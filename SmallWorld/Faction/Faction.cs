@@ -7,5 +7,6 @@ namespace SmallWorld
 {
     public interface Faction
     {
+        List<Unit> GenerateUnits();
     }
 }

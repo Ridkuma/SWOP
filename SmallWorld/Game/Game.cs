@@ -7,5 +7,12 @@ namespace SmallWorld
 {
     public interface Game
     {
+        void Pause();
+
+        void Resume();
+
+        void Launch();
+
+        void Save();
     }
 }

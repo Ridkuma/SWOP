@@ -40,9 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game\GameMaster.cs" />
-    <Compile Include="Game\Save.cs" />
-    <Compile Include="GUI\GUIMainMenu.cs" />
-    <Compile Include="Unit\BaseUnit.cs" />
     <Compile Include="Faction\DwarvesFaction.cs" />
     <Compile Include="Faction\Faction.cs" />
     <Compile Include="Game\Game.cs" />
@@ -55,14 +52,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Map\TileFactory.cs" />
     <Compile Include="Unit\Unit.cs" />
-    <Compile Include="Unit\UnitFactory.cs" />
-    <Compile Include="GUI\GUI.cs" />
     <Compile Include="Faction\VikingsFaction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

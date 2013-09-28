@@ -7,6 +7,8 @@ namespace SmallWorld
 {
     public interface GameMaster
     {
-        Game NewGame();
+        Game NewGame(string strategy, List<Tuple<string, string>> players);
+
+        Game LoadGame();
     }
 }

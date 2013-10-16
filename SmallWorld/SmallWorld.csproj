@@ -39,10 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\SoloGame.cs" />
     <Compile Include="Game\GameMaster.cs" />
     <Compile Include="Faction\DwarvesFaction.cs" />
     <Compile Include="Faction\Faction.cs" />
-    <Compile Include="Game\Game.cs" />
+    <Compile Include="Game\IGame.cs" />
     <Compile Include="Game\GameBuilder.cs" />
     <Compile Include="Faction\GaulsFaction.cs" />
     <Compile Include="Map\Map.cs" />

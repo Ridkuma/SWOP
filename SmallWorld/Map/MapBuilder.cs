@@ -5,23 +5,32 @@ using System.Text;
 
 namespace SmallWorld
 {
-    public interface MapBuilder
+    public interface IMapBuilder
     {
-        Map Build();
+		Map Build();
     }
 
-    public interface DemoMapBuilder : MapBuilder
+    public class DemoMapBuilder : IMapBuilder
     {
-        Map Build();
+		public Map Build()
+		{
+			return new Map();
+		}
     }
 
-    public interface SmallMapBuilder : MapBuilder
-    {
-        Map Build();
+	public class SmallMapBuilder : IMapBuilder
+	{
+		public Map Build()
+		{
+			return new Map();
+		}
     }
 
-    public interface NormalMapBuilder : MapBuilder
-    {
-        Map Build();
+	public class NormalMapBuilder : IMapBuilder
+	{
+		public Map Build()
+		{
+			return new Map();
+		}
     }
 }

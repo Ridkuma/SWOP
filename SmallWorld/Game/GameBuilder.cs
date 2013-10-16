@@ -5,14 +5,50 @@ using System.Text;
 
 namespace SmallWorld
 {
-    public interface GameBuilder
+    public class GameBuilder
     {
-        Game Build();
+        public IGame Build()
+		{
+			IGame game = new SoloGame();
 
-        Map BuildMap(string strategy);
+			return game;
+		}
 
-        List<Player> BuildPlayers(List<Tuple<string, string>> players);
+		public Map BuildMap(string strategy)
+		{
+			IMapBuilder mapBuilder;
+			switch (strategy)
+			{
+				case "demo":
+					mapBuilder = new DemoMapBuilder();
+					break;
 
-        void PlaceUnits();
+				case "small":
+					mapBuilder = new SmallMapBuilder();
+					break;
+
+				case "normal":
+					mapBuilder = new NormalMapBuilder();
+					break;
+
+				default:
+					Console.WriteLine("[Error in GameBuilder.BuildMap()] Strategy '" + strategy + "' for building map");
+					return null;
+			}
+
+			Map map = mapBuilder.Build();
+
+			return map;
+		}
+
+		public List<Player> BuildPlayers(List<Tuple<string, string>> players)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void PlaceUnits()
+		{
+			throw new NotImplementedException();
+		}
     }
 }

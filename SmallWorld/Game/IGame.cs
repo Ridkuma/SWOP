@@ -5,7 +5,17 @@ using System.Text;
 
 namespace SmallWorld
 {
-    public interface Game
+	public enum GameState
+	{
+		Idle,
+		Loading,
+		Saving,
+		Playing,
+		Pausing,
+		Ending,
+	}
+
+    public interface IGame
     {
         void Pause();
 

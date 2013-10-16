@@ -1,12 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
-  <Interface Name="SmallWorld.Map">
-    <Position X="3.75" Y="7.25" Width="1.5" />
+  <Class Name="SmallWorld.GameMaster">
+    <Position X="2.75" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAQAAAgABAAAAAAAAAAAAAABAAE=</HashCode>
+      <FileName>Game\GameMaster.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SmallWorld.SoloGame" Collapsed="true">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Game\SoloGame.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SmallWorld.GameBuilder">
+    <Position X="7.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAABAAAAAAgAAABAAAAAAAAAA=</HashCode>
+      <FileName>Game\GameBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SmallWorld.Map" Collapsed="true">
+    <Position X="2.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Map\Map.cs</FileName>
     </TypeIdentifier>
-  </Interface>
+  </Class>
+  <Class Name="SmallWorld.DemoMapBuilder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Map\MapBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SmallWorld.SmallMapBuilder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Map\MapBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SmallWorld.NormalMapBuilder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Map\MapBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
   <Interface Name="SmallWorld.Player">
     <Position X="10.25" Y="4.75" Width="2" />
     <TypeIdentifier>
@@ -15,7 +61,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="SmallWorld.Tile">
-    <Position X="5.5" Y="8" Width="1.5" />
+    <Position X="5.75" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Map\Tile.cs</FileName>
@@ -35,43 +81,8 @@
       <FileName>Faction\Faction.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="SmallWorld.Game">
-    <Position X="7.75" Y="2.25" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAgAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
-      <FileName>Game\Game.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.GameBuilder">
-    <Position X="2.75" Y="2.25" Width="3.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAIAAAABAAAAAAgAAABAAAAAAAAAA=</HashCode>
-      <FileName>Game\GameBuilder.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.MapBuilder">
-    <Position X="3.5" Y="4" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Map\MapBuilder.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.DemoMapBuilder">
-    <Position X="2" Y="5.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Map\MapBuilder.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.SmallMapBuilder">
-    <Position X="3.75" Y="5.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Map\MapBuilder.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.NormalMapBuilder">
-    <Position X="5.5" Y="5.5" Width="1.75" />
+  <Interface Name="SmallWorld.IMapBuilder">
+    <Position X="2.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
       <FileName>Map\MapBuilder.cs</FileName>
@@ -99,7 +110,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="SmallWorld.MountainTile">
-    <Position X="5.5" Y="11.75" Width="1.5" />
+    <Position X="5.75" Y="12.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Map\Tile.cs</FileName>
@@ -107,7 +118,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="SmallWorld.FieldTile">
-    <Position X="5.5" Y="10" Width="1.5" />
+    <Position X="5.75" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Map\Tile.cs</FileName>
@@ -115,7 +126,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="SmallWorld.DesertTile">
-    <Position X="5.5" Y="13.5" Width="1.5" />
+    <Position X="5.75" Y="14.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Map\Tile.cs</FileName>
@@ -123,7 +134,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="SmallWorld.WaterTile">
-    <Position X="5.5" Y="17.25" Width="1.5" />
+    <Position X="5.75" Y="18" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Map\Tile.cs</FileName>
@@ -131,7 +142,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="SmallWorld.ForestTile">
-    <Position X="5.5" Y="15.25" Width="1.5" />
+    <Position X="5.75" Y="16" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Map\Tile.cs</FileName>
@@ -139,17 +150,10 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="SmallWorld.TileFactory">
-    <Position X="2" Y="9.25" Width="2.5" />
+    <Position X="2.75" Y="8.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAEIAAAAAAAAAAAAAEAAAABAAEAAAAAAAAAAAABAAA=</HashCode>
       <FileName>Map\TileFactory.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.GameMaster">
-    <Position X="2.75" Y="0.5" Width="4" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAE=</HashCode>
-      <FileName>Game\GameMaster.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="SmallWorld.DwarvesUnit">
@@ -173,5 +177,19 @@
       <FileName>Unit\Unit.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Interface Name="SmallWorld.IGame">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Game\IGame.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="SmallWorld.GameState">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAQICIAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Game\IGame.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

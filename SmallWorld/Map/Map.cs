@@ -5,7 +5,11 @@ using System.Text;
 
 namespace SmallWorld
 {
-    public interface Map
+    public class Map
     {
+		public Map()
+		{
+			Console.WriteLine("[Log] Map created");
+		}
     }
 }

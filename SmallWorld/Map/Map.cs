@@ -10,6 +10,9 @@ namespace SmallWorld
 		public Map()
 		{
 			Console.WriteLine("[Log] Map created");
+			AlgoMap algo = new AlgoMap();
+			int test = algo.BuildMap();
+			Console.WriteLine("[Log] " + test);
 		}
     }
 }

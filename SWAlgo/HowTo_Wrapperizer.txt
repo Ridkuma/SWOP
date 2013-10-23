@@ -1,0 +1,17 @@
+*****************************************************************************
+The Wraperization of your C++ Library... How does this work and what does the fox say ?
+*****************************************************************************
+
+First download and extract SWIG somewhere on your computer from http://www.swig.org
+
+Check the instructions in the tutorial on the official website and to this link :
+http://stackoverflow.com/questions/9813429/how-can-i-build-this-simple-c-swig-c-project-in-visual-studio-2010
+
+In short :
+	 - write your C++ DLL code and ensure it compile, check out specific command as "___declspec" etc
+	 - write the .i interface file. Don't forget the " %include <windows.i> " for windows platform
+	 - from a command prompt, type (with the correct path and file name) :
+				..\..\swigwin-2.0.11\swig.exe -makedefault -csharp -c++ -v interface_file_name.i
+	 - add generated C# files to your targeted C# project
+	 
+Make sure to set the output build of >EACH< project in the same folder as the C++ DLL output (set in Properties project page)

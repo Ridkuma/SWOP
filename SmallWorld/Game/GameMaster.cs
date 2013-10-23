@@ -21,7 +21,7 @@ namespace SmallWorld
 		public GameMaster()
 		{
 			if (GM != null)
-				Console.WriteLine("[ERROR] GameMaster must be instancied only once");
+				Console.WriteLine("[WARNING] GameMaster must be instancied only once");
 			GM = this;
 
 			gameBuilder = new GameBuilder();

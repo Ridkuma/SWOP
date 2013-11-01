@@ -41,11 +41,9 @@
   <ItemGroup>
     <Compile Include="Game\SoloGame.cs" />
     <Compile Include="Game\GameMaster.cs" />
-    <Compile Include="Faction\DwarvesFaction.cs" />
     <Compile Include="Faction\Faction.cs" />
     <Compile Include="Game\IGame.cs" />
     <Compile Include="Game\GameBuilder.cs" />
-    <Compile Include="Faction\GaulsFaction.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\MapBuilder.cs" />
     <Compile Include="Map\Tile.cs" />
@@ -56,7 +54,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Map\TileFactory.cs" />
     <Compile Include="Unit\Unit.cs" />
-    <Compile Include="Faction\VikingsFaction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

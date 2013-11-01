@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Comment CommentText="Flyweight">
+    <Position X="3.859" Y="11.482" Height="0.396" Width="0.731" />
+  </Comment>
+  <Comment CommentText="Strategies">
+    <Position X="3.578" Y="6.096" Height="0.312" Width="0.815" />
+  </Comment>
+  <Comment CommentText="Builder">
+    <Position X="7.818" Y="2.542" Height="0.323" Width="0.773" />
+  </Comment>
   <Class Name="SmallWorld.GameMaster">
     <Position X="2.75" Y="0.5" Width="3" />
     <TypeIdentifier>
@@ -53,6 +62,61 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
+  <Class Name="SmallWorld.VikingsUnit">
+    <Position X="8.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Unit\Unit.cs</FileName>
+      <NewMemberFileName>VikingsUnit.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SmallWorld.GaulsUnit">
+    <Position X="10.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Unit\Unit.cs</FileName>
+      <NewMemberFileName>VikingsUnit.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SmallWorld.DwarvesUnit">
+    <Position X="12.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Unit\Unit.cs</FileName>
+      <NewMemberFileName>VikingsUnit.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SmallWorld.VikingsFaction">
+    <Position X="8.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Faction\Faction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.231" />
+  </Class>
+  <Class Name="SmallWorld.DwarvesFaction">
+    <Position X="12.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Faction\Faction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SmallWorld.GaulsFaction">
+    <Position X="10.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Faction\Faction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SmallWorld.Unit">
+    <Position X="10.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAACgAAAAAAAAAICAAAAAAAAAAgAAQAA=</HashCode>
+      <FileName>Unit\Unit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="SmallWorld.Player">
     <Position X="10.25" Y="4.75" Width="2" />
     <TypeIdentifier>
@@ -67,14 +131,7 @@
       <FileName>Map\Tile.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="SmallWorld.Unit" Collapsed="true">
-    <Position X="10.5" Y="9.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Unit\Unit.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.Faction">
+  <Interface Name="SmallWorld.IFaction">
     <Position X="10.25" Y="6.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
@@ -86,27 +143,6 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
       <FileName>Map\MapBuilder.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.DwarvesFaction">
-    <Position X="8.75" Y="8" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Faction\DwarvesFaction.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.VikingsFaction">
-    <Position X="10.5" Y="8" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Faction\VikingsFaction.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.GaulsFaction">
-    <Position X="12.25" Y="8" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Faction\GaulsFaction.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="SmallWorld.MountainTile">
@@ -154,27 +190,6 @@
     <TypeIdentifier>
       <HashCode>AAAEIAAAAAAAAAAAAAEAAAABAAEAAAAAAAAAAAABAAA=</HashCode>
       <FileName>Map\TileFactory.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.DwarvesUnit">
-    <Position X="8.75" Y="10.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Unit\Unit.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.VikingsUnit">
-    <Position X="10.5" Y="10.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Unit\Unit.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.GaulsUnit">
-    <Position X="12.25" Y="10.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Unit\Unit.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="SmallWorld.IGame">

@@ -1,6 +1,7 @@
 /* SWAlgo_Wrapper.i */
 %module SWAlgo
 
+%include "std_vector.i"
 
 %{
 

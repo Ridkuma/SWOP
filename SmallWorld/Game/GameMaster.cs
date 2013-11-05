@@ -11,8 +11,16 @@ namespace SmallWorld
 		
 		private GameBuilder gameBuilder;
 
-		private IGame currentGame;
-		private Map currentMap;
+		public IGame CurrentGame
+		{
+			get;
+			protected set;
+		}
+		public Map CurrentMap
+		{
+			get;
+			protected set;
+		}
 
 
 		/// <summary>
@@ -27,23 +35,23 @@ namespace SmallWorld
 			gameBuilder = new GameBuilder();
 
 			// tmp
-			NewGame("small");//, onmetquoidéjàici??)
+			//NewGame("small");//, onmetquoidéjàici??)
 		}
 
 
 		/// <summary>
 		/// Create a new game (map, players...)
 		/// </summary>
-        void NewGame(string strategy)//, List<Tuple<string, string>> players)
+        public void NewGame(string strategy)//, List<Tuple<string, string>> players)
 		{
-			currentGame = gameBuilder.Build();
-			currentMap = gameBuilder.BuildMap(strategy);
+			CurrentGame = gameBuilder.Build();
+			CurrentMap = gameBuilder.BuildMap(strategy);
 		}
 
 		/// <summary>
 		/// Load an existing game (map, players...)
 		/// </summary>
-        void LoadGame()
+        public void LoadGame()
 		{
 			throw new NotImplementedException();
 		}

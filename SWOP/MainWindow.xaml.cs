@@ -14,17 +14,29 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SmallWorld;
 
-namespace SmallWorldOfPOO
+namespace SWOP
 {
 	/// <summary>
 	/// Logique d'interaction pour MainWindow.xaml
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		public static MainWindow INSTANCE;
+
+		public GameMaster GM;
+		public MapView mapView;
+
 		public MainWindow()
 		{
 			InitializeComponent();
-			new GameMaster();
+			INSTANCE = this;
+		}
+
+		public void MainWindow_Loaded(object sender, RoutedEventArgs e) {
+			GM = new GameMaster();
+			GM.NewGame("small");
+
+			mapView = new MapView(GM.CurrentMap, mapGrid);
 		}
 	}
 }

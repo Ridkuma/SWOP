@@ -7,12 +7,12 @@ namespace SmallWorld
 {
     public interface IFaction
     {
-        List<IUnit> GenerateUnits();
+        List<Unit> GenerateUnits();
     }
 
     public class VikingsFaction : IFaction
     {
-        public List<IUnit> GenerateUnits()
+        public List<Unit> GenerateUnits()
         {
             throw new NotImplementedException();
         }
@@ -20,7 +20,7 @@ namespace SmallWorld
 
     public class DwarvesFaction : IFaction
     {
-        public List<IUnit> GenerateUnits()
+        public List<Unit> GenerateUnits()
         {
             throw new NotImplementedException();
         }
@@ -28,7 +28,7 @@ namespace SmallWorld
 
     public class GaulsFaction : IFaction
     {
-        public List<IUnit> GenerateUnits()
+        public List<Unit> GenerateUnits()
         {
             throw new NotImplementedException();
         }

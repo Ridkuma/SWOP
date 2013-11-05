@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="SWOP.TileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="50">
+	<UserControl.Resources>
+		<RadialGradientBrush x:Key="BrushMoutain" GradientOrigin="0.30,0.25">
+			<GradientStop Color="BlanchedAlmond" Offset="0.2" />
+			<GradientStop Color="Goldenrod" Offset="0.5" />
+			<GradientStop Color="Green" Offset="1.0" />
+		</RadialGradientBrush>
+		<LinearGradientBrush x:Key="BrushField">
+			<GradientStop Color="Green" Offset="-0.2" />
+			<GradientStop Color="GreenYellow" Offset="1.0" />
+		</LinearGradientBrush>
+		<LinearGradientBrush x:Key="BrushDesert">
+			<GradientStop Color="Yellow" Offset="0.0" />
+			<GradientStop Color="OrangeRed" Offset="1.5" />
+		</LinearGradientBrush>
+		<LinearGradientBrush x:Key="BrushWater">
+			<GradientStop Color="CadetBlue" Offset="0.0" />
+			<GradientStop Color="Aqua" Offset="1.0" />
+		</LinearGradientBrush>
+		<LinearGradientBrush x:Key="BrushForest">
+			<GradientStop Color="YellowGreen" Offset="0.0" />
+			<GradientStop Color="Green" Offset="0.5" />
+			<GradientStop Color="YellowGreen" Offset="1.0" />
+		</LinearGradientBrush>
+	</UserControl.Resources>
+	<Grid Name="grid">
+		<!--<Image Width="50" Height="50" Source="../Resources/earth.png"/>-->
+		<Rectangle Name="d_ground" Width="50" Height="50" Fill="{StaticResource BrushForest}">
+		</Rectangle>
+		<Button Name="btn" ClipToBounds="True" Content="Button" Width="Auto" Height="Auto" Opacity="0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
+	</Grid>
+</UserControl>

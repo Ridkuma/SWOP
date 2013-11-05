@@ -40,12 +40,16 @@ public class AlgoMap : IDisposable {
     }
   }
 
-  public int BuildMap() {
-    int ret = SWAlgoPINVOKE.AlgoMap_BuildMap(swigCPtr);
-    return ret;
+  public AlgoMap() : this(SWAlgoPINVOKE.new_AlgoMap(), true) {
   }
 
-  public AlgoMap() : this(SWAlgoPINVOKE.new_AlgoMap(), true) {
+  public void BuildMap(int size) {
+    SWAlgoPINVOKE.AlgoMap_BuildMap(swigCPtr, size);
+  }
+
+  public int GetTileType(int x, int y) {
+    int ret = SWAlgoPINVOKE.AlgoMap_GetTileType(swigCPtr, x, y);
+    return ret;
   }
 
 }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Comment CommentText="Flyweight">
-    <Position X="3.859" Y="11.482" Height="0.396" Width="0.731" />
+    <Position X="4.518" Y="11.042" Height="0.396" Width="0.731" />
   </Comment>
   <Comment CommentText="Strategies">
     <Position X="3.578" Y="6.096" Height="0.312" Width="0.815" />
@@ -12,7 +12,7 @@
   <Class Name="SmallWorld.GameMaster">
     <Position X="2.75" Y="0.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAAAAEAAAAAAAAAAAQAAAgABAAAAAAAAAAAAAABAAE=</HashCode>
+      <HashCode>AQAAAAAAAAAAAAAAAAQAAAgABAAAAAAAAAEAAAAAAAE=</HashCode>
       <FileName>Game\GameMaster.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -31,10 +31,10 @@
       <FileName>Game\GameBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SmallWorld.Map" Collapsed="true">
-    <Position X="2.75" Y="7.25" Width="1.5" />
+  <Class Name="SmallWorld.Map">
+    <Position X="2.75" Y="7" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgACAAIAAgAAAAAAAAA=</HashCode>
       <FileName>Map\Map.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -117,6 +117,56 @@
       <FileName>Unit\Unit.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="SmallWorld.TileFactory">
+    <Position X="2.75" Y="12.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAEIAAAAAQAAAAAAAAAAAABAAEAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Map\TileFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SmallWorld.ForestTile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Map\Tile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SmallWorld.WaterTile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Map\Tile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SmallWorld.MountainTile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Map\Tile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SmallWorld.FieldTile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Map\Tile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SmallWorld.DesertTile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Map\Tile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SmallWorld.Tile" Collapsed="true">
+    <Position X="5.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Map\Tile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
   <Interface Name="SmallWorld.Player">
     <Position X="10.25" Y="4.75" Width="2" />
     <TypeIdentifier>
@@ -124,10 +174,10 @@
       <FileName>Player\Player.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="SmallWorld.Tile">
-    <Position X="5.75" Y="8.75" Width="1.5" />
+  <Interface Name="SmallWorld.ITile">
+    <Position X="5.75" Y="10.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Map\Tile.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -145,53 +195,6 @@
       <FileName>Map\MapBuilder.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="SmallWorld.MountainTile">
-    <Position X="5.75" Y="12.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Map\Tile.cs</FileName>
-      <NewMemberFileName>MountainTile.cs</NewMemberFileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.FieldTile">
-    <Position X="5.75" Y="10.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Map\Tile.cs</FileName>
-      <NewMemberFileName>FieldTile.cs</NewMemberFileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.DesertTile">
-    <Position X="5.75" Y="14.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Map\Tile.cs</FileName>
-      <NewMemberFileName>DesertTile.cs</NewMemberFileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.WaterTile">
-    <Position X="5.75" Y="18" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Map\Tile.cs</FileName>
-      <NewMemberFileName>WaterTile.cs</NewMemberFileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.ForestTile">
-    <Position X="5.75" Y="16" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Map\Tile.cs</FileName>
-      <NewMemberFileName>Forest.cs</NewMemberFileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SmallWorld.TileFactory">
-    <Position X="2.75" Y="8.75" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAAEIAAAAAAAAAAAAAEAAAABAAEAAAAAAAAAAAABAAA=</HashCode>
-      <FileName>Map\TileFactory.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Interface Name="SmallWorld.IGame">
     <Position X="12.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
@@ -204,6 +207,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAABAAAAAAAAAAAAAQICIAAAAAAAABAAAAAAAAAA=</HashCode>
       <FileName>Game\IGame.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SmallWorld.TileType">
+    <Position X="2.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAACAAAAAAAAAAAAAEAgAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Map\TileFactory.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

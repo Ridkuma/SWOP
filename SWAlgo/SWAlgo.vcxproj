@@ -84,6 +84,9 @@
     <ClCompile Include="AlgoMap.cpp" />
     <ClCompile Include="SWAlgo_Wrapper_wrap.cxx" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SWAlgo_Wrapper.i" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

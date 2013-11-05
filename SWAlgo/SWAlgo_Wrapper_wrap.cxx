@@ -280,6 +280,14 @@ SWIGEXPORT void SWIGSTDCALL SWIGRegisterStringCallback_SWAlgo(SWIG_CSharpStringH
 #define SWIG_contract_assert(nullreturn, expr, msg) if (!(expr)) {SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentOutOfRangeException, msg, ""); return nullreturn; } else
 
 
+#include <stdexcept>
+
+
+#include <vector>
+#include <algorithm>
+#include <stdexcept>
+
+
 
 #include "AlgoMap.h"
 
@@ -289,13 +297,51 @@ SWIGEXPORT void SWIGSTDCALL SWIGRegisterStringCallback_SWAlgo(SWIG_CSharpStringH
 extern "C" {
 #endif
 
-SWIGEXPORT int SWIGSTDCALL CSharp_AlgoMap_BuildMap(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_TILE_FIELD_get() {
   int jresult ;
-  AlgoMap *arg1 = (AlgoMap *) 0 ;
   int result;
   
-  arg1 = (AlgoMap *)jarg1; 
-  result = (int)(arg1)->BuildMap();
+  result = (int)(0);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_TILE_MOUNTAIN_get() {
+  int jresult ;
+  int result;
+  
+  result = (int)(1);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_TILE_DESERT_get() {
+  int jresult ;
+  int result;
+  
+  result = (int)(2);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_TILE_FOREST_get() {
+  int jresult ;
+  int result;
+  
+  result = (int)(3);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_TILE_WATER_get() {
+  int jresult ;
+  int result;
+  
+  result = (int)(4);
   jresult = result; 
   return jresult;
 }
@@ -316,6 +362,32 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_AlgoMap(void * jarg1) {
   
   arg1 = (AlgoMap *)jarg1; 
   delete arg1;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_AlgoMap_BuildMap(void * jarg1, int jarg2) {
+  AlgoMap *arg1 = (AlgoMap *) 0 ;
+  int arg2 ;
+  
+  arg1 = (AlgoMap *)jarg1; 
+  arg2 = (int)jarg2; 
+  (arg1)->BuildMap(arg2);
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_AlgoMap_GetTileType(void * jarg1, int jarg2, int jarg3) {
+  int jresult ;
+  AlgoMap *arg1 = (AlgoMap *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int result;
+  
+  arg1 = (AlgoMap *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  result = (int)(arg1)->GetTileType(arg2,arg3);
+  jresult = result; 
+  return jresult;
 }
 
 

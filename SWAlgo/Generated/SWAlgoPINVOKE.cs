@@ -188,12 +188,30 @@ class SWAlgoPINVOKE {
   }
 
 
-  [DllImport("SWAlgo", EntryPoint="CSharp_AlgoMap_BuildMap")]
-  public static extern int AlgoMap_BuildMap(HandleRef jarg1);
+  [DllImport("SWAlgo", EntryPoint="CSharp_TILE_FIELD_get")]
+  public static extern int TILE_FIELD_get();
+
+  [DllImport("SWAlgo", EntryPoint="CSharp_TILE_MOUNTAIN_get")]
+  public static extern int TILE_MOUNTAIN_get();
+
+  [DllImport("SWAlgo", EntryPoint="CSharp_TILE_DESERT_get")]
+  public static extern int TILE_DESERT_get();
+
+  [DllImport("SWAlgo", EntryPoint="CSharp_TILE_FOREST_get")]
+  public static extern int TILE_FOREST_get();
+
+  [DllImport("SWAlgo", EntryPoint="CSharp_TILE_WATER_get")]
+  public static extern int TILE_WATER_get();
 
   [DllImport("SWAlgo", EntryPoint="CSharp_new_AlgoMap")]
   public static extern IntPtr new_AlgoMap();
 
   [DllImport("SWAlgo", EntryPoint="CSharp_delete_AlgoMap")]
   public static extern void delete_AlgoMap(HandleRef jarg1);
+
+  [DllImport("SWAlgo", EntryPoint="CSharp_AlgoMap_BuildMap")]
+  public static extern void AlgoMap_BuildMap(HandleRef jarg1, int jarg2);
+
+  [DllImport("SWAlgo", EntryPoint="CSharp_AlgoMap_GetTileType")]
+  public static extern int AlgoMap_GetTileType(HandleRef jarg1, int jarg2, int jarg3);
 }

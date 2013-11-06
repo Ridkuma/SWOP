@@ -16,6 +16,7 @@ namespace SmallWorld
 			get;
 			protected set;
 		}
+
 		public Map CurrentMap
 		{
 			get;
@@ -33,9 +34,6 @@ namespace SmallWorld
 			GM = this;
 
 			gameBuilder = new GameBuilder();
-
-			// tmp
-			//NewGame("small");//, onmetquoidéjàici??)
 		}
 
 
@@ -47,6 +45,7 @@ namespace SmallWorld
 			CurrentGame = gameBuilder.Build();
 			CurrentMap = gameBuilder.BuildMap(strategy);
 		}
+
 
 		/// <summary>
 		/// Load an existing game (map, players...)

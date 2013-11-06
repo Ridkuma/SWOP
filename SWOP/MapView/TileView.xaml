@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="50">
+             mc:Ignorable="d"
+			 Loaded="OnTileLoaded"
+            d:DesignWidth="78" d:DesignHeight="90" >
+	
 	<UserControl.Resources>
 		<RadialGradientBrush x:Key="BrushMoutain" GradientOrigin="0.30,0.25">
 			<GradientStop Color="BlanchedAlmond" Offset="0.2" />
@@ -25,14 +27,23 @@
 		</LinearGradientBrush>
 		<LinearGradientBrush x:Key="BrushForest">
 			<GradientStop Color="YellowGreen" Offset="0.0" />
-			<GradientStop Color="Green" Offset="0.5" />
+			<GradientStop Color="#FF122112" Offset="0.5" />
 			<GradientStop Color="YellowGreen" Offset="1.0" />
 		</LinearGradientBrush>
+		<ImageBrush x:Key="BrushImgField" ImageSource="../Resources/terrains/field.png"/>
+		<ImageBrush x:Key="BrushImgDesert" ImageSource="../Resources/terrains/desert.png"/>
+		<ImageBrush x:Key="BrushImgMountain" ImageSource="../Resources/terrains/mountain.png"/>
+		<ImageBrush x:Key="BrushImgWater" ImageSource="../Resources/terrains/water.png"/>
 	</UserControl.Resources>
+	
 	<Grid Name="grid">
 		<!--<Image Width="50" Height="50" Source="../Resources/earth.png"/>-->
-		<Rectangle Name="d_ground" Width="50" Height="50" Fill="{StaticResource BrushForest}">
-		</Rectangle>
-		<Button Name="btn" ClipToBounds="True" Content="Button" Width="Auto" Height="Auto" Opacity="0" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
+		<Path Name="d_ground" d:LayoutOverrides="None" 
+			d:LastTangent="0,0" Stroke="LightGray" Fill="{DynamicResource BrushWater}" 
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+			Margin="0" Width="78" Height ="90" Stretch="Fill"
+			MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" 
+			Data="M8.660254,0 L17.320508,5 17.320508,15 8.660254,20 0,15 0,5 8.660254,0 z"
+		/>
 	</Grid>
 </UserControl>

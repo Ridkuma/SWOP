@@ -18,50 +18,50 @@ namespace SWOP {
 	/// Logique d'interaction pour Tile.xaml
 	/// </summary>
 	public partial class TileView : UserControl {
-		//private static Random rnd;
-
+		
 		private ITile tile;
 		private TileType type;
 
-
-
-		/*public Tile() {
-			InitializeComponent();
-
-			if (rnd == null)
-				rnd = new Random();
-			m_type = (TileType) Enum.GetValues(typeof(TileType)).GetValue( rnd.Next(Enum.GetNames(typeof(TileType)).Length) );
-
-			SetGround();
-		}*/
 
 		public TileView(ITile t) {
 			InitializeComponent();
 
 			tile = t;
 			type = tile.Type;
+		}
+
+
+		private void OnTileLoaded(object sender, RoutedEventArgs e)
+		{
+			// Set position (hexagon disposition)
+			TranslateTransform trTns = new TranslateTransform(tile.X * 80 + ((tile.Y % 2 == 0) ? 0 : 40), tile.Y * 70);
+			TransformGroup trGrp = new TransformGroup();
+			trGrp.Children.Add(trTns);
+
+			grid.RenderTransform = trGrp;
 
 			SetGround();
 		}
 
-
 		public void SetGround() {
+			string brushPath = "Brush"; // set to "Brush" or "BrushImg"
+
 			switch (type)
 			{
 				case TileType.Field:
-					d_ground.Fill = (Brush) Resources["BrushField"];
+					d_ground.Fill = (Brush) Resources[brushPath + "Field"];
 					break;
 				case TileType.Mountain:
-					d_ground.Fill = (Brush) Resources["BrushMoutain"];
+					d_ground.Fill = (Brush) Resources[brushPath + "Moutain"];
 					break;
 				case TileType.Desert:
-					d_ground.Fill = (Brush)Resources["BrushDesert"];
+					d_ground.Fill = (Brush) Resources[brushPath + "Desert"];
 					break;
 				case TileType.Forest:
-					d_ground.Fill = (Brush)Resources["BrushForest"];
+					d_ground.Fill = (Brush) Resources[brushPath + "Forest"];
 					break;
 				case TileType.Water:
-					d_ground.Fill = (Brush) Resources["BrushWater"];
+					d_ground.Fill = (Brush) Resources[brushPath + "Water"];
 					break;
 			}
 		}
@@ -69,6 +69,8 @@ namespace SWOP {
 		// tmp
 		private void Button_MouseEnter(object sender, MouseEventArgs e)
 		{
+			d_ground.Opacity = 0.2;
+
 			foreach (ITile t in tile.AdjacentsTiles)
 			{
 				MainWindow.INSTANCE.mapView.tilesView[t].Hide();
@@ -77,12 +79,14 @@ namespace SWOP {
 
 		private void Hide()
 		{
-			d_ground.Visibility = System.Windows.Visibility.Hidden;
+			d_ground.Opacity = 0.7;
 		}
 
 		// tmp
 		private void Button_MouseLeave(object sender, MouseEventArgs e)
 		{
+			d_ground.Opacity = 1;
+
 			foreach (ITile t in tile.AdjacentsTiles)
 			{
 				MainWindow.INSTANCE.mapView.tilesView[t].Show();
@@ -91,7 +95,7 @@ namespace SWOP {
 
 		private void Show()
 		{
-			d_ground.Visibility = System.Windows.Visibility.Visible;
+			d_ground.Opacity = 1;
 		}
 	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 
+
 #ifdef SWAlgo_EXPORTS
 	#define SWAlgo_API __declspec(dllexport)
 #else
@@ -20,10 +21,11 @@ class SWAlgo_API AlgoMap
 {
 private:
 	int mapSize;
+	int mapRange;
 	std::vector<std::vector<int> > tiles;
 
 	void BuildSeaCoasts();
-
+	void BuildSpecialTiles(int tileType);
 
 public:
 	AlgoMap(void);

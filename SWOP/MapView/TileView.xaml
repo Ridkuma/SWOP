@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d"
 			 Loaded="OnTileLoaded"
-            d:DesignWidth="78" d:DesignHeight="90" >
+            d:DesignWidth="58" d:DesignHeight="65" >
 	
 	<UserControl.Resources>
 		<RadialGradientBrush x:Key="BrushMoutain" GradientOrigin="0.30,0.25">
@@ -41,7 +41,7 @@
 		<Path Name="d_ground" d:LayoutOverrides="None" 
 			d:LastTangent="0,0" Stroke="LightGray" Fill="{DynamicResource BrushWater}" 
 			HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-			Margin="0" Width="78" Height ="90" Stretch="Fill"
+			Margin="0" Width="58" Height ="65" Stretch="Fill"
 			MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" 
 			Data="M8.660254,0 L17.320508,5 17.320508,15 8.660254,20 0,15 0,5 8.660254,0 z"
 		/>

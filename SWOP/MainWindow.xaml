@@ -4,6 +4,8 @@
         Title="MainWindow" Width="800" Height="600" Top="350" Left="1800"
 		Loaded="MainWindow_Loaded" Background="#FF25071C"
 	>
-	<Grid Name="mapGrid" HorizontalAlignment="Left" VerticalAlignment="Top">
+	<Grid>
+		<Grid Name="mapGrid" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+		<Button Content="Reload" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="62" Click="ButtonReload_Click"/>
 	</Grid>
 </Window>

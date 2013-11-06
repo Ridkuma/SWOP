@@ -34,7 +34,7 @@ namespace SWOP {
 		private void OnTileLoaded(object sender, RoutedEventArgs e)
 		{
 			// Set position (hexagon disposition)
-			TranslateTransform trTns = new TranslateTransform(tile.X * 80 + ((tile.Y % 2 == 0) ? 0 : 40), tile.Y * 70);
+			TranslateTransform trTns = new TranslateTransform(tile.X * 60 + ((tile.Y % 2 == 0) ? 0 : 30), tile.Y * 50);
 			TransformGroup trGrp = new TransformGroup();
 			trGrp.Children.Add(trTns);
 

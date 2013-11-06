@@ -38,5 +38,13 @@ namespace SWOP
 
 			mapView = new MapView(GM.CurrentMap, mapGrid);
 		}
+
+		// tmp
+		private void ButtonReload_Click(object sender, RoutedEventArgs e)
+		{
+			GM.NewGame("normal");
+			mapView.mapViewGrid.Children.RemoveRange(0, mapView.mapViewGrid.Children.Count);
+			mapView = new MapView(GM.CurrentMap, mapGrid);
+		}
 	}
 }

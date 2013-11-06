@@ -144,7 +144,7 @@ namespace SmallWorld
 		{
 			get
 			{
-				return TileType.Field;
+				return TileType.Mountain;
 			}
 		}
 

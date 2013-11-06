@@ -9,7 +9,7 @@ using SmallWorld;
 namespace SWOP {
 	public class MapView {
 		private Map map;
-		private Grid mapViewGrid;
+		public Grid mapViewGrid; // tmp pass to private
 		public Dictionary<ITile, TileView> tilesView;
 
 		public MapView(SmallWorld.Map _map, Grid _mapViewGrid) {

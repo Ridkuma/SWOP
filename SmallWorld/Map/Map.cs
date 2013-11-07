@@ -72,7 +72,7 @@ namespace SmallWorld
 				}
 			}
 
-			Console.WriteLine("[Log] Map created");
+			Console.WriteLine("[Log] MapBoard created");
 		}
 
 	}

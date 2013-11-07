@@ -9,20 +9,21 @@
   <Comment CommentText="Builder">
     <Position X="7.818" Y="2.542" Height="0.323" Width="0.773" />
   </Comment>
+  <Comment CommentText="Abstract Factory">
+    <Position X="13.02" Y="6.553" Height="0.589" Width="0.814" />
+  </Comment>
+  <Comment CommentText="Singleton">
+    <Position X="1.442" Y="1.47" Height="0.323" Width="0.773" />
+  </Comment>
   <Class Name="SmallWorld.GameMaster">
     <Position X="2.75" Y="0.5" Width="3" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AQAAAAAAAAAAAAAAAAQAAAgABAAAAAAAAAEAAAAAAAE=</HashCode>
       <FileName>Game\GameMaster.cs</FileName>
     </TypeIdentifier>
-  </Class>
-  <Class Name="SmallWorld.SoloGame" Collapsed="true">
-    <Position X="14.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAgAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
-      <FileName>Game\SoloGame.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SmallWorld.GameBuilder">
     <Position X="7.25" Y="0.5" Width="2" />
@@ -33,6 +34,9 @@
   </Class>
   <Class Name="SmallWorld.Map">
     <Position X="2.75" Y="7" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgACAAIAAgAAAAAAAAA=</HashCode>
       <FileName>Map\Map.cs</FileName>
@@ -162,8 +166,16 @@
   <Class Name="SmallWorld.Tile" Collapsed="true">
     <Position X="5.75" Y="12.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAIAARAAoAAABAAAAAIAQBgAAAAYAA=</HashCode>
       <FileName>Map\Tile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SmallWorld.LocalGame" Collapsed="true">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgIIAAQAAAAAAAAAAAAAgAAAAgAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Game\LocalGame.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -175,9 +187,9 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="SmallWorld.ITile">
-    <Position X="5.75" Y="10.5" Width="1.5" />
+    <Position X="5.75" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAIAABAAoAAABAAAAAAAQAAAAAAYAA=</HashCode>
       <FileName>Map\Tile.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -198,7 +210,7 @@
   <Interface Name="SmallWorld.IGame">
     <Position X="12.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <HashCode>AAAgIIAAQAAAAAAAAAAAAAgAAAAgAAAAAAAAAAgAAAA=</HashCode>
       <FileName>Game\IGame.cs</FileName>
     </TypeIdentifier>
   </Interface>

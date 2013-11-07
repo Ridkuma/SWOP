@@ -17,6 +17,26 @@ namespace SmallWorld
 
     public interface IGame
     {
+        List<Player> Players
+        {
+            get;
+            set;
+        }
+
+        int CurrentTurn
+        {
+            get;
+            set;
+        }
+
+        Map MapBoard
+        {
+            get;
+            set;
+        }
+
+        IGame(Map map, List<Player> players);
+    
         void Pause();
 
         void Resume();

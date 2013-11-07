@@ -40,10 +40,9 @@ namespace SmallWorld
 		/// <summary>
 		/// Create a new game (map, players...)
 		/// </summary>
-        public void NewGame(string strategy)//, List<Tuple<string, string>> players)
+        public void NewGame(string strategy, List<Tuple<string, string>> playersInfo)
 		{
-			CurrentGame = gameBuilder.Build();
-			CurrentMap = gameBuilder.BuildMap(strategy);
+			CurrentGame = gameBuilder.Build(strategy, playersInfo);
 		}
 
 

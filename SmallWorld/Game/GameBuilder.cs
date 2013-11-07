@@ -7,9 +7,12 @@ namespace SmallWorld
 {
     public class GameBuilder
     {
-        public IGame Build()
+        public IGame Build(string strategy, List<Tuple<string, string>> playersInfo)
 		{
-			IGame game = new SoloGame();
+            List<Player> players = BuildPlayers(playersInfo);
+            Map map = BuildMap(strategy);
+
+			IGame game = new LocalGame(map, players);
 
 			return game;
 		}

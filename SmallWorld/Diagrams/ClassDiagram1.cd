@@ -67,7 +67,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="SmallWorld.VikingsUnit">
-    <Position X="8.5" Y="12.75" Width="1.5" />
+    <Position X="8.5" Y="14.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Unit\Unit.cs</FileName>
@@ -75,7 +75,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SmallWorld.GaulsUnit">
-    <Position X="10.5" Y="12.75" Width="1.5" />
+    <Position X="10.5" Y="14.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Unit\Unit.cs</FileName>
@@ -83,7 +83,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SmallWorld.DwarvesUnit">
-    <Position X="12.5" Y="12.75" Width="1.5" />
+    <Position X="12.5" Y="14.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Unit\Unit.cs</FileName>
@@ -93,7 +93,7 @@
   <Class Name="SmallWorld.VikingsFaction">
     <Position X="8.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAQAAAAAAAAAQAABAAAAA=</HashCode>
       <FileName>Faction\Faction.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.231" />
@@ -101,7 +101,7 @@
   <Class Name="SmallWorld.DwarvesFaction">
     <Position X="12.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAQAAAAAAAAAQAABAAAAA=</HashCode>
       <FileName>Faction\Faction.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -109,15 +109,15 @@
   <Class Name="SmallWorld.GaulsFaction">
     <Position X="10.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAQAAAAAAAAAQAABAAAAA=</HashCode>
       <FileName>Faction\Faction.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SmallWorld.Unit">
-    <Position X="10.5" Y="9.25" Width="1.5" />
+    <Position X="10.5" Y="11" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAACgAAAAAAAAAICAAAAAAAAAAgAAQAA=</HashCode>
+      <HashCode>AAAAAAAAAIAAAACgAAAAAAQAAICAAAAAAAAAAgAAQAA=</HashCode>
       <FileName>Unit\Unit.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -194,9 +194,9 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="SmallWorld.IFaction">
-    <Position X="10.25" Y="6.25" Width="2" />
+    <Position X="10.25" Y="6" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAAAA=</HashCode>
       <FileName>Faction\Faction.cs</FileName>
     </TypeIdentifier>
   </Interface>

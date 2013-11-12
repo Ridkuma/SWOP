@@ -12,26 +12,24 @@ namespace SmallWorld
         protected int Def { get; set; } // Defense Points
         protected int Hp { get; set; } // Health Points
         protected int Mvt { get; set; } // Movement Points
+        protected string Name { get; set; } // Unit name
 
-        protected Unit()
+        public Unit(string name)
         {
             this.Atk = 2;
             this.Def = 1;
             this.Hp = 2;
             this.Mvt = 1;
+            this.Name = name;
         }
 
-        protected Unit(ITile pos)
-            : this()
-        {
-            this.Position = pos;
-        }
-
-        // MOVE EXAMPLE : Consider this "pseudo code" for now
+        // DEFAULT MOVE : Consider this "pseudo code" for now
         // A Unit can only move one tile per round
-        protected virtual void Move(ITile destination)
+        public virtual void Move(ITile destination)
         {
-            bool possibleMove = (this.Mvt != 0)
+            // Minimum verifications before allowing a move,
+            // every Unit extension should add up their own limitations
+            bool possibleMove = (this.Mvt > 0)
                 && (!destination.IsOccupied());
 
             if (!possibleMove)
@@ -43,7 +41,7 @@ namespace SmallWorld
         }
 
         // Attacking is the same for every faction
-        protected void Attack(Unit ennemy)
+        public void Attack(Unit ennemy)
         {
             // TODO
         }
@@ -51,7 +49,7 @@ namespace SmallWorld
 
     public class VikingsUnit : Unit
     {
-        protected override void Move(ITile destination)
+        public override void Move(ITile destination)
         {
             if (!destination.IsAdjacent(this.Position))
                 return;
@@ -65,7 +63,7 @@ namespace SmallWorld
     {
         // A Dwarf can move from a Mountain to any another Mountain
         // Cannot cross Water
-        protected override void Move(ITile destination)
+        public override void Move(ITile destination)
         {
             bool mountainTravel = !destination.IsAdjacent(this.Position)
                 && destination.Type != TileType.Mountain
@@ -80,19 +78,13 @@ namespace SmallWorld
 
     public class GaulsUnit : Unit
     {
-        public GaulsUnit() 
-            : base()
+        public GaulsUnit(string name) 
+            : base(name)
         {
             this.Mvt = 2;
         }
 
-        public GaulsUnit(ITile pos)
-            : base(pos)
-        {
-            this.Mvt = 2;
-        }
-
-        protected void Move(ITile destination)
+        public void Move(ITile destination)
         {
 			if (!destination.IsAdjacent(this.Position) || destination.Type == TileType.Water)
                 return;

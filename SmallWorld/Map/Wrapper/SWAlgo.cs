@@ -11,6 +11,7 @@ using System;
 using System.Runtime.InteropServices;
 
 public class SWAlgo {
+  public static readonly int MAX_NB_PLAYERS = SWAlgoPINVOKE.MAX_NB_PLAYERS_get();
   public static readonly int TILE_FIELD = SWAlgoPINVOKE.TILE_FIELD_get();
   public static readonly int TILE_MOUNTAIN = SWAlgoPINVOKE.TILE_MOUNTAIN_get();
   public static readonly int TILE_DESERT = SWAlgoPINVOKE.TILE_DESERT_get();

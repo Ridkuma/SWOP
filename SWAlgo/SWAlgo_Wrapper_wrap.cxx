@@ -297,6 +297,16 @@ SWIGEXPORT void SWIGSTDCALL SWIGRegisterStringCallback_SWAlgo(SWIG_CSharpStringH
 extern "C" {
 #endif
 
+SWIGEXPORT int SWIGSTDCALL CSharp_MAX_NB_PLAYERS_get() {
+  int jresult ;
+  int result;
+  
+  result = (int)(2);
+  jresult = result; 
+  return jresult;
+}
+
+
 SWIGEXPORT int SWIGSTDCALL CSharp_TILE_FIELD_get() {
   int jresult ;
   int result;
@@ -386,6 +396,34 @@ SWIGEXPORT int SWIGSTDCALL CSharp_AlgoMap_GetTileType(void * jarg1, int jarg2, i
   arg2 = (int)jarg2; 
   arg3 = (int)jarg3; 
   result = (int)(arg1)->GetTileType(arg2,arg3);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_AlgoMap_GetStartTileX(void * jarg1, int jarg2) {
+  int jresult ;
+  AlgoMap *arg1 = (AlgoMap *) 0 ;
+  int arg2 ;
+  int result;
+  
+  arg1 = (AlgoMap *)jarg1; 
+  arg2 = (int)jarg2; 
+  result = (int)(arg1)->GetStartTileX(arg2);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_AlgoMap_GetStartTileY(void * jarg1, int jarg2) {
+  int jresult ;
+  AlgoMap *arg1 = (AlgoMap *) 0 ;
+  int arg2 ;
+  int result;
+  
+  arg1 = (AlgoMap *)jarg1; 
+  arg2 = (int)jarg2; 
+  result = (int)(arg1)->GetStartTileY(arg2);
   jresult = result; 
   return jresult;
 }

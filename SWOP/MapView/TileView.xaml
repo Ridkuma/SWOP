@@ -38,7 +38,7 @@
 	
 	<Grid Name="grid">
 		<!--<Image Width="50" Height="50" Source="../Resources/earth.png"/>-->
-		<Path Name="d_ground" d:LayoutOverrides="None" 
+		<Path Name="hexagon" d:LayoutOverrides="None" 
 			d:LastTangent="0,0" Stroke="LightGray" Fill="{DynamicResource BrushWater}" 
 			HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
 			Margin="0" Width="58" Height ="65" Stretch="Fill"

@@ -28,6 +28,11 @@ namespace SWOP {
 				}
 			}
 
+			// tmp
+			int[] startCoord = map.GetStartPosition(0);
+			Console.WriteLine("[LOG] Player 0 start coords = " + startCoord[0] + ", " + startCoord[1]);
+			startCoord = map.GetStartPosition(1);
+			Console.WriteLine("[LOG] Player 1 start coords = " + startCoord[0] + ", " + startCoord[1]);
 		}
 	}
 }

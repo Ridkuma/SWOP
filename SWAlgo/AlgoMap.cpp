@@ -27,12 +27,14 @@ void AlgoMap::BuildMap(int size)
     srand(time(0));
 
 	mapSize = size;
-	mapRange = (int) (mapSize / 5);
+	mapRange = (int) (mapSize / 5); // Scale index
 	vector<vector<int> > t (mapSize, vector<int>(mapSize));
 	tiles = t;
 
+	// Start by seas
 	BuildSeaCoasts();
 
+	// Then put some random zones
 	for (int i = 0; i < mapRange * 2; i++)
 	{
 		BuildSpecialTiles(TILE_MOUNTAIN);
@@ -53,6 +55,35 @@ int AlgoMap::GetTileType(int x, int y)
 
 
 
+// Getter of X position of starting tile
+// ----------------------------------------------
+int AlgoMap::GetStartTileX(int playerId)
+{
+	return startPositions[playerId][0];
+}
+
+
+// Getter of X position of starting tile
+// ----------------------------------------------
+int AlgoMap::GetStartTileY(int playerId)
+{
+	return startPositions[playerId][1];
+}
+
+/*
+// Is a starting tile (return player id)
+// ----------------------------------------------
+int AlgoMap::IsStartTile(int x, int y)
+{
+	for(int i = 0; i < MAX_NB_PLAYERS; i++)
+		if (x == startPositions[i][0] && y == startPositions[i][1])
+			return i;
+	return -1;
+}
+*/
+
+
+
 // ***********************************************
 // *               PRIVATE SECTION               *
 // ***********************************************
@@ -61,6 +92,9 @@ int AlgoMap::GetTileType(int x, int y)
 // BTW, if you're reading this, it means you're already cheating...
 // ....too late for the poussin... *SPROOooOOUTCH!!*  X-/
 
+
+// Build sea area on map
+// ----------------------------------------------
 void AlgoMap::BuildSeaCoasts()
 {
 	int nbCoasts = 6;
@@ -68,7 +102,7 @@ void AlgoMap::BuildSeaCoasts()
 
 	Coast seaCoast[3] = {None, None, None};
 	
-	// Random coasts selection
+	// Random coasts selection (2 mandatory + 1 optional)
 	do
 	{
 		seaCoast[0] = (Coast) (rand() % nbCoasts);
@@ -79,7 +113,7 @@ void AlgoMap::BuildSeaCoasts()
 		seaCoast[1] = (Coast) (rand() % nbCoasts);
 	} while (seaCoast[1] == None || seaCoast[1] == seaCoast[0]);
 
-	if (rand() % 10 > 6)
+	if (rand() % 10 > (7 - mapRange))
 	{
 		do
 		{
@@ -137,8 +171,11 @@ void AlgoMap::BuildSeaCoasts()
 }
 
 
+// Build area of a specific tile type
+// ----------------------------------------------
 void AlgoMap::BuildSpecialTiles(int tileType)
 {
+	// Find a random (and free) center for the zone
 	int centerX, centerY;
 	do
 	{
@@ -148,13 +185,52 @@ void AlgoMap::BuildSpecialTiles(int tileType)
 	
 	tiles[centerX][centerY] = tileType;
 
+	// Expand the zone around this center
 	for (int x = 0; x < mapSize; x++)
 	{
 		for (int y = 0; y < mapSize; y++)
 		{
-			int dist = (int) floor(sqrt(pow(centerX - x, 2) + pow(centerY - y, 2)));
+			int dist = GetDistance(centerX, centerY, x, y);
 			if (dist < min(mapRange, 3) && tiles[x][y] == TILE_FIELD && (rand() % 10) < (10 - mapRange * 2 - dist))
 				tiles[x][y] = tileType;
 		}
 	}
+}
+
+
+// Calculate best starting positions for players
+// ----------------------------------------------
+void AlgoMap::ProcessStartPositions()
+{
+	for(int i = 0; i <= 1; i++)
+		for(int j = 0; j <= 1; j++)
+			startPositions[i][j] = (int) mapSize / 2;
+
+	for (int x = 0; x < mapSize; x++)
+	{
+		for (int y = 0; y < mapSize; y++)
+		{
+			// Top-left corner
+			if (tiles[x][y] != TILE_WATER && (x + y) < (startPositions[0][0] + startPositions[0][1]))
+			{
+				startPositions[0][0] = x;
+				startPositions[0][1] = y;
+			}
+			// Bottom-right corner
+			if (tiles[x][y] != TILE_WATER && (x + y) > (startPositions[1][0] + startPositions[1][1]))
+			{
+				startPositions[1][0] = x;
+				startPositions[1][1] = y;
+			}
+			// TODO : also check top-right & bottom-left distance to see the farther
+		}
+	}
+}
+
+
+// Return distance between two tiles
+// ----------------------------------------------
+int AlgoMap::GetDistance(int x1, int y1, int x2, int y2)
+{
+	return (int) floor(sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2)));
 }

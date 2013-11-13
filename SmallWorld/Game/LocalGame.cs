@@ -7,19 +7,19 @@ namespace SmallWorld
 {
 	public class LocalGame : IGame
 	{
-        List<Player> Players
+        public List<Player> Players
         {
             get;
             set;
         }
 
-        int CurrentTurn
+		public int CurrentTurn
         {
             get;
             set;
         }
 
-        Map MapBoard
+		public Map MapBoard
         {
             get;
             set;

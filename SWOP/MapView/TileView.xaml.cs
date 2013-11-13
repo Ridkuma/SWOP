@@ -43,25 +43,26 @@ namespace SWOP {
 			SetGround();
 		}
 
+
 		public void SetGround() {
 			string brushPath = "Brush"; // set to "Brush" or "BrushImg"
 
 			switch (type)
 			{
 				case TileType.Field:
-					d_ground.Fill = (Brush) Resources[brushPath + "Field"];
+					hexagon.Fill = (Brush) Resources[brushPath + "Field"];
 					break;
 				case TileType.Mountain:
-					d_ground.Fill = (Brush) Resources[brushPath + "Moutain"];
+					hexagon.Fill = (Brush) Resources[brushPath + "Moutain"];
 					break;
 				case TileType.Desert:
-					d_ground.Fill = (Brush) Resources[brushPath + "Desert"];
+					hexagon.Fill = (Brush) Resources[brushPath + "Desert"];
 					break;
 				case TileType.Forest:
-					d_ground.Fill = (Brush) Resources[brushPath + "Forest"];
+					hexagon.Fill = (Brush) Resources[brushPath + "Forest"];
 					break;
 				case TileType.Water:
-					d_ground.Fill = (Brush) Resources[brushPath + "Water"];
+					hexagon.Fill = (Brush) Resources[brushPath + "Water"];
 					break;
 			}
 		}
@@ -69,7 +70,7 @@ namespace SWOP {
 		// tmp
 		private void Button_MouseEnter(object sender, MouseEventArgs e)
 		{
-			d_ground.Opacity = 0.2;
+			hexagon.Opacity = 0.2;
 
 			foreach (ITile t in tile.AdjacentsTiles)
 			{
@@ -79,13 +80,13 @@ namespace SWOP {
 
 		private void Hide()
 		{
-			d_ground.Opacity = 0.7;
+			hexagon.Opacity = 0.7;
 		}
 
 		// tmp
 		private void Button_MouseLeave(object sender, MouseEventArgs e)
 		{
-			d_ground.Opacity = 1;
+			hexagon.Opacity = 1;
 
 			foreach (ITile t in tile.AdjacentsTiles)
 			{
@@ -95,7 +96,7 @@ namespace SWOP {
 
 		private void Show()
 		{
-			d_ground.Opacity = 1;
+			hexagon.Opacity = 1;
 		}
 	}
 }

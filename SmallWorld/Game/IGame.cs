@@ -34,8 +34,6 @@ namespace SmallWorld
             get;
             set;
         }
-
-        IGame(Map map, List<Player> players);
     
         void Pause();
 

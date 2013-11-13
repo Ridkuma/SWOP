@@ -52,4 +52,14 @@ public class AlgoMap : IDisposable {
     return ret;
   }
 
+  public int GetStartTileX(int playerId) {
+    int ret = SWAlgoPINVOKE.AlgoMap_GetStartTileX(swigCPtr, playerId);
+    return ret;
+  }
+
+  public int GetStartTileY(int playerId) {
+    int ret = SWAlgoPINVOKE.AlgoMap_GetStartTileY(swigCPtr, playerId);
+    return ret;
+  }
+
 }

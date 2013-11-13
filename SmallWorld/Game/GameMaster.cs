@@ -17,12 +17,6 @@ namespace SmallWorld
 			protected set;
 		}
 
-		public Map CurrentMap
-		{
-			get;
-			protected set;
-		}
-
 
 		/// <summary>
 		/// Constructor of singleton GameMaster class

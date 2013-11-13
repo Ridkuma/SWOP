@@ -8,7 +8,6 @@ namespace SmallWorld
     public interface IFaction
     {
         List<Unit> GenerateUnits();
-        string GetRandomName();
     }
 
     public class VikingsFaction : IFaction

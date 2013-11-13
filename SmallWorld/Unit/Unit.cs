@@ -49,6 +49,11 @@ namespace SmallWorld
 
     public class VikingsUnit : Unit
     {
+        public VikingsUnit(string name) 
+            : base(name)
+        {
+        }
+
         public override void Move(ITile destination)
         {
             if (!destination.IsAdjacent(this.Position))
@@ -61,6 +66,11 @@ namespace SmallWorld
 
     public class DwarvesUnit : Unit
     {
+		public DwarvesUnit(string name) 
+            : base(name)
+        {
+        }
+
         // A Dwarf can move from a Mountain to any another Mountain
         // Cannot cross Water
         public override void Move(ITile destination)

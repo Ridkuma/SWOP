@@ -21,7 +21,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AQAAAAAAAAAAAAAAAAQAAAgABAAAAAAAAAEAAAAAAAE=</HashCode>
+      <HashCode>AQAAAAAAAAAAAAAAAAQAAAgABAAAAAAAAAAAAAAAAAE=</HashCode>
       <FileName>Game\GameMaster.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,7 +38,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgACAAIAAgAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAABAgACAAIAAgAAAAAAAAA=</HashCode>
       <FileName>Map\Map.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -196,7 +196,7 @@
   <Interface Name="SmallWorld.IFaction">
     <Position X="10.25" Y="6" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
       <FileName>Faction\Faction.cs</FileName>
     </TypeIdentifier>
   </Interface>

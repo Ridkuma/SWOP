@@ -34,17 +34,17 @@ namespace SWOP
 
 		public void MainWindow_Loaded(object sender, RoutedEventArgs e) {
 			GM = new GameMaster();
-			GM.NewGame("small");
+			GM.NewGame("small", null);
 
-			mapView = new MapView(GM.CurrentMap, mapGrid);
+			mapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
 		}
 
 		// tmp
 		private void ButtonReload_Click(object sender, RoutedEventArgs e)
 		{
-			GM.NewGame("normal");
+			GM.NewGame("normal", null);
 			mapView.mapViewGrid.Children.RemoveRange(0, mapView.mapViewGrid.Children.Count);
-			mapView = new MapView(GM.CurrentMap, mapGrid);
+			mapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
 		}
 	}
 }

@@ -188,6 +188,9 @@ class SWAlgoPINVOKE {
   }
 
 
+  [DllImport("SWAlgo", EntryPoint="CSharp_MAX_NB_PLAYERS_get")]
+  public static extern int MAX_NB_PLAYERS_get();
+
   [DllImport("SWAlgo", EntryPoint="CSharp_TILE_FIELD_get")]
   public static extern int TILE_FIELD_get();
 
@@ -214,4 +217,10 @@ class SWAlgoPINVOKE {
 
   [DllImport("SWAlgo", EntryPoint="CSharp_AlgoMap_GetTileType")]
   public static extern int AlgoMap_GetTileType(HandleRef jarg1, int jarg2, int jarg3);
+
+  [DllImport("SWAlgo", EntryPoint="CSharp_AlgoMap_GetStartTileX")]
+  public static extern int AlgoMap_GetStartTileX(HandleRef jarg1, int jarg2);
+
+  [DllImport("SWAlgo", EntryPoint="CSharp_AlgoMap_GetStartTileY")]
+  public static extern int AlgoMap_GetStartTileY(HandleRef jarg1, int jarg2);
 }

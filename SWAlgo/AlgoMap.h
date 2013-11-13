@@ -8,6 +8,7 @@
 	#define SWAlgo_API __declspec(dllimport)
 #endif
 
+#define MAX_NB_PLAYERS	2
 
 // Type tile constants
 #define TILE_FIELD		0
@@ -23,9 +24,13 @@ private:
 	int mapSize;
 	int mapRange;
 	std::vector<std::vector<int> > tiles;
+	int startPositions[MAX_NB_PLAYERS][2];
 
 	void BuildSeaCoasts();
 	void BuildSpecialTiles(int tileType);
+	void ProcessStartPositions();
+
+	int GetDistance(int x1, int y1, int x2, int y2);
 
 public:
 	AlgoMap(void);
@@ -33,5 +38,7 @@ public:
 
 	void BuildMap(int size);
 	int GetTileType(int x, int y);
-
+	int GetStartTileX(int playerId);
+	int GetStartTileY(int playerId);
+	//int IsStartTile(int x, int y);
 };

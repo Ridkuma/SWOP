@@ -7,6 +7,8 @@ namespace SmallWorld
 {
 	public class Map
 	{
+		private AlgoMap algo;
+
 		private int	mapSize;
 		public int MapSize
 		{
@@ -26,13 +28,16 @@ namespace SmallWorld
 		}
 
 
+		/// <summary>
+		/// Map constructor
+		/// </summary>
 		public Map(int size)
 		{
 			mapSize = size;
 			tiles = new ITile[mapSize, mapSize];
 
 			TileFactory tileFactory = new TileFactory();
-			AlgoMap algo = new AlgoMap();
+			algo = new AlgoMap();
 			algo.BuildMap(mapSize);
 
 			for (int y = 0; y < mapSize; y++)
@@ -75,5 +80,16 @@ namespace SmallWorld
 			Console.WriteLine("[Log] MapBoard created");
 		}
 
+
+		/// <summary>
+		/// Return start coords of a specific player
+		/// </summary>
+		public int[] GetStartPosition(int playerId)
+		{
+			int[] pos = new int[2];
+			pos[0] = algo.GetStartTileX(playerId);
+			pos[1] = algo.GetStartTileY(playerId);
+			return pos;
+		}
 	}
 }

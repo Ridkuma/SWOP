@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/dsltools/UseCaseModel"
+  dslVersion="1.0.0.0"
+  Id="744ff743-159d-43f3-b061-7aeaf6d6286a"
+  name="Diagrams" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <actor
+        Id="d0f709c4-a5e5-4c38-8f86-0f6a70ce93c7"
+        name="Player"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="dace8332-676c-4df4-bd50-d5d524d63046"
+        name="Player GameTurn actions"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="4609d15c-34ac-4e60-b673-ef0569cf4160"
+        name="Select Tile"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="dace8332-676c-4df4-bd50-d5d524d63046"
+            LastKnownName="Player GameTurn actions"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="2d3cdfb2-122a-4e07-986d-9e1a952665ab"
+        name="Action"
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="515dd42c-2854-4cac-94b8-293327a1e0aa">
+            <useCaseMoniker
+              Id="918fc5d5-b77d-45ea-a318-d4fbaa334511"
+              LastKnownName="EngageCombat"
+              LastKnownLocation="Diagrams.uml" />
+          </extend>
+          <extend
+            Id="a4fa787f-963b-4702-810d-9074c26a4e2d">
+            <useCaseMoniker
+              Id="56dedc96-a9da-46c1-b9fd-42673224da0d"
+              LastKnownName=" Move"
+              LastKnownLocation="Diagrams.uml" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker
+            Id="dace8332-676c-4df4-bd50-d5d524d63046"
+            LastKnownName="Player GameTurn actions"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="56dedc96-a9da-46c1-b9fd-42673224da0d"
+        name=" Move"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="dace8332-676c-4df4-bd50-d5d524d63046"
+            LastKnownName="Player GameTurn actions"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="918fc5d5-b77d-45ea-a318-d4fbaa334511"
+        name="EngageCombat"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="dace8332-676c-4df4-bd50-d5d524d63046"
+            LastKnownName="Player GameTurn actions"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="0ddb940c-421b-47f1-b46d-3601dacd44cb"
+        name="End GameTurn"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="dace8332-676c-4df4-bd50-d5d524d63046"
+            LastKnownName="Player GameTurn actions"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="04f04857-c551-480a-868b-3d4e50f53809"
+        name="Start game"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="ce00a525-ef65-436f-8ee8-29b2323bebfe"
+        name="Pause"
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="95f8c1e5-8e87-4b67-9bbb-469544e2669b">
+            <useCaseMoniker
+              Id="0bf5acab-6a83-4650-ae40-a9286199dc69"
+              LastKnownName="Resume"
+              LastKnownLocation="Diagrams.uml" />
+          </extend>
+          <extend
+            Id="8a3bcf86-4b5b-4906-8933-229d77de9212">
+            <useCaseMoniker
+              Id="826f4a0d-2155-4b46-aead-ab4fa7de9a1c"
+              LastKnownName="Save game"
+              LastKnownLocation="Diagrams.uml" />
+          </extend>
+          <extend
+            Id="b043ea4d-7562-461b-96bd-292814457f62">
+            <useCaseMoniker
+              Id="3bee4325-3954-418a-b207-c935529dfc39"
+              LastKnownName="Quit game"
+              LastKnownLocation="Diagrams.uml" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker
+            Id="dace8332-676c-4df4-bd50-d5d524d63046"
+            LastKnownName="Player GameTurn actions"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="826f4a0d-2155-4b46-aead-ab4fa7de9a1c"
+        name="Save game"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="dace8332-676c-4df4-bd50-d5d524d63046"
+            LastKnownName="Player GameTurn actions"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="3bee4325-3954-418a-b207-c935529dfc39"
+        name="Quit game"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="dace8332-676c-4df4-bd50-d5d524d63046"
+            LastKnownName="Player GameTurn actions"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="0bf5acab-6a83-4650-ae40-a9286199dc69"
+        name="Resume"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="dace8332-676c-4df4-bd50-d5d524d63046"
+            LastKnownName="Player GameTurn actions"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="503e4c10-d907-424b-995c-b50147ee618d"
+        name="Actor1"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="bf9aec37-b491-47b4-94de-cf5b1b83ee67"
+        name="Subsystem2"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="c8f7abfa-08af-4c76-baa6-e2b930f88646"
+        name="User"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="d95c0373-06cf-4b36-9306-5721a5065f62"
+            isDerived="false"
+            sourceEndRoleName="User"
+            targetEndRoleName="NewGame"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="f14d400f-3d80-4468-8dd6-7ed8f45fd49d"
+              LastKnownName="NewGame"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="8f92213d-124b-422a-9dd9-1066f824b477"
+                  name="User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f678526c-be9e-4a6e-98ee-f4effb57b53d"
+                  name="NewGame"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="58a6012d-aa5f-4405-938e-5cca3d9ca6b7"
+            isDerived="false"
+            sourceEndRoleName="User"
+            targetEndRoleName="LoadGame"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="82621306-598e-4329-930c-74f94faff2c9"
+              LastKnownName="LoadGame"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c56cd667-32fb-45d7-99b0-fafbe0786bdf"
+                  name="User"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="40b33623-f0d9-4011-98c1-ab8fe9bb1e74"
+                  name="LoadGame"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="0b42086e-a08b-43e5-b195-35c919d8598a"
+        name="Start Game"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="f14d400f-3d80-4468-8dd6-7ed8f45fd49d"
+        name="NewGame"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="c6ba4e54-766f-414f-a6a0-f40de9e4cd50">
+            <useCaseMoniker
+              Id="8c57673f-21d4-4c0a-8f5d-6c279591dd92"
+              LastKnownName="LaunchGame"
+              LastKnownLocation="Diagrams.uml" />
+          </dependency>
+        </suppliersInternal>
+        <additions>
+          <include
+            Id="1a38d4fe-dd35-4b9b-b9a6-615d6b0fa74b">
+            <useCaseMoniker
+              Id="032f7464-aed8-4f67-a55b-49ff22757579"
+              LastKnownName="Enter players' names"
+              LastKnownLocation="Diagrams.uml" />
+          </include>
+          <include
+            Id="a6b64c34-c295-44c6-8c22-25ae89633024">
+            <useCaseMoniker
+              Id="1ff33b9f-334c-475d-8eff-51e8f9efffdd"
+              LastKnownName="Choose factions"
+              LastKnownLocation="Diagrams.uml" />
+          </include>
+          <include
+            Id="bfe3b5e4-09f4-4f9a-80d6-4dd9984f40c4">
+            <useCaseMoniker
+              Id="29b9ee44-b478-4b0c-8a5a-45bb7e1ac193"
+              LastKnownName="Choose map size"
+              LastKnownLocation="Diagrams.uml" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker
+            Id="0b42086e-a08b-43e5-b195-35c919d8598a"
+            LastKnownName="Start Game"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="82621306-598e-4329-930c-74f94faff2c9"
+        name="LoadGame"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="c979ecc6-d063-43ba-ba3e-bcd1b5f2a019">
+            <useCaseMoniker
+              Id="8c57673f-21d4-4c0a-8f5d-6c279591dd92"
+              LastKnownName="LaunchGame"
+              LastKnownLocation="Diagrams.uml" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker
+            Id="0b42086e-a08b-43e5-b195-35c919d8598a"
+            LastKnownName="Start Game"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="032f7464-aed8-4f67-a55b-49ff22757579"
+        name="Enter players' names"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0b42086e-a08b-43e5-b195-35c919d8598a"
+            LastKnownName="Start Game"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="1ff33b9f-334c-475d-8eff-51e8f9efffdd"
+        name="Choose factions"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0b42086e-a08b-43e5-b195-35c919d8598a"
+            LastKnownName="Start Game"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="29b9ee44-b478-4b0c-8a5a-45bb7e1ac193"
+        name="Choose map size"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0b42086e-a08b-43e5-b195-35c919d8598a"
+            LastKnownName="Start Game"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="8c57673f-21d4-4c0a-8f5d-6c279591dd92"
+        name="LaunchGame"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0b42086e-a08b-43e5-b195-35c919d8598a"
+            LastKnownName="Start Game"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

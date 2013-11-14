@@ -35,8 +35,7 @@ namespace SmallWorld
 					break;
 
 				default:
-					Console.WriteLine("[Error in GameBuilder.BuildMap()] Strategy '" + strategy + "' for building map");
-					return null;
+                    throw new NotImplementedException();
 			}
 
 			Map map = mapBuilder.Build();

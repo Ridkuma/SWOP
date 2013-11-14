@@ -41,6 +41,8 @@ void AlgoMap::BuildMap(int size)
 		BuildSpecialTiles(TILE_DESERT);
 		BuildSpecialTiles(TILE_FOREST);
 	}
+
+	ProcessStartPositions();
 }
 
 // Getter of tile type at position (x,y)

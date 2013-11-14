@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="3e794713-0a29-48e8-a8e5-b4f06c8e16f8" name="Player" linkedPackageId="f29796fc-8170-4504-9f1d-ddbb1b06d22f" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <profileInstances>
+    <packageHasProfileInstances Id="483fe867-9604-476f-b79f-d7851231652a">
+      <profileInstance Id="947ea763-1690-4716-8219-ce30340a9497" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="a7de1f43-2a2f-4c79-8c92-d9f64b28792f">
+      <profileInstance Id="18023579-0ee6-4fde-b721-05493e39ceae" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="0ba2cbb2-cb95-4d0f-bd5f-0ad0e30f719f" name="Player" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d0f709c4-a5e5-4c38-8f86-0f6a70ce93c7" />
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="5a4f9589-81d2-481c-967b-ca714036e0c6" name="Player GameTurn actions" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="dace8332-676c-4df4-bd50-d5d524d63046" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="cf544992-2f36-4fe4-8a92-3ce65464da85" name="Select Tile" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="4609d15c-34ac-4e60-b673-ef0569cf4160" />
+        <subjects>
+          <subsystemMoniker Id="5a4f9589-81d2-481c-967b-ca714036e0c6" LastKnownName="Player GameTurn actions" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <useCaseModelRootHasTypes>
+      <useCase Id="238af7d7-4d49-492b-bd06-10de9b41f733" name="Action" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="2d3cdfb2-122a-4e07-986d-9e1a952665ab" />
+        <extendedCases>
+          <extend Id="781e5505-07b6-49e0-b00a-31753c0c3c0c">
+            <useCaseMoniker Id="5342ca7a-2bd3-4c13-b609-b8ec3da167e6" LastKnownName="EngageCombat" />
+            <elementDefinition Id="515dd42c-2854-4cac-94b8-293327a1e0aa" />
+          </extend>
+          <extend Id="4aa0059e-c451-4ea9-83e6-a2a925f2714a">
+            <useCaseMoniker Id="382be26e-2a3b-4e8a-8419-da04ef7dbbd0" LastKnownName=" Move" />
+            <elementDefinition Id="a4fa787f-963b-4702-810d-9074c26a4e2d" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="5a4f9589-81d2-481c-967b-ca714036e0c6" LastKnownName="Player GameTurn actions" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="382be26e-2a3b-4e8a-8419-da04ef7dbbd0" name=" Move" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="56dedc96-a9da-46c1-b9fd-42673224da0d" />
+        <subjects>
+          <subsystemMoniker Id="5a4f9589-81d2-481c-967b-ca714036e0c6" LastKnownName="Player GameTurn actions" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="5342ca7a-2bd3-4c13-b609-b8ec3da167e6" name="EngageCombat" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="918fc5d5-b77d-45ea-a318-d4fbaa334511" />
+        <subjects>
+          <subsystemMoniker Id="5a4f9589-81d2-481c-967b-ca714036e0c6" LastKnownName="Player GameTurn actions" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="48ef81a2-be9b-4678-9e4a-6efadbc1e8e9" name="End GameTurn" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0ddb940c-421b-47f1-b46d-3601dacd44cb" />
+        <subjects>
+          <subsystemMoniker Id="5a4f9589-81d2-481c-967b-ca714036e0c6" LastKnownName="Player GameTurn actions" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="35f818bd-4faa-47f8-8da5-6cd908c3458a" name="Pause" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ce00a525-ef65-436f-8ee8-29b2323bebfe" />
+        <extendedCases>
+          <extend Id="4969ff59-e22c-4688-b66e-8990578dd7d3">
+            <useCaseMoniker Id="a70d8e90-5c71-41ff-a446-7fa6ffc79462" LastKnownName="Resume" />
+            <elementDefinition Id="95f8c1e5-8e87-4b67-9bbb-469544e2669b" />
+          </extend>
+          <extend Id="81d4e795-b216-4d33-8b17-732ceabcf48f">
+            <useCaseMoniker Id="b7b0446e-bbe3-4177-8050-1854c642260e" LastKnownName="Save game" />
+            <elementDefinition Id="8a3bcf86-4b5b-4906-8933-229d77de9212" />
+          </extend>
+          <extend Id="dcd35cf0-5977-4f5d-90c6-9578cd50238b">
+            <useCaseMoniker Id="03d97a5b-3f27-4833-b736-ee1b65fcaa96" LastKnownName="Quit game" />
+            <elementDefinition Id="b043ea4d-7562-461b-96bd-292814457f62" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="5a4f9589-81d2-481c-967b-ca714036e0c6" LastKnownName="Player GameTurn actions" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="b7b0446e-bbe3-4177-8050-1854c642260e" name="Save game" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="826f4a0d-2155-4b46-aead-ab4fa7de9a1c" />
+        <subjects>
+          <subsystemMoniker Id="5a4f9589-81d2-481c-967b-ca714036e0c6" LastKnownName="Player GameTurn actions" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="03d97a5b-3f27-4833-b736-ee1b65fcaa96" name="Quit game" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="3bee4325-3954-418a-b207-c935529dfc39" />
+        <subjects>
+          <subsystemMoniker Id="5a4f9589-81d2-481c-967b-ca714036e0c6" LastKnownName="Player GameTurn actions" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="a70d8e90-5c71-41ff-a446-7fa6ffc79462" name="Resume" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0bf5acab-6a83-4650-ae40-a9286199dc69" />
+        <subjects>
+          <subsystemMoniker Id="5a4f9589-81d2-481c-967b-ca714036e0c6" LastKnownName="Player GameTurn actions" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="f29796fc-8170-4504-9f1d-ddbb1b06d22f" name="Diagrams">
+    <elementDefinition Id="744ff743-159d-43f3-b061-7aeaf6d6286a" />
+  </package>
+</useCaseModelRoot>

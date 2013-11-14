@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/dsltools/UseCaseModel"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner"
   dslVersion="1.0.0.0"
   Id="744ff743-159d-43f3-b061-7aeaf6d6286a"
   name="Diagrams" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -440,6 +440,168 @@
             LastKnownLocation="Diagrams.uml" />
         </subjects>
       </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <activity
+        Id="11fb0256-3370-4a1f-8024-1b2d664fedd1"
+        name="UnitLifespan"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <initialNode
+            Id="a2065542-c108-49c5-adf6-aedd27be72e0"
+            name="Initial1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="a2544805-36d9-4b9c-b5ce-90bfa6e04ba0"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="242a3d0a-f642-410e-bad0-3c08470b2fd0"
+                  LastKnownName="Ready"
+                  LastKnownLocation="Diagrams.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction
+            Id="242a3d0a-f642-410e-bad0-3c08470b2fd0"
+            name="Ready"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="6c33c6aa-fe2b-4ef6-9dfd-67b299b36c29"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="8417c75f-b12e-4af0-bb42-8adaa651ba36"
+                  LastKnownName="Decision1"
+                  LastKnownLocation="Diagrams.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode
+            Id="a3a6c1e8-266b-4bd7-9d8f-ddb739abc1e9"
+            name="ActivityFinal1"
+            isLeaf="false" />
+          <opaqueAction
+            Id="eb9478c2-18a0-494f-9e48-524e136a7e69"
+            name="Dead"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="079fb2c8-d9fb-410c-95b6-ed9c301a2dbd"
+                isLeaf="false">
+                <activityFinalNodeMoniker
+                  Id="a3a6c1e8-266b-4bd7-9d8f-ddb739abc1e9"
+                  LastKnownName="ActivityFinal1"
+                  LastKnownLocation="Diagrams.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="3e374a0b-5d17-4262-b7b0-d98fb7b42076"
+            name="Move"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="ccc9e5e0-ecd4-4057-b5bb-78740c076a76"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="7c3dbdfb-4bf7-47ec-9d52-4378dca63f65"
+                  LastKnownName="Idle"
+                  LastKnownLocation="Diagrams.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="7c3dbdfb-4bf7-47ec-9d52-4378dca63f65"
+            name="Idle"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="65a0b94b-b54b-4b8e-a59f-cd82f29285e9"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="242a3d0a-f642-410e-bad0-3c08470b2fd0"
+                  LastKnownName="Ready"
+                  LastKnownLocation="Diagrams.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="8417c75f-b12e-4af0-bb42-8adaa651ba36"
+            name="Decision1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="baba7f9d-fadd-44bf-8573-d3103b7dc96d"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="3e374a0b-5d17-4262-b7b0-d98fb7b42076"
+                  LastKnownName="Move"
+                  LastKnownLocation="Diagrams.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="fc12546e-5dfb-4bbf-86fc-173e0920eaf4"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="1ffe2c36-4874-44aa-8573-7262c17f53df"
+                  LastKnownName="Battle"
+                  LastKnownLocation="Diagrams.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction
+            Id="1ffe2c36-4874-44aa-8573-7262c17f53df"
+            name="Battle"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="ba774d29-cd9a-437f-9422-93e9767dd780"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="1335db08-7dfe-41e4-a4b3-202f9f3afa7c"
+                  LastKnownName="Decision2"
+                  LastKnownLocation="Diagrams.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="1335db08-7dfe-41e4-a4b3-202f9f3afa7c"
+            name="Decision2"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="1f9ce7a2-e8f3-40ed-98d4-30b0dc173ff8"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="7c3dbdfb-4bf7-47ec-9d52-4378dca63f65"
+                  LastKnownName="Idle"
+                  LastKnownLocation="Diagrams.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="065142ee-b293-41a5-896e-0ca774d2e1e7"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="eb9478c2-18a0-494f-9e48-524e136a7e69"
+                  LastKnownName="Dead"
+                  LastKnownLocation="Diagrams.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="4166aaa0-a79b-4cf1-a82d-02a7e71b015e"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="3e374a0b-5d17-4262-b7b0-d98fb7b42076"
+                  LastKnownName="Move"
+                  LastKnownLocation="Diagrams.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+        </nodes>
+      </activity>
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

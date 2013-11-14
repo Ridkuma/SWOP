@@ -6,8 +6,8 @@ using System.Text;
 namespace SmallWorld
 {
 	public class LocalGame : IGame
-	{
-        public List<Player> Players
+    {
+        public Map MapBoard
         {
             get;
             set;
@@ -19,7 +19,13 @@ namespace SmallWorld
             set;
         }
 
-		public Map MapBoard
+        public List<Player> Players
+        {
+            get;
+            set;
+        }
+
+        public int CurrentPlayerId
         {
             get;
             set;
@@ -33,17 +39,7 @@ namespace SmallWorld
 			Console.WriteLine("[Log] LocalGame created");
 		}
 
-		public void Pause()
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Resume()
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Launch()
+		public void NextPlayer()
 		{
 			throw new NotImplementedException();
 		}
@@ -52,5 +48,10 @@ namespace SmallWorld
 		{
 			throw new NotImplementedException();
 		}
-	}
+
+		public void End()
+		{
+			throw new NotImplementedException();
+		}
+    }
 }

@@ -33,16 +33,27 @@ namespace SWOP
 		}
 
 		public void MainWindow_Loaded(object sender, RoutedEventArgs e) {
-			GM = new GameMaster();
-			GM.NewGame("small", null);
+            // tmp
+            List<Tuple<string, FactionName>> listFaction = new List<Tuple<string,FactionName>>();
+            listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
+            listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
+
+            GM = new GameMaster();
+			GM.NewGame("small", listFaction);
 
 			mapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
 		}
 
 		// tmp
 		private void ButtonReload_Click(object sender, RoutedEventArgs e)
-		{
-			GM.NewGame("normal", null);
+        {
+            // tmp
+            List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
+            listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
+            listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
+
+			GM.NewGame("normal", listFaction);
+
 			mapView.mapViewGrid.Children.RemoveRange(0, mapView.mapViewGrid.Children.Count);
 			mapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
 		}

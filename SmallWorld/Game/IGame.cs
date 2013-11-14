@@ -5,16 +5,6 @@ using System.Text;
 
 namespace SmallWorld
 {
-	public enum GameState
-	{
-		Idle,
-		Loading,
-		Saving,
-		Playing,
-		Pausing,
-		Ending,
-	}
-
     public interface IGame
     {
         List<Player> Players
@@ -34,13 +24,17 @@ namespace SmallWorld
             get;
             set;
         }
-    
-        void Pause();
 
-        void Resume();
+        int CurrentPlayerId
+        {
+            get;
+            set;
+        }
 
-        void Launch();
+        void NextPlayer();
 
         void Save();
+
+        void End();
     }
 }

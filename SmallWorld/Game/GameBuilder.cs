@@ -7,10 +7,10 @@ namespace SmallWorld
 {
     public class GameBuilder
     {
-        public IGame Build(string strategy, List<Tuple<string, string>> playersInfo)
+        public IGame Build(string strategy, List<Tuple<string, FactionName>> playersInfo)
 		{
-            List<Player> players = null;//BuildPlayers(playersInfo);
             Map map = BuildMap(strategy);
+            List<Player> players = BuildPlayers(playersInfo);
 
 			IGame game = new LocalGame(map, players);
 
@@ -43,12 +43,19 @@ namespace SmallWorld
 			return map;
 		}
 
-		public List<Player> BuildPlayers(List<Tuple<string, string>> players)
+		public List<Player> BuildPlayers(List<Tuple<string, FactionName>> playersInfo)
 		{
-			throw new NotImplementedException();
+            List<Player> players = new List<Player>();
+
+            for (int i = 0; i < playersInfo.Count; i++)
+            {
+                players.Add(new Player(playersInfo[i].Item1, playersInfo[i].Item2));
+            }
+
+            return players;
 		}
 
-		public void PlaceUnits()
+        public void PlaceUnits()
 		{
 			throw new NotImplementedException();
 		}

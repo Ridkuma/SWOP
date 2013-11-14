@@ -120,7 +120,6 @@
       <HashCode>AAAAAAAAAIAAAACgAAAAAAQAAICAAAAAAAAAAgAAQAA=</HashCode>
       <FileName>Unit\Unit.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SmallWorld.TileFactory">
     <Position X="2.75" Y="12.5" Width="2.25" />
@@ -172,21 +171,21 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="SmallWorld.LocalGame" Collapsed="true">
-    <Position X="14.25" Y="0.5" Width="1.5" />
+  <Class Name="SmallWorld.LocalGame">
+    <Position X="12.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgIIAAQAAAAAAAAAAAAAgAAAAgAAAAAAAAAAgAAAA=</HashCode>
+      <HashCode>AAIAIIAAQAIAAAAAAAAAAAgAAAAwAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Game\LocalGame.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="SmallWorld.Player">
-    <Position X="10.25" Y="4.75" Width="2" />
+  <Class Name="SmallWorld.Player">
+    <Position X="10.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAQAAAAAAAAAQAAAAAAAAAA=</HashCode>
       <FileName>Player\Player.cs</FileName>
     </TypeIdentifier>
-  </Interface>
+  </Class>
   <Interface Name="SmallWorld.ITile">
     <Position X="5.75" Y="9.5" Width="1.5" />
     <TypeIdentifier>
@@ -209,9 +208,9 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="SmallWorld.IGame">
-    <Position X="12.25" Y="0.5" Width="1.5" />
+    <Position X="10.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgIIAAQAAAAAAAAAAAAAgAAAAgAAAAAAAAAAgAAAA=</HashCode>
+      <HashCode>AAIAIIAAQAIAAAAAAAAAAAgAAAAwAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Game\IGame.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -222,13 +221,6 @@
       <FileName>Unit\IUnit.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Enum Name="SmallWorld.GameState">
-    <Position X="10.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAABAAAAAAAAAAAAAQICIAAAAAAAABAAAAAAAAAA=</HashCode>
-      <FileName>Game\IGame.cs</FileName>
-    </TypeIdentifier>
-  </Enum>
   <Enum Name="SmallWorld.TileType">
     <Position X="2.75" Y="10.5" Width="1.5" />
     <TypeIdentifier>

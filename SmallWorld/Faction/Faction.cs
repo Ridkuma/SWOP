@@ -108,4 +108,11 @@ namespace SmallWorld
             return name;
         }
     }
+
+    public enum FactionName
+    {
+        Vikings,
+        Gauls,
+        Dwarves,
+    }
 }

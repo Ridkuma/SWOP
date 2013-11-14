@@ -5,14 +5,14 @@ using System.Text;
 
 namespace SmallWorld
 {
-    public class Unit
+    public class Unit : IUnit
     {
-        protected ITile Position { get; set; } // A position code, or a tile ?
-        protected int Atk { get; set; } // Attack Points
-        protected int Def { get; set; } // Defense Points
-        protected int Hp { get; set; } // Health Points
-        protected int Mvt { get; set; } // Movement Points
-        protected string Name { get; set; } // Unit name
+        protected ITile Position { get; set; }
+        protected int Atk { get; set; }
+        protected int Def { get; set; }
+        protected int Hp { get; set; }
+        protected int Mvt { get; set; }
+        protected string Name { get; set; }
 
         public Unit(string name)
         {
@@ -41,7 +41,7 @@ namespace SmallWorld
         }
 
         // Attacking is the same for every faction
-        public void Attack(Unit ennemy)
+        public void Attack(IUnit enemy)
         {
             // TODO
         }

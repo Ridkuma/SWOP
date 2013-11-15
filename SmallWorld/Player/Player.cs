@@ -7,32 +7,31 @@ namespace SmallWorld
 {
     public class Player
     {
-        public string Name
-        {
-            get;
-            protected set;
-        }
+		public string Name { get; protected set; }
+		public IFaction Faction { get; protected set; }
+		public int Score { get; protected set; }
 
-        public IFaction Faction
-        {
-            get;
-            protected set;
-        }
-
-        public int Score
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
 
         public Player(string name, FactionName faction)
         {
-            throw new System.NotImplementedException();
+			Name = name;
+			switch (faction)
+			{
+				case FactionName.Dwarves:
+					Faction = new DwarvesFaction();
+					break;
+
+				case FactionName.Gauls:
+					Faction = new GaulsFaction();
+					break;
+
+				case FactionName.Vikings:
+					Faction = new VikingsFaction();
+					break;
+
+				default:
+					throw new NotImplementedException();
+			}
         }
     }
 }

@@ -9,23 +9,9 @@ namespace SmallWorld
 	{
 		private AlgoMap algo;
 
-		private int	mapSize;
-		public int MapSize
-		{
-			get
-			{
-				return mapSize;
-			}
-		}
+		public int MapSize { get; protected set; }
 
-		private ITile[,] tiles;
-		public ITile[,] Tiles
-		{
-			get
-			{
-				return tiles;
-			}
-		}
+		public ITile[,] Tiles { get; protected set; }
 
 
 		/// <summary>
@@ -33,45 +19,45 @@ namespace SmallWorld
 		/// </summary>
 		public Map(int size)
 		{
-			mapSize = size;
-			tiles = new ITile[mapSize, mapSize];
+			MapSize = size;
+			Tiles = new ITile[MapSize, MapSize];
 
 			TileFactory tileFactory = new TileFactory();
 			algo = new AlgoMap();
-			algo.BuildMap(mapSize);
+			algo.BuildMap(MapSize);
 
-			for (int y = 0; y < mapSize; y++)
+			for (int y = 0; y < MapSize; y++)
 			{
-				for (int x = 0; x < mapSize; x++)
+				for (int x = 0; x < MapSize; x++)
 				{
-					tiles[x, y] = tileFactory.CreateTile(x, y, algo.GetTileType(x, y));
+					Tiles[x, y] = tileFactory.CreateTile(x, y, algo.GetTileType(x, y));
 
 					// Square map representation
 					if (x > 0)
 					{
-						tiles[x, y].AddAdjacentTile(tiles[x - 1, y]);
-						tiles[x - 1, y].AddAdjacentTile(tiles[x, y]);
+						Tiles[x, y].AddAdjacentTile(Tiles[x - 1, y]);
+						Tiles[x - 1, y].AddAdjacentTile(Tiles[x, y]);
 					}
 					if (y > 0)
 					{
-						tiles[x, y].AddAdjacentTile(tiles[x, y - 1]);
-						tiles[x, y - 1].AddAdjacentTile(tiles[x, y]);
+						Tiles[x, y].AddAdjacentTile(Tiles[x, y - 1]);
+						Tiles[x, y - 1].AddAdjacentTile(Tiles[x, y]);
 					}
 					// Hexagonal map representation (just add top-left (odd) or top-right (even) corner tile)
 					if (y % 2 == 0) // Odd line
 					{
 						if (x > 0 && y > 0)
 						{
-							tiles[x, y].AddAdjacentTile(tiles[x - 1, y - 1]);
-							tiles[x - 1, y - 1].AddAdjacentTile(tiles[x, y]);
+							Tiles[x, y].AddAdjacentTile(Tiles[x - 1, y - 1]);
+							Tiles[x - 1, y - 1].AddAdjacentTile(Tiles[x, y]);
 						}
 					}
 					else // Even line
 					{
-						if (x < mapSize - 1 && y > 0)
+						if (x < MapSize - 1 && y > 0)
 						{
-							tiles[x, y].AddAdjacentTile(tiles[x + 1, y - 1]);
-							tiles[x + 1, y - 1].AddAdjacentTile(tiles[x, y]);
+							Tiles[x, y].AddAdjacentTile(Tiles[x + 1, y - 1]);
+							Tiles[x + 1, y - 1].AddAdjacentTile(Tiles[x, y]);
 						}
 					}
 				}

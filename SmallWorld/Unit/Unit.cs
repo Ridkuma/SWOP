@@ -7,12 +7,12 @@ namespace SmallWorld
 {
     public class Unit : IUnit
     {
-        protected ITile Position { get; set; }
-        protected int Atk { get; set; }
-        protected int Def { get; set; }
-        protected int Hp { get; set; }
-        protected int Mvt { get; set; }
-        protected string Name { get; set; }
+        public ITile Position { get; protected set; }
+        public int Atk { get; protected set; }
+        public int Def { get; protected set; }
+        public int Hp { get; protected set; }
+        public int Mvt { get; protected set; }
+        public string Name { get; protected set; }
 
         public Unit(string name)
         {
@@ -34,10 +34,10 @@ namespace SmallWorld
 
             if (!possibleMove)
                 return;
-                
-            this.Position.OccupyingUnit = null;
+
+			this.Position.UnitLeave(this);
             this.Position = destination;
-            destination.OccupyingUnit = this;
+            destination.UnitEnter(this);
         }
 
         // Attacking is the same for every faction

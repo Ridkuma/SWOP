@@ -114,12 +114,13 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="SmallWorld.Unit">
+  <Class Name="SmallWorld.Unit" Collapsed="true">
     <Position X="11.5" Y="11" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAACgAAAAAAQAAICAAAAAAAAAAgAAQAA=</HashCode>
       <FileName>Unit\Unit.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SmallWorld.TileFactory">
     <Position X="2.75" Y="12.5" Width="2.25" />
@@ -174,7 +175,7 @@
   <Class Name="SmallWorld.LocalGame">
     <Position X="12.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAIIAAQAIAAAAAAAAAAAgAAAAwAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAIAIIAAAAIAAAAAAAAAAAgAAAAwAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Game\LocalGame.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -210,7 +211,7 @@
   <Interface Name="SmallWorld.IGame">
     <Position X="10.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAIIAAQAIAAAAAAAAAAAgAAAAwAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAIAIIAAAAIAAAAAAAAAAAgAAAAwAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Game\IGame.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -218,7 +219,7 @@
     <Position X="9.25" Y="11" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAACgAAAAAAQAAICAAAAAAAAAAgAAQAA=</HashCode>
-      <FileName>Unit\IUnit.cs</FileName>
+      <FileName>Unit\Unit.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="SmallWorld.TileType">

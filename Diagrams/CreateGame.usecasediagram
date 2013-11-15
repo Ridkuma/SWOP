@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="01d1b6e7-632b-4aac-bcc2-64895b861656" name="StartGame" linkedPackageId="de22ee73-5bd5-4910-9794-c4adde9e25c8" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
-  <profileInstances>
-    <packageHasProfileInstances Id="86c9f3c3-4e6a-4910-956d-9681323c9e7b">
-      <profileInstance Id="9335b558-14d6-4496-8743-a362b05bc33c" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="cea252e9-d622-4b97-b06a-0ee40ff9335a">
-      <profileInstance Id="72d9f6a2-b659-4d5e-9ab2-5f9086a3dd32" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
   <packagedElements>
     <useCaseModelRootHasTypes>
       <actor Id="a7817881-8075-489c-9d1e-0d5422fd6a32" name="User" isAbstract="false" isLeaf="false">
@@ -96,6 +82,12 @@
             <elementDefinition Id="c979ecc6-d063-43ba-ba3e-bcd1b5f2a019" />
           </dependency>
         </suppliersInternal>
+        <additions>
+          <include Id="f02df9dd-1d7e-41ed-827f-dec0b8d96c02">
+            <useCaseMoniker Id="dc1a6d9e-cf80-42f3-98d7-02fcc5aada9d" LastKnownName="Select one from all saves" />
+            <elementDefinition Id="992292e6-9c35-4ba9-a68b-960356db5e25" />
+          </include>
+        </additions>
         <subjects>
           <subsystemMoniker Id="993e5614-c7d3-4dbe-b0bd-2723dc97595c" LastKnownName="Start Game" />
         </subjects>
@@ -112,6 +104,20 @@
     <packageHasNamedElement>
       <useCase Id="3ca7510a-efba-403c-be1e-1f712fa17d33" name="Choose factions" isAbstract="false" isLeaf="false">
         <elementDefinition Id="1ff33b9f-334c-475d-8eff-51e8f9efffdd" />
+        <extendedCases>
+          <extend Id="cbc0a29b-c2ac-4fbe-8d58-58ec89769f2c">
+            <useCaseMoniker Id="bfd4266a-69c9-4412-9960-3a20d73d06c3" LastKnownName="Choose Vikings" />
+            <elementDefinition Id="08f10e7b-1dfa-4e27-bc65-71d4e16177ad" />
+          </extend>
+          <extend Id="978f636d-72ee-40ea-b286-3ef0945159c9">
+            <useCaseMoniker Id="fa3ad88e-1c97-4d54-bcb6-f06c7b5086cd" LastKnownName="Choose Gauls" />
+            <elementDefinition Id="be9f53ed-1ce7-4b6c-b073-2fed271065ff" />
+          </extend>
+          <extend Id="87cdd6da-cd05-4cbc-9dae-6df4c1de889c">
+            <useCaseMoniker Id="b330ed9e-b785-4a73-877a-6f092625b8b5" LastKnownName="Choose Dwarves" />
+            <elementDefinition Id="42af6534-4cc0-43b6-a349-4026c5bcf191" />
+          </extend>
+        </extendedCases>
         <subjects>
           <subsystemMoniker Id="993e5614-c7d3-4dbe-b0bd-2723dc97595c" LastKnownName="Start Game" />
         </subjects>
@@ -120,6 +126,20 @@
     <packageHasNamedElement>
       <useCase Id="ce13b5c9-f5a0-4070-bfe3-22521956e45e" name="Choose map size" isAbstract="false" isLeaf="false">
         <elementDefinition Id="29b9ee44-b478-4b0c-8a5a-45bb7e1ac193" />
+        <extendedCases>
+          <extend Id="460ab760-561d-4b9c-a336-1041d068e761">
+            <useCaseMoniker Id="ff96010a-ba06-4ab1-bec4-3abe762b9a25" LastKnownName="Demo size" />
+            <elementDefinition Id="75b3cc4f-c9e8-459d-b73d-c1b3850dba83" />
+          </extend>
+          <extend Id="7d9a76ff-f1ff-4e31-a4f0-a94c1da047be">
+            <useCaseMoniker Id="cabf4816-fa46-4704-8568-7836c4055ff1" LastKnownName="Small size" />
+            <elementDefinition Id="3937b20e-e59c-4dc6-b206-88827ab30594" />
+          </extend>
+          <extend Id="9a8a1d06-3b84-40e9-9031-b9571f02fc70">
+            <useCaseMoniker Id="0de75fa8-cb71-4a37-af80-9817b63a08d0" LastKnownName="Normal size" />
+            <elementDefinition Id="f2bd50c6-e7c5-40ba-896c-7b76af67702f" />
+          </extend>
+        </extendedCases>
         <subjects>
           <subsystemMoniker Id="993e5614-c7d3-4dbe-b0bd-2723dc97595c" LastKnownName="Start Game" />
         </subjects>
@@ -133,8 +153,78 @@
         </subjects>
       </useCase>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="bfd4266a-69c9-4412-9960-3a20d73d06c3" name="Choose Vikings" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f163d5ac-23e9-4a5a-a11e-bb6f188a691a" />
+        <subjects>
+          <subsystemMoniker Id="993e5614-c7d3-4dbe-b0bd-2723dc97595c" LastKnownName="Start Game" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="b330ed9e-b785-4a73-877a-6f092625b8b5" name="Choose Dwarves" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="7a070ff5-756a-44d8-9f9d-09cd8d6a0e9e" />
+        <subjects>
+          <subsystemMoniker Id="993e5614-c7d3-4dbe-b0bd-2723dc97595c" LastKnownName="Start Game" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="fa3ad88e-1c97-4d54-bcb6-f06c7b5086cd" name="Choose Gauls" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="92b72df2-f9da-4386-a86f-452a3522cfc6" />
+        <subjects>
+          <subsystemMoniker Id="993e5614-c7d3-4dbe-b0bd-2723dc97595c" LastKnownName="Start Game" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="dc1a6d9e-cf80-42f3-98d7-02fcc5aada9d" name="Select one from all saves" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="93e81738-a654-4a8a-bfae-b2abd16595fb" />
+        <subjects>
+          <subsystemMoniker Id="993e5614-c7d3-4dbe-b0bd-2723dc97595c" LastKnownName="Start Game" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="ff96010a-ba06-4ab1-bec4-3abe762b9a25" name="Demo size" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0a5f1534-844c-4c2c-bc16-744867856dce" />
+        <subjects>
+          <subsystemMoniker Id="993e5614-c7d3-4dbe-b0bd-2723dc97595c" LastKnownName="Start Game" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="0de75fa8-cb71-4a37-af80-9817b63a08d0" name="Normal size" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="57f687e1-80ec-4971-90f1-54e5dff0eb58" />
+        <subjects>
+          <subsystemMoniker Id="993e5614-c7d3-4dbe-b0bd-2723dc97595c" LastKnownName="Start Game" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="cabf4816-fa46-4704-8568-7836c4055ff1" name="Small size" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0a39d76a-c940-4ea6-9271-d932c0c682e0" />
+        <subjects>
+          <subsystemMoniker Id="993e5614-c7d3-4dbe-b0bd-2723dc97595c" LastKnownName="Start Game" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="de22ee73-5bd5-4910-9794-c4adde9e25c8" name="Diagrams">
     <elementDefinition Id="744ff743-159d-43f3-b061-7aeaf6d6286a" />
+    <profileInstances>
+      <packageHasProfileInstances Id="86c9f3c3-4e6a-4910-956d-9681323c9e7b">
+        <profileInstance Id="9335b558-14d6-4496-8743-a362b05bc33c" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="cea252e9-d622-4b97-b06a-0ee40ff9335a">
+        <profileInstance Id="72d9f6a2-b659-4d5e-9ab2-5f9086a3dd32" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </useCaseModelRoot>

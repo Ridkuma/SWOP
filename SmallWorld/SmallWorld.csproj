@@ -53,6 +53,7 @@
     <Compile Include="Player\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Map\TileFactory.cs" />
+    <Compile Include="Unit\IUnit.cs" />
     <Compile Include="Unit\Unit.cs" />
   </ItemGroup>
   <ItemGroup>

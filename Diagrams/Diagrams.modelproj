@@ -43,12 +43,12 @@
       <SubType>Content</SubType>
       <DependentUpon>Player.usecasediagram</DependentUpon>
     </Content>
-    <Content Include="StartGame.usecasediagram">
+    <Content Include="CreateGame.usecasediagram">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="StartGame.usecasediagram.layout">
+    <Content Include="CreateGame.usecasediagram.layout">
       <SubType>Content</SubType>
-      <DependentUpon>StartGame.usecasediagram</DependentUpon>
+      <DependentUpon>CreateGame.usecasediagram</DependentUpon>
     </Content>
     <Content Include="UMLActivityDiagram1.activitydiagram">
       <SubType>Content</SubType>

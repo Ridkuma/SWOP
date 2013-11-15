@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/dsltools/UseCaseModel"
   dslVersion="1.0.0.0"
   Id="744ff743-159d-43f3-b061-7aeaf6d6286a"
   name="Diagrams" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -23,7 +23,166 @@
         Id="d0f709c4-a5e5-4c38-8f86-0f6a70ce93c7"
         name="Player"
         isAbstract="false"
-        isLeaf="false" />
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="48e6c9e1-2292-426c-ba6f-33bb4d4ee1d2"
+            isDerived="false"
+            sourceEndRoleName="Player"
+            targetEndRoleName="Select Tile"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="4609d15c-34ac-4e60-b673-ef0569cf4160"
+              LastKnownName="Select Tile"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1599684c-9739-4f65-bdd8-da3327fd38bc"
+                  name="Player"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2e59c341-8fbc-4d6a-9c1b-e8b9a656d59d"
+                  name="Select Tile"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="0b22c11e-b59a-4d38-8d04-c284e5c6dff7"
+            isDerived="false"
+            sourceEndRoleName="Player"
+            targetEndRoleName="Action"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="2d3cdfb2-122a-4e07-986d-9e1a952665ab"
+              LastKnownName="Action on unit"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="fd8b1d85-7e9a-4776-9204-abdd11ff54f5"
+                  name="Player"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="27385ca8-6f34-4ea4-b4bf-f60888c6076d"
+                  name="Action"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="118be530-cedd-4321-8282-2918aeb6f6d5"
+            isDerived="false"
+            sourceEndRoleName="Player"
+            targetEndRoleName="End GameTurn"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="0ddb940c-421b-47f1-b46d-3601dacd44cb"
+              LastKnownName="End Player turn"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bbf3c138-7570-487e-9eb9-810b9244f3b5"
+                  name="Player"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3fa2c227-72a8-4f10-b76e-61eb4d86a717"
+                  name="End GameTurn"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="b0bdabd2-01d0-4133-b5ce-d1d137518c2a"
+            isDerived="false"
+            sourceEndRoleName="Player"
+            targetEndRoleName="Pause"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="ce00a525-ef65-436f-8ee8-29b2323bebfe"
+              LastKnownName="Pause"
+              LastKnownLocation="Diagrams.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="965e5add-4448-4b4c-abf2-ef1c0b5b2a11"
+                  name="Player"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="22743900-e721-4307-8455-113d7b4b0025"
+                  name="Pause"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <subsystem
@@ -39,6 +198,15 @@
         name="Select Tile"
         isAbstract="false"
         isLeaf="false">
+        <additions>
+          <include
+            Id="18217c0d-17fd-4826-9e4b-e9bc31c99050">
+            <useCaseMoniker
+              Id="4e3f8ed0-99f8-44f4-a968-5c8ddb2df501"
+              LastKnownName="Select Unit"
+              LastKnownLocation="Diagrams.uml" />
+          </include>
+        </additions>
         <subjects>
           <subsystemMoniker
             Id="dace8332-676c-4df4-bd50-d5d524d63046"
@@ -50,7 +218,7 @@
     <packageHasNamedElement>
       <useCase
         Id="2d3cdfb2-122a-4e07-986d-9e1a952665ab"
-        name="Action"
+        name="Action on unit"
         isAbstract="false"
         isLeaf="false">
         <extendedCases>
@@ -66,6 +234,13 @@
             <useCaseMoniker
               Id="56dedc96-a9da-46c1-b9fd-42673224da0d"
               LastKnownName=" Move"
+              LastKnownLocation="Diagrams.uml" />
+          </extend>
+          <extend
+            Id="7bd0e03f-d24c-485a-b997-fa5c257985de">
+            <useCaseMoniker
+              Id="19e4d2f8-f0ef-4a27-943c-d7ff4f5f6131"
+              LastKnownName="Turn pass"
               LastKnownLocation="Diagrams.uml" />
           </extend>
         </extendedCases>
@@ -108,7 +283,7 @@
     <packageHasNamedElement>
       <useCase
         Id="0ddb940c-421b-47f1-b46d-3601dacd44cb"
-        name="End GameTurn"
+        name="End Player turn"
         isAbstract="false"
         isLeaf="false">
         <subjects>
@@ -377,6 +552,15 @@
               LastKnownLocation="Diagrams.uml" />
           </dependency>
         </suppliersInternal>
+        <additions>
+          <include
+            Id="992292e6-9c35-4ba9-a68b-960356db5e25">
+            <useCaseMoniker
+              Id="93e81738-a654-4a8a-bfae-b2abd16595fb"
+              LastKnownName="Select one from all saves"
+              LastKnownLocation="Diagrams.uml" />
+          </include>
+        </additions>
         <subjects>
           <subsystemMoniker
             Id="0b42086e-a08b-43e5-b195-35c919d8598a"
@@ -405,6 +589,29 @@
         name="Choose factions"
         isAbstract="false"
         isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="08f10e7b-1dfa-4e27-bc65-71d4e16177ad">
+            <useCaseMoniker
+              Id="f163d5ac-23e9-4a5a-a11e-bb6f188a691a"
+              LastKnownName="Choose Vikings"
+              LastKnownLocation="Diagrams.uml" />
+          </extend>
+          <extend
+            Id="be9f53ed-1ce7-4b6c-b073-2fed271065ff">
+            <useCaseMoniker
+              Id="92b72df2-f9da-4386-a86f-452a3522cfc6"
+              LastKnownName="Choose Gauls"
+              LastKnownLocation="Diagrams.uml" />
+          </extend>
+          <extend
+            Id="42af6534-4cc0-43b6-a349-4026c5bcf191">
+            <useCaseMoniker
+              Id="7a070ff5-756a-44d8-9f9d-09cd8d6a0e9e"
+              LastKnownName="Choose Dwarves"
+              LastKnownLocation="Diagrams.uml" />
+          </extend>
+        </extendedCases>
         <subjects>
           <subsystemMoniker
             Id="0b42086e-a08b-43e5-b195-35c919d8598a"
@@ -419,6 +626,29 @@
         name="Choose map size"
         isAbstract="false"
         isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="75b3cc4f-c9e8-459d-b73d-c1b3850dba83">
+            <useCaseMoniker
+              Id="0a5f1534-844c-4c2c-bc16-744867856dce"
+              LastKnownName="Demo size"
+              LastKnownLocation="Diagrams.uml" />
+          </extend>
+          <extend
+            Id="3937b20e-e59c-4dc6-b206-88827ab30594">
+            <useCaseMoniker
+              Id="0a39d76a-c940-4ea6-9271-d932c0c682e0"
+              LastKnownName="Small size"
+              LastKnownLocation="Diagrams.uml" />
+          </extend>
+          <extend
+            Id="f2bd50c6-e7c5-40ba-896c-7b76af67702f">
+            <useCaseMoniker
+              Id="57f687e1-80ec-4971-90f1-54e5dff0eb58"
+              LastKnownName="Normal size"
+              LastKnownLocation="Diagrams.uml" />
+          </extend>
+        </extendedCases>
         <subjects>
           <subsystemMoniker
             Id="0b42086e-a08b-43e5-b195-35c919d8598a"
@@ -602,6 +832,168 @@
           </decisionNode>
         </nodes>
       </activity>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="f163d5ac-23e9-4a5a-a11e-bb6f188a691a"
+        name="Choose Vikings"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0b42086e-a08b-43e5-b195-35c919d8598a"
+            LastKnownName="Start Game"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="7a070ff5-756a-44d8-9f9d-09cd8d6a0e9e"
+        name="Choose Dwarves"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0b42086e-a08b-43e5-b195-35c919d8598a"
+            LastKnownName="Start Game"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="92b72df2-f9da-4386-a86f-452a3522cfc6"
+        name="Choose Gauls"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0b42086e-a08b-43e5-b195-35c919d8598a"
+            LastKnownName="Start Game"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="93e81738-a654-4a8a-bfae-b2abd16595fb"
+        name="Select one from all saves"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0b42086e-a08b-43e5-b195-35c919d8598a"
+            LastKnownName="Start Game"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="0a5f1534-844c-4c2c-bc16-744867856dce"
+        name="Demo size"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0b42086e-a08b-43e5-b195-35c919d8598a"
+            LastKnownName="Start Game"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="57f687e1-80ec-4971-90f1-54e5dff0eb58"
+        name="Normal size"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0b42086e-a08b-43e5-b195-35c919d8598a"
+            LastKnownName="Start Game"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="0a39d76a-c940-4ea6-9271-d932c0c682e0"
+        name="Small size"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0b42086e-a08b-43e5-b195-35c919d8598a"
+            LastKnownName="Start Game"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="4e3f8ed0-99f8-44f4-a968-5c8ddb2df501"
+        name="Select Unit"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="dace8332-676c-4df4-bd50-d5d524d63046"
+            LastKnownName="Player GameTurn actions"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="19e4d2f8-f0ef-4a27-943c-d7ff4f5f6131"
+        name="Turn pass"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="dace8332-676c-4df4-bd50-d5d524d63046"
+            LastKnownName="Player GameTurn actions"
+            LastKnownLocation="Diagrams.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="b9966597-391e-4945-85e5-acf690045760"
+        name="Player 1"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="e0633bf2-193e-4949-babd-616dc22acdf1"
+            isSubstitutable="false">
+            <actorMoniker
+              Id="d0f709c4-a5e5-4c38-8f86-0f6a70ce93c7"
+              LastKnownName="Player"
+              LastKnownLocation="Diagrams.uml" />
+          </generalization>
+        </generalsInternal>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="51d78022-1a8d-48c0-858b-056d5fe9073c"
+        name="Player 2"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="2437fff8-8c2a-4f15-9542-c16c018abb0c"
+            isSubstitutable="false">
+            <actorMoniker
+              Id="d0f709c4-a5e5-4c38-8f86-0f6a70ce93c7"
+              LastKnownName="Player"
+              LastKnownLocation="Diagrams.uml" />
+          </generalization>
+        </generalsInternal>
+      </actor>
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

@@ -45,7 +45,7 @@ namespace SWOP {
 
 
 		public void SetGround() {
-			string brushPath = "BrushImg"; // set to "Brush" or "BrushImg"
+			string brushPath = "Brush"; // set to "Brush" or "BrushImg"
 
 			switch (type)
 			{

@@ -7,41 +7,43 @@ namespace SmallWorld
 {
 	public class LocalGame : IGame
     {
-        public Map MapBoard
-        {
-            get;
-            set;
-        }
-
-		public int CurrentTurn
-        {
-            get;
-            set;
-        }
-
-        public List<Player> Players
-        {
-            get;
-            set;
-        }
-
-        public int CurrentPlayerId
-        {
-            get;
-            set;
-        }
+        public Map MapBoard { get; protected set; }
+		public int CurrentTurn { get; protected set; }
+        public List<Player> Players { get; protected set; }
+        public int CurrentPlayerId { get; protected set; }
+        
 
 		public LocalGame(Map map, List<Player> players)
 		{
-            this.Players = players;
-            this.MapBoard = map;
-            this.CurrentTurn = 1;
+            Players = players;
+            MapBoard = map;
+            CurrentTurn = 1;
+            CurrentPlayerId = 0;
 			Console.WriteLine("[Log] LocalGame created");
 		}
 
 		public void NextPlayer()
 		{
-			throw new NotImplementedException();
+			CurrentPlayerId++;
+			if (CurrentPlayerId >= Players.Count)
+			{
+				if (CurrentTurn >= MapBoard.TotalNbTurn) // Is end of game ?
+				{
+					End();
+				}
+				else
+				{
+					CurrentPlayerId = 0;
+					CurrentTurn++;
+				}
+			}
+			
+			// Put each units on Idle state
+			foreach (Player p in Players)
+			{
+				foreach (IUnit u in p.CurrentFaction.Units)
+					ChangeState(UnitState.Idle);
+			}
 		}
 
 		public void Save()

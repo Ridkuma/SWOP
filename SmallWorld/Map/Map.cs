@@ -9,17 +9,20 @@ namespace SmallWorld
 	{
 		private AlgoMap algo;
 
-		public int MapSize { get; protected set; }
-
 		public ITile[,] Tiles { get; protected set; }
+		public int MapSize { get; protected set; }
+		public int TotalNbTurn { get; protected set; }
+		public int TotalNbUnits { get; protected set; }
 
 
 		/// <summary>
 		/// Map constructor
 		/// </summary>
-		public Map(int size)
+		public Map(int size, int nbTurn, int nbUnits)
 		{
 			MapSize = size;
+			TotalNbTurn = nbTurn;
+			TotalNbUnits = nbUnits;
 			Tiles = new ITile[MapSize, MapSize];
 
 			TileFactory tileFactory = new TileFactory();

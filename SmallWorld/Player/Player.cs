@@ -8,7 +8,7 @@ namespace SmallWorld
     public class Player
     {
 		public string Name { get; protected set; }
-		public IFaction Faction { get; protected set; }
+		public IFaction CurrentFaction { get; protected set; }
 		public int Score { get; protected set; }
 
 

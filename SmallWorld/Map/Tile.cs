@@ -15,6 +15,7 @@ namespace SmallWorld
 		TileType Type { get; }
 		List<ITile> AdjacentsTiles { get; }
 		List<IUnit> OccupyingUnits { get; }
+		BonusType Bonus { get; }
 
 		void AddAdjacentTile(ITile adjacentTile);
 		bool IsAdjacent(ITile comparedTile);
@@ -37,6 +38,7 @@ namespace SmallWorld
 		}
 		public List<ITile> AdjacentsTiles { get; protected set; }
 		public List<IUnit> OccupyingUnits { get; protected set; }
+		BonusType Bonus { get; protected set; }
 
 
 		protected Tile(int posX, int posY)
@@ -46,6 +48,8 @@ namespace SmallWorld
 
 			AdjacentsTiles = new List<ITile>();
 			OccupyingUnits = new List<IUnit>();
+			
+			InitBonus();
 		}
 
 
@@ -84,6 +88,17 @@ namespace SmallWorld
 				OccupyingUnits.Remove(unit);
 			else
 				Console.WriteLine("[Warning] Unit trying to quit a tile not currently occupied");
+		}
+		
+		
+		private void InitBonus()
+		{
+			Bonus = BonusType.None;
+			
+			if (Random.value > 0.7)
+			{
+				Bonus = (BonusType) Random.value * BonusType.Count;
+			}
 		}
 	}
 
@@ -152,4 +167,12 @@ namespace SmallWorld
         {
         }
     }
+    
+    
+    public enum BonusType {
+		None,
+		DoublePoint,
+		DoubleAtkDef,
+		NoPoint,
+	}
 }

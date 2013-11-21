@@ -14,7 +14,7 @@ namespace SmallWorld
     {
 		public Map Build()
 		{
-			return new Map(5);
+			return new Map(5, 5, 4);
 		}
     }
 
@@ -22,7 +22,7 @@ namespace SmallWorld
 	{
 		public Map Build()
 		{
-			return new Map(10);
+			return new Map(10, 20, 6);
 		}
     }
 
@@ -30,7 +30,7 @@ namespace SmallWorld
 	{
 		public Map Build()
 		{
-			return new Map(15);
+			return new Map(15, 30, 8);
 		}
     }
 }

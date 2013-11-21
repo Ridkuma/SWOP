@@ -13,6 +13,8 @@ namespace SmallWorld
         public int Hp { get; protected set; }
         public int Mvt { get; protected set; }
         public string Name { get; protected set; }
+        public UnitState State { get; set; }
+
 
         public Unit(string name)
         {
@@ -21,6 +23,7 @@ namespace SmallWorld
             this.Hp = 2;
             this.Mvt = 1;
             this.Name = name;
+            this.State = UnitState.Idle;
         }
 
         // DEFAULT MOVE : Consider this "pseudo code" for now
@@ -45,6 +48,85 @@ namespace SmallWorld
         {
             // TODO
         }
+
+
+        public void ChangeState(UnitState targetState)
+        {
+            switch (this.State)
+            {
+                case UnitState.Idle :
+                    switch (targetState)
+                    {
+                        case UnitState.Selected :
+                            this.State = targetState;
+                            break;
+
+                        case UnitState.Defending :
+                            this.State = targetState;
+                            break;
+                    }
+                    break;
+
+                case UnitState.Selected :
+                    switch (targetState)
+                    {
+                        case UnitState.Move :
+                            this.State = targetState;
+                            break;
+
+                        case UnitState.Attacking :
+                            this.State = targetState;
+                            break;
+
+                        case UnitState.Idle :
+                            this.State = targetState;
+                            break;
+                    }
+                    break;
+
+                case UnitState.Move:
+                    switch (targetState)
+                    {
+                        case UnitState.Idle:
+                            this.State = targetState;
+                            break;
+
+                    }
+                    break;
+
+                case UnitState.Attacking:
+                    switch (targetState)
+                    {
+                        case UnitState.Move:
+                            this.State = targetState;
+                            break;
+
+                        case UnitState.Idle:
+                            this.State = targetState;
+                            break;
+
+                        case UnitState.Dead:
+                            this.State = targetState;
+                            break;
+                    }
+                    break;
+
+                case UnitState.Defending:
+                    switch (targetState)
+                    {
+                        case UnitState.Idle:
+                            this.State = targetState;
+                            break;
+
+                        case UnitState.Dead:
+                            this.State = targetState;
+                            break;
+                    }
+                    break;
+
+            }
+        }
+
     }
 
     public class VikingsUnit : Unit

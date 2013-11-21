@@ -8,30 +8,30 @@ using SmallWorld;
 
 namespace SWOP {
 	public class MapView {
-		private Map map;
-		public Grid mapViewGrid; // tmp pass to private
-		public Dictionary<ITile, TileView> tilesView;
+		private Map Map { get; set; }
+        public Grid MapViewGrid { get; set; } // tmp pass to private
+        public Dictionary<ITile, TileView> TilesView { get; set; }
 
 		public MapView(SmallWorld.Map _map, Grid _mapViewGrid) {
-			map = _map;
-			mapViewGrid = _mapViewGrid;
+			Map = _map;
+			MapViewGrid = _mapViewGrid;
 
-			tilesView = new Dictionary<ITile,TileView>();
+			TilesView = new Dictionary<ITile,TileView>();
 
-			for (int y = 0; y < map.MapSize; y++)
+			for (int y = 0; y < Map.MapSize; y++)
 			{
-				for (int x = 0; x < map.MapSize; x++)
+				for (int x = 0; x < Map.MapSize; x++)
 				{
-					TileView tile = new TileView(map.Tiles[x, y]);
-					mapViewGrid.Children.Add(tile);
-					tilesView.Add(map.Tiles[x, y], tile);
+					TileView tile = new TileView(Map.Tiles[x, y]);
+					MapViewGrid.Children.Add(tile);
+					TilesView.Add(Map.Tiles[x, y], tile);
 				}
 			}
 
 			// tmp
-			int[] startCoord = map.GetStartPosition(0);
+			int[] startCoord = Map.GetStartPosition(0);
 			Console.WriteLine("[LOG] Player 0 start coords = " + startCoord[0] + ", " + startCoord[1]);
-			startCoord = map.GetStartPosition(1);
+			startCoord = Map.GetStartPosition(1);
 			Console.WriteLine("[LOG] Player 1 start coords = " + startCoord[0] + ", " + startCoord[1]);
 		}
 	}

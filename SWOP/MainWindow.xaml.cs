@@ -54,7 +54,7 @@ namespace SWOP
 
 			GM.NewGame("normal", listFaction);
 
-			mapView.mapViewGrid.Children.RemoveRange(0, mapView.mapViewGrid.Children.Count);
+			mapView.MapViewGrid.Children.RemoveRange(0, mapView.MapViewGrid.Children.Count);
 			mapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
 		}
 	}

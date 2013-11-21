@@ -14,8 +14,20 @@ namespace SmallWorld
         int Hp { get; } // Health Points
         int Mvt { get; } // Movement Points
         string Name { get; } // Unit name
+        UnitState State { get; } // Unit State
 
         void Move(ITile destination);
         void Attack(IUnit enemy);
+        void ChangeState(UnitState targetState);
+    }
+
+    public enum UnitState
+    {
+        Idle,
+        Selected,
+        Move,
+        Attacking,
+        Defending,
+        Dead
     }
 }

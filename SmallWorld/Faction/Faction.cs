@@ -7,7 +7,8 @@ namespace SmallWorld
 {
     public interface IFaction
     {
-        List<Unit> GenerateUnits();
+        List<IUnit> Units { get; }
+        void GenerateUnits();
     }
 
     public class VikingsFaction : IFaction
@@ -28,7 +29,7 @@ namespace SmallWorld
                 "Cryptograf"
             };
 
-        public List<Unit> GenerateUnits()
+        public void GenerateUnits()
         {
             throw new NotImplementedException();
         }
@@ -63,7 +64,7 @@ namespace SmallWorld
                 "Bofur"
             };
 
-        public List<Unit> GenerateUnits()
+        public void GenerateUnits()
         {
             throw new NotImplementedException();
         }
@@ -95,7 +96,7 @@ namespace SmallWorld
                 "Iélosubmarine"
             };
 
-        public List<Unit> GenerateUnits()
+        public void GenerateUnits()
         {
             throw new NotImplementedException();
         }

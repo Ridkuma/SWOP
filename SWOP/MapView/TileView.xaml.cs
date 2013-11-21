@@ -19,22 +19,19 @@ namespace SWOP {
 	/// </summary>
 	public partial class TileView : UserControl {
 		
-		private ITile tile;
-		private TileType type;
-
+		private ITile Tile { get; set; }
 
 		public TileView(ITile t) {
 			InitializeComponent();
 
-			tile = t;
-			type = tile.Type;
+			Tile = t;
 		}
 
 
 		private void OnTileLoaded(object sender, RoutedEventArgs e)
 		{
 			// Set position (hexagon disposition)
-			TranslateTransform trTns = new TranslateTransform(tile.X * 60 + ((tile.Y % 2 == 0) ? 0 : 30), tile.Y * 50);
+			TranslateTransform trTns = new TranslateTransform(Tile.X * 60 + ((Tile.Y % 2 == 0) ? 0 : 30), Tile.Y * 50);
 			TransformGroup trGrp = new TransformGroup();
 			trGrp.Children.Add(trTns);
 
@@ -47,7 +44,7 @@ namespace SWOP {
 		public void SetGround() {
 			string brushPath = "Brush"; // set to "Brush" or "BrushImg"
 
-			switch (type)
+			switch (Tile.Type)
 			{
 				case TileType.Field:
 					hexagon.Fill = (Brush) Resources[brushPath + "Field"];
@@ -72,9 +69,9 @@ namespace SWOP {
 		{
 			hexagon.Opacity = 0.2;
 
-			foreach (ITile t in tile.AdjacentsTiles)
+			foreach (ITile t in Tile.AdjacentsTiles)
 			{
-				MainWindow.INSTANCE.mapView.tilesView[t].Hide();
+				MainWindow.INSTANCE.mapView.TilesView[t].Hide();
 			}
 		}
 
@@ -88,9 +85,9 @@ namespace SWOP {
 		{
 			hexagon.Opacity = 1;
 
-			foreach (ITile t in tile.AdjacentsTiles)
+			foreach (ITile t in Tile.AdjacentsTiles)
 			{
-				MainWindow.INSTANCE.mapView.tilesView[t].Show();
+				MainWindow.INSTANCE.mapView.TilesView[t].Show();
 			}
 		}
 

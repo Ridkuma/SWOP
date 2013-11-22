@@ -38,7 +38,7 @@ namespace SmallWorld
 		}
 		public List<ITile> AdjacentsTiles { get; protected set; }
 		public List<IUnit> OccupyingUnits { get; protected set; }
-		BonusType Bonus { get; protected set; }
+		public BonusType Bonus { get; protected set; }
 
 
 		protected Tile(int posX, int posY)
@@ -94,10 +94,11 @@ namespace SmallWorld
 		private void InitBonus()
 		{
 			Bonus = BonusType.None;
-			
-			if (Random.value > 0.7)
+
+			Random rnd = new Random();
+			if (rnd.Next(10) > 7)
 			{
-				Bonus = (BonusType) Random.value * BonusType.Count;
+				Bonus = (BonusType) rnd.Next(Enum.GetValues(typeof(BonusType)).Length);
 			}
 		}
 	}

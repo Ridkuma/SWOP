@@ -42,7 +42,7 @@ namespace SmallWorld
 			foreach (Player p in Players)
 			{
 				foreach (IUnit u in p.CurrentFaction.Units)
-					ChangeState(UnitState.Idle);
+					u.ChangeState(UnitState.Idle);
 			}
 		}
 

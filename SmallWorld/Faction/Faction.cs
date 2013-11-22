@@ -12,7 +12,8 @@ namespace SmallWorld
     }
 
     public class VikingsFaction : IFaction
-    {
+	{
+		public List<IUnit> Units { get; protected set; }
         static Random random = new Random();
 
         private List<string> availableNames = new List<string> 
@@ -44,7 +45,8 @@ namespace SmallWorld
     }
 
     public class DwarvesFaction : IFaction
-    {
+	{
+		public List<IUnit> Units { get; protected set; }
         static Random random = new Random();
 
         private List<string> availableNames = new List<string> 
@@ -79,7 +81,8 @@ namespace SmallWorld
     }
 
     public class GaulsFaction : IFaction
-    {
+	{
+		public List<IUnit> Units { get; protected set; }
         static Random random = new Random();
 
         private List<string> availableNames = new List<string> 

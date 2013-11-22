@@ -18,15 +18,15 @@ namespace SmallWorld
 			switch (faction)
 			{
 				case FactionName.Dwarves:
-					Faction = new DwarvesFaction();
+					CurrentFaction = new DwarvesFaction();
 					break;
 
 				case FactionName.Gauls:
-					Faction = new GaulsFaction();
+					CurrentFaction = new GaulsFaction();
 					break;
 
 				case FactionName.Vikings:
-					Faction = new VikingsFaction();
+					CurrentFaction = new VikingsFaction();
 					break;
 
 				default:

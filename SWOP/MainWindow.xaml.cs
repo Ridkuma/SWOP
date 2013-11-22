@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -23,8 +24,9 @@ namespace SWOP
 	{
 		public static MainWindow INSTANCE;
 
-		public GameMaster GM;
-		public MapView mapView;
+		public GameMaster GM { get; protected set; }
+		public MapView MapView { get; protected set; }
+
 
 		public MainWindow()
 		{
@@ -40,11 +42,34 @@ namespace SWOP
 
             GM = new GameMaster();
 			GM.NewGame("small", listFaction);
+			
+			MapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
 
-			mapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
+			player1Name.Content = GM.CurrentGame.Players[0].Name;
+			player2Name.Content = GM.CurrentGame.Players[1].Name;
 		}
 
-		// tmp
+
+		// Pause the game and display main menu
+		// -------------------------------------------------
+		private void ButtonMenu_Click(object sender, RoutedEventArgs e)
+		{
+			mainMenu.Visibility = System.Windows.Visibility.Visible;
+			BlurEffect blur = new BlurEffect();
+			blur.Radius = 15;
+			mapGrid.Effect = blur;
+		}
+
+
+		// Pause the game and display main menu
+		// -------------------------------------------------
+		private void ButtonResume_Click(object sender, RoutedEventArgs e)
+		{
+			mainMenu.Visibility = System.Windows.Visibility.Hidden;
+			mapGrid.Effect = null;
+		}
+
+
 		private void ButtonReload_Click(object sender, RoutedEventArgs e)
         {
             // tmp
@@ -54,8 +79,8 @@ namespace SWOP
 
 			GM.NewGame("normal", listFaction);
 
-			mapView.MapViewGrid.Children.RemoveRange(0, mapView.MapViewGrid.Children.Count);
-			mapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
+			MapView.MapViewGrid.Children.RemoveRange(0, MapView.MapViewGrid.Children.Count);
+			MapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
 		}
 	}
 }

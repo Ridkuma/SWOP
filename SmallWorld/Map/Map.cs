@@ -9,11 +9,12 @@ namespace SmallWorld
 	{
 		private AlgoMap algo;
 
-		public ITile[,] Tiles { get; protected set; }
 		public int MapSize { get; protected set; }
 		public int TotalNbTurn { get; protected set; }
 		public int TotalNbUnits { get; protected set; }
 
+		public ITile[,] Tiles { get; protected set; }
+		public ITile SelectedTile { get; set; }
 
 		/// <summary>
 		/// Map constructor

@@ -7,29 +7,11 @@ namespace SmallWorld
 {
     public interface IGame
     {
-        List<Player> Players
-        {
-            get;
-            set;
-        }
+		List<Player> Players { get; }
+		int CurrentTurn { get; }
+		Map MapBoard { get; }
+		int CurrentPlayerId { get; }
 
-        int CurrentTurn
-        {
-            get;
-            set;
-        }
-
-        Map MapBoard
-        {
-            get;
-            set;
-        }
-
-        int CurrentPlayerId
-        {
-            get;
-            set;
-        }
 
         void NextPlayer();
 

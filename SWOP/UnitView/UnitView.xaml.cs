@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SmallWorld;
 
-namespace SWOP.UnitView
+namespace SWOP
 {
     /// <summary>
     /// Logique d'interaction pour UserControl1.xaml
@@ -23,7 +23,48 @@ namespace SWOP.UnitView
     {
         private IUnit Unit { get; set; }
         
+        public UnitView(IUnit u)
+        {
+            InitializeComponent();
+            this.Unit = u;
+        }
 
+        private void OnUnitLoaded(object sender, RoutedEventArgs e)
+        {
+            this.SetPosition();
+            this.SetFactionView();
+        }
+
+        public void SetFactionView()
+        {
+            // Cannot switch on type with C# !
+            // So this one is gonna burn eyes
+            switch(this.Unit.GetType().Name)
+            {
+                case "VikingsUnit":
+                    unit.Fill = (SolidColorBrush) Resources["VikingsColor"];
+                    break;
+
+                case "GaulsUnit":
+                    unit.Fill = (SolidColorBrush) Resources["GaulsColor"];
+                    break;
+
+                case "DwarvesUnit":
+                    unit.Fill = (SolidColorBrush) Resources["DwarvesColor"];
+                    break;
+            }
+        }
+
+        public void SetPosition()
+        {
+            int X = this.Unit.Position.X;
+            int Y = this.Unit.Position.Y;
+            TranslateTransform trTns = new TranslateTransform(X * 60 + ((Y % 2 == 0) ? 0 : 30), Y * 50);
+            TransformGroup trGrp = new TransformGroup();
+            trGrp.Children.Add(trTns);
+
+            grid.RenderTransform = trGrp;
+        }
 
     }
 }

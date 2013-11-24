@@ -7,7 +7,7 @@ namespace SmallWorld
 {
     public class Unit : IUnit
     {
-        public ITile Position { get; protected set; }
+        public ITile Position { get; set; }
         public int Atk { get; protected set; }
         public int Def { get; protected set; }
         public int Hp { get; protected set; }
@@ -38,7 +38,7 @@ namespace SmallWorld
             if (!possibleMove)
                 return;
 
-			this.Position.UnitLeave(this);
+            this.Position.UnitLeave(this);
             this.Position = destination;
             destination.UnitEnter(this);
         }
@@ -148,7 +148,7 @@ namespace SmallWorld
 
     public class DwarvesUnit : Unit
     {
-		public DwarvesUnit(string name) 
+        public DwarvesUnit(string name) 
             : base(name)
         {
         }
@@ -159,9 +159,9 @@ namespace SmallWorld
         {
             bool mountainTravel = !destination.IsAdjacent(this.Position)
                 && destination.Type != TileType.Mountain
-				&& this.Position.Type != TileType.Mountain;
+                && this.Position.Type != TileType.Mountain;
 
-			if (!mountainTravel || destination.Type == TileType.Water)
+            if (!mountainTravel || destination.Type == TileType.Water)
                 return;
             base.Move(destination);
             this.Mvt--;
@@ -178,10 +178,10 @@ namespace SmallWorld
 
         public void Move(ITile destination)
         {
-			if (!destination.IsAdjacent(this.Position) || destination.Type == TileType.Water)
+            if (!destination.IsAdjacent(this.Position) || destination.Type == TileType.Water)
                 return;
             base.Move(destination);
-			if (destination.Type == TileType.Field)
+            if (destination.Type == TileType.Field)
                 this.Mvt -= 1;
             else
                 this.Mvt -= 2;

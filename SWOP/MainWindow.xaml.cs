@@ -44,8 +44,8 @@ namespace SWOP
             
             MapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
 
-            GaulsUnit unit = new GaulsUnit("Agecanonix");
-            unit.Position = GM.CurrentGame.MapBoard.Tiles[0, 0];
+            VikingsUnit unit = new VikingsUnit("Cinematograf");
+            unit.Position = GM.CurrentGame.MapBoard.Tiles[5, 5];
             UnitView unitView = new UnitView(unit);
             MapView.TilesView[unit.Position].grid.Children.Add(unitView);
 

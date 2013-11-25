@@ -31,40 +31,30 @@ namespace SWOP
 
         private void OnUnitLoaded(object sender, RoutedEventArgs e)
         {
-            this.SetPosition();
-            this.SetFactionView();
+           this.SetAppearance();
         }
 
-        public void SetFactionView()
+        public void SetAppearance()
         {
             // Cannot switch on type with C# !
             // So this one is gonna burn eyes
             switch(this.Unit.GetType().Name)
             {
                 case "VikingsUnit":
-                    unit.Fill = (SolidColorBrush) Resources["VikingsColor"];
+                    this.selectedSquare.Stroke = (SolidColorBrush) Resources["VikingsColor"];
+                    this.sprite.Source = (BitmapImage) Resources["VikingsImg"];
                     break;
 
                 case "GaulsUnit":
-                    unit.Fill = (SolidColorBrush) Resources["GaulsColor"];
+                    this.selectedSquare.Stroke = (SolidColorBrush) Resources["GaulsColor"];
+                    this.sprite.Source = (BitmapImage) Resources["GaulsImg"];
                     break;
 
                 case "DwarvesUnit":
-                    unit.Fill = (SolidColorBrush) Resources["DwarvesColor"];
+                    this.selectedSquare.Stroke = (SolidColorBrush) Resources["DwarvesColor"];
+                    this.sprite.Source = (BitmapImage) Resources["DwarvesImg"];
                     break;
             }
         }
-
-        public void SetPosition()
-        {
-            int X = this.Unit.Position.X;
-            int Y = this.Unit.Position.Y;
-            TranslateTransform trTns = new TranslateTransform(X * 60 + ((Y % 2 == 0) ? 0 : 30), Y * 50);
-            TransformGroup trGrp = new TransformGroup();
-            trGrp.Children.Add(trTns);
-
-            grid.RenderTransform = trGrp;
-        }
-
     }
 }

@@ -14,7 +14,7 @@ namespace SmallWorld
         public int Mvt { get; protected set; }
         public string Name { get; protected set; }
         public UnitState State { get; set; }
-        public FactionName Faction { get; }
+		public FactionName Faction { get; protected set; }
 
 
         public Unit(string name)

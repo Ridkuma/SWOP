@@ -56,5 +56,10 @@ namespace SWOP
                     break;
             }
         }
+
+		private void Unit_LeftClick(object sender, MouseButtonEventArgs e)
+		{
+
+		}
     }
 }

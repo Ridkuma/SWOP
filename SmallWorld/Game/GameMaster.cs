@@ -48,5 +48,25 @@ namespace SmallWorld
 			throw new NotImplementedException();
 		}
 
+
+		/// <summary>
+		/// Launch the game
+		/// </summary>
+		public void StartGame()
+		{
+			if (CurrentGame == null)
+				throw new NotSupportedException();
+
+			CurrentGame.Start();
+		}
+
+
+		/// <summary>
+		/// 'Destroy' the game from memory
+		/// </summary>
+		public void DestroyGame()
+		{
+			CurrentGame = null;
+		}
     }
 }

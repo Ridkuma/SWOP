@@ -18,7 +18,7 @@ using SmallWorld;
 namespace SWOP
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -33,6 +33,9 @@ namespace SWOP
             INSTANCE = this;
         }
 
+		/// <summary>
+		/// Initialization of the game once UI loaded
+		/// </summary>
         public void MainWindow_Loaded(object sender, RoutedEventArgs e) {
             // tmp
             List<Tuple<string, FactionName>> listFaction = new List<Tuple<string,FactionName>>();
@@ -42,7 +45,10 @@ namespace SWOP
             GM = new GameMaster();
             GM.NewGame("small", listFaction);
 
+			// Subscribe to Game events
+			GM.CurrentGame.OnStartGame += OnStartGame;
 			GM.CurrentGame.OnNextPlayer += OnNextPlayer;
+			GM.CurrentGame.OnEndGame += OnEndGame;
 
             MapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
 
@@ -55,10 +61,9 @@ namespace SWOP
             MapView.TilesView[dUnit.Position].grid.Children.Add(dUnitView);
             MapView.TilesView[gUnit.Position].grid.Children.Add(gUnitView);
 
-            player1Name.Content = GM.CurrentGame.Players[0].Name;
-            player2Name.Content = GM.CurrentGame.Players[1].Name;
-
+			GM.StartGame(); // Ask explicitely to launch game
         }
+
 
 		#region ButtonsEvents
 
@@ -109,11 +114,31 @@ namespace SWOP
 
 		#region EventsHandlers
 
-		void OnNextPlayer(object sender, EventArgs e)
+		void OnStartGame(object sender, EventArgs e)
 		{
-			Console.WriteLine("[LOG] Next player turn"); // tmp
+			lblPlayer1Name.Content = GM.CurrentGame.Players[0].Name;
+			lblPlayer2Name.Content = GM.CurrentGame.Players[1].Name;
+
+			OnNextPlayer(this, e); // Init game info in the UI
 		}
 
+		void OnNextPlayer(object sender, EventArgs e)
+		{
+			IGame g = GM.CurrentGame;
+			lblNbTurn.Content = "Turn " + g.CurrentTurn + "/" + g.MapBoard.TotalNbTurn;
+
+			borderPlayer1.Visibility = (g.CurrentPlayerId == 0) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+			borderPlayer2.Visibility = (g.CurrentPlayerId == 1) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+		}
+
+		void OnEndGame(object sender, EventArgs e)
+		{
+			IGame g = GM.CurrentGame;
+			lblNbTurn.Content = "Game Over !";
+
+			borderPlayer1.Visibility = System.Windows.Visibility.Hidden;
+			borderPlayer2.Visibility = System.Windows.Visibility.Hidden;
+		}
 		#endregion
 	}
 }

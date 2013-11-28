@@ -9,14 +9,15 @@ namespace SmallWorld
     {
 		List<Player> Players { get; }
 		int CurrentTurn { get; }
-		Map MapBoard { get; }
+		IMap MapBoard { get; }
 		int CurrentPlayerId { get; }
 
-
         void NextPlayer();
-
         void Save();
+		void End();
 
-        void End();
+		event EventHandler<EventArgs> OnNextPlayer;
+		event EventHandler<EventArgs> OnNextTurn;
+		event EventHandler<EventArgs> OnEndGame;
     }
 }

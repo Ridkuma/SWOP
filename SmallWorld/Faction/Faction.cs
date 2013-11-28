@@ -8,8 +8,10 @@ namespace SmallWorld
     public interface IFaction
     {
         List<IUnit> Units { get; }
-        void GenerateUnits();
+        void GenerateUnits(int nbUnits);
     }
+
+
 
     public class VikingsFaction : IFaction
 	{
@@ -30,12 +32,16 @@ namespace SmallWorld
                 "Cryptograf"
             };
 
-        public void GenerateUnits()
-        {
-            throw new NotImplementedException();
+		public void GenerateUnits(int nbUnits)
+		{
+			Units = new List<IUnit>();
+			for (int i = 0; i < nbUnits; i++)
+			{
+				Units.Add(new VikingsUnit(GetRandomName()));
+			}
         }
 
-        private string GetRandomName()
+		private string GetRandomName()
         {
             int rand = random.Next(this.availableNames.Count);
             string name = this.availableNames[rand];
@@ -43,6 +49,7 @@ namespace SmallWorld
             return name;
         }
     }
+
 
     public class DwarvesFaction : IFaction
 	{
@@ -66,9 +73,13 @@ namespace SmallWorld
                 "Bofur"
             };
 
-        public void GenerateUnits()
-        {
-            throw new NotImplementedException();
+		public void GenerateUnits(int nbUnits)
+		{
+			Units = new List<IUnit>();
+			for (int i = 0; i < nbUnits; i++)
+			{
+				Units.Add(new DwarvesUnit(GetRandomName()));
+			}
         }
 
         private string GetRandomName()
@@ -79,6 +90,7 @@ namespace SmallWorld
             return name;
         }
     }
+
 
     public class GaulsFaction : IFaction
 	{
@@ -99,9 +111,13 @@ namespace SmallWorld
                 "Iélosubmarine"
             };
 
-        public void GenerateUnits()
-        {
-            throw new NotImplementedException();
+		public void GenerateUnits(int nbUnits)
+		{
+			Units = new List<IUnit>();
+			for (int i = 0; i < nbUnits; i++)
+			{
+				Units.Add(new GaulsUnit(GetRandomName()));
+			}
         }
 
         private string GetRandomName()
@@ -112,6 +128,7 @@ namespace SmallWorld
             return name;
         }
     }
+
 
     public enum FactionName
     {

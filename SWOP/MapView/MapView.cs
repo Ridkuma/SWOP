@@ -8,11 +8,11 @@ using SmallWorld;
 
 namespace SWOP {
     public class MapView {
-        public Map Map { get; protected set; }
+        public IMap Map { get; protected set; }
         public Grid MapViewGrid { get; protected set; }
         public Dictionary<ITile, TileView> TilesView { get; protected set; }
 
-        public MapView(SmallWorld.Map _map, Grid _mapViewGrid) {
+        public MapView(SmallWorld.IMap _map, Grid _mapViewGrid) {
             Map = _map;
             MapViewGrid = _mapViewGrid;
 
@@ -27,12 +27,6 @@ namespace SWOP {
                     TilesView.Add(Map.Tiles[x, y], tile);
                 }
             }
-
-            // tmp
-            int[] startCoord = Map.GetStartPosition(0);
-            Console.WriteLine("[LOG] Player 0 start coords = " + startCoord[0] + ", " + startCoord[1]);
-            startCoord = Map.GetStartPosition(1);
-            Console.WriteLine("[LOG] Player 1 start coords = " + startCoord[0] + ", " + startCoord[1]);
         }
     }
 }

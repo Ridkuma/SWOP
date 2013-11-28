@@ -26,5 +26,7 @@
             <Button Content="Reload(tmp)" Width="100" Click="ButtonReload_Click" Canvas.Left="25" Canvas.Top="80" Background="#FFBF8850"/>
             <Button Content="Go to main menu" Width="100" Click="ButtonResume_Click" Canvas.Left="25" Canvas.Top="130" Background="#FFBF8850"/>
         </Canvas>
+        <!-- Bottom footer -->
+        <Button Content="End your turn" HorizontalAlignment="Right" Margin="0,20,10,0" Grid.Row="2" VerticalAlignment="Top" Width="120" Height="38" Click="ButtonNextPlayer_Click"/>
     </Grid>
 </Window>

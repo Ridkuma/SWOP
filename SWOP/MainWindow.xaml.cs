@@ -44,10 +44,14 @@ namespace SWOP
             
             MapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
 
-            VikingsUnit unit = new VikingsUnit("Cinematograf");
-            unit.Position = GM.CurrentGame.MapBoard.Tiles[5, 5];
-            UnitView unitView = new UnitView(unit);
-            MapView.TilesView[unit.Position].grid.Children.Add(unitView);
+            DwarvesUnit dUnit = new DwarvesUnit("Gimli");
+            GaulsUnit gUnit = new GaulsUnit("Agecanonix");
+            dUnit.Position = GM.CurrentGame.MapBoard.GetStartPosition(0);
+            gUnit.Position = GM.CurrentGame.MapBoard.GetStartPosition(1);
+            UnitView dUnitView = new UnitView(dUnit);
+            UnitView gUnitView = new UnitView(gUnit);
+            MapView.TilesView[dUnit.Position].grid.Children.Add(dUnitView);
+            MapView.TilesView[gUnit.Position].grid.Children.Add(gUnitView);
 
             player1Name.Content = GM.CurrentGame.Players[0].Name;
             player2Name.Content = GM.CurrentGame.Players[1].Name;

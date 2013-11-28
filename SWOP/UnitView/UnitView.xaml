@@ -5,26 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              Loaded="OnUnitLoaded"
-             d:DesignHeight="40" d:DesignWidth="40">
+             d:DesignHeight="60" d:DesignWidth="60">
     
     <UserControl.Resources>
         <SolidColorBrush x:Key="VikingsColor" Color="DarkRed"></SolidColorBrush>
         <SolidColorBrush x:Key="GaulsColor" Color="SteelBlue"></SolidColorBrush>
         <SolidColorBrush x:Key="DwarvesColor" Color="ForestGreen"></SolidColorBrush>
-        <BitmapImage x:Key="VikingsImg" DecodePixelWidth="40" UriSource="../Resources/units/viking.png"></BitmapImage>
-        <BitmapImage x:Key="GaulsImg" DecodePixelWidth="40" UriSource="../Resources/units/gaul.png"></BitmapImage>
-        <BitmapImage x:Key="DwarvesImg" DecodePixelWidth="40" UriSource="../Resources/units/dwarf.png"></BitmapImage>
+        <BitmapImage x:Key="VikingsImg" DecodePixelWidth="60" UriSource="../Resources/units/viking.png"></BitmapImage>
+        <BitmapImage x:Key="GaulsImg" DecodePixelWidth="60" UriSource="../Resources/units/gaul.png"></BitmapImage>
+        <BitmapImage x:Key="DwarvesImg" DecodePixelWidth="60" UriSource="../Resources/units/dwarf.png"></BitmapImage>
     </UserControl.Resources>
     
     <Grid Name="grid">
         <Rectangle Name="selectedSquare" 
             Stroke="{DynamicResource VikingsColor}"
-            Visibility="Visible"
-            Width="40" Height ="40"/>
+            Visibility="Hidden"
+            Width="50" Height ="50"/>
         
         <Image Name="sprite" 
-            Width="40"
-            Source="{DynamicResource VikingsImg}"/>
+            Width="60"
+            Source="{DynamicResource VikingsImg}"
+            MouseDown="Unit_LeftClick"/>
         
     </Grid>
 </UserControl>

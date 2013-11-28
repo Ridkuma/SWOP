@@ -14,6 +14,7 @@ namespace SmallWorld
         public int Mvt { get; protected set; }
         public string Name { get; protected set; }
         public UnitState State { get; set; }
+        public FactionName Faction { get; }
 
 
         public Unit(string name)
@@ -136,6 +137,11 @@ namespace SmallWorld
         {
         }
 
+        public FactionName Faction
+        {
+            get { return FactionName.Vikings; }
+        }
+
         public override void Move(ITile destination)
         {
             if (!destination.IsAdjacent(this.Position))
@@ -151,6 +157,11 @@ namespace SmallWorld
         public DwarvesUnit(string name) 
             : base(name)
         {
+        }
+
+        public FactionName Faction
+        {
+            get { return FactionName.Dwarves; }
         }
 
         // A Dwarf can move from a Mountain to any another Mountain
@@ -174,6 +185,11 @@ namespace SmallWorld
             : base(name)
         {
             this.Mvt = 2;
+        }
+
+        public FactionName Faction
+        {
+            get { return FactionName.Gauls; }
         }
 
         public void Move(ITile destination)

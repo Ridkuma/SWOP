@@ -15,6 +15,7 @@ namespace SmallWorld
         int Mvt { get; } // Movement Points
         string Name { get; } // Unit name
         UnitState State { get; } // Unit State
+        FactionName Faction { get; } // Unit's Faction Name
 
         void Move(ITile destination);
         void Attack(IUnit enemy);

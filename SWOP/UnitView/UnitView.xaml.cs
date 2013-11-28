@@ -38,19 +38,19 @@ namespace SWOP
         {
             // Cannot switch on type with C# !
             // So this one is gonna burn eyes
-            switch(this.Unit.GetType().Name)
+            switch(this.Unit.Faction)
             {
-                case "VikingsUnit":
+                case FactionName.Vikings:
                     this.selectedSquare.Stroke = (SolidColorBrush) Resources["VikingsColor"];
                     this.sprite.Source = (BitmapImage) Resources["VikingsImg"];
                     break;
 
-                case "GaulsUnit":
+                case FactionName.Gauls:
                     this.selectedSquare.Stroke = (SolidColorBrush) Resources["GaulsColor"];
                     this.sprite.Source = (BitmapImage) Resources["GaulsImg"];
                     break;
 
-                case "DwarvesUnit":
+                case FactionName.Dwarves:
                     this.selectedSquare.Stroke = (SolidColorBrush) Resources["DwarvesColor"];
                     this.sprite.Source = (BitmapImage) Resources["DwarvesImg"];
                     break;

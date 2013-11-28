@@ -9,10 +9,12 @@ namespace SmallWorld
     {
         public IGame Build(string strategy, List<Tuple<string, FactionName>> playersInfo)
 		{
-            Map map = BuildMap(strategy);
+            IMap map = BuildMap(strategy);
             List<Player> players = BuildPlayers(playersInfo);
 
 			IGame game = new LocalGame(map, players);
+
+			GenerateAllUnits(game);
 
 			return game;
 		}
@@ -47,17 +49,18 @@ namespace SmallWorld
 		{
             List<Player> players = new List<Player>();
 
-            for (int i = 0; i < playersInfo.Count; i++)
-            {
-                players.Add(new Player(playersInfo[i].Item1, playersInfo[i].Item2));
+            foreach (Tuple<string, FactionName> pi in playersInfo)
+			{
+                players.Add(new Player(pi.Item1, pi.Item2));
             }
 
             return players;
 		}
 
-        public void PlaceUnits()
+        public void GenerateAllUnits(IGame game)
 		{
-			throw new NotImplementedException();
+			foreach (Player p in game.Players)
+				p.CurrentFaction.GenerateUnits(game.MapBoard.TotalNbUnits);
 		}
     }
 }

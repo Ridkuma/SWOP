@@ -5,7 +5,19 @@ using System.Text;
 
 namespace SmallWorld
 {
-	public class Map
+	public interface IMap
+	{
+		int MapSize { get; }
+		int TotalNbTurn { get; }
+		int TotalNbUnits { get; }
+		ITile[,] Tiles { get; }
+		ITile SelectedTile { get; set; }
+
+		ITile GetStartPosition(int playerId);
+	}
+
+
+	public class Map : IMap
 	{
 		private AlgoMap algo;
 
@@ -74,12 +86,9 @@ namespace SmallWorld
 		/// <summary>
 		/// Return start coords of a specific player
 		/// </summary>
-		public int[] GetStartPosition(int playerId)
+		public ITile GetStartPosition(int playerId)
 		{
-			int[] pos = new int[2];
-			pos[0] = algo.GetStartTileX(playerId);
-			pos[1] = algo.GetStartTileY(playerId);
-			return pos;
+			return Tiles[algo.GetStartTileX(playerId), algo.GetStartTileY(playerId)];
 		}
 	}
 }

@@ -7,13 +7,13 @@ namespace SmallWorld
 {
 	public class LocalGame : IGame
     {
-        public Map MapBoard { get; protected set; }
+        public IMap MapBoard { get; protected set; }
 		public int CurrentTurn { get; protected set; }
         public List<Player> Players { get; protected set; }
         public int CurrentPlayerId { get; protected set; }
         
 
-		public LocalGame(Map map, List<Player> players)
+		public LocalGame(IMap map, List<Player> players)
 		{
             Players = players;
             MapBoard = map;
@@ -27,7 +27,7 @@ namespace SmallWorld
 			CurrentPlayerId++;
 			if (CurrentPlayerId >= Players.Count)
 			{
-				if (CurrentTurn >= MapBoard.TotalNbTurn) // Is end of game ?
+				if (CurrentTurn >= MapBoard.TotalNbTurn) // Is end of total turns ?
 				{
 					End();
 				}
@@ -44,6 +44,8 @@ namespace SmallWorld
 				foreach (IUnit u in p.CurrentFaction.Units)
 					u.ChangeState(UnitState.Idle);
 			}
+
+			OnRaiseNextPlayer(new EventArgs());
 		}
 
 		public void Save()
@@ -54,6 +56,40 @@ namespace SmallWorld
 		public void End()
 		{
 			throw new NotImplementedException();
-		}
+        }
+
+
+
+        #region Events
+
+        public event EventHandler<EventArgs> OnNextPlayer;
+        public event EventHandler<EventArgs> OnNextTurn;
+        public event EventHandler<EventArgs> OnEndGame;
+
+
+        protected virtual void OnRaiseNextPlayer(EventArgs e)
+        {
+            if (OnNextPlayer != null)
+            {
+                OnNextPlayer(this, e);
+            }
+        }
+
+        protected virtual void OnRaiseNextTurn(EventArgs e)
+        {
+            if (OnNextTurn != null)
+            {
+                OnNextTurn(this, e);
+            }
+        }
+
+        protected virtual void OnRaiseEndGame(EventArgs e)
+        {
+            if (OnEndGame != null)
+            {
+                OnEndGame(this, e);
+            }
+        }
+        #endregion
     }
 }

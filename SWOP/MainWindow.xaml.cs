@@ -26,10 +26,12 @@ namespace SWOP
 
         public GameMaster GM { get; protected set; }
         public MapView MapView { get; protected set; }
+        public UnitView ActiveUnitView { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
+            this.ActiveUnitView = null;
             INSTANCE = this;
         }
 
@@ -129,6 +131,14 @@ namespace SWOP
 
 			borderPlayer1.Visibility = (g.CurrentPlayerId == 0) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
 			borderPlayer2.Visibility = (g.CurrentPlayerId == 1) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+
+            if (this.ActiveUnitView != null)
+            {
+                this.ActiveUnitView.Unit.ChangeState(UnitState.Idle);
+                this.ActiveUnitView.UpdateAppearance();
+                this.ActiveUnitView = null;
+            }
+            
 		}
 
 		void OnEndGame(object sender, EventArgs e)

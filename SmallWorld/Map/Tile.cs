@@ -76,7 +76,7 @@ namespace SmallWorld
         public void UnitEnter(IUnit unit)
         {
             if (!OccupyingUnits.Contains(unit))
-                OccupyingUnits.Remove(unit);
+                OccupyingUnits.Add(unit);
             else
                 Console.WriteLine("[Warning] Unit trying to enter on a tile already occupied");
         }

@@ -21,7 +21,8 @@ namespace SWOP
     /// </summary>
     public partial class UnitView : UserControl
     {
-        private IUnit Unit { get; set; }
+        public IUnit Unit { get; private set; }
+
         
         public UnitView(IUnit u)
         {
@@ -36,8 +37,6 @@ namespace SWOP
 
         public void SetAppearance()
         {
-            // Cannot switch on type with C# !
-            // So this one is gonna burn eyes
             switch(this.Unit.Faction)
             {
                 case FactionName.Vikings:
@@ -57,9 +56,32 @@ namespace SWOP
             }
         }
 
-		private void Unit_LeftClick(object sender, MouseButtonEventArgs e)
-		{
+        public void UpdateAppearance()
+        {
+            this.selectedSquare.Visibility = (this.Unit.State == UnitState.Selected) ? Visibility.Visible : Visibility.Hidden;
+        }
 
-		}
+        public void Move(TileView tileView)
+        {
+            ITile prevPos = this.Unit.Position;
+            if (this.Unit.Move(tileView.Tile))
+            {
+                MainWindow.INSTANCE.MapView.TilesView[prevPos].grid.Children.Remove(this);
+                MainWindow.INSTANCE.MapView.TilesView[this.Unit.Position].grid.Children.Add(this);
+            }
+        }
+
+        private void Unit_LeftClick(object sender, MouseButtonEventArgs e)
+        {
+            if (MainWindow.INSTANCE.ActiveUnitView != null)
+            {
+                MainWindow.INSTANCE.ActiveUnitView.Unit.ChangeState(UnitState.Idle);
+                MainWindow.INSTANCE.ActiveUnitView.UpdateAppearance();
+            }
+            MainWindow.INSTANCE.ActiveUnitView = this;
+
+            this.Unit.ChangeState(UnitState.Selected);
+            this.UpdateAppearance();
+        }
     }
 }

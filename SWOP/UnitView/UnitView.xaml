@@ -11,9 +11,9 @@
         <SolidColorBrush x:Key="VikingsColor" Color="DarkRed"></SolidColorBrush>
         <SolidColorBrush x:Key="GaulsColor" Color="SteelBlue"></SolidColorBrush>
         <SolidColorBrush x:Key="DwarvesColor" Color="ForestGreen"></SolidColorBrush>
-        <BitmapImage x:Key="VikingsImg" DecodePixelWidth="60" UriSource="../Resources/units/viking.png"></BitmapImage>
-        <BitmapImage x:Key="GaulsImg" DecodePixelWidth="60" UriSource="../Resources/units/gaul.png"></BitmapImage>
-        <BitmapImage x:Key="DwarvesImg" DecodePixelWidth="60" UriSource="../Resources/units/dwarf.png"></BitmapImage>
+        <BitmapImage x:Key="VikingsImg" UriSource="../Resources/units/viking.png"></BitmapImage>
+        <BitmapImage x:Key="GaulsImg" UriSource="../Resources/units/gaul.png"></BitmapImage>
+        <BitmapImage x:Key="DwarvesImg" UriSource="../Resources/units/dwarf.png"></BitmapImage>
     </UserControl.Resources>
     
     <Grid Name="grid">

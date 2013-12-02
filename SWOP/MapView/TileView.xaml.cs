@@ -25,21 +25,23 @@ namespace SWOP {
             Selected,
             SelectedOver
         }
+
+        public ITile Tile { get; private set; }
+
         private TileViewState currentState;
-        private ITile tile;
         
 
         public TileView(ITile t) {
             InitializeComponent();
 
-            tile = t;
+            Tile = t;
         }
 
 
         private void OnTileLoaded(object sender, RoutedEventArgs e)
         {
             // Set position (hexagon disposition)
-            TranslateTransform trTns = new TranslateTransform(tile.X * 60 + ((tile.Y % 2 == 0) ? 0 : 30), tile.Y * 50);
+            TranslateTransform trTns = new TranslateTransform(Tile.X * 60 + ((Tile.Y % 2 == 0) ? 0 : 30), Tile.Y * 50);
             TransformGroup trGrp = new TransformGroup();
             trGrp.Children.Add(trTns);
 
@@ -80,7 +82,7 @@ namespace SWOP {
         public void SetGround() {
             string brushPath = "Brush"; // set to "Brush" or "BrushImg"
 
-            switch (tile.Type)
+            switch (Tile.Type)
             {
                 case TileType.Field:
                     hexagon.Fill = (Brush) Resources[brushPath + "Field"];
@@ -100,24 +102,33 @@ namespace SWOP {
             }
         }
 
-        
-        private void Tile_MouseButtonDown(object sender, MouseEventArgs e)
+        #region Events
+
+        private void Tile_MouseLeftButtonDown(object sender, MouseEventArgs e)
         {
             MapView mapView = MainWindow.INSTANCE.MapView;
-            if (mapView.Map.SelectedTile == tile)
+            if (mapView.Map.SelectedTile == Tile)
                 return;
 
             if (mapView.Map.SelectedTile != null)
                 mapView.TilesView[mapView.Map.SelectedTile].SetAppearance(TileViewState.Idle);
 
-            mapView.Map.SelectedTile = tile;
+            mapView.Map.SelectedTile = Tile;
             SetAppearance(TileViewState.Selected);
+        }
+
+        private void Tile_MouseRightButtonDown(object sender, MouseEventArgs e)
+        {
+            if (MainWindow.INSTANCE.ActiveUnitView != null)
+            {
+                MainWindow.INSTANCE.ActiveUnitView.Move(this);
+            }
         }
 
 
         private void Tile_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (MainWindow.INSTANCE.MapView.Map.SelectedTile == tile)
+            if (MainWindow.INSTANCE.MapView.Map.SelectedTile == Tile)
                 SetAppearance(TileViewState.SelectedOver);
             else
                 SetAppearance(TileViewState.Over);
@@ -126,7 +137,7 @@ namespace SWOP {
 
         private void Tile_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (MainWindow.INSTANCE.MapView.Map.SelectedTile == tile)
+            if (MainWindow.INSTANCE.MapView.Map.SelectedTile == Tile)
                 SetAppearance(TileViewState.Selected);
             else
                 SetAppearance(TileViewState.Idle);
@@ -136,5 +147,8 @@ namespace SWOP {
                 MainWindow.INSTANCE.MapView.TilesView[t].Show();
             }*/
         }
+
+        #endregion
+
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace SmallWorld
 {
+
     public class Unit : IUnit
     {
         public ITile Position { get; set; }
@@ -14,7 +15,7 @@ namespace SmallWorld
         public int Mvt { get; protected set; }
         public string Name { get; protected set; }
         public UnitState State { get; set; }
-		public FactionName Faction { get; protected set; }
+        public FactionName Faction { get; protected set; }
 
 
         public Unit(string name)
@@ -27,21 +28,22 @@ namespace SmallWorld
             this.State = UnitState.Idle;
         }
 
-        // DEFAULT MOVE : Consider this "pseudo code" for now
         // A Unit can only move one tile per round
-        public virtual void Move(ITile destination)
+        public virtual bool Move(ITile destination)
         {
             // Minimum verifications before allowing a move,
             // every Unit extension should add up their own limitations
-            bool possibleMove = (this.Mvt > 0)
-                && (!destination.IsOccupied());
+            /* bool possibleMove = (this.Mvt > 0)
+                && (!destination.IsOccupied())
+                && (destination != this.Position);
 
             if (!possibleMove)
-                return;
+                return false; */
 
             this.Position.UnitLeave(this);
             this.Position = destination;
             destination.UnitEnter(this);
+            return true;
         }
 
         // Attacking is the same for every faction
@@ -130,24 +132,23 @@ namespace SmallWorld
 
     }
 
+
     public class VikingsUnit : Unit
     {
         public VikingsUnit(string name) 
             : base(name)
         {
+            this.Faction = FactionName.Vikings;
         }
 
-        public FactionName Faction
-        {
-            get { return FactionName.Vikings; }
-        }
 
-        public override void Move(ITile destination)
+        public override bool Move(ITile destination)
         {
             if (!destination.IsAdjacent(this.Position))
-                return;
+                return false;
             base.Move(destination);
             this.Mvt--;
+            return true;
         }
 
     }
@@ -157,25 +158,22 @@ namespace SmallWorld
         public DwarvesUnit(string name) 
             : base(name)
         {
-        }
-
-        public FactionName Faction
-        {
-            get { return FactionName.Dwarves; }
+            this.Faction = FactionName.Dwarves;
         }
 
         // A Dwarf can move from a Mountain to any another Mountain
         // Cannot cross Water
-        public override void Move(ITile destination)
+        public override bool Move(ITile destination)
         {
-            bool mountainTravel = !destination.IsAdjacent(this.Position)
+            /* bool mountainTravel = !destination.IsAdjacent(this.Position)
                 && destination.Type != TileType.Mountain
                 && this.Position.Type != TileType.Mountain;
 
             if (!mountainTravel || destination.Type == TileType.Water)
-                return;
+                return false; */
             base.Move(destination);
             this.Mvt--;
+            return true;
         }
     }
 
@@ -184,23 +182,20 @@ namespace SmallWorld
         public GaulsUnit(string name) 
             : base(name)
         {
+            this.Faction = FactionName.Gauls;
             this.Mvt = 2;
         }
 
-        public FactionName Faction
+        public override bool Move(ITile destination)
         {
-            get { return FactionName.Gauls; }
-        }
-
-        public void Move(ITile destination)
-        {
-            if (!destination.IsAdjacent(this.Position) || destination.Type == TileType.Water)
-                return;
+            // if (!destination.IsAdjacent(this.Position) || destination.Type == TileType.Water)
+            //    return false;
             base.Move(destination);
             if (destination.Type == TileType.Field)
                 this.Mvt -= 1;
             else
                 this.Mvt -= 2;
+            return true;
         }
     }
 }

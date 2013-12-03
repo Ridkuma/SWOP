@@ -9,23 +9,41 @@
     
     <UserControl.Resources>
         <SolidColorBrush x:Key="VikingsColor" Color="DarkRed"></SolidColorBrush>
-        <SolidColorBrush x:Key="GaulsColor" Color="SteelBlue"></SolidColorBrush>
-        <SolidColorBrush x:Key="DwarvesColor" Color="ForestGreen"></SolidColorBrush>
+        <SolidColorBrush x:Key="GaulsColor" Color="DarkOrchid"></SolidColorBrush>
+        <SolidColorBrush x:Key="DwarvesColor" Color="Gold"></SolidColorBrush>
         <BitmapImage x:Key="VikingsImg" UriSource="../Resources/units/viking.png"></BitmapImage>
         <BitmapImage x:Key="GaulsImg" UriSource="../Resources/units/gaul.png"></BitmapImage>
         <BitmapImage x:Key="DwarvesImg" UriSource="../Resources/units/dwarf.png"></BitmapImage>
     </UserControl.Resources>
     
     <Grid Name="grid">
+
+        <Grid.Triggers>
+            <!-- Animates the rectangle's opacity. -->
+            <EventTrigger RoutedEvent="MouseDown">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetName="selectedSquare" 
+                            Storyboard.TargetProperty="Opacity"
+                            From="1.0" To="0.2" Duration="0:0:1" 
+                            AutoReverse="True" RepeatBehavior="Forever" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+        
         <Rectangle Name="selectedSquare" 
             Stroke="{DynamicResource VikingsColor}"
             Visibility="Hidden"
-            Width="50" Height ="50"/>
+            Width="50" Height ="50"
+            StrokeThickness="2">
+        </Rectangle>
         
         <Image Name="sprite" 
             Width="60"
             Source="{DynamicResource VikingsImg}"
-            MouseDown="Unit_LeftClick"/>
+            MouseLeftButtonDown="Unit_LeftClick"/>
         
     </Grid>
 </UserControl>

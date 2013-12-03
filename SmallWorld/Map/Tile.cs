@@ -69,7 +69,7 @@ namespace SmallWorld
 
         public bool IsOccupied()
         {
-            return (OccupyingUnits.Count == 0);
+            return (OccupyingUnits.Count > 0);
         }
 
 

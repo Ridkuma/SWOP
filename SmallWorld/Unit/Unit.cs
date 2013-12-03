@@ -33,12 +33,12 @@ namespace SmallWorld
         {
             // Minimum verifications before allowing a move,
             // every Unit extension should add up their own limitations
-            /* bool possibleMove = (this.Mvt > 0)
+            bool possibleMove = (this.Mvt > 0)
                 && (!destination.IsOccupied())
                 && (destination != this.Position);
 
             if (!possibleMove)
-                return false; */
+                return false;
 
             this.Position.UnitLeave(this);
             this.Position = destination;
@@ -165,12 +165,15 @@ namespace SmallWorld
         // Cannot cross Water
         public override bool Move(ITile destination)
         {
-            /* bool mountainTravel = !destination.IsAdjacent(this.Position)
-                && destination.Type != TileType.Mountain
-                && this.Position.Type != TileType.Mountain;
+            bool mountainTravel = destination.Type == TileType.Mountain
+                && this.Position.Type == TileType.Mountain;
 
-            if (!mountainTravel || destination.Type == TileType.Water)
-                return false; */
+            if (!destination.IsAdjacent(this.Position) || destination.Type == TileType.Water)
+            {
+                if (!mountainTravel)
+                    return false;
+            }
+
             base.Move(destination);
             this.Mvt--;
             return true;
@@ -188,8 +191,8 @@ namespace SmallWorld
 
         public override bool Move(ITile destination)
         {
-            // if (!destination.IsAdjacent(this.Position) || destination.Type == TileType.Water)
-            //    return false;
+            if (!destination.IsAdjacent(this.Position) || destination.Type == TileType.Water)
+                return false;
             base.Move(destination);
             if (destination.Type == TileType.Field)
                 this.Mvt -= 1;

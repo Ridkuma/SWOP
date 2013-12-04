@@ -5,34 +5,62 @@ using System.Text;
 
 namespace SmallWorld
 {
+	public enum BuilderGameStrategy
+	{
+		Local,
+		Server,
+		Client,
+	}
+
+	public enum BuilderMapStrategy
+	{
+		Demo,
+		Small,
+		Normal,
+	}
+
     public class GameBuilder
     {
-        public IGame Build(string strategy, List<Tuple<string, FactionName>> playersInfo)
+        public IGame Build(BuilderGameStrategy gameStrategy, BuilderMapStrategy mapStrategy, List<Tuple<string, FactionName>> playersInfo)
 		{
-            IMap map = BuildMap(strategy);
+			IMap map = BuildMap(mapStrategy);
             List<Player> players = BuildPlayers(playersInfo);
+			IGame game = null;
 
-			IGame game = new LocalGame(map, players);
+			switch (gameStrategy)
+			{
+				case BuilderGameStrategy.Local:
+					game = new LocalGame(map, players);
+					break;
 
-			GenerateAllUnits(game);
+				case BuilderGameStrategy.Server:
+					game = new ServerGame(map, players);
+					break;
 
+				case BuilderGameStrategy.Client:
+					game = new ClientGame(map, players);
+					break;
+
+				default:
+					throw new NotImplementedException();
+			}
 			return game;
 		}
 
-		public Map BuildMap(string strategy)
+		public Map BuildMap(BuilderMapStrategy mapStrategy)
 		{
 			IMapBuilder mapBuilder;
-			switch (strategy)
+			switch (mapStrategy)
 			{
-				case "demo":
+				case BuilderMapStrategy.Demo:
 					mapBuilder = new DemoMapBuilder();
 					break;
 
-				case "small":
+				case BuilderMapStrategy.Small:
 					mapBuilder = new SmallMapBuilder();
 					break;
 
-				case "normal":
+				case BuilderMapStrategy.Normal:
 					mapBuilder = new NormalMapBuilder();
 					break;
 

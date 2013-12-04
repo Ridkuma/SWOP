@@ -15,12 +15,6 @@ namespace SmallWorld
 		public int CurrentPlayerId { get; protected set; }
 		public int CurrentTurn { get; protected set; }
 
-		/// <summary>
-		/// Events
-		/// </summary>
-		public event EventHandler<EventArgs> OnStartGame;
-		public event EventHandler<EventArgs> OnNextPlayer;
-		public event EventHandler<EventArgs> OnEndGame;
 
 		/// <summary>
 		/// Constructor
@@ -32,9 +26,18 @@ namespace SmallWorld
 		}
 
 		/// <summary>
+		/// Add a new player to the existing list
+		/// </summary>
+		/// <param name="player"></param>
+		public void AddNewPlayer(Player player)
+		{
+			Players.Add(player);
+		}
+
+		/// <summary>
 		/// Launch the game
 		/// </summary>
-		public void Start()
+		public virtual void Start()
 		{
             CurrentTurn = 1;
             CurrentPlayerId = 0;
@@ -45,7 +48,7 @@ namespace SmallWorld
 		/// <summary>
 		/// End of player turn, possible outcomes : next player, next game turn or end of game
 		/// </summary>
-		public void NextPlayer()
+		public virtual void NextPlayer()
 		{
 			CurrentPlayerId++;
 			if (CurrentPlayerId >= Players.Count)
@@ -78,7 +81,7 @@ namespace SmallWorld
 		/// <summary>
 		/// Save the game in an external file
 		/// </summary>
-		public void Save()
+		public virtual void Save()
 		{
 			throw new NotImplementedException();
 		}
@@ -86,32 +89,47 @@ namespace SmallWorld
 		/// <summary>
 		/// End of the game
 		/// </summary>
-		public void End()
+		public virtual void End()
 		{
 			OnRaiseEndGame();
         }
 
 
+		/// <summary>
+		/// Events
+		/// </summary>
 		#region Events
 
+		public event EventHandler<EventArgs> OnStartGame;
 		protected virtual void OnRaiseStartGame()
 		{
 			if (OnStartGame != null)
 				OnStartGame(this, new EventArgs());
 		}
 
+		public event EventHandler<EventArgs> OnNextPlayer;
 		protected virtual void OnRaiseNextPlayer()
 		{
 			if (OnNextPlayer != null)
 				OnNextPlayer(this, new EventArgs());
 		}
 
+		public event EventHandler<EventArgs> OnEndGame;
 		protected virtual void OnRaiseEndGame()
 		{
 			if (OnEndGame != null)
 				OnEndGame(this, new EventArgs());
 		}
 
+		public event EventHandler<StringEventArgs> OnNewChatMessage;
+		public virtual void OnRaiseNewChatMessage(string text)
+		{
+			if (OnNewChatMessage != null)
+				OnNewChatMessage(this, new StringEventArgs(text));
+		}
+
 		#endregion
-    }
+
+
+	}
 }

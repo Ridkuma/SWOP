@@ -34,9 +34,12 @@ namespace SmallWorld
 		/// <summary>
 		/// Create a new game (map, players...)
 		/// </summary>
-        public void NewGame(string strategy, List<Tuple<string, FactionName>> playersInfo)
+        public void NewGame(BuilderGameStrategy gameStrategy, BuilderMapStrategy mapStrategy, List<Tuple<string, FactionName>> playersInfo)
 		{
-			CurrentGame = gameBuilder.Build(strategy, playersInfo);
+			if (CurrentGame != null)
+				DestroyGame();
+
+			CurrentGame = gameBuilder.Build(gameStrategy, mapStrategy, playersInfo);
 		}
 
 
@@ -57,6 +60,8 @@ namespace SmallWorld
 			if (CurrentGame == null)
 				throw new NotSupportedException();
 
+			gameBuilder.GenerateAllUnits(CurrentGame);
+
 			CurrentGame.Start();
 		}
 
@@ -66,6 +71,7 @@ namespace SmallWorld
 		/// </summary>
 		public void DestroyGame()
 		{
+			CurrentGame.End();
 			CurrentGame = null;
 		}
     }

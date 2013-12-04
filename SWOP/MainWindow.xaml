@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="SWOP.MainWindow"
         Title="MainWindow" Width="800" Height="600"
-        Loaded="MainWindow_Loaded" Background="#FF141019"
+        Loaded="MainWindow_Loaded" Closed="MainWindow_Closed"
+		Background="#FF141019"
     >
     <Grid>
         <Grid.RowDefinitions>
@@ -37,13 +38,16 @@
         <!-- Main grid -->
         <Grid x:Name="mapGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1"/>
         <!-- Pause menu -->
-        <Canvas Name="mainMenu" Width="150" Height="180" Grid.Row="1" Margin="321,79,321,191" Visibility="Hidden">
-            <Rectangle Stroke="#FFBF8850" Fill="#FF1C2427" Width="150" Height="180"/>
-            <Button Content="Resume" Width="100" Click="ButtonResume_Click" Canvas.Left="25" Canvas.Top="30" Background="#FFBF8850"/>
-            <Button Content="Reload(tmp)" Width="100" Click="ButtonReload_Click" Canvas.Left="25" Canvas.Top="80" Background="#FFBF8850"/>
-            <Button Content="Go to main menu" Width="100" Click="ButtonResume_Click" Canvas.Left="25" Canvas.Top="130" Background="#FFBF8850"/>
+        <Canvas Name="mainMenu" Width="150" Height="200" Grid.Row="1" Margin="321,79,321,191">
+            <Rectangle Stroke="#FFBF8850" Fill="#FF1C2427" Width="150" Height="200"/>
+            <Button Content="Resume" Width="100" Click="ButtonResume_Click" Canvas.Left="25" Canvas.Top="20" Background="#FFBF8850"/>
+			<Button Content="Reload(tmp)" Width="100" Click="ButtonReload_Click" Canvas.Left="25" Canvas.Top="55" Background="#FFBF8850"/>
+			<Button Content="Launch server" Width="100" Click="ButtonLaunchServer_Click" Canvas.Left="25" Canvas.Top="90" Background="#FFBF8850"/>
+			<Button Content="Join localhost" Width="100" Click="ButtonJoinServer_Click" Canvas.Left="25" Canvas.Top="125" Background="#FFBF8850"/>
+			<Button Content="Go to main menu" Width="100" Click="ButtonResume_Click" Canvas.Left="25" Canvas.Top="160" Background="#FFBF8850"/>
         </Canvas>
         <!-- Bottom footer -->
         <Button Content="End your turn" HorizontalAlignment="Right" Margin="0,20,10,0" Grid.Row="2" VerticalAlignment="Top" Width="120" Height="38" Click="ButtonNextPlayer_Click"/>
-    </Grid>
+		<TextBlock Name="textChat" HorizontalAlignment="Left" Height="108" Margin="15,-50,0,0" Grid.Row="2" Grid.RowSpan="1" TextWrapping="Wrap" Text="-- Chat --" VerticalAlignment="Top" Width="303" Foreground="#FFD6D6D6"/>
+	</Grid>
 </Window>

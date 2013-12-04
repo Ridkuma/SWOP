@@ -39,18 +39,40 @@ namespace SWOP
 		/// Initialization of the game once UI loaded
 		/// </summary>
         public void MainWindow_Loaded(object sender, RoutedEventArgs e) {
+			GM = new GameMaster();
+			NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Small); // tmp
+		}
+
+
+		/// <summary>
+		/// Application exit
+		/// </summary>
+		private void MainWindow_Closed(object sender, EventArgs e)
+		{
+			GM.DestroyGame();
+		}
+
+
+
+		/// <summary>
+		/// Creation of a new game
+		/// </summary>
+		/// <param name="gameStrategy"></param>
+		/// <param name="mapStrategy"></param>
+		public void NewGame(BuilderGameStrategy gameStrategy, BuilderMapStrategy mapStrategy)
+		{
             // tmp
             List<Tuple<string, FactionName>> listFaction = new List<Tuple<string,FactionName>>();
             listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
             listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
 
-            GM = new GameMaster();
-            GM.NewGame("small", listFaction);
+            GM.NewGame(gameStrategy, mapStrategy, listFaction);
 
 			// Subscribe to Game events
 			GM.CurrentGame.OnStartGame += OnStartGame;
 			GM.CurrentGame.OnNextPlayer += OnNextPlayer;
 			GM.CurrentGame.OnEndGame += OnEndGame;
+			GM.CurrentGame.OnNewChatMessage += OnNewChatMessage;
 
             MapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
 
@@ -65,6 +87,7 @@ namespace SWOP
 
 			GM.StartGame(); // Ask explicitely to launch game
         }
+
 
 
 		#region ButtonsEvents
@@ -89,19 +112,32 @@ namespace SWOP
         }
 
 
+		// tmp
         private void ButtonReload_Click(object sender, RoutedEventArgs e)
         {
-            // tmp
             List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
             listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
             listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
 
-            GM.NewGame("normal", listFaction);
+			GM.NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Normal, listFaction);
 
             MapView.MapViewGrid.Children.RemoveRange(0, MapView.MapViewGrid.Children.Count);
             MapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
         }
 
+
+		// tmp
+		private void ButtonLaunchServer_Click(object sender, RoutedEventArgs e)
+		{
+			NewGame(BuilderGameStrategy.Server, BuilderMapStrategy.Small);
+		}
+
+
+		// tmp
+		private void ButtonJoinServer_Click(object sender, RoutedEventArgs e)
+		{
+			NewGame(BuilderGameStrategy.Client, BuilderMapStrategy.Demo);
+		}
 
 
         // End current player turn
@@ -114,9 +150,15 @@ namespace SWOP
 		#endregion
 
 
+
 		#region EventsHandlers
 
-		void OnStartGame(object sender, EventArgs e)
+		/// <summary>
+		/// Event recevied when game officially start
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void OnStartGame(object sender, EventArgs e)
 		{
 			lblPlayer1Name.Content = GM.CurrentGame.Players[0].Name;
 			lblPlayer2Name.Content = GM.CurrentGame.Players[1].Name;
@@ -124,7 +166,12 @@ namespace SWOP
 			OnNextPlayer(this, e); // Init game info in the UI
 		}
 
-		void OnNextPlayer(object sender, EventArgs e)
+		/// <summary>
+		/// Event received when it's next effective player turn
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void OnNextPlayer(object sender, EventArgs e)
 		{
 			IGame g = GM.CurrentGame;
 			lblNbTurn.Content = "Turn " + g.CurrentTurn + "/" + g.MapBoard.TotalNbTurn;
@@ -141,7 +188,12 @@ namespace SWOP
             
 		}
 
-		void OnEndGame(object sender, EventArgs e)
+		/// <summary>
+		/// Event received when game is over
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void OnEndGame(object sender, EventArgs e)
 		{
 			IGame g = GM.CurrentGame;
 			lblNbTurn.Content = "Game Over !";
@@ -149,6 +201,23 @@ namespace SWOP
 			borderPlayer1.Visibility = System.Windows.Visibility.Hidden;
 			borderPlayer2.Visibility = System.Windows.Visibility.Hidden;
 		}
+
+		/// <summary>
+		/// Event received when a chat message is received
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void OnNewChatMessage(object sender, StringEventArgs e)
+		{
+			this.Dispatcher.Invoke((OnNewChatMessageCallback) delegate ()
+			{
+				textChat.Text += "\n" + e.Text;
+			});
+		}
+		private delegate void OnNewChatMessageCallback();
+
 		#endregion
+
+
 	}
 }

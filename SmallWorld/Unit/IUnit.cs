@@ -20,6 +20,7 @@ namespace SmallWorld
         bool Move(ITile destination);
         void Attack(IUnit enemy);
         void ChangeState(UnitState targetState);
+        void EndTurn();
     }
 
     public enum UnitState

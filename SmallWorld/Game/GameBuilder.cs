@@ -87,8 +87,8 @@ namespace SmallWorld
 
         public void GenerateAllUnits(IGame game)
 		{
-			foreach (Player p in game.Players)
-				p.CurrentFaction.GenerateUnits(game.MapBoard.TotalNbUnits);
+			for (int i = 0; i < game.Players.Count; i++)
+				game.Players[i].CurrentFaction.GenerateUnits(game.MapBoard.TotalNbUnits, game.MapBoard.GetStartPosition(i));
 		}
     }
 }

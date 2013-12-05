@@ -18,7 +18,7 @@ namespace SmallWorld
         public FactionName Faction { get; protected set; }
 
 
-        public Unit(string name)
+        public Unit(string name, ITile position)
         {
             this.Atk = 2;
             this.Def = 1;
@@ -26,6 +26,8 @@ namespace SmallWorld
             this.Mvt = 1;
             this.Name = name;
             this.State = UnitState.Idle;
+            this.Position = position;
+            position.UnitEnter(this);
         }
 
         // A Unit can only move one tile per round
@@ -130,13 +132,18 @@ namespace SmallWorld
             }
         }
 
+        public virtual void EndTurn()
+        {
+            this.Mvt = 1;
+        }
+
     }
 
 
     public class VikingsUnit : Unit
     {
-        public VikingsUnit(string name) 
-            : base(name)
+        public VikingsUnit(string name, ITile position) 
+            : base(name, position)
         {
             this.Faction = FactionName.Vikings;
         }
@@ -155,8 +162,8 @@ namespace SmallWorld
 
     public class DwarvesUnit : Unit
     {
-        public DwarvesUnit(string name) 
-            : base(name)
+        public DwarvesUnit(string name, ITile position) 
+            : base(name, position)
         {
             this.Faction = FactionName.Dwarves;
         }
@@ -182,8 +189,8 @@ namespace SmallWorld
 
     public class GaulsUnit : Unit
     {
-        public GaulsUnit(string name) 
-            : base(name)
+        public GaulsUnit(string name, ITile position) 
+            : base(name, position)
         {
             this.Faction = FactionName.Gauls;
             this.Mvt = 2;
@@ -199,6 +206,11 @@ namespace SmallWorld
             else
                 this.Mvt -= 2;
             return true;
+        }
+
+        public override void EndTurn()
+        {
+            this.Mvt = 2;
         }
     }
 }

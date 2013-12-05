@@ -16,7 +16,7 @@
         <BitmapImage x:Key="DwarvesImg" UriSource="../Resources/units/dwarf.png"></BitmapImage>
     </UserControl.Resources>
     
-    <Grid Name="grid">
+    <Grid Name="grid" IsHitTestVisible="False">
 
         <Grid.Triggers>
             <!-- Animates the rectangle's opacity. -->

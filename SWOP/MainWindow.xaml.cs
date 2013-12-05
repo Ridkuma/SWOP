@@ -76,16 +76,11 @@ namespace SWOP
 
             MapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
 
-            DwarvesUnit dUnit = new DwarvesUnit("Gimli");
-            GaulsUnit gUnit = new GaulsUnit("Agecanonix");
-            dUnit.Position = GM.CurrentGame.MapBoard.GetStartPosition(0);
-            gUnit.Position = GM.CurrentGame.MapBoard.GetStartPosition(1);
-            UnitView dUnitView = new UnitView(dUnit);
-            UnitView gUnitView = new UnitView(gUnit);
-            MapView.TilesView[dUnit.Position].grid.Children.Add(dUnitView);
-            MapView.TilesView[gUnit.Position].grid.Children.Add(gUnitView);
-
 			GM.StartGame(); // Ask explicitely to launch game
+            foreach (Player p in GM.CurrentGame.Players)
+            {
+                new FactionView(p.CurrentFaction);
+            }
         }
 
 
@@ -184,6 +179,13 @@ namespace SWOP
                 this.ActiveUnitView.Unit.ChangeState(UnitState.Idle);
                 this.ActiveUnitView.UpdateAppearance();
                 this.ActiveUnitView = null;
+            }
+
+            // TODO : Temp, need to place this somewhere else
+            foreach (TileView tView in this.MapView.TilesView.Values)
+            {
+                if (tView.Tile.IsOccupied())
+                    tView.DispatchArmy();
             }
             
 		}

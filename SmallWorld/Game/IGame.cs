@@ -12,6 +12,7 @@ namespace SmallWorld
 		int CurrentPlayerId { get; }
 		int CurrentTurn { get; }
 
+        Player GetCurrentPlayer();
 		void AddNewPlayer(Player player);
 		void Start();
         void NextPlayer();

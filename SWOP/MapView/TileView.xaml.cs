@@ -29,6 +29,8 @@ namespace SWOP {
         public ITile Tile { get; private set; }
 
         private TileViewState currentState;
+
+        static Random random = new Random();
         
 
         public TileView(ITile t) {
@@ -102,6 +104,42 @@ namespace SWOP {
             }
         }
 
+        /// <summary>
+        /// Randomize aspect of multiple Units on the same Tile
+        /// </summary>
+        public void DispatchArmy()
+        {
+            IEnumerable<UnitView> uViews = this.grid.Children.OfType<UnitView>();
+
+            if (uViews.Count() < 2)
+                return;
+
+            foreach (UnitView uView in uViews)
+            {
+                int randMargin = random.Next(10, 30);
+                int randMarginDir = random.Next(3);
+
+                switch (randMarginDir)
+                {
+                    case 0 :
+                        uView.Margin = new Thickness(randMargin, 0, 0, 0);
+                        break;
+
+                    case 1:
+                        uView.Margin = new Thickness(0, randMargin, 0, 0);
+                        break;
+
+                    case 2:
+                        uView.Margin = new Thickness(0, 0, randMargin, 0);
+                        break;
+
+                    case 3:
+                        uView.Margin = new Thickness(0, 0, 0, randMargin);
+                        break;
+                }
+            }
+        }
+
         #region Events
 
         private void Tile_MouseLeftButtonDown(object sender, MouseEventArgs e)
@@ -122,6 +160,7 @@ namespace SWOP {
             if (MainWindow.INSTANCE.ActiveUnitView != null)
             {
                 MainWindow.INSTANCE.ActiveUnitView.Move(this);
+                MainWindow.INSTANCE.ActiveUnitView.Margin = new Thickness(0);
             }
         }
 

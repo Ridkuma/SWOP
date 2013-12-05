@@ -73,6 +73,9 @@ namespace SWOP
 
         private void Unit_LeftClick(object sender, MouseButtonEventArgs e)
         {
+            if (this.Unit.Faction != MainWindow.INSTANCE.GM.CurrentGame.GetCurrentPlayer().CurrentFaction.Name)
+                return;
+
             if (MainWindow.INSTANCE.ActiveUnitView != null)
             {
                 MainWindow.INSTANCE.ActiveUnitView.Unit.ChangeState(UnitState.Idle);

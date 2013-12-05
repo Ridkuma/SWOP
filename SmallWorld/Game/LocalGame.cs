@@ -25,6 +25,11 @@ namespace SmallWorld
 			Players = players;
 		}
 
+        public Player GetCurrentPlayer()
+        {
+            return this.Players[this.CurrentPlayerId];
+        }
+
 		/// <summary>
 		/// Add a new player to the existing list
 		/// </summary>
@@ -72,8 +77,11 @@ namespace SmallWorld
 			// Put each units on Idle state
 			foreach (Player p in Players)
 			{
-				foreach (IUnit u in p.CurrentFaction.Units)
-					u.ChangeState(UnitState.Idle);
+                foreach (IUnit u in p.CurrentFaction.Units)
+                {
+                    u.ChangeState(UnitState.Idle);
+                    u.EndTurn();
+                }
 			}
 
 		}

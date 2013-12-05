@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UnitView\FactionView.cs" />
     <Compile Include="UnitView\UnitView.xaml.cs">
       <DependentUpon>UnitView.xaml</DependentUpon>
     </Compile>

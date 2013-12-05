@@ -24,7 +24,7 @@ namespace SmallWorld
 			: base(map, players)
 		{
 			client = new UdpClient();
-			client.Connect("127.0.0.1", 1523);
+			client.Connect("10.131.42.139", 1523);
 			isRunning = true;
 
 			// Launch the listening thread

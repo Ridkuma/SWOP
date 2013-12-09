@@ -19,26 +19,32 @@ namespace SmallWorld
 		Normal,
 	}
 
+
     public class GameBuilder
-    {
+	{
+		public BuilderGameStrategy LastBuilderGameStrategy { get; protected set; }
+		public BuilderMapStrategy LastBuilderMapStrategy { get; protected set; }
+
         public IGame Build(BuilderGameStrategy gameStrategy, BuilderMapStrategy mapStrategy, List<Tuple<string, FactionName>> playersInfo)
 		{
-			IMap map = BuildMap(mapStrategy);
+			LastBuilderGameStrategy = gameStrategy;
+			LastBuilderMapStrategy = mapStrategy;
+
             List<Player> players = BuildPlayers(playersInfo);
 			IGame game = null;
 
 			switch (gameStrategy)
 			{
 				case BuilderGameStrategy.Local:
-					game = new LocalGame(map, players);
+					game = new LocalGame(BuildMap(mapStrategy, 0), players);
 					break;
 
 				case BuilderGameStrategy.Server:
-					game = new ServerGame(map, players);
+					game = new ServerGame(BuildMap(mapStrategy, 0), players);
 					break;
 
 				case BuilderGameStrategy.Client:
-					game = new ClientGame(map, players);
+					game = new ClientGame(null, players);
 					break;
 
 				default:
@@ -47,7 +53,7 @@ namespace SmallWorld
 			return game;
 		}
 
-		public Map BuildMap(BuilderMapStrategy mapStrategy)
+		public Map BuildMap(BuilderMapStrategy mapStrategy, int randomSeed)
 		{
 			IMapBuilder mapBuilder;
 			switch (mapStrategy)
@@ -68,7 +74,7 @@ namespace SmallWorld
                     throw new NotImplementedException();
 			}
 
-			Map map = mapBuilder.Build();
+			Map map = mapBuilder.Build(randomSeed);
 
 			return map;
 		}
@@ -83,12 +89,6 @@ namespace SmallWorld
             }
 
             return players;
-		}
-
-        public void GenerateAllUnits(IGame game)
-		{
-			for (int i = 0; i < game.Players.Count; i++)
-				game.Players[i].CurrentFaction.GenerateUnits(game.MapBoard.TotalNbUnits, game.MapBoard.GetStartPosition(i));
 		}
     }
 }

@@ -43,8 +43,13 @@ public class AlgoMap : IDisposable {
   public AlgoMap() : this(SWAlgoPINVOKE.new_AlgoMap(), true) {
   }
 
-  public void BuildMap(int size) {
-    SWAlgoPINVOKE.AlgoMap_BuildMap(swigCPtr, size);
+  public void BuildMap(int size, int rndSeed) {
+    SWAlgoPINVOKE.AlgoMap_BuildMap(swigCPtr, size, rndSeed);
+  }
+
+  public int GetRandomSeed() {
+    int ret = SWAlgoPINVOKE.AlgoMap_GetRandomSeed(swigCPtr);
+    return ret;
   }
 
   public int GetTileType(int x, int y) {

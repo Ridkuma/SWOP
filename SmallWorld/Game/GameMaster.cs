@@ -7,15 +7,9 @@ namespace SmallWorld
 {
     public class GameMaster
     {
-		public static GameMaster GM;
-		
-		private GameBuilder gameBuilder;
-
-		public IGame CurrentGame
-		{
-			get;
-			protected set;
-		}
+		public static GameMaster GM { get; protected set; }
+		public GameBuilder GameBuilder { get; protected set; }
+		public IGame CurrentGame { get; protected set; }
 
 
 		/// <summary>
@@ -27,7 +21,7 @@ namespace SmallWorld
 				Console.WriteLine("[WARNING] GameMaster must be instancied only once");
 			GM = this;
 
-			gameBuilder = new GameBuilder();
+			GameBuilder = new GameBuilder();
 		}
 
 
@@ -39,7 +33,7 @@ namespace SmallWorld
 			if (CurrentGame != null)
 				DestroyGame();
 
-			CurrentGame = gameBuilder.Build(gameStrategy, mapStrategy, playersInfo);
+			CurrentGame = GameBuilder.Build(gameStrategy, mapStrategy, playersInfo);
 		}
 
 
@@ -49,20 +43,6 @@ namespace SmallWorld
         public void LoadGame()
 		{
 			throw new NotImplementedException();
-		}
-
-
-		/// <summary>
-		/// Launch the game
-		/// </summary>
-		public void StartGame()
-		{
-			if (CurrentGame == null)
-				throw new NotSupportedException();
-
-			gameBuilder.GenerateAllUnits(CurrentGame);
-
-			CurrentGame.Start();
 		}
 
 

@@ -39,14 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\ClientGame.cs" />
+    <Compile Include="Network\ClientGame.cs" />
     <Compile Include="Game\GameMaster.cs" />
     <Compile Include="Faction\Faction.cs" />
     <Compile Include="Game\IGame.cs" />
     <Compile Include="Game\GameBuilder.cs" />
     <Compile Include="Game\LocalGame.cs" />
-    <Compile Include="Game\NetworkData.cs" />
-    <Compile Include="Game\ServerGame.cs" />
+    <Compile Include="Network\NetworkData.cs" />
+    <Compile Include="Network\ServerGame.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\MapBuilder.cs" />
     <Compile Include="Map\Tile.cs" />

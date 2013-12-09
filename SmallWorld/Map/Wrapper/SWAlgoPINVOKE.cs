@@ -213,7 +213,10 @@ class SWAlgoPINVOKE {
   public static extern void delete_AlgoMap(HandleRef jarg1);
 
   [DllImport("SWAlgo", EntryPoint="CSharp_AlgoMap_BuildMap")]
-  public static extern void AlgoMap_BuildMap(HandleRef jarg1, int jarg2);
+  public static extern void AlgoMap_BuildMap(HandleRef jarg1, int jarg2, int jarg3);
+
+  [DllImport("SWAlgo", EntryPoint="CSharp_AlgoMap_GetRandomSeed")]
+  public static extern int AlgoMap_GetRandomSeed(HandleRef jarg1);
 
   [DllImport("SWAlgo", EntryPoint="CSharp_AlgoMap_GetTileType")]
   public static extern int AlgoMap_GetTileType(HandleRef jarg1, int jarg2, int jarg3);

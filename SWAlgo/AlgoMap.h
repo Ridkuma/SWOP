@@ -8,7 +8,7 @@
 	#define SWAlgo_API __declspec(dllimport)
 #endif
 
-#define MAX_NB_PLAYERS	2
+#define MAX_NB_PLAYERS	4
 
 // Type tile constants
 #define TILE_FIELD		0
@@ -21,6 +21,7 @@
 class SWAlgo_API AlgoMap
 {
 private:
+	int randomSeed;
 	int mapSize;
 	int mapRange;
 	std::vector<std::vector<int> > tiles;
@@ -36,7 +37,8 @@ public:
 	AlgoMap(void);
 	~AlgoMap(void);
 
-	void BuildMap(int size);
+	void BuildMap(int size, int rndSeed);
+	int GetRandomSeed();
 	int GetTileType(int x, int y);
 	int GetStartTileX(int playerId);
 	int GetStartTileY(int playerId);

@@ -11,10 +11,11 @@ namespace SmallWorld
 		/// Properties
 		/// </summary>
         public IMap MapBoard { get; protected set; }
-        public List<Player> Players { get; protected set; }
-		public int CurrentPlayerId { get; protected set; }
 		public int CurrentTurn { get; protected set; }
-
+		public List<Player> Players { get; protected set; }
+		public int LocalPlayerId { get; protected set; } // -1 if local game
+		public int CurrentPlayerId { get; protected set; }
+		public bool CurrentPlayerIsMe { get { return (LocalPlayerId == -1 || LocalPlayerId == CurrentPlayerId); } }
 
 		/// <summary>
 		/// Constructor
@@ -22,13 +23,10 @@ namespace SmallWorld
 		public LocalGame(IMap map, List<Player> players)
 		{
 			MapBoard = map;
+			CurrentTurn = 0;
 			Players = players;
+			LocalPlayerId = -1;
 		}
-
-        public Player GetCurrentPlayer()
-        {
-            return this.Players[this.CurrentPlayerId];
-        }
 
 		/// <summary>
 		/// Add a new player to the existing list
@@ -40,12 +38,27 @@ namespace SmallWorld
 		}
 
 		/// <summary>
+		/// Return current playing Player
+		/// </summary>
+		/// <returns></returns>
+        public Player GetCurrentPlayer()
+        {
+            return this.Players[this.CurrentPlayerId];
+        }
+
+		/// <summary>
 		/// Launch the game
 		/// </summary>
 		public virtual void Start()
 		{
             CurrentTurn = 1;
             CurrentPlayerId = 0;
+
+			if (MapBoard == null)
+				throw new NotSupportedException(); // Map must exist
+
+			for (int i = 0; i < Players.Count; i++)
+				Players[i].CurrentFaction.GenerateUnits(MapBoard.TotalNbUnits, MapBoard.GetStartPosition(i));
 
 			OnRaiseStartGame();
 		}
@@ -56,6 +69,7 @@ namespace SmallWorld
 		public virtual void NextPlayer()
 		{
 			CurrentPlayerId++;
+
 			if (CurrentPlayerId >= Players.Count)
 			{
 				if (CurrentTurn >= MapBoard.TotalNbTurn) // Is end of total turns ? => game over
@@ -77,6 +91,9 @@ namespace SmallWorld
 			// Put each units on Idle state
 			foreach (Player p in Players)
 			{
+				if (p.CurrentFaction == null || p.CurrentFaction.Units == null)
+					throw new NotImplementedException(); // Faction and/or units MUST already be existing here (adding a player in middle of the game ??)
+
                 foreach (IUnit u in p.CurrentFaction.Units)
                 {
                     u.ChangeState(UnitState.Idle);

@@ -40,7 +40,14 @@ namespace SWOP
 		/// </summary>
         public void MainWindow_Loaded(object sender, RoutedEventArgs e) {
 			GM = new GameMaster();
-			NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Small); // tmp
+
+			// tmp
+			List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
+			listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
+			listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
+
+			NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Small, listFaction); // tmp
+			GM.CurrentGame.Start(); // Ask explicitely to launch game
 		}
 
 
@@ -59,13 +66,8 @@ namespace SWOP
 		/// </summary>
 		/// <param name="gameStrategy"></param>
 		/// <param name="mapStrategy"></param>
-		public void NewGame(BuilderGameStrategy gameStrategy, BuilderMapStrategy mapStrategy)
+		public void NewGame(BuilderGameStrategy gameStrategy, BuilderMapStrategy mapStrategy, List<Tuple<string, FactionName>> listFaction)
 		{
-            // tmp
-            List<Tuple<string, FactionName>> listFaction = new List<Tuple<string,FactionName>>();
-            listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
-            listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
-
             GM.NewGame(gameStrategy, mapStrategy, listFaction);
 
 			// Subscribe to Game events
@@ -74,13 +76,12 @@ namespace SWOP
 			GM.CurrentGame.OnEndGame += OnEndGame;
 			GM.CurrentGame.OnNewChatMessage += OnNewChatMessage;
 
-            MapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
-
-			GM.StartGame(); // Ask explicitely to launch game
-            foreach (Player p in GM.CurrentGame.Players)
-            {
-                new FactionView(p.CurrentFaction);
-            }
+			// GUI
+			btnNextPlayer.Visibility = System.Windows.Visibility.Visible;
+			btnNextPlayer.Content = "Start Game !";
+			
+				if (MapView != null)
+					MapView.MapViewGrid.Children.RemoveRange(0, MapView.MapViewGrid.Children.Count);
         }
 
 
@@ -109,29 +110,35 @@ namespace SWOP
 
 		// tmp
         private void ButtonReload_Click(object sender, RoutedEventArgs e)
-        {
-            List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
-            listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
-            listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
+		{
+			// tmp
+			List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
+			listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
+			listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
 
-			GM.NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Normal, listFaction);
-
-            MapView.MapViewGrid.Children.RemoveRange(0, MapView.MapViewGrid.Children.Count);
-            MapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
+			NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Normal, listFaction);
         }
 
 
 		// tmp
 		private void ButtonLaunchServer_Click(object sender, RoutedEventArgs e)
 		{
-			NewGame(BuilderGameStrategy.Server, BuilderMapStrategy.Small);
+			// tmp
+			List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
+			listFaction.Add(new Tuple<string, FactionName>("MeTheServer", FactionName.Vikings));
+
+			NewGame(BuilderGameStrategy.Server, BuilderMapStrategy.Small, listFaction);
 		}
 
 
 		// tmp
 		private void ButtonJoinServer_Click(object sender, RoutedEventArgs e)
 		{
-			NewGame(BuilderGameStrategy.Client, BuilderMapStrategy.Demo);
+			// tmp
+			List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
+			listFaction.Add(new Tuple<string, FactionName>("MeTheTinyClient", FactionName.Gauls));
+
+			NewGame(BuilderGameStrategy.Client, BuilderMapStrategy.Demo, listFaction);
 		}
 
 
@@ -139,7 +146,10 @@ namespace SWOP
         // -------------------------------------------------
 		private void ButtonNextPlayer_Click(object sender, RoutedEventArgs e)
 		{
-			GM.CurrentGame.NextPlayer();
+			if (GM.CurrentGame.CurrentTurn == 0)
+				GM.CurrentGame.Start(); // Start game
+			else
+				GM.CurrentGame.NextPlayer(); // Next turn
 		}
 
 		#endregion
@@ -148,6 +158,8 @@ namespace SWOP
 
 		#region EventsHandlers
 
+		private delegate void OnModifyWPFCallback(); // Used for calls from other thread
+
 		/// <summary>
 		/// Event recevied when game officially start
 		/// </summary>
@@ -155,10 +167,21 @@ namespace SWOP
 		/// <param name="e"></param>
 		private void OnStartGame(object sender, EventArgs e)
 		{
-			lblPlayer1Name.Content = GM.CurrentGame.Players[0].Name;
-			lblPlayer2Name.Content = GM.CurrentGame.Players[1].Name;
+			this.Dispatcher.Invoke((OnModifyWPFCallback) delegate()
+			{
+				lblPlayer1Name.Content = GM.CurrentGame.Players[0].Name;
+				lblPlayer2Name.Content = GM.CurrentGame.Players[1].Name;
 
-			OnNextPlayer(this, e); // Init game info in the UI
+				MapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
+
+				foreach (Player p in GM.CurrentGame.Players)
+				{
+					new FactionView(p.CurrentFaction);
+				}
+
+				OnNextPlayer(this, e); // Init game info in the UI
+				btnNextPlayer.Content = "End my turn";
+			});
 		}
 
 		/// <summary>
@@ -168,26 +191,31 @@ namespace SWOP
 		/// <param name="e"></param>
 		private void OnNextPlayer(object sender, EventArgs e)
 		{
-			IGame g = GM.CurrentGame;
-			lblNbTurn.Content = "Turn " + g.CurrentTurn + "/" + g.MapBoard.TotalNbTurn;
+			this.Dispatcher.Invoke((OnModifyWPFCallback) delegate()
+			{
+				IGame g = GM.CurrentGame;
+				lblNbTurn.Content = "Turn " + g.CurrentTurn + "/" + g.MapBoard.TotalNbTurn;
 
-			borderPlayer1.Visibility = (g.CurrentPlayerId == 0) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
-			borderPlayer2.Visibility = (g.CurrentPlayerId == 1) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+				borderPlayer1.Visibility = (g.CurrentPlayerId == 0) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+				borderPlayer2.Visibility = (g.CurrentPlayerId == 1) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
 
-            if (this.ActiveUnitView != null)
-            {
-                this.ActiveUnitView.Unit.ChangeState(UnitState.Idle);
-                this.ActiveUnitView.UpdateAppearance();
-                this.ActiveUnitView = null;
-            }
+				btnNextPlayer.Visibility = (g.CurrentPlayerIsMe) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
 
-            // TODO : Temp, need to place this somewhere else
-            foreach (TileView tView in this.MapView.TilesView.Values)
-            {
-                if (tView.Tile.IsOccupied())
-                    tView.DispatchArmy();
-            }
-            
+				if (this.ActiveUnitView != null)
+				{
+					this.ActiveUnitView.Unit.ChangeState(UnitState.Idle);
+					this.ActiveUnitView.UpdateAppearance();
+					this.ActiveUnitView = null;
+				}
+
+				// TODO : Temp, need to place this somewhere else
+				foreach (TileView tView in this.MapView.TilesView.Values)
+				{
+					if (tView.Tile.IsOccupied())
+						tView.DispatchArmy();
+				}
+
+			});
 		}
 
 		/// <summary>
@@ -197,11 +225,14 @@ namespace SWOP
 		/// <param name="e"></param>
 		private void OnEndGame(object sender, EventArgs e)
 		{
-			IGame g = GM.CurrentGame;
-			lblNbTurn.Content = "Game Over !";
+			this.Dispatcher.Invoke((OnModifyWPFCallback) delegate()
+			{
+				IGame g = GM.CurrentGame;
+				lblNbTurn.Content = "Game Over !";
 
-			borderPlayer1.Visibility = System.Windows.Visibility.Hidden;
-			borderPlayer2.Visibility = System.Windows.Visibility.Hidden;
+				borderPlayer1.Visibility = System.Windows.Visibility.Hidden;
+				borderPlayer2.Visibility = System.Windows.Visibility.Hidden;
+			});
 		}
 
 		/// <summary>
@@ -211,12 +242,11 @@ namespace SWOP
 		/// <param name="e"></param>
 		private void OnNewChatMessage(object sender, StringEventArgs e)
 		{
-			this.Dispatcher.Invoke((OnNewChatMessageCallback) delegate ()
+			this.Dispatcher.Invoke((OnModifyWPFCallback) delegate ()
 			{
 				textChat.Text += "\n" + e.Text;
 			});
 		}
-		private delegate void OnNewChatMessageCallback();
 
 		#endregion
 

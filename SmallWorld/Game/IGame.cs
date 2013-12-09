@@ -8,12 +8,12 @@ namespace SmallWorld
     public interface IGame
     {
 		IMap MapBoard { get; }
+		int CurrentTurn { get; }
 		List<Player> Players { get; }
 		int CurrentPlayerId { get; }
-		int CurrentTurn { get; }
+		bool CurrentPlayerIsMe { get; }
 
         Player GetCurrentPlayer();
-		void AddNewPlayer(Player player);
 		void Start();
         void NextPlayer();
         void Save();

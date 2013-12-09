@@ -22,9 +22,13 @@ AlgoMap::~AlgoMap(void)
 
 // Generate each tiles on map
 // ----------------------------------------------
-void AlgoMap::BuildMap(int size)
+void AlgoMap::BuildMap(int size, int rndSeed)
 {
-    srand(time(0));
+	if (rndSeed == 0)
+		randomSeed = time(0);
+	else
+		randomSeed = rndSeed;
+    srand(randomSeed);
 
 	mapSize = size;
 	mapRange = (int) (mapSize / 5); // Scale index
@@ -45,6 +49,15 @@ void AlgoMap::BuildMap(int size)
 	ProcessStartPositions();
 }
 
+
+// Return seed value
+// ----------------------------------------------
+int AlgoMap::GetRandomSeed()
+{
+	return randomSeed;
+}
+
+
 // Getter of tile type at position (x,y)
 // ----------------------------------------------
 int AlgoMap::GetTileType(int x, int y)
@@ -61,6 +74,9 @@ int AlgoMap::GetTileType(int x, int y)
 // ----------------------------------------------
 int AlgoMap::GetStartTileX(int playerId)
 {
+	if (playerId >= MAX_NB_PLAYERS)
+		return 0;
+
 	return startPositions[playerId][0];
 }
 
@@ -69,20 +85,11 @@ int AlgoMap::GetStartTileX(int playerId)
 // ----------------------------------------------
 int AlgoMap::GetStartTileY(int playerId)
 {
+	if (playerId >= MAX_NB_PLAYERS)
+		return 0;
+
 	return startPositions[playerId][1];
 }
-
-/*
-// Is a starting tile (return player id)
-// ----------------------------------------------
-int AlgoMap::IsStartTile(int x, int y)
-{
-	for(int i = 0; i < MAX_NB_PLAYERS; i++)
-		if (x == startPositions[i][0] && y == startPositions[i][1])
-			return i;
-	return -1;
-}
-*/
 
 
 
@@ -204,8 +211,8 @@ void AlgoMap::BuildSpecialTiles(int tileType)
 // ----------------------------------------------
 void AlgoMap::ProcessStartPositions()
 {
-	for(int i = 0; i <= 1; i++)
-		for(int j = 0; j <= 1; j++)
+	for(int i = 0; i < MAX_NB_PLAYERS; i++)
+		for(int j = 0; j < 2; j++)
 			startPositions[i][j] = (int) mapSize / 2;
 
 	for (int x = 0; x < mapSize; x++)
@@ -224,7 +231,18 @@ void AlgoMap::ProcessStartPositions()
 				startPositions[1][0] = x;
 				startPositions[1][1] = y;
 			}
-			// TODO : also check top-right & bottom-left distance to see the farther
+			// Bottom-left corner
+			if (tiles[x][y] != TILE_WATER && (x + (mapSize - y)) < (startPositions[2][0] + (mapSize - startPositions[2][1])))
+			{
+				startPositions[2][0] = x;
+				startPositions[2][1] = y;
+			}
+			// Top-right corner
+			if (tiles[x][y] != TILE_WATER && (x + (mapSize - y)) > (startPositions[3][0] + (mapSize - startPositions[3][1])))
+			{
+				startPositions[3][0] = x;
+				startPositions[3][1] = y;
+			}
 		}
 	}
 }

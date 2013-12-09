@@ -301,7 +301,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_MAX_NB_PLAYERS_get() {
   int jresult ;
   int result;
   
-  result = (int)(2);
+  result = (int)(4);
   jresult = result; 
   return jresult;
 }
@@ -375,13 +375,27 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_AlgoMap(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_AlgoMap_BuildMap(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_AlgoMap_BuildMap(void * jarg1, int jarg2, int jarg3) {
   AlgoMap *arg1 = (AlgoMap *) 0 ;
   int arg2 ;
+  int arg3 ;
   
   arg1 = (AlgoMap *)jarg1; 
   arg2 = (int)jarg2; 
-  (arg1)->BuildMap(arg2);
+  arg3 = (int)jarg3; 
+  (arg1)->BuildMap(arg2,arg3);
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_AlgoMap_GetRandomSeed(void * jarg1) {
+  int jresult ;
+  AlgoMap *arg1 = (AlgoMap *) 0 ;
+  int result;
+  
+  arg1 = (AlgoMap *)jarg1; 
+  result = (int)(arg1)->GetRandomSeed();
+  jresult = result; 
+  return jresult;
 }
 
 

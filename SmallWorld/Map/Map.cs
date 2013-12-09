@@ -13,6 +13,7 @@ namespace SmallWorld
 		ITile[,] Tiles { get; }
 		ITile SelectedTile { get; set; }
 
+		int GetRandomSeed();
 		ITile GetStartPosition(int playerId);
 	}
 
@@ -31,7 +32,7 @@ namespace SmallWorld
 		/// <summary>
 		/// Map constructor
 		/// </summary>
-		public Map(int size, int nbTurn, int nbUnits)
+		public Map(int size, int nbTurn, int nbUnits, int randomSeed)
 		{
 			MapSize = size;
 			TotalNbTurn = nbTurn;
@@ -40,7 +41,7 @@ namespace SmallWorld
 
 			TileFactory tileFactory = new TileFactory();
 			algo = new AlgoMap();
-			algo.BuildMap(MapSize);
+			algo.BuildMap(MapSize, randomSeed);
 
 			for (int y = 0; y < MapSize; y++)
 			{
@@ -82,6 +83,14 @@ namespace SmallWorld
 			Console.WriteLine("[Log] MapBoard created");
 		}
 
+
+		/// <summary>
+		/// Return the seed used to generate the map
+		/// </summary>
+		public int GetRandomSeed()
+		{
+			return algo.GetRandomSeed();
+		}
 
 		/// <summary>
 		/// Return start coords of a specific player

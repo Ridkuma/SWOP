@@ -30,8 +30,12 @@ namespace SmallWorld
             position.UnitEnter(this);
         }
 
-        // A Unit can only move one tile per round
-        public virtual bool Move(ITile destination)
+        /// <summary>
+        /// Default check whether a Unit can or not move to destination
+        /// </summary>
+        /// <param name="destination"></param>
+        /// <returns></returns>
+        public virtual bool CheckMove(ITile destination)
         {
             // Minimum verifications before allowing a move,
             // every Unit extension should add up their own limitations
@@ -39,13 +43,19 @@ namespace SmallWorld
                 && (!destination.IsOccupied())
                 && (destination != this.Position);
 
-            if (!possibleMove)
-                return false;
+            return possibleMove;
+        }
 
+        /// <summary>
+        /// Effectively move a Unit to destination if possible
+        /// </summary>
+        /// <param name="destination"></param>
+        public virtual void Move(ITile destination)
+        {
             this.Position.UnitLeave(this);
             this.Position = destination;
             destination.UnitEnter(this);
-            return true;
+            GameMaster.GM.CurrentGame.OnRaiseMoveUnit();
         }
 
         // Attacking is the same for every faction
@@ -54,7 +64,10 @@ namespace SmallWorld
             // TODO
         }
 
-
+        /// <summary>
+        /// Change current state
+        /// </summary>
+        /// <param name="targetState"></param>
         public void ChangeState(UnitState targetState)
         {
             switch (this.State)
@@ -132,6 +145,9 @@ namespace SmallWorld
             }
         }
 
+        /// <summary>
+        /// Default actions on turn end
+        /// </summary>
         public virtual void EndTurn()
         {
             this.Mvt = 1;
@@ -149,15 +165,21 @@ namespace SmallWorld
         }
 
 
-        public override bool Move(ITile destination)
+        public override bool CheckMove(ITile destination)
         {
             if (!destination.IsAdjacent(this.Position))
                 return false;
-            base.Move(destination);
-            this.Mvt--;
-            return true;
+
+            return base.CheckMove(destination);
         }
 
+        public override void Move(ITile destination)
+        {
+            if (!this.CheckMove(destination))
+                return;
+            this.Mvt--;
+            base.Move(destination);
+        }
     }
 
     public class DwarvesUnit : Unit
@@ -168,9 +190,13 @@ namespace SmallWorld
             this.Faction = FactionName.Dwarves;
         }
 
-        // A Dwarf can move from a Mountain to any another Mountain
-        // Cannot cross Water
-        public override bool Move(ITile destination)
+        /// <summary>
+        /// A Dwarf can move from a Mountain to any other Mountain
+        /// Cannot cross Water
+        /// </summary>
+        /// <param name="destination"></param>
+        /// <returns></returns>
+        public override bool CheckMove(ITile destination)
         {
             bool mountainTravel = destination.Type == TileType.Mountain
                 && this.Position.Type == TileType.Mountain;
@@ -181,9 +207,15 @@ namespace SmallWorld
                     return false;
             }
 
-            base.Move(destination);
+            return base.CheckMove(destination); ;
+        }
+
+        public override void Move(ITile destination)
+        {
+            if (!this.CheckMove(destination))
+                return;
             this.Mvt--;
-            return true;
+            base.Move(destination);
         }
     }
 
@@ -196,16 +228,31 @@ namespace SmallWorld
             this.Mvt = 2;
         }
 
-        public override bool Move(ITile destination)
+        /// <summary>
+        /// A Gaul can move twice if it crosses a Plain
+        /// Cannot cross Water
+        /// </summary>
+        /// <param name="destination"></param>
+        /// <returns></returns>
+        public override bool CheckMove(ITile destination)
         {
             if (!destination.IsAdjacent(this.Position) || destination.Type == TileType.Water)
                 return false;
-            base.Move(destination);
+
+            return base.CheckMove(destination); ;
+        }
+
+        public override void Move(ITile destination)
+        {
+            if (!this.CheckMove(destination))
+                return;
+
             if (destination.Type == TileType.Field)
                 this.Mvt -= 1;
             else
                 this.Mvt -= 2;
-            return true;
+
+            base.Move(destination);
         }
 
         public override void EndTurn()

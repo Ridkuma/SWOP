@@ -153,14 +153,31 @@ namespace SWOP {
 
             mapView.Map.SelectedTile = Tile;
             SetAppearance(TileViewState.Selected);
+
+            if (!this.Tile.IsOccupied())
+                return;
+
+            IEnumerable<UnitView> uViews = this.grid.Children.OfType<UnitView>();
+
+            // if (uViews.Count() < 2)
+             uViews.ElementAt(0).Select();
+
+
         }
 
         private void Tile_MouseRightButtonDown(object sender, MouseEventArgs e)
         {
             if (MainWindow.INSTANCE.ActiveUnitView != null)
             {
-                MainWindow.INSTANCE.ActiveUnitView.Move(this);
+                MainWindow.INSTANCE.ActiveUnitView.Unit.Move(this.Tile);
                 MainWindow.INSTANCE.ActiveUnitView.Margin = new Thickness(0);
+
+                MapView mapView = MainWindow.INSTANCE.MapView;
+                if (mapView.Map.SelectedTile != null)
+                {
+                    mapView.TilesView[mapView.Map.SelectedTile].SetAppearance(TileViewState.Idle);
+                    mapView.Map.SelectedTile = null;
+                }
             }
         }
 

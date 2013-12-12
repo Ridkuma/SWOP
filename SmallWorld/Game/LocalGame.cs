@@ -146,6 +146,13 @@ namespace SmallWorld
 				OnEndGame(this, new EventArgs());
 		}
 
+        public event EventHandler<EventArgs> OnMoveUnit;
+        public virtual void OnRaiseMoveUnit()
+        {
+            if (OnMoveUnit != null)
+                OnMoveUnit(this, new EventArgs());
+        }
+
 		public event EventHandler<StringEventArgs> OnNewChatMessage;
 		public virtual void OnRaiseNewChatMessage(string text)
 		{

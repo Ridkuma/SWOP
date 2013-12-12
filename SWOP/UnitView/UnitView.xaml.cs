@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -22,12 +23,13 @@ namespace SWOP
     public partial class UnitView : UserControl
     {
         public IUnit Unit { get; private set; }
-
+        private TileView ParentTile { get; set; }
         
         public UnitView(IUnit u)
         {
             InitializeComponent();
             this.Unit = u;
+            this.ParentTile = MainWindow.INSTANCE.MapView.TilesView[this.Unit.Position];
         }
 
         private void OnUnitLoaded(object sender, RoutedEventArgs e)
@@ -58,20 +60,22 @@ namespace SWOP
 
         public void UpdateAppearance()
         {
-            this.selectedSquare.Visibility = (this.Unit.State == UnitState.Selected) ? Visibility.Visible : Visibility.Hidden;
-        }
+            Storyboard rectangleOpacityAnim = (Storyboard) this.grid.FindResource("rectangleOpacity");
 
-        public void Move(TileView tileView)
-        {
-            ITile prevPos = this.Unit.Position;
-            if (this.Unit.Move(tileView.Tile))
+            if (this.Unit.State == UnitState.Selected)
             {
-                MainWindow.INSTANCE.MapView.TilesView[prevPos].grid.Children.Remove(this);
-                MainWindow.INSTANCE.MapView.TilesView[this.Unit.Position].grid.Children.Add(this);
+                this.selectedSquare.Visibility = Visibility.Visible;
+                rectangleOpacityAnim.Begin(this);
             }
+            else
+            {
+                this.selectedSquare.Visibility = (this.Unit.State == UnitState.Selected) ? Visibility.Visible : Visibility.Hidden;
+                rectangleOpacityAnim.Stop(this);
+            }
+            
         }
 
-        private void Unit_LeftClick(object sender, MouseButtonEventArgs e)
+        public void Select()
         {
             if (this.Unit.Faction != MainWindow.INSTANCE.GM.CurrentGame.GetCurrentPlayer().CurrentFaction.Name)
                 return;
@@ -85,6 +89,14 @@ namespace SWOP
 
             this.Unit.ChangeState(UnitState.Selected);
             this.UpdateAppearance();
+        }
+
+        public void Move()
+        {
+            this.ParentTile.grid.Children.Remove(this);
+            TileView newTileView = MainWindow.INSTANCE.MapView.TilesView[this.Unit.Position];
+            newTileView.grid.Children.Add(this);
+            this.ParentTile = newTileView;
         }
     }
 }

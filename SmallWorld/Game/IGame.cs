@@ -22,8 +22,10 @@ namespace SmallWorld
 		event EventHandler<EventArgs> OnStartGame;
 		event EventHandler<EventArgs> OnNextPlayer;
 		event EventHandler<EventArgs> OnEndGame;
+        event EventHandler<EventArgs> OnMoveUnit;
 		event EventHandler<StringEventArgs> OnNewChatMessage;
 
+        void OnRaiseMoveUnit();
 		void OnRaiseNewChatMessage(string text);
 
     }

@@ -74,6 +74,7 @@ namespace SWOP
 			GM.CurrentGame.OnStartGame += OnStartGame;
 			GM.CurrentGame.OnNextPlayer += OnNextPlayer;
 			GM.CurrentGame.OnEndGame += OnEndGame;
+            GM.CurrentGame.OnMoveUnit += OnMoveUnit;
 			GM.CurrentGame.OnNewChatMessage += OnNewChatMessage;
 
 			// GUI
@@ -217,6 +218,28 @@ namespace SWOP
 
 			});
 		}
+
+        /// <summary>
+        /// Event received when a unit moves
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnMoveUnit(object sender, EventArgs e)
+        {
+            this.Dispatcher.Invoke((OnModifyWPFCallback)delegate()
+            {
+                this.ActiveUnitView.Move();
+
+                // TODO : Temp, need to place this somewhere else
+                /*
+                foreach (TileView tView in this.MapView.TilesView.Values)
+                {
+                    if (tView.Tile.IsOccupied())
+                        tView.DispatchArmy();
+                } */
+
+            });
+        }
 
 		/// <summary>
 		/// Event received when game is over

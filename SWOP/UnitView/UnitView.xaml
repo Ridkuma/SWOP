@@ -18,21 +18,17 @@
     
     <Grid Name="grid" IsHitTestVisible="False">
 
-        <Grid.Triggers>
             <!-- Animates the rectangle's opacity. -->
-            <EventTrigger RoutedEvent="MouseDown">
-                <BeginStoryboard>
-                    <Storyboard>
-                        <DoubleAnimation
-                            Storyboard.TargetName="selectedSquare" 
-                            Storyboard.TargetProperty="Opacity"
-                            From="1.0" To="0.2" Duration="0:0:1" 
-                            AutoReverse="True" RepeatBehavior="Forever" />
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
-        </Grid.Triggers>
-        
+        <Grid.Resources>
+            <Storyboard x:Key="rectangleOpacity">
+                <DoubleAnimation
+                    Storyboard.TargetName="selectedSquare" 
+                    Storyboard.TargetProperty="Opacity"
+                    From="1.0" To="0.2" Duration="0:0:1" 
+                    AutoReverse="True" RepeatBehavior="Forever" />
+            </Storyboard>
+        </Grid.Resources>
+
         <Rectangle Name="selectedSquare" 
             Stroke="{DynamicResource VikingsColor}"
             Visibility="Hidden"
@@ -42,8 +38,7 @@
         
         <Image Name="sprite" 
             Width="60"
-            Source="{DynamicResource VikingsImg}"
-            MouseLeftButtonDown="Unit_LeftClick"/>
+            Source="{DynamicResource VikingsImg}"/>
         
     </Grid>
 </UserControl>

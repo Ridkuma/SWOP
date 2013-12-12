@@ -17,7 +17,8 @@ namespace SmallWorld
         UnitState State { get; } // Unit State
         FactionName Faction { get; } // Unit's Faction Name
 
-        bool Move(ITile destination);
+        bool CheckMove(ITile destination);
+        void Move(ITile destination);
         void Attack(IUnit enemy);
         void ChangeState(UnitState targetState);
         void EndTurn();

@@ -207,6 +207,7 @@ namespace SWOP
 					this.ActiveUnitView.Unit.ChangeState(UnitState.Idle);
 					this.ActiveUnitView.UpdateAppearance();
 					this.ActiveUnitView = null;
+                    this.selectedUnit.Visibility = Visibility.Hidden;
 				}
 
 				// TODO : Temp, need to place this somewhere else

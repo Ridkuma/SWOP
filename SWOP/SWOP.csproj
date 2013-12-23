@@ -133,6 +133,13 @@
     <Resource Include="Resources\units\gaul.png" />
     <Resource Include="Resources\units\viking.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\musics\BGM2_Morro.mp3" />
+    <Resource Include="Resources\musics\BGM3_Ray.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\musics\BGM1_FFTA.mp3" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

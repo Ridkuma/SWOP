@@ -39,13 +39,15 @@
         <!-- Main grid -->
         <Grid x:Name="mapGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1"/>
         <!-- Pause menu -->
-        <Canvas Name="mainMenu" Width="150" Height="200" Grid.Row="1" Margin="321,79,321,191">
-            <Rectangle Stroke="#FFBF8850" Fill="#FF1C2427" Width="150" Height="200"/>
+        <Canvas Name="mainMenu" Width="150" Height="240" Grid.Row="1" Margin="321,79,321,191">
+            <Rectangle Stroke="#FFBF8850" Fill="#FF1C2427" Width="150" Height="240"/>
             <Button Content="Resume" Width="100" Click="ButtonResume_Click" Canvas.Left="25" Canvas.Top="20" Background="#FFBF8850"/>
             <Button Content="Reload(tmp)" Width="100" Click="ButtonReload_Click" Canvas.Left="25" Canvas.Top="55" Background="#FFBF8850"/>
             <Button Content="Launch server" Width="100" Click="ButtonLaunchServer_Click" Canvas.Left="25" Canvas.Top="90" Background="#FFBF8850"/>
             <Button Content="Join localhost" Width="100" Click="ButtonJoinServer_Click" Canvas.Left="25" Canvas.Top="125" Background="#FFBF8850"/>
             <Button Content="Go to main menu" Width="100" Click="ButtonResume_Click" Canvas.Left="25" Canvas.Top="160" Background="#FFBF8850"/>
+            <Button Name="muteBgmBtn" Content="Mute BGM" Width="100" Click="ButtonMuteBGM_Click" Canvas.Left="25" Canvas.Top="195" Background="#FFBF8850"/>
+            <Button Name="playBgmBtn" Content="Play BGM" Width="100" Click="ButtonPlayBGM_Click" Canvas.Left="25" Canvas.Top="195" Background="#FFBF8850" Visibility="Hidden"/>
         </Canvas>
 
         <!-- Bottom footer -->

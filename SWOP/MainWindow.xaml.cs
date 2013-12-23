@@ -1,18 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using SmallWorld;
 
 namespace SWOP
@@ -27,11 +18,18 @@ namespace SWOP
         public GameMaster GM { get; protected set; }
         public MapView MapView { get; protected set; }
         public UnitView ActiveUnitView { get; set; }
+        public MediaPlayer MediaPlayer { get; set; }
+
+        private static Random RAND = new Random();
+
+        private const int MIN_VOLUME = 20;
+        private const int MAX_VOLUME = 80;
 
         public MainWindow()
         {
             InitializeComponent();
             this.ActiveUnitView = null;
+            this.MediaPlayer = new MediaPlayer();
             INSTANCE = this;
         }
 
@@ -77,12 +75,51 @@ namespace SWOP
             GM.CurrentGame.OnMoveUnit += OnMoveUnit;
 			GM.CurrentGame.OnNewChatMessage += OnNewChatMessage;
 
+            // Subscribe to Media event
+            this.MediaPlayer.MediaEnded += OnMediaEnded;
+
 			// GUI
 			btnNextPlayer.Visibility = System.Windows.Visibility.Visible;
 			btnNextPlayer.Content = "Start Game !";
 			
 				if (MapView != null)
 					MapView.MapViewGrid.Children.RemoveRange(0, MapView.MapViewGrid.Children.Count);
+        }
+        
+
+        /// <summary>
+        /// Play a random battle song
+        /// </summary>
+        public void RandomBattleSong()
+        {
+            String path = System.Environment.CurrentDirectory;
+            path = path.Replace(@"\Debug", @"\SWOP\Resources");
+            path = path.Replace(@"\Release", @"\SWOP\Resources");
+            Uri uri;
+
+            switch (RAND.Next(3))
+            {
+                case 0 :
+                    uri = new Uri(path + @"\musics\BGM1_FFTA.mp3");
+                    break;
+
+                case 1 :
+                    uri = new Uri(path + @"\musics\BGM2_Morro.mp3");
+                    break;
+
+                case 2:
+                    uri = new Uri(path + @"\musics\BGM3_Ray.mp3");
+                    break;
+
+                default :
+                    uri = new Uri(path + @"\musics\BGM1_FFTA.mp3");
+                    break;
+            }
+            
+            this.MediaPlayer.Stop();
+            this.MediaPlayer.Open(uri);
+            this.MediaPlayer.Volume = MAX_VOLUME;
+            this.MediaPlayer.Play();
         }
 
 
@@ -97,6 +134,7 @@ namespace SWOP
             BlurEffect blur = new BlurEffect();
             blur.Radius = 15;
             mapGrid.Effect = blur;
+            this.MediaPlayer.Volume = MIN_VOLUME;
         }
 
 
@@ -106,8 +144,28 @@ namespace SWOP
         {
             mainMenu.Visibility = System.Windows.Visibility.Hidden;
             mapGrid.Effect = null;
+            this.MediaPlayer.Volume = MAX_VOLUME;
         }
 
+        /// <summary>
+        /// Mutes BGM
+        /// </summary>
+        private void ButtonMuteBGM_Click(object sender, RoutedEventArgs e)
+        {
+            this.MediaPlayer.Stop();
+            this.muteBgmBtn.Visibility = Visibility.Hidden;
+            this.playBgmBtn.Visibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// Resumes BGM
+        /// </summary>
+        private void ButtonPlayBGM_Click(object sender, RoutedEventArgs e)
+        {
+            this.RandomBattleSong();
+            this.muteBgmBtn.Visibility = Visibility.Visible;
+            this.playBgmBtn.Visibility = Visibility.Hidden;
+        }
 
 		// tmp
         private void ButtonReload_Click(object sender, RoutedEventArgs e)
@@ -180,6 +238,8 @@ namespace SWOP
 					new FactionView(p.CurrentFaction);
 				}
 
+                this.RandomBattleSong();
+
 				OnNextPlayer(this, e); // Init game info in the UI
 				btnNextPlayer.Content = "End my turn";
 			});
@@ -251,6 +311,8 @@ namespace SWOP
 		{
 			this.Dispatcher.Invoke((OnModifyWPFCallback) delegate()
 			{
+                this.MediaPlayer.Stop();
+
 				IGame g = GM.CurrentGame;
 				lblNbTurn.Content = "Game Over !";
 
@@ -271,6 +333,17 @@ namespace SWOP
 				textChat.Text += "\n" + e.Text;
 			});
 		}
+
+        /// <summary>
+        /// When BGM ends, play another
+        /// </summary>
+        private void OnMediaEnded(object sender, EventArgs e)
+        {
+            this.Dispatcher.Invoke((OnModifyWPFCallback)delegate()
+            {
+                this.RandomBattleSong();
+            });
+        }
 
 		#endregion
 

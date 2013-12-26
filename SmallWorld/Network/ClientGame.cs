@@ -22,7 +22,7 @@ namespace SmallWorld
 		}
 
 
-		public override void Start()
+		public override void Start(bool generateUnits = true)
 		{
 			// Don't do anything, it's the server which order to launch the game
 		}
@@ -31,6 +31,12 @@ namespace SmallWorld
 		public override void NextPlayer()
 		{
 			SendPacket(NetworkCommand.ClientNextPlayer);
+		}
+
+
+		public override void MoveUnit(IUnit unit, ITile destination)
+		{
+			SendPacket(NetworkCommand.ClientUnitMove, 0, MapBoard.GetTileId(destination), unit.Name);
 		}
 
 
@@ -76,7 +82,7 @@ namespace SmallWorld
 
 				// Launch game
 				case NetworkCommand.GameStart:
-					base.Start();
+					base.Start(false);
 					break;
 
 				// Next player turn
@@ -84,9 +90,27 @@ namespace SmallWorld
 					base.NextPlayer();
 					break;
 
-				// Launch game
+				// End game
 				case NetworkCommand.GameEnd:
 					End();
+					break;
+
+				// Move unit (or create if inexisting)
+				case NetworkCommand.UnitMove:
+					bool unitFind = false;
+					foreach (IUnit u in Players[data.ArgsInt1].CurrentFaction.Units)
+					{
+						if (u.Name == data.ArgsString)
+						{
+							base.MoveUnit(u, MapBoard.GetTileFromId(data.ArgsInt2));
+							unitFind = true;
+							break;
+						}
+					}
+					if (!unitFind)
+					{
+						Players[data.ArgsInt1].CurrentFaction.AddUnit(data.ArgsString, MapBoard.GetTileFromId(data.ArgsInt2));
+					}
 					break;
 
 				default:

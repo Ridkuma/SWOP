@@ -14,8 +14,9 @@ namespace SmallWorld
 		bool CurrentPlayerIsMe { get; }
 
         Player GetCurrentPlayer();
-		void Start();
+		void Start(bool generateUnits = true);
         void NextPlayer();
+		void MoveUnit(IUnit unit, ITile destination);
         void Save();
 		void End();
 
@@ -25,7 +26,6 @@ namespace SmallWorld
         event EventHandler<EventArgs> OnMoveUnit;
 		event EventHandler<StringEventArgs> OnNewChatMessage;
 
-        void OnRaiseMoveUnit();
 		void OnRaiseNewChatMessage(string text);
 
     }

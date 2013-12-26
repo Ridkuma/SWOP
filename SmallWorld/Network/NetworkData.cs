@@ -19,7 +19,7 @@ namespace SmallWorld
 		GameEnd,			// ()
 		NextPlayer,			// ()
 		Message,			// (0, 0, message)
-		Move,
+		UnitMove,			// (ownerPlayerId, targetTile, name)
 		Attack,
 		
 		ClientLogin,		// (0, factionId, name)
@@ -27,6 +27,7 @@ namespace SmallWorld
 		ClientGiveIpEP,		// (0, port, ipToParse)
 		ClientNextPlayer,	// ()
 		ClientMessage,		// (0, 0, message)
+		ClientUnitMove,		// (0, targetTile, name)
 	}
 
 

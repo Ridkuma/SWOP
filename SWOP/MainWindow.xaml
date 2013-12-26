@@ -62,7 +62,7 @@
 
                 <!-- Chat Column -->
                 <Border Grid.Column="0" BorderThickness="0,0,2,0" BorderBrush="#FFBF8850">
-                    <TextBlock Name="textChat" Height="80" TextWrapping="Wrap" Text="-- Chat --" VerticalAlignment="Top" Foreground="#FFD6D6D6"/>
+                    <TextBlock Name="textChat" TextWrapping="Wrap" Text="-- Chat --" VerticalAlignment="Bottom" Foreground="#FFD6D6D6"/>
                 </Border>
 
                 <!-- Selected Unit Column -->

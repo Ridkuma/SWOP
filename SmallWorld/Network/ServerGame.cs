@@ -19,17 +19,45 @@ namespace SmallWorld
 		}
 
 
-		public override void Start()
+		public override void Start(bool generateUnits = true)
 		{
 			base.Start();
+
+			// Send each units created to every players (overkill powaaa)
+			foreach (Player p in Players)
+			{
+				foreach (IUnit u in p.CurrentFaction.Units)
+				{
+					SendMulticast(NetworkCommand.UnitMove, Players.IndexOf(p), MapBoard.GetTileId(u.Position), u.Name);
+				}
+			}
+
 			SendMulticast(NetworkCommand.GameStart);
 		}
 
 
+		/// <summary>
+		/// Warn each players of the new game turn
+		/// </summary>
 		public override void NextPlayer()
 		{
 			base.NextPlayer();
 			SendMulticast(NetworkCommand.NextPlayer);
+		}
+
+
+		/// <summary>
+		/// Warn each players of the new move
+		/// </summary>
+		public override void MoveUnit(IUnit unit, ITile destination)
+		{
+			base.MoveUnit(unit, destination);
+			SendMulticast(NetworkCommand.UnitMove, 0, MapBoard.GetTileId(destination), unit.Name);
+		}
+		public void MoveUnit(IUnit unit, ITile destination, int ownerPlayer)
+		{
+			base.MoveUnit(unit, destination);
+			SendMulticast(NetworkCommand.UnitMove, ownerPlayer, MapBoard.GetTileId(destination), unit.Name);
 		}
 
 
@@ -70,6 +98,18 @@ namespace SmallWorld
 				// Next player turn
 				case NetworkCommand.ClientNextPlayer:
 					NextPlayer();
+					break;
+
+
+				// Player ask to move one of his unit
+				case NetworkCommand.ClientUnitMove:
+					foreach (IUnit u in Players[data.PlayerId].CurrentFaction.Units)
+					{
+						if (u.Name == data.ArgsString)
+						{
+							MoveUnit(u, MapBoard.GetTileFromId(data.ArgsInt2), data.PlayerId);
+						}
+					}
 					break;
 
 				default:

@@ -49,7 +49,7 @@ namespace SmallWorld
 		/// <summary>
 		/// Launch the game
 		/// </summary>
-		public virtual void Start()
+		public virtual void Start(bool generateUnits = true)
 		{
             CurrentTurn = 1;
             CurrentPlayerId = 0;
@@ -57,8 +57,11 @@ namespace SmallWorld
 			if (MapBoard == null)
 				throw new NotSupportedException(); // Map must exist
 
-			for (int i = 0; i < Players.Count; i++)
-				Players[i].CurrentFaction.GenerateUnits(MapBoard.TotalNbUnits, MapBoard.GetStartPosition(i));
+			if (generateUnits)
+			{
+				for (int i = 0; i < Players.Count; i++)
+					Players[i].CurrentFaction.GenerateUnits(MapBoard.TotalNbUnits, MapBoard.GetStartTile(i));
+			}
 
 			OnRaiseStartGame();
 		}
@@ -100,7 +103,15 @@ namespace SmallWorld
                     u.EndTurn();
                 }
 			}
+		}
 
+		/// <summary>
+		/// Process the move of a unit on the map
+		/// </summary>
+		public virtual void MoveUnit(IUnit unit, ITile destination)
+		{
+			unit.RealMove(destination);
+			OnRaiseMoveUnit();
 		}
 
 		/// <summary>
@@ -147,7 +158,7 @@ namespace SmallWorld
 		}
 
         public event EventHandler<EventArgs> OnMoveUnit;
-        public virtual void OnRaiseMoveUnit()
+        protected virtual void OnRaiseMoveUnit()
         {
             if (OnMoveUnit != null)
                 OnMoveUnit(this, new EventArgs());

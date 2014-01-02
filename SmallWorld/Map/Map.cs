@@ -11,10 +11,11 @@ namespace SmallWorld
 		int TotalNbTurn { get; }
 		int TotalNbUnits { get; }
 		ITile[,] Tiles { get; }
-		ITile SelectedTile { get; set; }
 
 		int GetRandomSeed();
-		ITile GetStartPosition(int playerId);
+		ITile GetStartTile(int playerId);
+		int GetTileId(ITile tile);
+		ITile GetTileFromId(int id);
 	}
 
 
@@ -27,7 +28,6 @@ namespace SmallWorld
 		public int TotalNbUnits { get; protected set; }
 
 		public ITile[,] Tiles { get; protected set; }
-		public ITile SelectedTile { get; set; }
 
 		/// <summary>
 		/// Map constructor
@@ -95,9 +95,29 @@ namespace SmallWorld
 		/// <summary>
 		/// Return start coords of a specific player
 		/// </summary>
-		public ITile GetStartPosition(int playerId)
+		public ITile GetStartTile(int playerId)
 		{
 			return Tiles[algo.GetStartTileX(playerId), algo.GetStartTileY(playerId)];
+		}
+
+		/// <summary>
+		/// Get unique index of a tile (equivalent of the position put in a single int)
+		/// </summary>
+		public int GetTileId(ITile tile)
+		{
+			return (tile.X * MapSize) + tile.Y;
+		}
+
+		/// <summary>
+		/// Get unique index of a tile (equivalent of the position put in a single int)
+		/// </summary>
+		public ITile GetTileFromId(int id)
+		{
+			// Index out of limits
+			if (id < 0 || id >= Tiles.Length)
+				throw new NotSupportedException();
+
+			return Tiles[(id / MapSize), (id % MapSize)];
 		}
 	}
 }

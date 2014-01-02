@@ -93,22 +93,28 @@ namespace SWOP
 
             if (MainWindow.INSTANCE.ActiveUnitView != null)
             {
-                MainWindow.INSTANCE.ActiveUnitView.Unit.ChangeState(UnitState.Idle);
-                MainWindow.INSTANCE.ActiveUnitView.UpdateAppearance();
+				MainWindow.INSTANCE.ActiveUnitView.Unselect();
             }
-            MainWindow.INSTANCE.ActiveUnitView = this;
+			MainWindow.INSTANCE.ActiveUnitView = this;
 
             this.Unit.ChangeState(UnitState.Selected);
             this.UpdateAppearance();
 
-            MainWindow.INSTANCE.unitName.Text = this.Unit.Name;
-            MainWindow.INSTANCE.unitHp.Text = "HP : " + this.Unit.Hp.ToString();
-            MainWindow.INSTANCE.unitMvt.Text = "MVT : " + this.Unit.Mvt.ToString();
-            MainWindow.INSTANCE.unitAtk.Text = "ATK : " + this.Unit.Atk.ToString();
-            MainWindow.INSTANCE.unitDef.Text = "DEF : " + this.Unit.Def.ToString();
-            MainWindow.INSTANCE.unitImg.Source = this.sprite.Source;
-            MainWindow.INSTANCE.selectedUnit.Visibility = Visibility.Visible;
+			MainWindow.INSTANCE.RefreshUI();
         }
+
+		
+        /// <summary>
+        /// UI update on Unit selection
+        /// </summary>
+		public void Unselect()
+		{
+			MainWindow.INSTANCE.ActiveUnitView.Unit.ChangeState(UnitState.Idle);
+			MainWindow.INSTANCE.ActiveUnitView.UpdateAppearance();
+			MainWindow.INSTANCE.ActiveUnitView = null;
+
+			MainWindow.INSTANCE.RefreshUI();
+		}
 
         /// <summary>
         /// UI update on Unit move

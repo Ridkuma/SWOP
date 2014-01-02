@@ -40,22 +40,31 @@ namespace SmallWorld
             // Minimum verifications before allowing a move,
             // every Unit extension should add up their own limitations
             bool possibleMove = (this.Mvt > 0)
-                && (!destination.IsOccupied())
+				&& GameMaster.GM.CurrentGame.CurrentPlayerIsMe
+                //&& (!destination.IsOccupied()) // TODO : check if it's friend
                 && (destination != this.Position);
 
             return possibleMove;
         }
 
+		/// <summary>
+		/// Ask IGame if move is possible (server check in network game)
+		/// </summary>
+		/// <param name="destination"></param>
+		public virtual void Move(ITile destination)
+		{
+			GameMaster.GM.CurrentGame.MoveUnit(this, destination);
+		}
+
         /// <summary>
-        /// Effectively move a Unit to destination if possible
+        /// Effectively move a Unit to destination (ordered by IGame)
         /// </summary>
         /// <param name="destination"></param>
-        public virtual void Move(ITile destination)
+        public virtual void RealMove(ITile destination)
         {
             this.Position.UnitLeave(this);
             this.Position = destination;
             destination.UnitEnter(this);
-            GameMaster.GM.CurrentGame.OnRaiseMoveUnit();
         }
 
         // Attacking is the same for every faction

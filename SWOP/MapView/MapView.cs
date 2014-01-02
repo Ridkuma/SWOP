@@ -10,7 +10,8 @@ namespace SWOP {
     public class MapView {
         public IMap Map { get; protected set; }
         public Grid MapViewGrid { get; protected set; }
-        public Dictionary<ITile, TileView> TilesView { get; protected set; }
+		public Dictionary<ITile, TileView> TilesView { get; protected set; }
+		public TileView SelectedTileView { get; set; }
 
         public MapView(SmallWorld.IMap _map, Grid _mapViewGrid) {
             Map = _map;

@@ -40,6 +40,9 @@ namespace SWOP {
         }
 
 
+		/// <summary>
+		/// Init position of the tile
+		/// </summary>
         private void OnTileLoaded(object sender, RoutedEventArgs e)
         {
             // Set position (hexagon disposition)
@@ -54,6 +57,10 @@ namespace SWOP {
         }
 
 
+		/// <summary>
+		/// Change view of the tile
+		/// </summary>
+		/// <param name="newState"></param>
         protected void SetAppearance(TileViewState newState)
         {
             if (newState == currentState)
@@ -65,13 +72,13 @@ namespace SWOP {
                     hexagon.Opacity = 1;
                     break;
                 case TileViewState.Over:
-                    hexagon.Opacity = 0.8;
+                    hexagon.Opacity = 0.9;
                     break;
                 case TileViewState.Selected:
-                    hexagon.Opacity = 0.4;
+                    hexagon.Opacity = 0.8;
                     break;
                 case TileViewState.SelectedOver:
-                    hexagon.Opacity = 0.2;
+                    hexagon.Opacity = 0.7;
                     break;
                 default:
                     throw new NotImplementedException();
@@ -116,84 +123,95 @@ namespace SWOP {
 
             foreach (UnitView uView in uViews)
             {
-                int randMargin = random.Next(10, 30);
-                int randMarginDir = random.Next(3);
+				int randMarginX = random.Next(-20, 20);
+				int randMarginY = random.Next(-30, 20);
 
-                switch (randMarginDir)
-                {
-                    case 0 :
-                        uView.Margin = new Thickness(randMargin, 0, 0, 0);
-                        break;
-
-                    case 1:
-                        uView.Margin = new Thickness(0, randMargin, 0, 0);
-                        break;
-
-                    case 2:
-                        uView.Margin = new Thickness(0, 0, randMargin, 0);
-                        break;
-
-                    case 3:
-                        uView.Margin = new Thickness(0, 0, 0, randMargin);
-                        break;
-                }
+                uView.Margin = new Thickness(randMarginX, randMarginY, - randMarginX, - randMarginY);
             }
         }
 
         #region Events
 
+		/// <summary>
+		/// Player left-clik on the tile => select a unit on it
+		/// </summary>
         private void Tile_MouseLeftButtonDown(object sender, MouseEventArgs e)
         {
             MapView mapView = MainWindow.INSTANCE.MapView;
-            if (mapView.Map.SelectedTile == Tile)
-                return;
+			if (mapView.SelectedTileView != this)
+			{
+				if (mapView.SelectedTileView != null)
+					mapView.SelectedTileView.SetAppearance(TileViewState.Idle);
 
-            if (mapView.Map.SelectedTile != null)
-                mapView.TilesView[mapView.Map.SelectedTile].SetAppearance(TileViewState.Idle);
+				mapView.SelectedTileView = this;
+				SetAppearance(TileViewState.Selected);
+			}
 
-            mapView.Map.SelectedTile = Tile;
-            SetAppearance(TileViewState.Selected);
-
-            if (!this.Tile.IsOccupied())
-                return;
-
-            IEnumerable<UnitView> uViews = this.grid.Children.OfType<UnitView>();
-
-            // if (uViews.Count() < 2)
-             uViews.ElementAt(0).Select();
-
-
+			// Unit selection
+			if (this.Tile.IsOccupied())
+			{
+				IEnumerable<UnitView> uViews = this.grid.Children.OfType<UnitView>();
+				if (uViews.Count() <= 1)
+				{
+					uViews.ElementAt(0).Select();
+				}
+				else
+				{
+					int idToSelect = 0;
+					for (int i = 0; i < uViews.Count(); i++)
+					{
+						if (uViews.ElementAt(i).Unit.State == UnitState.Selected)
+						{
+							idToSelect = (i + 1) % uViews.Count();
+							break;
+						}
+					}
+					uViews.ElementAt(idToSelect).Select();
+				}
+			}
+			else if (MainWindow.INSTANCE.ActiveUnitView != null)
+			{
+				MainWindow.INSTANCE.ActiveUnitView.Unselect();
+			}
         }
 
+		/// <summary>
+		/// Player right-clik => move the selected unit
+		/// </summary>
         private void Tile_MouseRightButtonDown(object sender, MouseEventArgs e)
         {
             if (MainWindow.INSTANCE.ActiveUnitView != null)
             {
                 MainWindow.INSTANCE.ActiveUnitView.Unit.Move(this.Tile);
-                MainWindow.INSTANCE.ActiveUnitView.Margin = new Thickness(0);
 
                 MapView mapView = MainWindow.INSTANCE.MapView;
-                if (mapView.Map.SelectedTile != null)
+                if (mapView.SelectedTileView != null)
                 {
-                    mapView.TilesView[mapView.Map.SelectedTile].SetAppearance(TileViewState.Idle);
-                    mapView.Map.SelectedTile = null;
+                    mapView.SelectedTileView.SetAppearance(TileViewState.Idle);
+                    mapView.SelectedTileView = null;
                 }
             }
         }
 
 
+		/// <summary>
+		/// Mouse over the tile
+		/// </summary>
         private void Tile_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (MainWindow.INSTANCE.MapView.Map.SelectedTile == Tile)
+            if (MainWindow.INSTANCE.MapView.SelectedTileView == this)
                 SetAppearance(TileViewState.SelectedOver);
             else
                 SetAppearance(TileViewState.Over);
         }
 
 
+		/// <summary>
+		/// Mouse quit 'overred' tile
+		/// </summary>
         private void Tile_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (MainWindow.INSTANCE.MapView.Map.SelectedTile == Tile)
+            if (MainWindow.INSTANCE.MapView.SelectedTileView == this)
                 SetAppearance(TileViewState.Selected);
             else
                 SetAppearance(TileViewState.Idle);

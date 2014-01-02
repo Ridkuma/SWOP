@@ -17,8 +17,9 @@ namespace SWOP
 
         public GameMaster GM { get; protected set; }
         public MapView MapView { get; protected set; }
-        public UnitView ActiveUnitView { get; set; }
-        public MediaPlayer MediaPlayer { get; set; }
+		public List<FactionView> FactionsViews { get; protected set; }
+		public UnitView ActiveUnitView { get; set; }
+		public MediaPlayer MediaPlayer { get; set; }
 
         private static Random RAND = new Random();
         private static String PATH;
@@ -58,7 +59,6 @@ namespace SWOP
 		}
 
 
-
 		/// <summary>
 		/// Creation of a new game
 		/// </summary>
@@ -82,8 +82,8 @@ namespace SWOP
 			btnNextPlayer.Visibility = System.Windows.Visibility.Visible;
 			btnNextPlayer.Content = "Start Game !";
 			
-				if (MapView != null)
-					MapView.MapViewGrid.Children.RemoveRange(0, MapView.MapViewGrid.Children.Count);
+			if (MapView != null)
+				MapView.MapViewGrid.Children.RemoveRange(0, MapView.MapViewGrid.Children.Count);
         }
         
 
@@ -118,6 +118,39 @@ namespace SWOP
         }
 
 
+		/// <summary>
+		/// Ask explicitely to refresh each UI elemetns (may be tmp and replaced by bindings)
+		/// </summary>
+		public void RefreshUI()
+		{
+			IGame g = GM.CurrentGame;
+
+			// Header UI elements
+			lblPlayer1Name.Content = g.Players[0].Name;
+			lblPlayer2Name.Content = g.Players[1].Name;
+			lblNbTurn.Content = "Turn " + g.CurrentTurn + "/" + g.MapBoard.TotalNbTurn;
+
+			borderPlayer1.Visibility = (g.CurrentPlayerId == 0) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+			borderPlayer2.Visibility = (g.CurrentPlayerId == 1) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+
+			// Bottom UI elements
+			if (ActiveUnitView != null)
+			{
+				unitName.Text = ActiveUnitView.Unit.Name;
+				unitHp.Text = "HP : " + ActiveUnitView.Unit.Hp.ToString();
+				unitMvt.Text = "MVT : " + ActiveUnitView.Unit.Mvt.ToString();
+				unitAtk.Text = "ATK : " + ActiveUnitView.Unit.Atk.ToString();
+				unitDef.Text = "DEF : " + ActiveUnitView.Unit.Def.ToString();
+				unitImg.Source = ActiveUnitView.sprite.Source;
+				selectedUnit.Visibility = Visibility.Visible;
+			}
+			else
+			{
+				selectedUnit.Visibility = Visibility.Hidden;
+			}
+
+			btnNextPlayer.Visibility = (g.CurrentPlayerIsMe) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+		}
 
 		#region ButtonsEvents
 
@@ -138,8 +171,9 @@ namespace SWOP
             gameGrid.Visibility = Visibility.Visible;
         }
 
-		// Pause the game and display main menu
-        // -------------------------------------------------
+		/// <summary>
+		/// Pause the game and display main menu
+		/// </summary>
         private void ButtonMenu_Click(object sender, RoutedEventArgs e)
         {
             mainMenu.Visibility = System.Windows.Visibility.Visible;
@@ -150,8 +184,9 @@ namespace SWOP
         }
 
 
-        // Resume the game and hide main menu
-        // -------------------------------------------------
+		/// <summary>
+		/// Resume the game and hide main menu
+		/// </summary>
         private void ButtonResume_Click(object sender, RoutedEventArgs e)
         {
             mainMenu.Visibility = System.Windows.Visibility.Hidden;
@@ -213,8 +248,9 @@ namespace SWOP
 		}
 
 
-        // End current player turn
-        // -------------------------------------------------
+		/// <summary>
+		/// End current player turn
+		/// </summary>
 		private void ButtonNextPlayer_Click(object sender, RoutedEventArgs e)
 		{
 			if (GM.CurrentGame.CurrentTurn == 0)
@@ -240,17 +276,15 @@ namespace SWOP
 		{
 			this.Dispatcher.Invoke((OnModifyWPFCallback) delegate()
 			{
-				lblPlayer1Name.Content = GM.CurrentGame.Players[0].Name;
-				lblPlayer2Name.Content = GM.CurrentGame.Players[1].Name;
-
 				MapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
 
+				FactionsViews = new List<FactionView>();
 				foreach (Player p in GM.CurrentGame.Players)
 				{
-					new FactionView(p.CurrentFaction);
+					FactionsViews.Add(new FactionView(p.CurrentFaction));
 				}
 
-                this.RandomBattleSong();
+                //this.RandomBattleSong();
 
 				OnNextPlayer(this, e); // Init game info in the UI
 				btnNextPlayer.Content = "End my turn";
@@ -266,21 +300,8 @@ namespace SWOP
 		{
 			this.Dispatcher.Invoke((OnModifyWPFCallback) delegate()
 			{
-				IGame g = GM.CurrentGame;
-				lblNbTurn.Content = "Turn " + g.CurrentTurn + "/" + g.MapBoard.TotalNbTurn;
-
-				borderPlayer1.Visibility = (g.CurrentPlayerId == 0) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
-				borderPlayer2.Visibility = (g.CurrentPlayerId == 1) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
-
-				btnNextPlayer.Visibility = (g.CurrentPlayerIsMe) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
-
-				if (this.ActiveUnitView != null)
-				{
-					this.ActiveUnitView.Unit.ChangeState(UnitState.Idle);
-					this.ActiveUnitView.UpdateAppearance();
-					this.ActiveUnitView = null;
-                    this.selectedUnit.Visibility = Visibility.Hidden;
-				}
+				if (ActiveUnitView != null)
+					ActiveUnitView.Unselect();
 
 				// TODO : Temp, need to place this somewhere else
 				foreach (TileView tView in this.MapView.TilesView.Values)
@@ -289,6 +310,7 @@ namespace SWOP
 						tView.DispatchArmy();
 				}
 
+				RefreshUI();
 			});
 		}
 
@@ -301,15 +323,14 @@ namespace SWOP
         {
             this.Dispatcher.Invoke((OnModifyWPFCallback)delegate()
             {
-                this.ActiveUnitView.Move();
+                //this.ActiveUnitView.Move();
 
-                // TODO : Temp, need to place this somewhere else
-                /*
-                foreach (TileView tView in this.MapView.TilesView.Values)
-                {
-                    if (tView.Tile.IsOccupied())
-                        tView.DispatchArmy();
-                } */
+                // TODO : tmp, could be better implemented than this 'a-la-bourrin' method
+				foreach(FactionView fv in FactionsViews)
+					foreach (UnitView uv in fv.UnitViews.Values)
+					{
+						uv.Move();
+					}
 
             });
         }

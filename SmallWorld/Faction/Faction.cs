@@ -14,24 +14,26 @@ namespace SmallWorld
 
     public interface IFaction
     {
-        List<IUnit> Units { get; }
+		FactionName Name { get; }
+		List<IUnit> Units { get; }
+		void AddUnit(string name, ITile startPos);
         void GenerateUnits(int nbUnits, ITile startPos);
-        FactionName Name { get; }
     }
 
 
 
     public class VikingsFaction : IFaction
     {
-        public List<IUnit> Units { get; protected set; }
-        public FactionName Name { get; private set; }
+		public FactionName Name { get; private set; }
+		public List<IUnit> Units { get; protected set; }
 
         static Random random = new Random();
 
         public VikingsFaction()
         {
             this.Name = FactionName.Vikings;
-        }
+			Units = new List<IUnit>();
+		}
 
         private List<string> availableNames = new List<string> 
             { 
@@ -47,14 +49,25 @@ namespace SmallWorld
                 "Cryptograf"
             };
 
-        public void GenerateUnits(int nbUnits, ITile startPos)
-        {
-            Units = new List<IUnit>();
-            for (int i = 0; i < nbUnits; i++)
-            {
-                Units.Add(new VikingsUnit(GetRandomName(), startPos));
-            }
-        }
+
+		/// <summary>
+		/// Generate all units (called by a LocalGame or as Server only, no Client)
+		/// </summary>
+		public void GenerateUnits(int nbUnits, ITile startPos)
+		{
+			for (int i = 0; i < nbUnits; i++)
+			{
+				AddUnit(GetRandomName(), startPos);
+			}
+		}
+
+		/// <summary>
+		/// Create new unit
+		/// </summary>
+		public void AddUnit(string name, ITile startPos)
+		{
+			Units.Add(new VikingsUnit(name, startPos));
+		}
 
         private string GetRandomName()
         {
@@ -75,30 +88,42 @@ namespace SmallWorld
         public GaulsFaction()
         {
             this.Name = FactionName.Gauls;
-        }
+			Units = new List<IUnit>();
+		}
 
-        private List<string> availableNames = new List<string> 
+        private List<string> availableNames = new List<string> // no special chr (like accents) in names => cause bug with network -_-'
             { 
-                "Astérix",
-                "Obélix",
-                "Ordralphabétix",
+                "Asterix",
+                "Obelix",
+                "Ordralphabetix",
                 "Assurancetourix",
                 "Abraracourcix",
                 "Bonnemine",
                 "Goudurix",
                 "Falbala",
-                "Cétautomatix",
-                "Iélosubmarine"
+                "Cetautomatix",
+                "Ielosubmarine"
             };
 
+
+		/// <summary>
+		/// Generate all units (called by a LocalGame or as Server only, no Client)
+		/// </summary>
         public void GenerateUnits(int nbUnits, ITile startPos)
         {
-            Units = new List<IUnit>();
             for (int i = 0; i < nbUnits; i++)
             {
-                Units.Add(new GaulsUnit(GetRandomName(), startPos));
-            }
+				AddUnit(GetRandomName(), startPos);
+			}
         }
+
+		/// <summary>
+		/// Create new unit
+		/// </summary>
+		public void AddUnit(string name, ITile startPos)
+		{
+			Units.Add(new GaulsUnit(name, startPos));
+		}
 
         private string GetRandomName()
         {
@@ -119,7 +144,8 @@ namespace SmallWorld
         public DwarvesFaction()
         {
             this.Name = FactionName.Dwarves;
-        }
+			Units = new List<IUnit>();
+		}
 
         private List<string> availableNames = new List<string> 
             { 
@@ -138,14 +164,25 @@ namespace SmallWorld
                 "Bofur"
             };
 
+
+		/// <summary>
+		/// Generate all units (called by a LocalGame or as Server only, no Client)
+		/// </summary>
         public void GenerateUnits(int nbUnits, ITile startPos)
         {
-            Units = new List<IUnit>();
             for (int i = 0; i < nbUnits; i++)
             {
-                Units.Add(new DwarvesUnit(GetRandomName(), startPos));
-            }
+				AddUnit(GetRandomName(), startPos);
+			}
         }
+
+		/// <summary>
+		/// Create new unit
+		/// </summary>
+		public void AddUnit(string name, ITile startPos)
+		{
+			Units.Add(new DwarvesUnit(name, startPos));
+		}
 
         private string GetRandomName()
         {

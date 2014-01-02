@@ -21,6 +21,7 @@ namespace SWOP
         public MediaPlayer MediaPlayer { get; set; }
 
         private static Random RAND = new Random();
+        private static String PATH;
 
         private const int MIN_VOLUME = 20;
         private const int MAX_VOLUME = 80;
@@ -31,6 +32,10 @@ namespace SWOP
             this.ActiveUnitView = null;
             this.MediaPlayer = new MediaPlayer();
             INSTANCE = this;
+
+            PATH = System.Environment.CurrentDirectory;
+            PATH = PATH.Replace(@"\Debug", @"\SWOP\Resources");
+            PATH = PATH.Replace(@"\Release", @"\SWOP\Resources");
         }
 
 		/// <summary>
@@ -38,14 +43,9 @@ namespace SWOP
 		/// </summary>
         public void MainWindow_Loaded(object sender, RoutedEventArgs e) {
 			GM = new GameMaster();
-
-			// tmp
-			List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
-			listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
-			listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
-
-			NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Small, listFaction); // tmp
-			GM.CurrentGame.Start(); // Ask explicitely to launch game
+            this.MediaPlayer.Volume = MAX_VOLUME;
+            this.MediaPlayer.Open(new Uri(PATH + @"\musics\BGM2_Morro.mp3"));
+            this.MediaPlayer.Play();
 		}
 
 
@@ -92,39 +92,51 @@ namespace SWOP
         /// </summary>
         public void RandomBattleSong()
         {
-            String path = System.Environment.CurrentDirectory;
-            path = path.Replace(@"\Debug", @"\SWOP\Resources");
-            path = path.Replace(@"\Release", @"\SWOP\Resources");
             Uri uri;
-
             switch (RAND.Next(3))
             {
                 case 0 :
-                    uri = new Uri(path + @"\musics\BGM1_FFTA.mp3");
+                    uri = new Uri(PATH + @"\musics\BGM1_FFTA.mp3");
                     break;
 
                 case 1 :
-                    uri = new Uri(path + @"\musics\BGM2_Morro.mp3");
+                    uri = new Uri(PATH + @"\musics\BGM2_Morro.mp3");
                     break;
 
                 case 2:
-                    uri = new Uri(path + @"\musics\BGM3_Ray.mp3");
+                    uri = new Uri(PATH + @"\musics\BGM3_Ray.mp3");
                     break;
 
                 default :
-                    uri = new Uri(path + @"\musics\BGM1_FFTA.mp3");
+                    uri = new Uri(PATH + @"\musics\BGM1_FFTA.mp3");
                     break;
             }
             
             this.MediaPlayer.Stop();
             this.MediaPlayer.Open(uri);
-            this.MediaPlayer.Volume = MAX_VOLUME;
             this.MediaPlayer.Play();
         }
 
 
 
 		#region ButtonsEvents
+
+        /// <summary>
+        /// Starts Multi Player game creation
+        /// </summary>
+        private void ButtonMultiPlayer_Click(object sender, RoutedEventArgs e)
+        {
+            // tmp
+            List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
+            listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
+            listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
+
+            NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Small, listFaction); // tmp
+            this.GM.CurrentGame.Start(); // Ask explicitely to launch game
+
+            menuGrid.Visibility = Visibility.Collapsed;
+            gameGrid.Visibility = Visibility.Visible;
+        }
 
 		// Pause the game and display main menu
         // -------------------------------------------------

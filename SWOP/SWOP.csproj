@@ -112,6 +112,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\fonts\DarkCrystalScript.ttf" />
+    <Resource Include="Resources\fonts\DarkCrystalOutline.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -139,6 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\musics\BGM1_FFTA.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BGP_StartScreen.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

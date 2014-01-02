@@ -7,77 +7,165 @@
         Loaded="MainWindow_Loaded" Closed="MainWindow_Closed"
 		Background="#FF141019"
     >
+
+    <!-- Resources -->
+    <Window.Resources>
+        <Style x:Key="startupPageButton" TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Height" Value="56"/>
+            <Setter Property="Width" Value="254"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Opacity" Value="0"/>
+        </Style>
+
+        <Style x:Key="textDropShadow" TargetType="TextBlock">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="4" Direction="330" Color="Black" Opacity="0.8" BlurRadius="4" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <!-- Wrapper -->
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="36px"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="80px"/>
-        </Grid.RowDefinitions>
-        <!-- Top header -->
-        <Grid Grid.Row="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30px"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="200px"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Border Grid.ColumnSpan="3" Background="#FF2B3240"/>
 
-            <Label Name="lblNbTurn" Content="Turn  */*" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" FontSize="16" Foreground="#FFD48230" FontWeight="Bold" Margin="0,-2,0,0"/>
-            <Button Content="Menu" HorizontalAlignment="Right" Grid.Column="1" Margin="0,5,0,5" VerticalAlignment="Top" Width="62" Click="ButtonMenu_Click" Background="#FFBF8850"/>
-            <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Background="#FF786752"/>
-
-            <Label Name="lblPlayer1Name" Content="Player1Name" Grid.Column="0" Foreground="#FF3E62FF" Margin="10,0,0,0"/>
-            <Border Name="borderPlayer1" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Background="#FF2C48C3" Visibility="Hidden"/>
-
-            <Label Name="lblPlayer2Name" Content="Player2Name" Grid.Column="2" Foreground="#FFD83626" HorizontalAlignment="Right" Margin="0,0,10,0"/>
-            <Border Name="borderPlayer2" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" Background="#FFA62D1A" Visibility="Hidden"/>
+        <!-- Main Menu Grid -->
+        <Grid Name="menuGrid" Visibility="Visible">
+            
+            <Grid.Resources>
+                <Storyboard x:Key="titleFadeIn">
+                    <DoubleAnimation
+                        Storyboard.TargetName="firstTitleText"
+                        Storyboard.TargetProperty="Opacity"
+                        From="0" To="1" Duration="0:0:3" 
+                        BeginTime="0:0:2" 
+                        />
+                    <DoubleAnimation
+                        Storyboard.TargetName="secondTitleText"
+                        Storyboard.TargetProperty="Opacity"
+                        From="0" To="1" Duration="0:0:1" 
+                        BeginTime="0:0:6" 
+                        />
+                    <DoubleAnimation
+                        Storyboard.TargetName="buttonSinglePlayer"
+                        Storyboard.TargetProperty="Opacity"
+                        From="0" To="1" Duration="0:0:1" 
+                        BeginTime="0:0:9" 
+                        />
+                    <DoubleAnimation
+                        Storyboard.TargetName="buttonMultiPlayer"
+                        Storyboard.TargetProperty="Opacity"
+                        From="0" To="1" Duration="0:0:1" 
+                        BeginTime="0:0:9" 
+                        />
+                </Storyboard>
+            </Grid.Resources>
+            
+            <Image Source="Resources/BGP_StartScreen.jpg" Stretch="UniformToFill"/>
+            
+            <TextBlock Name="firstTitleText" Text="SmallWorld" FontFamily="Resources/fonts/#Dark Crystal Outline" FontSize="100" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0" Opacity="0"/>
+            <TextBlock Name="secondTitleText" Text="of POO" FontFamily="Resources/fonts/#Dark Crystal Script" FontSize="50" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="538,178,61,0" Opacity="0" RenderTransformOrigin="0.5,0.5">
+                 <TextBlock.RenderTransform>
+                    <RotateTransform Angle="-25.492"/>
+                 </TextBlock.RenderTransform>
+                <TextBlock.Triggers>
+                    <!-- Fades Title blocks in -->
+                    <EventTrigger RoutedEvent="TextBlock.Loaded">
+                        <BeginStoryboard Storyboard="{DynamicResource titleFadeIn}" />
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
+            
+            <Button Name="buttonSinglePlayer" Style="{StaticResource startupPageButton}" Margin="0,319,0,0">
+                <Button.Content>
+                    <TextBlock Text="Single Player" Style="{StaticResource textDropShadow}" />
+                </Button.Content>
+            </Button>
+            <Button Name="buttonMultiPlayer" Click="ButtonMultiPlayer_Click" Style="{StaticResource startupPageButton}" Margin="0,408,0,0">
+                <Button.Content>
+                    <TextBlock Text="Multi Player" Style="{StaticResource textDropShadow}" />
+                </Button.Content>
+            </Button>
         </Grid>
-        <!-- Main grid -->
-        <Grid x:Name="mapGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1"/>
-        <!-- Pause menu -->
-        <Canvas Name="mainMenu" Width="150" Height="240" Grid.Row="1" Margin="321,79,321,191">
-            <Rectangle Stroke="#FFBF8850" Fill="#FF1C2427" Width="150" Height="240"/>
-            <Button Content="Resume" Width="100" Click="ButtonResume_Click" Canvas.Left="25" Canvas.Top="20" Background="#FFBF8850"/>
-            <Button Content="Reload(tmp)" Width="100" Click="ButtonReload_Click" Canvas.Left="25" Canvas.Top="55" Background="#FFBF8850"/>
-            <Button Content="Launch server" Width="100" Click="ButtonLaunchServer_Click" Canvas.Left="25" Canvas.Top="90" Background="#FFBF8850"/>
-            <Button Content="Join localhost" Width="100" Click="ButtonJoinServer_Click" Canvas.Left="25" Canvas.Top="125" Background="#FFBF8850"/>
-            <Button Content="Go to main menu" Width="100" Click="ButtonResume_Click" Canvas.Left="25" Canvas.Top="160" Background="#FFBF8850"/>
-            <Button Name="muteBgmBtn" Content="Mute BGM" Width="100" Click="ButtonMuteBGM_Click" Canvas.Left="25" Canvas.Top="195" Background="#FFBF8850"/>
-            <Button Name="playBgmBtn" Content="Play BGM" Width="100" Click="ButtonPlayBGM_Click" Canvas.Left="25" Canvas.Top="195" Background="#FFBF8850" Visibility="Hidden"/>
-        </Canvas>
 
-        <!-- Bottom footer -->
-        <Border Grid.Row="2" BorderThickness="0,2,0,0" BorderBrush="#FFBF8850">
-            <Grid Background="#FF2B3240">
-
+        <!-- Game Grid -->
+        <Grid Name="gameGrid" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="36px"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="80px"/>
+            </Grid.RowDefinitions>
+            <!-- Top header -->
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30px"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition MinWidth="200px" Width="*"/>
-                    <ColumnDefinition Width="480px"/>
-                    <ColumnDefinition Width="110px"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="200px"/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+                <Border Grid.ColumnSpan="3" Background="#FF2B3240"/>
 
-                <!-- Chat Column -->
-                <Border Grid.Column="0" BorderThickness="0,0,2,0" BorderBrush="#FFBF8850">
-                    <TextBlock Name="textChat" Height="80" TextWrapping="Wrap" Text="-- Chat --" VerticalAlignment="Top" Foreground="#FFD6D6D6"/>
-                </Border>
+                <Label Name="lblNbTurn" Content="Turn  */*" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" FontSize="16" Foreground="#FFD48230" FontWeight="Bold" Margin="0,-2,0,0"/>
+                <Button Content="Menu" HorizontalAlignment="Right" Grid.Column="1" Margin="0,5,0,5" VerticalAlignment="Top" Width="62" Click="ButtonMenu_Click" Background="#FFBF8850"/>
+                <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Background="#FF786752"/>
 
-                <!-- Selected Unit Column -->
-                <Grid Name="selectedUnit" Grid.Column="1" Visibility="Hidden">
-                    <Image Name="unitImg" Width="60" Height="60px" Margin="20,8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                    <TextBlock Name="unitName" TextAlignment="Center" Width="282" Height="20px" Margin="0,5,74,0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="AntiqueWhite"/>
-                    <TextBlock Name="unitDef" Width="130" Height="15px" Margin="0,50,74,0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="AntiqueWhite"/>
-                    <TextBlock Name="unitAtk" Width="130" Height="15px" Margin="0,50,226,0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="AntiqueWhite"/>
-                    <TextBlock Name="unitHp" Width="130" Height="15px" Margin="0,30,74,0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="AntiqueWhite"/>
-                    <TextBlock Name="unitMvt" Width="130" Height="15px" Margin="0,30,226,0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="AntiqueWhite"/>
-                </Grid>
+                <Label Name="lblPlayer1Name" Content="Player1Name" Grid.Column="0" Foreground="#FF3E62FF" Margin="10,0,0,0"/>
+                <Border Name="borderPlayer1" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Background="#FF2C48C3" Visibility="Hidden"/>
 
-                <!-- Button Column -->
-                <Button Name="btnNextPlayer" Grid.Column="2" Content="Start Game !" Margin="5,20,5,0" VerticalAlignment="Top" Height="38" Click="ButtonNextPlayer_Click" Background="#FFBF8850"/>
+                <Label Name="lblPlayer2Name" Content="Player2Name" Grid.Column="2" Foreground="#FFD83626" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <Border Name="borderPlayer2" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" Background="#FFA62D1A" Visibility="Hidden"/>
             </Grid>
-        </Border>
+            <!-- Main grid -->
+            <Grid x:Name="mapGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1"/>
+            <!-- Pause menu -->
+            <Canvas Name="mainMenu" Width="150" Height="240" Grid.Row="1" Margin="321,79,321,191">
+                <Rectangle Stroke="#FFBF8850" Fill="#FF1C2427" Width="150" Height="240"/>
+                <Button Content="Resume" Width="100" Click="ButtonResume_Click" Canvas.Left="25" Canvas.Top="20" Background="#FFBF8850"/>
+                <Button Content="Reload(tmp)" Width="100" Click="ButtonReload_Click" Canvas.Left="25" Canvas.Top="55" Background="#FFBF8850"/>
+                <Button Content="Launch server" Width="100" Click="ButtonLaunchServer_Click" Canvas.Left="25" Canvas.Top="90" Background="#FFBF8850"/>
+                <Button Content="Join localhost" Width="100" Click="ButtonJoinServer_Click" Canvas.Left="25" Canvas.Top="125" Background="#FFBF8850"/>
+                <Button Content="Go to main menu" Width="100" Click="ButtonResume_Click" Canvas.Left="25" Canvas.Top="160" Background="#FFBF8850"/>
+                <Button Name="muteBgmBtn" Content="Mute BGM" Width="100" Click="ButtonMuteBGM_Click" Canvas.Left="25" Canvas.Top="195" Background="#FFBF8850"/>
+                <Button Name="playBgmBtn" Content="Play BGM" Width="100" Click="ButtonPlayBGM_Click" Canvas.Left="25" Canvas.Top="195" Background="#FFBF8850" Visibility="Hidden"/>
+            </Canvas>
+
+            <!-- Bottom footer -->
+            <Border Grid.Row="2" BorderThickness="0,2,0,0" BorderBrush="#FFBF8850">
+                <Grid Background="#FF2B3240">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MinWidth="200px" Width="*"/>
+                        <ColumnDefinition Width="480px"/>
+                        <ColumnDefinition Width="110px"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Chat Column -->
+                    <Border Grid.Column="0" BorderThickness="0,0,2,0" BorderBrush="#FFBF8850">
+                        <TextBlock Name="textChat" Height="80" TextWrapping="Wrap" Text="-- Chat --" VerticalAlignment="Top" Foreground="#FFD6D6D6"/>
+                    </Border>
+
+                    <!-- Selected Unit Column -->
+                    <Grid Name="selectedUnit" Grid.Column="1" Visibility="Visible">
+                        <Image Name="unitImg" Width="60" Height="60px" Margin="20,8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <TextBlock Name="unitName" TextAlignment="Center" Width="282" Height="20px" Margin="0,5,74,0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="AntiqueWhite"/>
+                        <TextBlock Name="unitDef" Width="130" Height="15px" Margin="0,50,74,0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="AntiqueWhite"/>
+                        <TextBlock Name="unitAtk" Width="130" Height="15px" Margin="0,50,226,0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="AntiqueWhite"/>
+                        <TextBlock Name="unitHp" Width="130" Height="15px" Margin="0,30,74,0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="AntiqueWhite"/>
+                        <TextBlock Name="unitMvt" Width="130" Height="15px" Margin="0,30,226,0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="AntiqueWhite"/>
+                    </Grid>
+
+                    <!-- Button Column -->
+                    <Button Name="btnNextPlayer" Grid.Column="2" Content="Start Game !" Margin="5,20,5,0" VerticalAlignment="Top" Height="38" Click="ButtonNextPlayer_Click" Background="#FFBF8850"/>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

@@ -219,8 +219,6 @@ namespace SWOP {
 		/// </summary>
         private void Tile_MouseEnter(object sender, MouseEventArgs e)
         {
-			hexagonPath.Opacity = hexagonPath.Opacity - 0.1;
-
             // Display ToHit chance from Active Unit to Best Unit on Tile
             if (MainWindow.INSTANCE.ActiveUnitView != null 
                 && this.Tile.IsOccupied() 
@@ -235,11 +233,10 @@ namespace SWOP {
 
 
 		/// <summary>
-		/// Mouse quit 'overred' tile
+		/// Mouse quit hovered tile
 		/// </summary>
         private void Tile_MouseLeave(object sender, MouseEventArgs e)
         {
-			hexagonPath.Opacity = hexagonPath.Opacity + 0.1;
             this.hitChance.Visibility = Visibility.Collapsed;
         }
 

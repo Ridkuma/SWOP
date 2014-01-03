@@ -123,8 +123,8 @@ namespace SWOP {
 
             foreach (UnitView uView in uViews)
             {
-				int randMarginX = random.Next(-20, 20);
-				int randMarginY = random.Next(-30, 20);
+				int randMarginX = random.Next(-10, 15);
+				int randMarginY = random.Next(-20, 15);
 
                 uView.Margin = new Thickness(randMarginX, randMarginY, - randMarginX, - randMarginY);
             }
@@ -176,13 +176,32 @@ namespace SWOP {
         }
 
 		/// <summary>
-		/// Player right-clik => move the selected unit
+		/// Player right-clik => move the selected unit, or attack
 		/// </summary>
         private void Tile_MouseRightButtonDown(object sender, MouseEventArgs e)
         {
             if (MainWindow.INSTANCE.ActiveUnitView != null)
             {
+                // Try to move
                 MainWindow.INSTANCE.ActiveUnitView.Unit.Move(this.Tile);
+
+                // Try to attack
+                int maxDef = -1;
+                IUnit bestDefUnit = null;
+                foreach (IUnit unit in this.Tile.OccupyingUnits)
+                {
+                    if (unit.Def > maxDef)
+                    {
+                        bestDefUnit = unit;
+                        maxDef = unit.Def;
+                    }
+                }
+                if (bestDefUnit != null)
+                {
+                    Console.WriteLine("Defender : " + bestDefUnit.Name);
+                    MainWindow.INSTANCE.ActiveUnitView.Unit.Attack(bestDefUnit);
+                    MainWindow.INSTANCE.RefreshUI();
+                }
 
                 MapView mapView = MainWindow.INSTANCE.MapView;
                 if (mapView.SelectedTileView != null)

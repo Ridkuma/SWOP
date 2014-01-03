@@ -17,6 +17,11 @@ namespace SmallWorld
 		public int CurrentPlayerId { get; protected set; }
 		public bool CurrentPlayerIsMe { get { return (LocalPlayerId == -1 || LocalPlayerId == CurrentPlayerId); } }
 
+        /// <summary>
+        /// Random numbers generator
+        /// </summary>
+        private static Random RAND = new Random();
+
 		/// <summary>
 		/// Constructor
 		/// </summary>
@@ -114,6 +119,52 @@ namespace SmallWorld
 			OnRaiseMoveUnit();
 		}
 
+        /// <summary>
+        /// Process attacking from a Unit to another
+        /// </summary>
+        public virtual void AttackUnit(IUnit unit, IUnit enemy)
+        {
+            unit.RealAttack(enemy);
+            OnRaiseAttackUnit();
+        }
+
+        /// <summary>
+        /// Handles the actual fight between two Units
+        /// </summary>
+        /// <param name="attacker"></param>
+        /// <param name="defender"></param>
+        public void Fight(IUnit attacker, IUnit defender)
+        {
+            if (defender.Def == 0)
+            {
+                defender.Hp = 0;
+                return;
+            }
+
+            int maxHp = Math.Max(attacker.Hp, defender.Hp);
+            int turns = RAND.Next(3, maxHp + 3);
+            while (turns > 0 && attacker.Hp > 0 && defender.Hp > 0)
+            {
+                double realAtk = (double) attacker.Atk * ( (double) attacker.Hp / attacker.HpMax );
+                double realDef = (double) defender.Def * ( (double) defender.Hp / defender.HpMax );
+
+                double toHit;
+                if (realAtk >= realDef)
+                    toHit = 0.5d + 0.5d * (1d - ((double) realDef / realAtk));
+                else
+                    toHit = 1d - (0.5d + 0.5d * (1d - ((double) realAtk / realDef)));
+
+                toHit *= 100d;
+                int hit = RAND.Next(101);
+                if (hit <= toHit)
+                    defender.Hp--;
+                else
+                    attacker.Hp--;
+
+                turns--;
+            }
+        }
+
 		/// <summary>
 		/// Save the game in an external file
 		/// </summary>
@@ -162,6 +213,13 @@ namespace SmallWorld
         {
             if (OnMoveUnit != null)
                 OnMoveUnit(this, new EventArgs());
+        }
+
+        public event EventHandler<EventArgs> OnAttackUnit;
+        protected virtual void OnRaiseAttackUnit()
+        {
+            if (OnAttackUnit != null)
+                OnAttackUnit(this, new EventArgs());
         }
 
 		public event EventHandler<StringEventArgs> OnNewChatMessage;

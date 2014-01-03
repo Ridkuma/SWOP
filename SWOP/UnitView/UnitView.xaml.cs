@@ -124,6 +124,7 @@ namespace SWOP
             this.ParentTile.grid.Children.Remove(this);
             TileView newTileView = MainWindow.INSTANCE.MapView.TilesView[this.Unit.Position];
             newTileView.grid.Children.Add(this);
+            this.Margin = new Thickness(0);
             this.ParentTile = newTileView;
         }
     }

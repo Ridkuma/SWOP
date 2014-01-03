@@ -11,7 +11,8 @@ namespace SmallWorld
         public ITile Position { get; set; }
         public int Atk { get; protected set; }
         public int Def { get; protected set; }
-        public int Hp { get; protected set; }
+        public int Hp { get; set; }
+        public int HpMax { get; protected set; }
         public int Mvt { get; protected set; }
         public string Name { get; protected set; }
         public UnitState State { get; set; }
@@ -22,13 +23,16 @@ namespace SmallWorld
         {
             this.Atk = 2;
             this.Def = 1;
-            this.Hp = 2;
+            this.HpMax = 2;
+            this.Hp = this.HpMax;
             this.Mvt = 1;
             this.Name = name;
             this.State = UnitState.Idle;
             this.Position = position;
             position.UnitEnter(this);
         }
+
+        #region MoveLogic
 
         /// <summary>
         /// Default check whether a Unit can or not move to destination
@@ -40,21 +44,21 @@ namespace SmallWorld
             // Minimum verifications before allowing a move,
             // every Unit extension should add up their own limitations
             bool possibleMove = (this.Mvt > 0)
-				&& GameMaster.GM.CurrentGame.CurrentPlayerIsMe
-                //&& (!destination.IsOccupied()) // TODO : check if it's friend
+                && GameMaster.GM.CurrentGame.CurrentPlayerIsMe
+                && (!destination.IsOccupied()) // TODO : check if it's friend
                 && (destination != this.Position);
 
             return possibleMove;
         }
 
-		/// <summary>
-		/// Ask IGame if move is possible (server check in network game)
-		/// </summary>
-		/// <param name="destination"></param>
-		public virtual void Move(ITile destination)
-		{
-			GameMaster.GM.CurrentGame.MoveUnit(this, destination);
-		}
+        /// <summary>
+        /// Ask IGame if move is possible (server check in network game)
+        /// </summary>
+        /// <param name="destination"></param>
+        public virtual void Move(ITile destination)
+        {
+            GameMaster.GM.CurrentGame.MoveUnit(this, destination);
+        }
 
         /// <summary>
         /// Effectively move a Unit to destination (ordered by IGame)
@@ -67,11 +71,60 @@ namespace SmallWorld
             destination.UnitEnter(this);
         }
 
-        // Attacking is the same for every faction
+        #endregion
+
+        #region CombatLogic
+
+        /// <summary>
+        /// Check whether a Unit can attack another
+        /// </summary>
+        /// <param name="enemy"></param>
+        /// <returns></returns>
+        public bool CheckAttack(IUnit enemy)
+        {
+            return this.Position.IsAdjacent(enemy.Position)
+                && this.Mvt > 0
+                && enemy.Faction != this.Faction
+                && GameMaster.GM.CurrentGame.CurrentPlayerIsMe;
+        }
+
+        /// <summary>
+        /// Ask IGame if attacking is possible (server check in network game)
+        /// </summary>
+        /// <param name="enemy"></param>
         public void Attack(IUnit enemy)
         {
-            // TODO
+            if (!this.CheckAttack(enemy))
+                return;
+
+            GameMaster.GM.CurrentGame.AttackUnit(this, enemy);
         }
+
+        /// <summary>
+        /// Effectively starts a combat with enemy
+        /// Attacking is the same for every faction
+        /// </summary>
+        /// <param name="enemy"></param>
+        public void RealAttack(IUnit enemy)
+        {
+            this.ChangeState(UnitState.Attacking);
+            enemy.ChangeState(UnitState.Defending);
+            this.Mvt--;
+            GameMaster.GM.CurrentGame.Fight(this, enemy);
+
+            // Check wounds after fighting
+            if (this.Hp == 0)
+                this.ChangeState(UnitState.Dead);
+            else
+                this.ChangeState(UnitState.Idle);
+
+            if (enemy.Hp == 0)
+                enemy.ChangeState(UnitState.Dead);
+            else
+                enemy.ChangeState(UnitState.Idle);
+        }
+
+        #endregion
 
         /// <summary>
         /// Change current state

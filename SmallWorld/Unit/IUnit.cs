@@ -8,10 +8,11 @@ namespace SmallWorld
 {
     public interface IUnit
     {
-        ITile Position { get; } // A position code, or a tile ?
+        ITile Position { get; } // Tile
         int Atk { get; } // Attack Points
         int Def { get; } // Defense Points
-        int Hp { get; } // Health Points
+        int Hp { get; set; } // Health Points // TODO : Would be cleaner to remove the setter ("friend"-like relationship IUnit/IGame ?)
+        int HpMax { get; } // Maximum Heath Points
         int Mvt { get; } // Movement Points
         string Name { get; } // Unit name
         UnitState State { get; } // Unit State
@@ -20,7 +21,9 @@ namespace SmallWorld
         bool CheckMove(ITile destination);
 		void Move(ITile destination);
 		void RealMove(ITile destination);
+        bool CheckAttack(IUnit enemy);
         void Attack(IUnit enemy);
+        void RealAttack(IUnit enemy);
         void ChangeState(UnitState targetState);
         void EndTurn();
     }

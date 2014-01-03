@@ -119,7 +119,7 @@ namespace SWOP
 
 
 		/// <summary>
-		/// Ask explicitely to refresh each UI elemetns (may be tmp and replaced by bindings)
+		/// Ask explicitely to refresh each UI elements (may be tmp and replaced by bindings)
 		/// </summary>
 		public void RefreshUI()
 		{
@@ -137,7 +137,7 @@ namespace SWOP
 			if (ActiveUnitView != null)
 			{
 				unitName.Text = ActiveUnitView.Unit.Name;
-				unitHp.Text = "HP : " + ActiveUnitView.Unit.Hp.ToString();
+                unitHp.Text = "HP : " + ActiveUnitView.Unit.Hp.ToString() + "/" + ActiveUnitView.Unit.HpMax.ToString();
 				unitMvt.Text = "MVT : " + ActiveUnitView.Unit.Mvt.ToString();
 				unitAtk.Text = "ATK : " + ActiveUnitView.Unit.Atk.ToString();
 				unitDef.Text = "DEF : " + ActiveUnitView.Unit.Def.ToString();
@@ -164,7 +164,7 @@ namespace SWOP
             listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
             listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
 
-            NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Small, listFaction); // tmp
+            NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Demo, listFaction); // tmp
             this.GM.CurrentGame.Start(); // Ask explicitely to launch game
 
             menuGrid.Visibility = Visibility.Collapsed;
@@ -222,7 +222,7 @@ namespace SWOP
 			listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
 			listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
 
-			NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Normal, listFaction);
+			NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Demo, listFaction);
         }
 
 

@@ -17,6 +17,8 @@ namespace SmallWorld
 		void Start(bool generateUnits = true);
         void NextPlayer();
 		void MoveUnit(IUnit unit, ITile destination);
+        void AttackUnit(IUnit unit, IUnit enemy);
+        void Fight(IUnit attacker, IUnit defender);
         void Save();
 		void End();
 
@@ -24,6 +26,7 @@ namespace SmallWorld
 		event EventHandler<EventArgs> OnNextPlayer;
 		event EventHandler<EventArgs> OnEndGame;
         event EventHandler<EventArgs> OnMoveUnit;
+        event EventHandler<EventArgs> OnAttackUnit;
 		event EventHandler<StringEventArgs> OnNewChatMessage;
 
 		void OnRaiseNewChatMessage(string text);

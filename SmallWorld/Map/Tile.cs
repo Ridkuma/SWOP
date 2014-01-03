@@ -80,7 +80,7 @@ namespace SmallWorld
             else
                 Console.WriteLine("[Warning] Unit trying to enter on a tile already occupied");
         }
-
+		
 
         public void UnitLeave(IUnit unit)
         {

@@ -17,4 +17,7 @@ public class SWAlgo {
   public static readonly int TILE_DESERT = SWAlgoPINVOKE.TILE_DESERT_get();
   public static readonly int TILE_FOREST = SWAlgoPINVOKE.TILE_FOREST_get();
   public static readonly int TILE_WATER = SWAlgoPINVOKE.TILE_WATER_get();
+  public static readonly int FACTION_VIKINGS = SWAlgoPINVOKE.FACTION_VIKINGS_get();
+  public static readonly int FACTION_GAULS = SWAlgoPINVOKE.FACTION_GAULS_get();
+  public static readonly int FACTION_DWARVES = SWAlgoPINVOKE.FACTION_DWARVES_get();
 }

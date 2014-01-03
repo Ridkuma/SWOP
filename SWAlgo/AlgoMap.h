@@ -17,6 +17,11 @@
 #define TILE_FOREST		3
 #define TILE_WATER		4
 
+// Type faction constants
+#define FACTION_VIKINGS	0
+#define FACTION_GAULS	1
+#define FACTION_DWARVES	2
+
 
 class SWAlgo_API AlgoMap
 {
@@ -42,5 +47,6 @@ public:
 	int GetTileType(int x, int y);
 	int GetStartTileX(int playerId);
 	int GetStartTileY(int playerId);
-	//int IsStartTile(int x, int y);
+	bool CanMoveTo(int x1, int y1, int x2, int y2, int unitFaction1);
+	bool CanAttackTo(int x1, int y1, int x2, int y2, int unitFaction1, int unitFaction2);
 };

@@ -51,6 +51,9 @@ namespace SmallWorld
 		/// </summary>
 		public void DestroyGame()
 		{
+			if (CurrentGame == null)
+				return;
+
 			CurrentGame.End();
 			CurrentGame = null;
 		}

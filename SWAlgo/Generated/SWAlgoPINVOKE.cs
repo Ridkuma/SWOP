@@ -206,6 +206,15 @@ class SWAlgoPINVOKE {
   [DllImport("SWAlgo", EntryPoint="CSharp_TILE_WATER_get")]
   public static extern int TILE_WATER_get();
 
+  [DllImport("SWAlgo", EntryPoint="CSharp_FACTION_VIKINGS_get")]
+  public static extern int FACTION_VIKINGS_get();
+
+  [DllImport("SWAlgo", EntryPoint="CSharp_FACTION_GAULS_get")]
+  public static extern int FACTION_GAULS_get();
+
+  [DllImport("SWAlgo", EntryPoint="CSharp_FACTION_DWARVES_get")]
+  public static extern int FACTION_DWARVES_get();
+
   [DllImport("SWAlgo", EntryPoint="CSharp_new_AlgoMap")]
   public static extern IntPtr new_AlgoMap();
 
@@ -226,4 +235,10 @@ class SWAlgoPINVOKE {
 
   [DllImport("SWAlgo", EntryPoint="CSharp_AlgoMap_GetStartTileY")]
   public static extern int AlgoMap_GetStartTileY(HandleRef jarg1, int jarg2);
+
+  [DllImport("SWAlgo", EntryPoint="CSharp_AlgoMap_CanMoveTo")]
+  public static extern bool AlgoMap_CanMoveTo(HandleRef jarg1, int jarg2, int jarg3, int jarg4, int jarg5, int jarg6);
+
+  [DllImport("SWAlgo", EntryPoint="CSharp_AlgoMap_CanAttackTo")]
+  public static extern bool AlgoMap_CanAttackTo(HandleRef jarg1, int jarg2, int jarg3, int jarg4, int jarg5, int jarg6, int jarg7);
 }

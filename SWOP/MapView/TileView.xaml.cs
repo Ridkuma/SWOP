@@ -18,12 +18,13 @@ namespace SWOP {
     /// Logique d'interaction pour Tile.xaml
     /// </summary>
     public partial class TileView : UserControl {
-        protected enum TileViewState
+        public enum TileViewState
         {
             Idle,
-            Over,
             Selected,
-            SelectedOver
+			MoveReachable,
+			AttackReachable,
+			Unreachable,
         }
 
         public ITile Tile { get; private set; }
@@ -61,7 +62,7 @@ namespace SWOP {
 		/// Change view of the tile
 		/// </summary>
 		/// <param name="newState"></param>
-        protected void SetAppearance(TileViewState newState)
+        public void SetAppearance(TileViewState newState)
         {
             if (newState == currentState)
                 return;
@@ -71,15 +72,18 @@ namespace SWOP {
                 case TileViewState.Idle:
                     hexagon.Opacity = 1;
                     break;
-                case TileViewState.Over:
-                    hexagon.Opacity = 0.9;
-                    break;
                 case TileViewState.Selected:
                     hexagon.Opacity = 0.8;
                     break;
-                case TileViewState.SelectedOver:
-                    hexagon.Opacity = 0.7;
-                    break;
+				case TileViewState.MoveReachable:
+					hexagon.Opacity = 0.6;
+					break;
+				case TileViewState.AttackReachable:
+					hexagon.Opacity = 0.1;
+					break;
+				case TileViewState.Unreachable:
+					hexagon.Opacity = 0.3;
+					break;
                 default:
                     throw new NotImplementedException();
             }
@@ -173,6 +177,8 @@ namespace SWOP {
 			{
 				MainWindow.INSTANCE.ActiveUnitView.Unselect();
 			}
+
+			mapView.ParseNewSelectedTile();
         }
 
 		/// <summary>
@@ -185,11 +191,12 @@ namespace SWOP {
                 MainWindow.INSTANCE.ActiveUnitView.Unit.Move(this.Tile);
 
                 MapView mapView = MainWindow.INSTANCE.MapView;
-                if (mapView.SelectedTileView != null)
+                if (mapView.SelectedTileView != null && mapView.Map.CanMoveTo(mapView.SelectedTileView.Tile, this.Tile))
                 {
                     mapView.SelectedTileView.SetAppearance(TileViewState.Idle);
                     mapView.SelectedTileView = null;
-                }
+					mapView.ParseNewSelectedTile();
+				}
             }
         }
 
@@ -199,10 +206,7 @@ namespace SWOP {
 		/// </summary>
         private void Tile_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (MainWindow.INSTANCE.MapView.SelectedTileView == this)
-                SetAppearance(TileViewState.SelectedOver);
-            else
-                SetAppearance(TileViewState.Over);
+			hexagon.Opacity = hexagon.Opacity - 0.1;
         }
 
 
@@ -211,15 +215,7 @@ namespace SWOP {
 		/// </summary>
         private void Tile_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (MainWindow.INSTANCE.MapView.SelectedTileView == this)
-                SetAppearance(TileViewState.Selected);
-            else
-                SetAppearance(TileViewState.Idle);
-
-            /*foreach (ITile t in Tile.AdjacentsTiles)
-            {
-                MainWindow.INSTANCE.MapView.TilesView[t].Show();
-            }*/
+			hexagon.Opacity = hexagon.Opacity + 0.1;
         }
 
         #endregion

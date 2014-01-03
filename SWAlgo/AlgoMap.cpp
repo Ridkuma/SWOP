@@ -92,6 +92,35 @@ int AlgoMap::GetStartTileY(int playerId)
 }
 
 
+// Return if moving to a specific tile is possible
+// -----------------------------------------------
+bool AlgoMap::CanMoveTo(int x1, int y1, int x2, int y2, int unitFaction1)
+{
+	// No unit on the tile
+	if (unitFaction1 == -1)
+		return false;
+
+	// No move on water except for vikings
+	if (tiles[x2][y2] == TILE_WATER && unitFaction1 != FACTION_VIKINGS)
+		return false;
+
+	// Special move for dwarves over moutain (TODO : handle attack case exception)
+	if (tiles[x1][y1] == TILE_MOUNTAIN && tiles[x2][y2] == TILE_MOUNTAIN && unitFaction1 == FACTION_DWARVES)
+		return true;
+
+	// Close enough
+	return (GetDistance(x1, y1, x2, y2) <= 1);
+}
+
+
+// Return if moving to a specific tile is possible
+// -----------------------------------------------
+bool AlgoMap::CanAttackTo(int x1, int y1, int x2, int y2, int unitFaction1, int unitFaction2)
+{
+	return (unitFaction1 != unitFaction2 && unitFaction2 > -1 && CanMoveTo(x1, y1, x2, y2, unitFaction1));
+}
+
+
 
 // ***********************************************
 // *               PRIVATE SECTION               *

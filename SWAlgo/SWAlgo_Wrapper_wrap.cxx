@@ -519,6 +519,30 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_AlgoMap_CanAttackTo(void * jarg1, int
 }
 
 
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_AlgoMap_IsFavorite(void * jarg1, int jarg2, int jarg3, int jarg4, int jarg5, unsigned int jarg6, unsigned int jarg7) {
+  unsigned int jresult ;
+  AlgoMap *arg1 = (AlgoMap *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  bool arg6 ;
+  bool arg7 ;
+  bool result;
+  
+  arg1 = (AlgoMap *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  arg4 = (int)jarg4; 
+  arg5 = (int)jarg5; 
+  arg6 = jarg6 ? true : false; 
+  arg7 = jarg7 ? true : false; 
+  result = (bool)(arg1)->IsFavorite(arg2,arg3,arg4,arg5,arg6,arg7);
+  jresult = result; 
+  return jresult;
+}
+
+
 #ifdef __cplusplus
 }
 #endif

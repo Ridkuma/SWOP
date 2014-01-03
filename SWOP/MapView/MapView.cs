@@ -37,19 +37,56 @@ namespace SWOP {
 
 		public void ParseNewSelectedTile()
 		{
+			int remainingFav = 3; // Adviced tiles for next action (max 3)
+			List<TileView> remainingFavList = new List<TileView>();
+
 			foreach (ITile t in TilesView.Keys)
 			{
 				if (TilesView[t] != SelectedTileView)
 				{
+					// Reset tile
 					if (SelectedTileView == null || !SelectedTileView.Tile.IsOccupied() || SelectedTileView.Tile.OccupyingUnits[0].Faction != MainWindow.INSTANCE.GM.CurrentGame.GetCurrentPlayer().CurrentFaction.Name)
+					{
 						TilesView[t].SetAppearance(TileView.TileViewState.Idle);
+					}
+					// Attack tile
 					else if (Map.CanAttackTo(SelectedTileView.Tile, t))
-						TilesView[t].SetAppearance(TileView.TileViewState.AttackReachable);
+					{
+						if (Map.IsFavorite(remainingFav, SelectedTileView.Tile, t, true, false))
+						{
+							TilesView[t].SetAppearance(TileView.TileViewState.AttackReachableFavorite);
+							remainingFav--;
+						}
+						else
+						{
+							TilesView[t].SetAppearance(TileView.TileViewState.AttackReachable);
+						}
+					}
+					// Move tile
 					else if (Map.CanMoveTo(SelectedTileView.Tile, t))
+					{
 						TilesView[t].SetAppearance(TileView.TileViewState.MoveReachable);
+						if (Map.IsFavorite(remainingFav, SelectedTileView.Tile, t, false, t.IsOccupied()))
+						{
+							remainingFavList.Insert(0, TilesView[t]); // Insert at start in priority
+						}
+						else if (remainingFav > 0)
+						{
+							remainingFavList.Add(TilesView[t]);
+						}
+					}
+					// Unreachable tile
 					else
+					{
 						TilesView[t].SetAppearance(TileView.TileViewState.Unreachable);
+					}
 				}
+			}
+
+			for (int i = 0; i < remainingFav; i++)
+			{
+				if (i < remainingFavList.Count)
+					remainingFavList[i].SetAppearance(TileView.TileViewState.MoveReachableFavorite);
 			}
 		}
     }

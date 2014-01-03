@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SmallWorld;
@@ -23,7 +24,9 @@ namespace SWOP {
             Idle,
             Selected,
 			MoveReachable,
+			MoveReachableFavorite,
 			AttackReachable,
+			AttackReachableFavorite,
 			Unreachable,
         }
 
@@ -64,8 +67,9 @@ namespace SWOP {
 		/// <param name="newState"></param>
         public void SetAppearance(TileViewState newState)
         {
-            if (newState == currentState)
-                return;
+            //if (newState == currentState)
+            //    return;
+			hexagonPath.BeginAnimation(OpacityProperty, null);
 
             switch(newState)
             {
@@ -80,9 +84,31 @@ namespace SWOP {
 					bgPath.Fill = new SolidColorBrush(Color.FromRgb(100,255,100));
 					hexagonPath.Opacity = 0.7;
 					break;
+				case TileViewState.MoveReachableFavorite:
+					bgPath.Fill = new SolidColorBrush(Color.FromRgb(100, 255, 120));
+
+					DoubleAnimation daM = new DoubleAnimation();
+					daM.From = 0.9;
+					daM.To = 0.5;
+					daM.Duration = new Duration(TimeSpan.FromSeconds(1));
+					daM.AutoReverse = true;
+					daM.RepeatBehavior = RepeatBehavior.Forever;
+					hexagonPath.BeginAnimation(OpacityProperty, daM);
+					break;
 				case TileViewState.AttackReachable:
 					bgPath.Fill = new SolidColorBrush(Color.FromRgb(255,64,32));
 					hexagonPath.Opacity = 0.6;
+					break;
+				case TileViewState.AttackReachableFavorite:
+					bgPath.Fill = new SolidColorBrush(Color.FromRgb(255, 64, 32));
+
+					DoubleAnimation daA = new DoubleAnimation();
+					daA.From = 0.8;
+					daA.To = 0.4;
+					daA.Duration = new Duration(TimeSpan.FromSeconds(1));
+					daA.AutoReverse = true;
+					daA.RepeatBehavior = RepeatBehavior.Forever;
+					hexagonPath.BeginAnimation(OpacityProperty, daA);
 					break;
 				case TileViewState.Unreachable:
 					bgPath.Fill = new SolidColorBrush(Color.FromRgb(0,0,0));
@@ -204,7 +230,7 @@ namespace SWOP {
                 }
 
                 MapView mapView = MainWindow.INSTANCE.MapView;
-                if (mapView.SelectedTileView != null && mapView.Map.CanMoveTo(mapView.SelectedTileView.Tile, this.Tile))
+                if (mapView.SelectedTileView != null)
                 {
                     mapView.SelectedTileView.SetAppearance(TileViewState.Idle);
                     mapView.SelectedTileView = null;

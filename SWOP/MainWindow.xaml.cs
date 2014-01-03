@@ -315,7 +315,8 @@ namespace SWOP
 					if (tView.Tile.IsOccupied())
 						tView.DispatchArmy();
 				}
-
+				MapView.ParseNewSelectedTile();
+				
 				RefreshUI();
 			});
 		}

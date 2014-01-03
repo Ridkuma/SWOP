@@ -77,4 +77,9 @@ public class AlgoMap : IDisposable {
     return ret;
   }
 
+  public bool IsFavorite(int x1, int y1, int x2, int y2, bool canAttack, bool isOccupiedByMe) {
+    bool ret = SWAlgoPINVOKE.AlgoMap_IsFavorite(swigCPtr, x1, y1, x2, y2, canAttack, isOccupiedByMe);
+    return ret;
+  }
+
 }

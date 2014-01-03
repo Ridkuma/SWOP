@@ -113,13 +113,23 @@ bool AlgoMap::CanMoveTo(int x1, int y1, int x2, int y2, int unitFaction1)
 }
 
 
-// Return if moving to a specific tile is possible
+// Return if attacking a specific tile is possible
 // -----------------------------------------------
 bool AlgoMap::CanAttackTo(int x1, int y1, int x2, int y2, int unitFaction1, int unitFaction2)
 {
 	return (unitFaction1 != unitFaction2 && unitFaction2 > -1 && CanMoveTo(x1, y1, x2, y2, unitFaction1));
 }
 
+
+// Is it an adviced tile for next action ?
+// -----------------------------------------------
+bool AlgoMap::IsFavorite(int x1, int y1, int x2, int y2, bool canAttack, bool isOccupiedByMe)
+{
+	if (tiles[x2][y2] == TILE_WATER)
+		return false;
+
+	return (canAttack || !isOccupiedByMe || (GetDistance(x1, y1, x2, y2) > 1));
+}
 
 
 // ***********************************************

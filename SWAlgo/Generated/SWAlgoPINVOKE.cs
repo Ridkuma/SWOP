@@ -241,4 +241,7 @@ class SWAlgoPINVOKE {
 
   [DllImport("SWAlgo", EntryPoint="CSharp_AlgoMap_CanAttackTo")]
   public static extern bool AlgoMap_CanAttackTo(HandleRef jarg1, int jarg2, int jarg3, int jarg4, int jarg5, int jarg6, int jarg7);
+
+  [DllImport("SWAlgo", EntryPoint="CSharp_AlgoMap_IsFavorite")]
+  public static extern bool AlgoMap_IsFavorite(HandleRef jarg1, int jarg2, int jarg3, int jarg4, int jarg5, bool jarg6, bool jarg7);
 }

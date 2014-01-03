@@ -47,6 +47,8 @@ public:
 	int GetTileType(int x, int y);
 	int GetStartTileX(int playerId);
 	int GetStartTileY(int playerId);
+
 	bool CanMoveTo(int x1, int y1, int x2, int y2, int unitFaction1);
 	bool CanAttackTo(int x1, int y1, int x2, int y2, int unitFaction1, int unitFaction2);
+	bool IsFavorite(int x1, int y1, int x2, int y2, bool canAttack, bool isOccupiedByMe);
 };

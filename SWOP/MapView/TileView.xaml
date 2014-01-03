@@ -48,5 +48,16 @@
             MouseEnter="Tile_MouseEnter" MouseLeave="Tile_MouseLeave" 
             Data="M8.660254,0 L17.320508,5 17.320508,15 8.660254,20 0,15 0,5 8.660254,0 z" Fill="{DynamicResource BrushForest}"
         />
-	</Grid>
+
+        <TextBlock Name="hitChance"
+                   IsHitTestVisible="False"
+                   Height="20"
+                   Width="40"
+                   Foreground="White" 
+                   TextAlignment="Center"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   Visibility="Collapsed"
+                   Panel.ZIndex="100"/>
+    </Grid>
 </UserControl>

@@ -22,6 +22,7 @@ namespace SmallWorld
         bool IsOccupied();
         void UnitEnter(IUnit unit);
         void UnitLeave(IUnit unit);
+        IUnit GetBestDefUnit();
     }
 
 
@@ -88,6 +89,22 @@ namespace SmallWorld
                 OccupyingUnits.Remove(unit);
             else
                 Console.WriteLine("[Warning] Unit trying to quit a tile not currently occupied");
+        }
+
+        public IUnit GetBestDefUnit()
+        {
+            int maxDef = -1;
+            IUnit bestDefUnit = null;
+            foreach (IUnit unit in this.OccupyingUnits)
+            {
+                if (unit.Def > maxDef)
+                {
+                    bestDefUnit = unit;
+                    maxDef = unit.Def;
+                }
+            }
+
+            return bestDefUnit;
         }
         
         

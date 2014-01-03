@@ -192,16 +192,7 @@ namespace SWOP {
                 MainWindow.INSTANCE.ActiveUnitView.Unit.Move(this.Tile);
 
                 // Try to attack
-                int maxDef = -1;
-                IUnit bestDefUnit = null;
-                foreach (IUnit unit in this.Tile.OccupyingUnits)
-                {
-                    if (unit.Def > maxDef)
-                    {
-                        bestDefUnit = unit;
-                        maxDef = unit.Def;
-                    }
-                }
+                IUnit bestDefUnit = this.Tile.GetBestDefUnit();
                 if (bestDefUnit != null)
                 {
                     Console.WriteLine("Defender : " + bestDefUnit.Name);
@@ -226,6 +217,17 @@ namespace SWOP {
         private void Tile_MouseEnter(object sender, MouseEventArgs e)
         {
 			hexagon.Opacity = hexagon.Opacity - 0.1;
+
+            // Display ToHit chance from Active Unit to Best Unit on Tile
+            if (MainWindow.INSTANCE.ActiveUnitView != null 
+                && this.Tile.IsOccupied() 
+                && MainWindow.INSTANCE.ActiveUnitView.Unit.CheckAttack(this.Tile.OccupyingUnits[0]))
+            {
+                IUnit bestUnit = this.Tile.GetBestDefUnit();
+                double toHit = MainWindow.INSTANCE.GM.CurrentGame.ToHitChance(MainWindow.INSTANCE.ActiveUnitView.Unit, bestUnit);
+                this.hitChance.Text = toHit.ToString() + "%";
+                this.hitChance.Visibility = Visibility.Visible;
+            }
         }
 
 
@@ -235,6 +237,7 @@ namespace SWOP {
         private void Tile_MouseLeave(object sender, MouseEventArgs e)
         {
 			hexagon.Opacity = hexagon.Opacity + 0.1;
+            this.hitChance.Visibility = Visibility.Collapsed;
         }
 
         #endregion

@@ -129,6 +129,28 @@ namespace SmallWorld
         }
 
         /// <summary>
+        /// Computes the chance percentage for the attacker to hit the defender
+        /// </summary>
+        /// <param name="attacker"></param>
+        /// <param name="defender"></param>
+        /// <returns></returns>
+        public double ToHitChance(IUnit attacker, IUnit defender)
+        {
+            double realAtk = (double)attacker.Atk * ((double)attacker.Hp / attacker.HpMax);
+            double realDef = (double)defender.Def * ((double)defender.Hp / defender.HpMax);
+
+            double toHit;
+            if (realAtk >= realDef)
+                toHit = 0.5d + 0.5d * (1d - ((double)realDef / realAtk));
+            else
+                toHit = 1d - (0.5d + 0.5d * (1d - ((double)realAtk / realDef)));
+
+            toHit *= 100d;
+
+            return toHit;
+        }
+
+        /// <summary>
         /// Handles the actual fight between two Units
         /// </summary>
         /// <param name="attacker"></param>
@@ -145,16 +167,7 @@ namespace SmallWorld
             int turns = RAND.Next(3, maxHp + 3);
             while (turns > 0 && attacker.Hp > 0 && defender.Hp > 0)
             {
-                double realAtk = (double) attacker.Atk * ( (double) attacker.Hp / attacker.HpMax );
-                double realDef = (double) defender.Def * ( (double) defender.Hp / defender.HpMax );
-
-                double toHit;
-                if (realAtk >= realDef)
-                    toHit = 0.5d + 0.5d * (1d - ((double) realDef / realAtk));
-                else
-                    toHit = 1d - (0.5d + 0.5d * (1d - ((double) realAtk / realDef)));
-
-                toHit *= 100d;
+                double toHit = this.ToHitChance(attacker, defender);
                 int hit = RAND.Next(101);
                 if (hit <= toHit)
                     defender.Hp--;

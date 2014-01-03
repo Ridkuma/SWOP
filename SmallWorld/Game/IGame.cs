@@ -18,6 +18,7 @@ namespace SmallWorld
         void NextPlayer();
 		void MoveUnit(IUnit unit, ITile destination);
         void AttackUnit(IUnit unit, IUnit enemy);
+        double ToHitChance(IUnit attacker, IUnit defender);
         void Fight(IUnit attacker, IUnit defender);
         void Save();
 		void End();

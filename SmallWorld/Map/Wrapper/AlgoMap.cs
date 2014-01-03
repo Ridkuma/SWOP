@@ -67,4 +67,14 @@ public class AlgoMap : IDisposable {
     return ret;
   }
 
+  public bool CanMoveTo(int x1, int y1, int x2, int y2, int unitFaction1) {
+    bool ret = SWAlgoPINVOKE.AlgoMap_CanMoveTo(swigCPtr, x1, y1, x2, y2, unitFaction1);
+    return ret;
+  }
+
+  public bool CanAttackTo(int x1, int y1, int x2, int y2, int unitFaction1, int unitFaction2) {
+    bool ret = SWAlgoPINVOKE.AlgoMap_CanAttackTo(swigCPtr, x1, y1, x2, y2, unitFaction1, unitFaction2);
+    return ret;
+  }
+
 }

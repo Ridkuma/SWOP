@@ -357,6 +357,36 @@ SWIGEXPORT int SWIGSTDCALL CSharp_TILE_WATER_get() {
 }
 
 
+SWIGEXPORT int SWIGSTDCALL CSharp_FACTION_VIKINGS_get() {
+  int jresult ;
+  int result;
+  
+  result = (int)(0);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_FACTION_GAULS_get() {
+  int jresult ;
+  int result;
+  
+  result = (int)(1);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_FACTION_DWARVES_get() {
+  int jresult ;
+  int result;
+  
+  result = (int)(2);
+  jresult = result; 
+  return jresult;
+}
+
+
 SWIGEXPORT void * SWIGSTDCALL CSharp_new_AlgoMap() {
   void * jresult ;
   AlgoMap *result = 0 ;
@@ -438,6 +468,52 @@ SWIGEXPORT int SWIGSTDCALL CSharp_AlgoMap_GetStartTileY(void * jarg1, int jarg2)
   arg1 = (AlgoMap *)jarg1; 
   arg2 = (int)jarg2; 
   result = (int)(arg1)->GetStartTileY(arg2);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_AlgoMap_CanMoveTo(void * jarg1, int jarg2, int jarg3, int jarg4, int jarg5, int jarg6) {
+  unsigned int jresult ;
+  AlgoMap *arg1 = (AlgoMap *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  bool result;
+  
+  arg1 = (AlgoMap *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  arg4 = (int)jarg4; 
+  arg5 = (int)jarg5; 
+  arg6 = (int)jarg6; 
+  result = (bool)(arg1)->CanMoveTo(arg2,arg3,arg4,arg5,arg6);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_AlgoMap_CanAttackTo(void * jarg1, int jarg2, int jarg3, int jarg4, int jarg5, int jarg6, int jarg7) {
+  unsigned int jresult ;
+  AlgoMap *arg1 = (AlgoMap *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  int arg7 ;
+  bool result;
+  
+  arg1 = (AlgoMap *)jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  arg4 = (int)jarg4; 
+  arg5 = (int)jarg5; 
+  arg6 = (int)jarg6; 
+  arg7 = (int)jarg7; 
+  result = (bool)(arg1)->CanAttackTo(arg2,arg3,arg4,arg5,arg6,arg7);
   jresult = result; 
   return jresult;
 }

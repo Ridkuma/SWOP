@@ -16,6 +16,8 @@ namespace SmallWorld
 		ITile GetStartTile(int playerId);
 		int GetTileId(ITile tile);
 		ITile GetTileFromId(int id);
+		bool CanMoveTo(ITile source, ITile destination);
+		bool CanAttackTo(ITile source, ITile destination);
 	}
 
 
@@ -118,6 +120,35 @@ namespace SmallWorld
 				throw new NotSupportedException();
 
 			return Tiles[(id / MapSize), (id % MapSize)];
+		}
+
+		/// <summary>
+		/// Can go from a source to a destination tile
+		/// </summary>
+		public bool CanMoveTo(ITile source, ITile destination)
+		{
+			int idToSelect = 0;
+			for (int i = 0; i < source.OccupyingUnits.Count; i++)
+				if (source.OccupyingUnits[i].State == UnitState.Selected)
+				{
+					idToSelect = i;	break;
+				}
+			return algo.CanMoveTo(source.X, source.Y, destination.X, destination.Y, ((source.IsOccupied() && source.OccupyingUnits[idToSelect].CheckMove(destination)) ? (int) source.OccupyingUnits[idToSelect].Faction : -1));
+		}
+
+		/// <summary>
+		/// Can attack from a source to a destination tile
+		/// </summary>
+		public bool CanAttackTo(ITile source, ITile destination)
+		{
+			int idToSelect = 0;
+			for (int i = 0; i < source.OccupyingUnits.Count; i++)
+				if (source.OccupyingUnits[i].State == UnitState.Selected)
+				{
+					idToSelect = i;
+					break;
+				}
+			return algo.CanAttackTo(source.X, source.Y, destination.X, destination.Y, ((source.IsOccupied() && source.OccupyingUnits[idToSelect].CheckMove(destination)) ? (int) source.OccupyingUnits[idToSelect].Faction : -1), (destination.IsOccupied() ? (int) destination.OccupyingUnits[0].Faction : -1));
 		}
 	}
 }

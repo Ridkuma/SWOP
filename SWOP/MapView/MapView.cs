@@ -13,6 +13,11 @@ namespace SWOP {
 		public Dictionary<ITile, TileView> TilesView { get; protected set; }
 		public TileView SelectedTileView { get; set; }
 
+		/// <summary>
+		/// Constructor to the view of the map
+		/// </summary>
+		/// <param name="_map">Reference to the Map model</param>
+		/// <param name="_mapViewGrid">WPF Grid element</param>
         public MapView(SmallWorld.IMap _map, Grid _mapViewGrid) {
             Map = _map;
             MapViewGrid = _mapViewGrid;
@@ -29,5 +34,23 @@ namespace SWOP {
                 }
             }
         }
+
+		public void ParseNewSelectedTile()
+		{
+			foreach (ITile t in TilesView.Keys)
+			{
+				if (TilesView[t] != SelectedTileView)
+				{
+					if (SelectedTileView == null || !SelectedTileView.Tile.IsOccupied())
+						TilesView[t].SetAppearance(TileView.TileViewState.Idle);
+					else if (Map.CanAttackTo(SelectedTileView.Tile, t))
+						TilesView[t].SetAppearance(TileView.TileViewState.AttackReachable);
+					else if (Map.CanMoveTo(SelectedTileView.Tile, t))
+						TilesView[t].SetAppearance(TileView.TileViewState.MoveReachable);
+					else
+						TilesView[t].SetAppearance(TileView.TileViewState.Unreachable);
+				}
+			}
+		}
     }
 }

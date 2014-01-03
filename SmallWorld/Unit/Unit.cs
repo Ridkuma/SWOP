@@ -114,12 +114,12 @@ namespace SmallWorld
 
             // Check wounds after fighting
             if (this.Hp == 0)
-                this.ChangeState(UnitState.Dead);
+                this.Die();
             else
                 this.ChangeState(UnitState.Idle);
 
             if (enemy.Hp == 0)
-                enemy.ChangeState(UnitState.Dead);
+                enemy.Die();
             else
                 enemy.ChangeState(UnitState.Idle);
         }
@@ -205,6 +205,15 @@ namespace SmallWorld
                     break;
 
             }
+        }
+
+        /// <summary>
+        /// Perform all Death related actions
+        /// </summary>
+        public void Die()
+        {
+            this.ChangeState(UnitState.Dead);
+            this.Position.UnitLeave(this);
         }
 
         /// <summary>

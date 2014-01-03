@@ -18,8 +18,8 @@ namespace SmallWorld
 		List<IUnit> Units { get; }
 		void AddUnit(string name, ITile startPos);
         void GenerateUnits(int nbUnits, ITile startPos);
+        bool IsDecimated();
     }
-
 
 
     public class VikingsFaction : IFaction
@@ -69,12 +69,31 @@ namespace SmallWorld
 			Units.Add(new VikingsUnit(name, startPos));
 		}
 
+        /// <summary>
+        /// Get a random name among all available for this faction
+        /// </summary>
+        /// <returns>Name for a Unit</returns>
         private string GetRandomName()
         {
             int rand = random.Next(this.availableNames.Count);
             string name = this.availableNames[rand];
             this.availableNames.RemoveAt(rand);
             return name;
+        }
+
+        /// <summary>
+        /// Check if this faction has been wiped out
+        /// </summary>
+        /// <returns></returns>
+        public bool IsDecimated()
+        {
+            foreach (IUnit unit in this.Units)
+            {
+                if (unit.State != UnitState.Dead)
+                    return false;
+            }
+
+            return true;
         }
     }
 
@@ -131,6 +150,21 @@ namespace SmallWorld
             string name = this.availableNames[rand];
             this.availableNames.RemoveAt(rand);
             return name;
+        }
+
+        /// <summary>
+        /// Check if this faction has been wiped out
+        /// </summary>
+        /// <returns></returns>
+        public bool IsDecimated()
+        {
+            foreach (IUnit unit in this.Units)
+            {
+                if (unit.State != UnitState.Dead)
+                    return false;
+            }
+
+            return true;
         }
     }
 
@@ -190,6 +224,21 @@ namespace SmallWorld
             string name = this.availableNames[rand];
             this.availableNames.RemoveAt(rand);
             return name;
+        }
+
+        /// <summary>
+        /// Check if this faction has been wiped out
+        /// </summary>
+        /// <returns></returns>
+        public bool IsDecimated()
+        {
+            foreach (IUnit unit in this.Units)
+            {
+                if (unit.State != UnitState.Dead)
+                    return false;
+            }
+
+            return true;
         }
     }
 

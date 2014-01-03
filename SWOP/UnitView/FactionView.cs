@@ -23,5 +23,17 @@ namespace SWOP
 				UnitViews.Add(unit, unitView);
             }
         }
+
+        public void BuryOurDeads()
+        {
+            foreach (IUnit unit in this.Faction.Units)
+            {
+                if (unit.State == UnitState.Dead)
+                {
+                    UnitView uView = UnitViews[unit];
+                    uView.ParentTile.grid.Children.Remove(uView);
+                }
+            }
+        }
     }
 }

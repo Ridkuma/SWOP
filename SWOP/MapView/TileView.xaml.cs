@@ -199,7 +199,6 @@ namespace SWOP {
                 IUnit bestDefUnit = this.Tile.GetBestDefUnit();
                 if (bestDefUnit != null)
                 {
-                    Console.WriteLine("Defender : " + bestDefUnit.Name);
                     MainWindow.INSTANCE.ActiveUnitView.Unit.Attack(bestDefUnit);
                     MainWindow.INSTANCE.RefreshUI();
                 }

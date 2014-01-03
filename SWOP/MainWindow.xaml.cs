@@ -149,6 +149,12 @@ namespace SWOP
 				selectedUnit.Visibility = Visibility.Hidden;
 			}
 
+            // Remove dead units
+            foreach (FactionView factionView in this.FactionsViews)
+            {
+                factionView.BuryOurDeads();
+            }
+
 			btnNextPlayer.Visibility = (g.CurrentPlayerIsMe) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
 		}
 

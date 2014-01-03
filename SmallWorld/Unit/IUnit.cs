@@ -25,6 +25,7 @@ namespace SmallWorld
         void Attack(IUnit enemy);
         void RealAttack(IUnit enemy);
         void ChangeState(UnitState targetState);
+        void Die();
         void EndTurn();
     }
 

@@ -75,13 +75,18 @@
 
         <TextBlock Name="hitChance"
                    IsHitTestVisible="False"
-                   Height="20"
-                   Width="40"
+                   Height="25"
+                   Width="45"
+                   FontSize="18"
                    Foreground="White" 
                    TextAlignment="Center"
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center"
                    Visibility="Collapsed"
-                   Panel.ZIndex="100"/>
+                   Panel.ZIndex="100">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="2" Direction="330" Color="Black" Opacity="0.8" BlurRadius="2" />
+            </TextBlock.Effect>
+        </TextBlock>
 	</Grid>
 </UserControl>

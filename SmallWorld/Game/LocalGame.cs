@@ -71,6 +71,21 @@ namespace SmallWorld
 			OnRaiseStartGame();
 		}
 
+        /// <summary>
+        /// Check if a player has been destroyed
+        /// </summary>
+        /// <returns>True if a player's faction was decimated</returns>
+        public bool IsAnyPlayerOverkilled()
+        {
+            foreach (Player player in this.Players)
+            {
+                if (player.CurrentFaction.IsDecimated())
+                    return true;
+            }
+
+            return false;
+        }
+
 		/// <summary>
 		/// End of player turn, possible outcomes : next player, next game turn or end of game
 		/// </summary>
@@ -80,7 +95,7 @@ namespace SmallWorld
 
 			if (CurrentPlayerId >= Players.Count)
 			{
-				if (CurrentTurn >= MapBoard.TotalNbTurn) // Is end of total turns ? => game over
+				if (CurrentTurn >= MapBoard.TotalNbTurn || this.IsAnyPlayerOverkilled()) // Is end of total turns or player wiped out ? => game over
 				{
 					End();
 				}
@@ -136,6 +151,11 @@ namespace SmallWorld
         /// <returns></returns>
         public double ToHitChance(IUnit attacker, IUnit defender)
         {
+            if (defender.Def == 0)
+            {
+                return 100d;
+            }
+
             double realAtk = (double)attacker.Atk * ((double)attacker.Hp / attacker.HpMax);
             double realDef = (double)defender.Def * ((double)defender.Hp / defender.HpMax);
 

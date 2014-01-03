@@ -23,7 +23,7 @@ namespace SWOP
     public partial class UnitView : UserControl
     {
         public IUnit Unit { get; private set; }
-        private TileView ParentTile { get; set; }
+        public TileView ParentTile { get; private set; }
         
         public UnitView(IUnit u)
         {

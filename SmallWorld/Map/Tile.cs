@@ -19,7 +19,9 @@ namespace SmallWorld
 
         void AddAdjacentTile(ITile adjacentTile);
         bool IsAdjacent(ITile comparedTile);
-        bool IsOccupied();
+		bool IsOccupied();
+		bool IsOccupiedByFriend(IUnit comparedUnit);
+		bool IsOccupiedByEnnemy(IUnit comparedUnit);
         void UnitEnter(IUnit unit);
         void UnitLeave(IUnit unit);
         IUnit GetBestDefUnit();
@@ -72,6 +74,27 @@ namespace SmallWorld
         {
             return (OccupyingUnits.Count > 0);
         }
+
+
+		public bool IsOccupiedByFriend(IUnit comparedUnit)
+		{
+			if (!IsOccupied())
+				return false;
+
+			foreach (Player p in GameMaster.GM.CurrentGame.Players)
+				if (p.CurrentFaction.Units.Contains(comparedUnit))
+					foreach (IUnit u in OccupyingUnits)
+						if (!p.CurrentFaction.Units.Contains(u))
+							return false;
+
+			return true;
+		}
+
+
+		public bool IsOccupiedByEnnemy(IUnit comparedUnit)
+		{
+			return (IsOccupied() && !IsOccupiedByFriend(comparedUnit));
+		}
 
 
         public void UnitEnter(IUnit unit)

@@ -41,7 +41,7 @@ namespace SWOP {
 			{
 				if (TilesView[t] != SelectedTileView)
 				{
-					if (SelectedTileView == null || !SelectedTileView.Tile.IsOccupied())
+					if (SelectedTileView == null || !SelectedTileView.Tile.IsOccupied() || SelectedTileView.Tile.OccupyingUnits[0].Faction != MainWindow.INSTANCE.GM.CurrentGame.GetCurrentPlayer().CurrentFaction.Name)
 						TilesView[t].SetAppearance(TileView.TileViewState.Idle);
 					else if (Map.CanAttackTo(SelectedTileView.Tile, t))
 						TilesView[t].SetAppearance(TileView.TileViewState.AttackReachable);

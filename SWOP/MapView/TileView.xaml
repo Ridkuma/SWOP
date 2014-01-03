@@ -8,7 +8,7 @@
             d:DesignWidth="58" d:DesignHeight="65" >
 
 	<UserControl.Resources>
-		<RadialGradientBrush x:Key="BrushMoutain" GradientOrigin="0.40,0.35">
+		<RadialGradientBrush x:Key="BrushMountain" GradientOrigin="0.40,0.35">
 			<GradientStop Color="BlanchedAlmond" Offset="0.1" />
 			<GradientStop Color="#FFBFBCB2" Offset="0.3" />
 			<GradientStop Color="#FF929C88" Offset="0.6" />
@@ -32,22 +32,44 @@
 			<GradientStop Color="#FF49322C" Offset="1.0" />
 		</LinearGradientBrush>
 		<ImageBrush x:Key="BrushImgField" ImageSource="../Resources/terrains/field.png"/>
+		<ImageBrush x:Key="BrushImgForest" ImageSource="../Resources/terrains/forest.png"/>
 		<ImageBrush x:Key="BrushImgDesert" ImageSource="../Resources/terrains/desert.png"/>
 		<ImageBrush x:Key="BrushImgMountain" ImageSource="../Resources/terrains/mountain.png"/>
 		<ImageBrush x:Key="BrushImgWater" ImageSource="../Resources/terrains/water.png"/>
 	</UserControl.Resources>
 
 	<Grid Name="grid">
-		<!--<Image Width="50" Height="50" Source="../Resources/earth.png"/>-->
-		<Path Name="hexagon" d:LayoutOverrides="None" 
+		<Path Name="bgPath" d:LayoutOverrides="None" 
+            d:LastTangent="0,0"
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+            Margin="0" Width="58" Height ="65" Stretch="Fill"
+            Data="M8.660254,0 L17.320508,5 17.320508,15 8.660254,20 0,15 0,5 8.660254,0 z" Fill="Green"
+        />
+		<Path Name="hexagonPath" d:LayoutOverrides="None" 
             d:LastTangent="0,0" Stroke="LightGray" 
             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
             Margin="0" Width="58" Height ="65" Stretch="Fill"
             MouseLeftButtonDown="Tile_MouseLeftButtonDown"
             MouseRightButtonDown="Tile_MouseRightButtonDown"
-            MouseEnter="Tile_MouseEnter" MouseLeave="Tile_MouseLeave" 
-            Data="M8.660254,0 L17.320508,5 17.320508,15 8.660254,20 0,15 0,5 8.660254,0 z" Fill="{DynamicResource BrushForest}"
-        />
+            Data="M8.660254,0 L17.320508,5 17.320508,15 8.660254,20 0,15 0,5 8.660254,0 z" Fill="{DynamicResource BrushForest}">
+            
+            <Path.Triggers>
+                <EventTrigger RoutedEvent="Path.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="hexagonPath" Storyboard.TargetProperty="Stroke.Color" To="Gray" Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Path.MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="hexagonPath" Storyboard.TargetProperty="Stroke.Color" To="LightGray" Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Path.Triggers>
+        </Path>
 
         <TextBlock Name="hitChance"
                    IsHitTestVisible="False"
@@ -59,5 +81,5 @@
                    VerticalAlignment="Center"
                    Visibility="Collapsed"
                    Panel.ZIndex="100"/>
-    </Grid>
+	</Grid>
 </UserControl>

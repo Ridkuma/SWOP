@@ -121,11 +121,17 @@ namespace SWOP
         /// </summary>
         public void Move()
         {
-            this.ParentTile.grid.Children.Remove(this);
             TileView newTileView = MainWindow.INSTANCE.MapView.TilesView[this.Unit.Position];
+			if (this.ParentTile == newTileView)
+				return;
+
+            this.ParentTile.grid.Children.Remove(this);
             newTileView.grid.Children.Add(this);
-            this.Margin = new Thickness(0);
             this.ParentTile = newTileView;
+
+			// If only one unit on tile => replace it in the center
+			if (this.ParentTile.Tile.OccupyingUnits.Count <= 1)
+				this.Margin = new Thickness(0);
         }
     }
 }

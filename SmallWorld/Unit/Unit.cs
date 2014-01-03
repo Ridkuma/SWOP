@@ -45,7 +45,7 @@ namespace SmallWorld
             // every Unit extension should add up their own limitations
             bool possibleMove = (this.Mvt > 0)
                 && GameMaster.GM.CurrentGame.CurrentPlayerIsMe
-                && (!destination.IsOccupied()) // TODO : check if it's friend
+                && (!destination.IsOccupiedByEnnemy(this))
                 && (destination != this.Position);
 
             return possibleMove;

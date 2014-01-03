@@ -148,7 +148,7 @@ namespace SmallWorld
 					idToSelect = i;
 					break;
 				}
-			return algo.CanAttackTo(source.X, source.Y, destination.X, destination.Y, ((source.IsOccupied() && source.OccupyingUnits[idToSelect].CheckMove(destination)) ? (int) source.OccupyingUnits[idToSelect].Faction : -1), (destination.IsOccupied() ? (int) destination.OccupyingUnits[0].Faction : -1));
+			return algo.CanAttackTo(source.X, source.Y, destination.X, destination.Y, ((source.IsOccupied() && destination.IsOccupied() && source.OccupyingUnits[idToSelect].CheckAttack(destination.OccupyingUnits[0])) ? (int) source.OccupyingUnits[idToSelect].Faction : -1), (destination.IsOccupied() ? (int) destination.OccupyingUnits[0].Faction : -1));
 		}
 	}
 }

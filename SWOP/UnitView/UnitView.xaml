@@ -32,8 +32,8 @@
         <Rectangle Name="selectedSquare" 
             Stroke="{DynamicResource VikingsColor}"
             Visibility="Hidden"
-            Width="50" Height ="50"
-            StrokeThickness="2">
+            Width="40" Height ="50"
+            StrokeThickness="2" Margin="10,0,0,5">
         </Rectangle>
         
         <Image Name="sprite" 

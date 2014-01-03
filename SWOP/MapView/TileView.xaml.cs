@@ -70,19 +70,23 @@ namespace SWOP {
             switch(newState)
             {
                 case TileViewState.Idle:
-                    hexagon.Opacity = 1;
+                    hexagonPath.Opacity = 1;
                     break;
                 case TileViewState.Selected:
-                    hexagon.Opacity = 0.8;
+					bgPath.Fill = new SolidColorBrush(Color.FromRgb(222,222,222));
+                    hexagonPath.Opacity = 0.6;
                     break;
 				case TileViewState.MoveReachable:
-					hexagon.Opacity = 0.6;
+					bgPath.Fill = new SolidColorBrush(Color.FromRgb(100,255,100));
+					hexagonPath.Opacity = 0.7;
 					break;
 				case TileViewState.AttackReachable:
-					hexagon.Opacity = 0.1;
+					bgPath.Fill = new SolidColorBrush(Color.FromRgb(255,64,32));
+					hexagonPath.Opacity = 0.6;
 					break;
 				case TileViewState.Unreachable:
-					hexagon.Opacity = 0.3;
+					bgPath.Fill = new SolidColorBrush(Color.FromRgb(0,0,0));
+					hexagonPath.Opacity = 0.6;
 					break;
                 default:
                     throw new NotImplementedException();
@@ -93,24 +97,24 @@ namespace SWOP {
 
 
         public void SetGround() {
-            string brushPath = "Brush"; // set to "Brush" or "BrushImg"
+            string brushPath = "BrushImg"; // set to "Brush" or "BrushImg"
 
             switch (Tile.Type)
             {
                 case TileType.Field:
-                    hexagon.Fill = (Brush) Resources[brushPath + "Field"];
+                    hexagonPath.Fill = (Brush) Resources[brushPath + "Field"];
                     break;
                 case TileType.Mountain:
-                    hexagon.Fill = (Brush) Resources[brushPath + "Moutain"];
+                    hexagonPath.Fill = (Brush) Resources[brushPath + "Mountain"];
                     break;
                 case TileType.Desert:
-                    hexagon.Fill = (Brush) Resources[brushPath + "Desert"];
+                    hexagonPath.Fill = (Brush) Resources[brushPath + "Desert"];
                     break;
                 case TileType.Forest:
-                    hexagon.Fill = (Brush) Resources[brushPath + "Forest"];
+                    hexagonPath.Fill = (Brush) Resources[brushPath + "Forest"];
                     break;
                 case TileType.Water:
-                    hexagon.Fill = (Brush) Resources[brushPath + "Water"];
+                    hexagonPath.Fill = (Brush) Resources[brushPath + "Water"];
                     break;
             }
         }
@@ -217,24 +221,6 @@ namespace SWOP {
 					mapView.ParseNewSelectedTile();
 				}
             }
-        }
-
-
-		/// <summary>
-		/// Mouse over the tile
-		/// </summary>
-        private void Tile_MouseEnter(object sender, MouseEventArgs e)
-        {
-			hexagon.Opacity = hexagon.Opacity - 0.1;
-        }
-
-
-		/// <summary>
-		/// Mouse quit 'overred' tile
-		/// </summary>
-        private void Tile_MouseLeave(object sender, MouseEventArgs e)
-        {
-			hexagon.Opacity = hexagon.Opacity + 0.1;
         }
 
         #endregion

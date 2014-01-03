@@ -21,21 +21,62 @@ namespace SmallWorld
         bool IsDecimated();
     }
 
-
-    public class VikingsFaction : IFaction
+    public abstract class Faction : IFaction
     {
-		public FactionName Name { get; private set; }
-		public List<IUnit> Units { get; protected set; }
+        public FactionName Name { get; protected set; }
+        public List<IUnit> Units { get; protected set; }
+        public List<string> AvailableNames { get; protected set; }
+
+        public abstract void AddUnit(string name, ITile startPos);
 
         static Random random = new Random();
 
+        /// <summary>
+        /// Generate all units (called by a LocalGame or as Server only, no Client)
+        /// </summary>
+        public void GenerateUnits(int nbUnits, ITile startPos)
+        {
+            for (int i = 0; i < nbUnits; i++)
+            {
+                AddUnit(GetRandomName(), startPos);
+            }
+        }
+
+        /// <summary>
+        /// Check if this faction has been wiped out
+        /// </summary>
+        /// <returns></returns>
+        public bool IsDecimated()
+        {
+            foreach (IUnit unit in this.Units)
+            {
+                if (unit.State != UnitState.Dead)
+                    return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Get a random name among all available for this faction
+        /// </summary>
+        /// <returns>Name for a Unit</returns>
+        private string GetRandomName()
+        {
+            int rand = random.Next(this.AvailableNames.Count);
+            string name = this.AvailableNames[rand];
+            this.AvailableNames.RemoveAt(rand);
+            return name;
+        }
+    }
+
+    public class VikingsFaction : Faction
+    {
         public VikingsFaction()
         {
-            this.Name = FactionName.Vikings;
-			Units = new List<IUnit>();
-		}
-
-        private List<string> availableNames = new List<string> 
+            base.Name = FactionName.Vikings;
+			base.Units = new List<IUnit>();
+            base.AvailableNames = new List<string> 
             { 
                 "Olaf",
                 "Grossebaf",
@@ -48,69 +89,24 @@ namespace SmallWorld
                 "Ortograf",
                 "Cryptograf"
             };
-
-
-		/// <summary>
-		/// Generate all units (called by a LocalGame or as Server only, no Client)
-		/// </summary>
-		public void GenerateUnits(int nbUnits, ITile startPos)
-		{
-			for (int i = 0; i < nbUnits; i++)
-			{
-				AddUnit(GetRandomName(), startPos);
-			}
 		}
 
 		/// <summary>
 		/// Create new unit
 		/// </summary>
-		public void AddUnit(string name, ITile startPos)
+		public override void AddUnit(string name, ITile startPos)
 		{
 			Units.Add(new VikingsUnit(name, startPos));
 		}
-
-        /// <summary>
-        /// Get a random name among all available for this faction
-        /// </summary>
-        /// <returns>Name for a Unit</returns>
-        private string GetRandomName()
-        {
-            int rand = random.Next(this.availableNames.Count);
-            string name = this.availableNames[rand];
-            this.availableNames.RemoveAt(rand);
-            return name;
-        }
-
-        /// <summary>
-        /// Check if this faction has been wiped out
-        /// </summary>
-        /// <returns></returns>
-        public bool IsDecimated()
-        {
-            foreach (IUnit unit in this.Units)
-            {
-                if (unit.State != UnitState.Dead)
-                    return false;
-            }
-
-            return true;
-        }
     }
 
-    public class GaulsFaction : IFaction
+    public class GaulsFaction : Faction
     {
-        public List<IUnit> Units { get; protected set; }
-        public FactionName Name { get; private set; }
-
-        static Random random = new Random();
-
         public GaulsFaction()
         {
-            this.Name = FactionName.Gauls;
-			Units = new List<IUnit>();
-		}
-
-        private List<string> availableNames = new List<string> // no special chr (like accents) in names => cause bug with network -_-'
+            base.Name = FactionName.Gauls;
+			base.Units = new List<IUnit>();
+            base.AvailableNames = new List<string> // no special chr (like accents) in names => cause bug with network -_-'
             { 
                 "Asterix",
                 "Obelix",
@@ -123,65 +119,25 @@ namespace SmallWorld
                 "Cetautomatix",
                 "Ielosubmarine"
             };
-
-
-		/// <summary>
-		/// Generate all units (called by a LocalGame or as Server only, no Client)
-		/// </summary>
-        public void GenerateUnits(int nbUnits, ITile startPos)
-        {
-            for (int i = 0; i < nbUnits; i++)
-            {
-				AddUnit(GetRandomName(), startPos);
-			}
-        }
+		}
 
 		/// <summary>
 		/// Create new unit
 		/// </summary>
-		public void AddUnit(string name, ITile startPos)
+		public override void AddUnit(string name, ITile startPos)
 		{
 			Units.Add(new GaulsUnit(name, startPos));
 		}
 
-        private string GetRandomName()
-        {
-            int rand = random.Next(this.availableNames.Count);
-            string name = this.availableNames[rand];
-            this.availableNames.RemoveAt(rand);
-            return name;
-        }
-
-        /// <summary>
-        /// Check if this faction has been wiped out
-        /// </summary>
-        /// <returns></returns>
-        public bool IsDecimated()
-        {
-            foreach (IUnit unit in this.Units)
-            {
-                if (unit.State != UnitState.Dead)
-                    return false;
-            }
-
-            return true;
-        }
     }
 
-    public class DwarvesFaction : IFaction
+    public class DwarvesFaction : Faction
     {
-        public List<IUnit> Units { get; protected set; }
-        public FactionName Name { get; private set; }
-
-        static Random random = new Random();
-
         public DwarvesFaction()
         {
-            this.Name = FactionName.Dwarves;
-			Units = new List<IUnit>();
-		}
-
-        private List<string> availableNames = new List<string> 
+            base.Name = FactionName.Dwarves;
+			base.Units = new List<IUnit>();
+            base.AvailableNames = new List<string> 
             { 
                 "Thorin Oakenshield",
                 "Dwalin",
@@ -197,49 +153,15 @@ namespace SmallWorld
                 "Bombur",
                 "Bofur"
             };
-
-
-		/// <summary>
-		/// Generate all units (called by a LocalGame or as Server only, no Client)
-		/// </summary>
-        public void GenerateUnits(int nbUnits, ITile startPos)
-        {
-            for (int i = 0; i < nbUnits; i++)
-            {
-				AddUnit(GetRandomName(), startPos);
-			}
-        }
+		}
 
 		/// <summary>
 		/// Create new unit
 		/// </summary>
-		public void AddUnit(string name, ITile startPos)
+		public override void AddUnit(string name, ITile startPos)
 		{
 			Units.Add(new DwarvesUnit(name, startPos));
 		}
-
-        private string GetRandomName()
-        {
-            int rand = random.Next(this.availableNames.Count);
-            string name = this.availableNames[rand];
-            this.availableNames.RemoveAt(rand);
-            return name;
-        }
-
-        /// <summary>
-        /// Check if this faction has been wiped out
-        /// </summary>
-        /// <returns></returns>
-        public bool IsDecimated()
-        {
-            foreach (IUnit unit in this.Units)
-            {
-                if (unit.State != UnitState.Dead)
-                    return false;
-            }
-
-            return true;
-        }
     }
 
 

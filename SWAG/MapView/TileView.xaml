@@ -1,0 +1,94 @@
+﻿<UserControl xmlns:s="http://schemas.microsoft.com/surface/2008"  x:Class="SWAG.TileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             Loaded="OnTileLoaded"
+            d:DesignWidth="58" d:DesignHeight="65" >
+
+	<UserControl.Resources>
+		<RadialGradientBrush x:Key="BrushMountain" GradientOrigin="0.40,0.35">
+			<GradientStop Color="BlanchedAlmond" Offset="0.1" />
+			<GradientStop Color="#FFBFBCB2" Offset="0.3" />
+			<GradientStop Color="#FF929C88" Offset="0.6" />
+			<GradientStop Color="#FF768D61" Offset="1.0" />
+		</RadialGradientBrush>
+		<LinearGradientBrush x:Key="BrushField">
+			<GradientStop Color="#FF5B815B" Offset="-0.2" />
+			<GradientStop Color="#FF6B8147" Offset="1.0" />
+		</LinearGradientBrush>
+		<LinearGradientBrush x:Key="BrushDesert">
+			<GradientStop Color="#FFD4D49F" Offset="0.0" />
+			<GradientStop Color="#FF8F533C" Offset="1.5" />
+		</LinearGradientBrush>
+		<LinearGradientBrush x:Key="BrushWater">
+			<GradientStop Color="CadetBlue" Offset="0.0" />
+			<GradientStop Color="#FF2E7A91" Offset="1.0" />
+		</LinearGradientBrush>
+		<LinearGradientBrush x:Key="BrushForest">
+			<GradientStop Color="#FFA1B875" Offset="-0.2" />
+			<GradientStop Color="#FF486A48" Offset="0.5" />
+			<GradientStop Color="#FF49322C" Offset="1.0" />
+		</LinearGradientBrush>
+		<ImageBrush x:Key="BrushImgField" ImageSource="../Resources/terrains/field.png"/>
+		<ImageBrush x:Key="BrushImgForest" ImageSource="../Resources/terrains/forest.png"/>
+		<ImageBrush x:Key="BrushImgDesert" ImageSource="../Resources/terrains/desert.png"/>
+		<ImageBrush x:Key="BrushImgMountain" ImageSource="../Resources/terrains/mountain.png"/>
+		<ImageBrush x:Key="BrushImgWater" ImageSource="../Resources/terrains/water.png"/>
+	</UserControl.Resources>
+
+	<Grid Name="grid">
+		<s:SurfaceButton Width="56" Height="45" Click="Tile_FingerTouch" Background="{x:Null}" />
+
+		<Path Name="bgPath" d:LayoutOverrides="None" IsHitTestVisible="False"
+            d:LastTangent="0,0"
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+            Margin="0" Width="58" Height ="65" Stretch="Fill"
+            Data="M8.660254,0 L17.320508,5 17.320508,15 8.660254,20 0,15 0,5 8.660254,0 z" Fill="Green"
+        />
+		<Path Name="hexagonPath" d:LayoutOverrides="None" IsHitTestVisible="False"
+            d:LastTangent="0,0" Stroke="LightGray" 
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+            Margin="0" Width="58" Height ="65" Stretch="Fill"
+            MouseEnter="Tile_MouseEnter"
+            MouseLeave="Tile_MouseLeave"
+            MouseLeftButtonDown="Tile_MouseLeftButtonDown"
+            MouseRightButtonDown="Tile_MouseRightButtonDown"
+            Data="M8.660254,0 L17.320508,5 17.320508,15 8.660254,20 0,15 0,5 8.660254,0 z" Fill="{DynamicResource BrushForest}">
+            
+            <Path.Triggers>
+                <EventTrigger RoutedEvent="Path.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="hexagonPath" Storyboard.TargetProperty="Stroke.Color" To="Gray" Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Path.MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="hexagonPath" Storyboard.TargetProperty="Stroke.Color" To="LightGray" Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Path.Triggers>
+        </Path>
+
+        <TextBlock Name="hitChance"
+                   IsHitTestVisible="False"
+                   Height="25"
+                   Width="45"
+                   FontSize="18"
+                   Foreground="White" 
+                   TextAlignment="Center"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   Visibility="Collapsed"
+                   Panel.ZIndex="100">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="2" Direction="330" Color="Black" Opacity="0.8" BlurRadius="2" />
+            </TextBlock.Effect>
+        </TextBlock>
+	</Grid>
+</UserControl>

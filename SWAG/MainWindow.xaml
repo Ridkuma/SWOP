@@ -1,0 +1,34 @@
+﻿<s:SurfaceWindow x:Class="SWAG.MainWindow"
+    xmlns:SWAG="clr-namespace:SWAG"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="http://schemas.microsoft.com/surface/2008"
+    Title="SWAG"
+    >
+	<s:SurfaceWindow.Background>
+		<RadialGradientBrush>
+			<GradientStop Color="#FF29344B" Offset="0"/>
+			<GradientStop Color="#FF1D1830" Offset="1"/>
+		</RadialGradientBrush>
+	</s:SurfaceWindow.Background>
+	<Grid>
+		<Label Content="Game Over" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="80" FontWeight="Bold" Visibility="Hidden" Background="#FFECB338"/>
+
+		<s:ScatterView x:Name="mapScatterView">
+			<s:ScatterViewItem Height="765" Width="930" Background="{x:Null}" Orientation="0" ZIndex="-10" IsTopmostOnActivation="False">
+				<Grid Name="mapGrid" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+			</s:ScatterViewItem>
+		</s:ScatterView>
+
+		<s:ScatterView x:Name="playerScatterView">
+			<s:ScatterView.ItemContainerStyle>
+				<Style TargetType="{x:Type s:ScatterViewItem}">
+					<Setter Property="Height" Value="300"/>
+					<Setter Property="Width" Value="250"/>
+					<Setter Property="BorderThickness" Value="1"/>
+					<Setter Property="CanScale" Value="False"/>
+				</Style>
+			</s:ScatterView.ItemContainerStyle>
+		</s:ScatterView>		
+	</Grid>
+</s:SurfaceWindow>

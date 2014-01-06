@@ -146,11 +146,7 @@
     <Resource Include="Resources\units\viking.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\musics\BGM2_Morro.mp3" />
-    <Resource Include="Resources\musics\BGM3_Ray.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\musics\BGM1_FFTA.mp3" />
+    <Resource Include="Resources\musics\BGM0_Morro.mp3" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\BGP_StartScreen.jpg" />
@@ -160,6 +156,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\swop.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\musics\BGM2_GW.mp3" />
+    <Resource Include="Resources\musics\BGM3_DS2.mp3" />
+    <Resource Include="Resources\musics\BGM1_AoE2.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

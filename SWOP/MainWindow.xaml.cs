@@ -45,7 +45,7 @@ namespace SWOP
         public void MainWindow_Loaded(object sender, RoutedEventArgs e) {
 			GM = new GameMaster();
             this.MediaPlayer.Volume = MAX_VOLUME;
-            this.MediaPlayer.Open(new Uri(PATH + @"\musics\BGM2_Morro.mp3"));
+            this.MediaPlayer.Open(new Uri(PATH + @"\musics\BGM0_Morro.mp3"));
             this.MediaPlayer.Play();
 		}
 
@@ -96,19 +96,19 @@ namespace SWOP
             switch (RAND.Next(3))
             {
                 case 0 :
-                    uri = new Uri(PATH + @"\musics\BGM1_FFTA.mp3");
+                    uri = new Uri(PATH + @"\musics\BGM1_AoE2.mp3");
                     break;
 
                 case 1 :
-                    uri = new Uri(PATH + @"\musics\BGM2_Morro.mp3");
+                    uri = new Uri(PATH + @"\musics\BGM2_GW.mp3");
                     break;
 
                 case 2:
-                    uri = new Uri(PATH + @"\musics\BGM3_Ray.mp3");
+                    uri = new Uri(PATH + @"\musics\BGM3_DS2.mp3");
                     break;
 
                 default :
-                    uri = new Uri(PATH + @"\musics\BGM1_FFTA.mp3");
+                    uri = new Uri(PATH + @"\musics\BGM0_Morro.mp3");
                     break;
             }
             
@@ -172,7 +172,7 @@ namespace SWOP
         /// </summary>
         private void ButtonGameCreation_Click(object sender, RoutedEventArgs e)
         {
-            menuGrid.Visibility = Visibility.Hidden;
+            titleScreenGrid.Visibility = Visibility.Collapsed;
             creationGrid.Visibility = Visibility.Visible;
         }
 
@@ -192,8 +192,7 @@ namespace SWOP
 
             GM.FinishLoadGame();
 
-            menuGrid.Visibility = Visibility.Hidden;
-            creationGrid.Visibility = Visibility.Hidden;
+            menuGrid.Visibility = Visibility.Collapsed;
             gameGrid.Visibility = Visibility.Visible;
         }
 
@@ -206,8 +205,7 @@ namespace SWOP
 
             NewGame(BuilderGameStrategy.Client, BuilderMapStrategy.Demo, listFaction);
 
-            menuGrid.Visibility = Visibility.Hidden;
-            creationGrid.Visibility = Visibility.Hidden;
+            menuGrid.Visibility = Visibility.Collapsed;
             gameGrid.Visibility = Visibility.Visible;
         }
 
@@ -228,9 +226,9 @@ namespace SWOP
             NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Demo, listFaction); // tmp
             this.GM.CurrentGame.Start(); // Ask explicitely to launch game
 
-            menuGrid.Visibility = Visibility.Hidden;
-            creationGrid.Visibility = Visibility.Hidden;
+            menuGrid.Visibility = Visibility.Collapsed;
             gameGrid.Visibility = Visibility.Visible;
+            this.RandomBattleSong();
         }
 
         // tmp
@@ -242,9 +240,9 @@ namespace SWOP
 
             NewGame(BuilderGameStrategy.Server, BuilderMapStrategy.Small, listFaction);
 
-            menuGrid.Visibility = Visibility.Hidden;
-            creationGrid.Visibility = Visibility.Hidden;
+            menuGrid.Visibility = Visibility.Collapsed;
             gameGrid.Visibility = Visibility.Visible;
+            this.RandomBattleSong();
         }
 
 
@@ -288,8 +286,13 @@ namespace SWOP
         /// </summary>
         private void ButtonGoMainMenu_Click(object sender, RoutedEventArgs e)
         {
+            this.MediaPlayer.Stop();
+            this.MediaPlayer.Open(new Uri(PATH + @"\musics\BGM0_Morro.mp3"));
+            this.MediaPlayer.Play();
             menuGrid.Visibility = Visibility.Visible;
-            gameGrid.Visibility = Visibility.Hidden;
+            titleScreenGrid.Visibility = Visibility.Visible;
+            creationGrid.Visibility = Visibility.Collapsed;
+            gameGrid.Visibility = Visibility.Collapsed;
         }
 
 

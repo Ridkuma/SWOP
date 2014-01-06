@@ -38,77 +38,88 @@
         <!-- Main Menu Grid -->
         <Grid Name="menuGrid" Visibility="Visible">
 
-            <Grid.Resources>
-                <Storyboard x:Key="titleFadeIn">
-                    <DoubleAnimation
+            <Image Source="Resources/BGP_StartScreen.jpg" Stretch="UniformToFill"/>
+            
+            <!-- Title Screen grid -->
+            <Grid Name="titleScreenGrid" Visibility="Visible">
+
+                <Grid.Resources>
+                    <Storyboard x:Key="titleFadeIn">
+                        <DoubleAnimation
                         Storyboard.TargetName="firstTitleText"
                         Storyboard.TargetProperty="Opacity"
-                        From="0" To="1" Duration="0:0:3" 
-                        BeginTime="0:0:2" 
+                        From="0" To="1" Duration="0:0:2" 
+                        BeginTime="0:0:3" 
                         />
-                    <DoubleAnimation
+                        <DoubleAnimation
                         Storyboard.TargetName="secondTitleText"
                         Storyboard.TargetProperty="Opacity"
                         From="0" To="1" Duration="0:0:1" 
-                        BeginTime="0:0:6" 
+                        BeginTime="0:0:5" 
                         />
-                    <DoubleAnimation
-                        Storyboard.TargetName="buttonSinglePlayer"
+                        <DoubleAnimation
+                        Storyboard.TargetName="buttonGameCreation"
                         Storyboard.TargetProperty="Opacity"
                         From="0" To="1" Duration="0:0:1" 
-                        BeginTime="0:0:9" 
+                        BeginTime="0:0:7" 
                         />
-                    <DoubleAnimation
-                        Storyboard.TargetName="buttonMultiPlayer"
+                        <DoubleAnimation
+                        Storyboard.TargetName="buttonLoad"
                         Storyboard.TargetProperty="Opacity"
                         From="0" To="1" Duration="0:0:1" 
-                        BeginTime="0:0:9" 
+                        BeginTime="0:0:7" 
                         />
-                </Storyboard>
-            </Grid.Resources>
+                        <DoubleAnimation
+                        Storyboard.TargetName="buttonJoin"
+                        Storyboard.TargetProperty="Opacity"
+                        From="0" To="1" Duration="0:0:1" 
+                        BeginTime="0:0:7" 
+                        />
+                    </Storyboard>
+                </Grid.Resources>
 
-            <Image Source="Resources/BGP_StartScreen.jpg" Stretch="UniformToFill"/>
+                <TextBlock Name="firstTitleText" Text="SmallWorld" FontFamily="Resources/fonts/#Dark Crystal Outline" FontSize="100" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0" Opacity="0"/>
+                <TextBlock Name="secondTitleText" Text="of POO" FontFamily="Resources/fonts/#Dark Crystal Script" FontSize="50" Foreground="Black" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="530,175,49,0" Opacity="0" RenderTransformOrigin="0.5,0.5" Width="213">
+                    <TextBlock.RenderTransform>
+                        <RotateTransform Angle="-25.492"/>
+                    </TextBlock.RenderTransform>
+                    <TextBlock.Triggers>
+                        <!-- Fades Title blocks in -->
+                        <EventTrigger RoutedEvent="TextBlock.Loaded">
+                            <BeginStoryboard Storyboard="{DynamicResource titleFadeIn}" />
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>
 
-            <TextBlock Name="firstTitleText" Text="SmallWorld" FontFamily="Resources/fonts/#Dark Crystal Outline" FontSize="100" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0" Opacity="0"/>
-            <TextBlock Name="secondTitleText" Text="of POO" FontFamily="Resources/fonts/#Dark Crystal Script" FontSize="50" Foreground="Black" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="530,175,49,0" Opacity="0" RenderTransformOrigin="0.5,0.5" Width="213">
-                <TextBlock.RenderTransform>
-                    <RotateTransform Angle="-25.492"/>
-                </TextBlock.RenderTransform>
-                <TextBlock.Triggers>
-                    <!-- Fades Title blocks in -->
-                    <EventTrigger RoutedEvent="TextBlock.Loaded">
-                        <BeginStoryboard Storyboard="{DynamicResource titleFadeIn}" />
-                    </EventTrigger>
-                </TextBlock.Triggers>
-            </TextBlock>
+                <Button Name="buttonGameCreation" Click="ButtonGameCreation_Click" Style="{StaticResource startupPageButton}" Margin="0,-40,0,0" VerticalAlignment="Center">
+                    <Button.Content>
+                        <TextBlock Text="Start new game" Style="{StaticResource textDropShadow}" />
+                    </Button.Content>
+                </Button>
+                <Button Name="buttonLoad" Click="ButtonLoad_Click" Style="{StaticResource startupPageButton}" Margin="0,80,0,0" VerticalAlignment="Center">
+                    <Button.Content>
+                        <TextBlock Text="Load game" Style="{StaticResource textDropShadow}" />
+                    </Button.Content>
+                </Button>
+                <Button Name="buttonJoin" Click="ButtonJoinServer_Click" Style="{StaticResource startupPageButton}" Margin="0,200,0,0" VerticalAlignment="Center">
+                    <Button.Content>
+                        <TextBlock Text="Join game" Style="{StaticResource textDropShadow}" />
+                    </Button.Content>
+                </Button>
+            </Grid>
 
-            <Button Name="buttonGameCreation" Click="ButtonGameCreation_Click" Style="{StaticResource startupPageButton}" Margin="0,-120,0,0" VerticalAlignment="Center">
-                <Button.Content>
-                    <TextBlock Text="Start new game" Style="{StaticResource textDropShadow}" />
-                </Button.Content>
-            </Button>
-            <Button Name="buttonLoad" Click="ButtonLoad_Click" Style="{StaticResource startupPageButton}" Margin="0,0,0,0" VerticalAlignment="Center">
-                <Button.Content>
-                    <TextBlock Text="Load game" Style="{StaticResource textDropShadow}" />
-                </Button.Content>
-            </Button>
-            <Button Name="buttonJoin" Click="ButtonJoinServer_Click" Style="{StaticResource startupPageButton}" Margin="0,120,0,0" VerticalAlignment="Center">
-                <Button.Content>
-                    <TextBlock Text="Join game" Style="{StaticResource textDropShadow}" />
-                </Button.Content>
-            </Button>
+            <!-- Game creation grid -->
+            <Grid Name="creationGrid" Visibility="Hidden">
+                <SWOP:PlayerCreator Width="300" Height="400" Margin="-350,0,0,0"></SWOP:PlayerCreator>
+                <SWOP:PlayerCreator Width="300" Height="400" Margin="350,0,0,0"></SWOP:PlayerCreator>
+
+                <Button Content="Start !" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonValidate_Click"/>
+                <Button Content="or Launch server" HorizontalAlignment="Center" Width="120" Height="30" Margin="300,0,0,35" VerticalAlignment="Bottom" Click="ButtonLaunchServer_Click"/>
+
+            </Grid>
         </Grid>
         
-        <Grid Name="creationGrid" Visibility="Hidden">
-            <Image Source="Resources/BGP_StartScreen.jpg" Stretch="UniformToFill"/>
-            
-            <SWOP:PlayerCreator Width="300" Height="400" Margin="-350,0,0,0"></SWOP:PlayerCreator>
-            <SWOP:PlayerCreator Width="300" Height="400" Margin="350,0,0,0"></SWOP:PlayerCreator>
-
-            <Button Content="Start !" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonValidate_Click"/>
-            <Button Content="or Launch server" HorizontalAlignment="Center" Width="120" Height="30" Margin="300,0,0,35" VerticalAlignment="Bottom" Click="ButtonLaunchServer_Click"/>
-
-        </Grid>
+        
         
         <!-- Game Grid -->
         <Grid Name="gameGrid" Visibility="Collapsed">

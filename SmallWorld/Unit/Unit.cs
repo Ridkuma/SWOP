@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SmallWorld
 {
-
+    [Serializable]
     public class Unit : IUnit
     {
         public ITile Position { get; set; }
@@ -227,6 +227,7 @@ namespace SmallWorld
     }
 
 
+    [Serializable]
     public class VikingsUnit : Unit
     {
         public VikingsUnit(string name, ITile position) 
@@ -253,6 +254,7 @@ namespace SmallWorld
         }
     }
 
+    [Serializable]
     public class DwarvesUnit : Unit
     {
         public DwarvesUnit(string name, ITile position) 
@@ -290,6 +292,7 @@ namespace SmallWorld
         }
     }
 
+    [Serializable]
     public class GaulsUnit : Unit
     {
         public GaulsUnit(string name, ITile position) 

@@ -31,6 +31,7 @@ namespace SmallWorld
     /// <summary>
     /// Private implementation of Tile
     /// </summary>
+    [Serializable]
     public class Tile : ITile
     {
         public int X { get; protected set; }
@@ -144,6 +145,7 @@ namespace SmallWorld
     }
 
 
+    [Serializable]
     public class FieldTile : Tile
     {
         public override TileType Type
@@ -157,6 +159,7 @@ namespace SmallWorld
         }
     }
 
+    [Serializable]
     public class MountainTile : Tile
     {
         public override TileType Type
@@ -170,6 +173,7 @@ namespace SmallWorld
         }
     }
 
+    [Serializable]
     public class DesertTile : Tile
     {
         public override TileType Type
@@ -183,6 +187,7 @@ namespace SmallWorld
         }
     }
 
+    [Serializable]
     public class ForestTile : Tile
     {
         public override TileType Type
@@ -196,6 +201,7 @@ namespace SmallWorld
         }
     }
 
+    [Serializable]
     public class WaterTile : Tile
     {
         public override TileType Type

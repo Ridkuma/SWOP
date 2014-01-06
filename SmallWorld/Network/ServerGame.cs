@@ -159,7 +159,7 @@ namespace SmallWorld
 
 			// Send init info to new client
 			SendToOneClient(newPlayerId, NetworkCommand.LoginAccepted, newPlayerId);
-			SendToOneClient(newPlayerId, NetworkCommand.InitMap, (int) GameMaster.GM.GameBuilder.LastBuilderMapStrategy, MapBoard.GetRandomSeed());
+			SendToOneClient(newPlayerId, NetworkCommand.InitMap, (int) GameMaster.GM.GameBuilder.LastBuilderMapStrategy, MapBoard.RandomSeed);
 			for (int i = 0; i < Players.Count - 1; i++) // Send to new client the existing players (except itself)
 				SendToOneClient(newPlayerId, NetworkCommand.NewPlayer, i, (int) Players[i].CurrentFaction.Name, Players[i].Name);
 

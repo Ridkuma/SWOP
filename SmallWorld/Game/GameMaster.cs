@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace SmallWorld
 {
@@ -11,6 +14,8 @@ namespace SmallWorld
 		public GameBuilder GameBuilder { get; protected set; }
 		public IGame CurrentGame { get; protected set; }
 
+        public const string SAVEFILE_PATH = "gamesave.dat";
+        private BinaryFormatter formatter;
 
 		/// <summary>
 		/// Constructor of singleton GameMaster class
@@ -22,6 +27,7 @@ namespace SmallWorld
 			GM = this;
 
 			GameBuilder = new GameBuilder();
+            formatter = new BinaryFormatter();
 		}
 
 
@@ -37,14 +43,57 @@ namespace SmallWorld
 		}
 
 
+        /// <summary>
+        /// Save current game (map, players...)
+        /// </summary>
+        public void SaveGame()
+        {
+            try
+            {
+                // Create a FileStream that will write data to file.
+                FileStream fileStream = new FileStream(SAVEFILE_PATH, FileMode.Create, FileAccess.Write);
+                formatter.Serialize(fileStream, (LocalGame)CurrentGame);
+                fileStream.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("[ERROR] Unable to save game data : [" + e.Source + "]" + e.Message);
+            }
+        }
+
+
 		/// <summary>
-		/// Load an existing game (map, players...)
+		/// Load last saved game (map, players...)
 		/// </summary>
         public void LoadGame()
 		{
-			throw new NotImplementedException();
+            if (CurrentGame != null)
+                DestroyGame();
+            
+            if (File.Exists(SAVEFILE_PATH))
+            {
+                try
+                {
+                    // Read data file.
+                    FileStream fileStream = new FileStream(SAVEFILE_PATH, FileMode.Open, FileAccess.Read);
+                    CurrentGame = (LocalGame) formatter.Deserialize(fileStream);
+                    fileStream.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("[ERROR] Unable to read game data : [" + e.Source + "]" + e.Message);
+                }
+
+                CurrentGame.MapBoard.RefreshAlgoMap();
+            }
 		}
 
+
+        public void FinishLoadGame()
+        {
+            if (CurrentGame != null)
+                CurrentGame.OnRaiseStartGame();
+        }
 
 		/// <summary>
 		/// 'Destroy' the game from memory

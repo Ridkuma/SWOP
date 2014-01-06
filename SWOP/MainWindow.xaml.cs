@@ -79,7 +79,7 @@ namespace SWOP
             this.MediaPlayer.MediaEnded += OnMediaEnded;
 
 			// GUI
-			btnNextPlayer.Visibility = System.Windows.Visibility.Visible;
+			btnNextPlayer.Visibility = Visibility.Visible;
 			btnNextPlayer.Content = "Start Game !";
 			
 			if (MapView != null)
@@ -130,8 +130,8 @@ namespace SWOP
 			lblPlayer2Name.Content = g.Players[1].Name;
 			lblNbTurn.Content = "Turn " + g.CurrentTurn + "/" + g.MapBoard.TotalNbTurn;
 
-			borderPlayer1.Visibility = (g.CurrentPlayerId == 0) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
-			borderPlayer2.Visibility = (g.CurrentPlayerId == 1) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+			borderPlayer1.Visibility = (g.CurrentPlayerId == 0) ? Visibility.Visible : Visibility.Hidden;
+			borderPlayer2.Visibility = (g.CurrentPlayerId == 1) ? Visibility.Visible : Visibility.Hidden;
 
 			// Bottom UI elements
 			if (ActiveUnitView != null)
@@ -155,15 +155,66 @@ namespace SWOP
                 factionView.BuryOurDeads();
             }
 
-			btnNextPlayer.Visibility = (g.CurrentPlayerIsMe) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+			btnNextPlayer.Visibility = (g.CurrentPlayerIsMe) ? Visibility.Visible : Visibility.Hidden;
 		}
 
+
 		#region ButtonsEvents
+
+        // Main menu -----------------------------------------------------------
+
+        /// <summary>
+        /// Open creation game window
+        /// </summary>
+        private void ButtonGameCreation_Click(object sender, RoutedEventArgs e)
+        {
+            menuGrid.Visibility = Visibility.Hidden;
+            creationGrid.Visibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// Load last game saved
+        /// </summary>
+        private void ButtonLoad_Click(object sender, RoutedEventArgs e)
+        {
+            GM.LoadGame();
+
+            // Subscribe to Game events
+            GM.CurrentGame.OnStartGame += OnStartGame;
+            GM.CurrentGame.OnNextPlayer += OnNextPlayer;
+            GM.CurrentGame.OnEndGame += OnEndGame;
+            GM.CurrentGame.OnMoveUnit += OnMoveUnit;
+            GM.CurrentGame.OnNewChatMessage += OnNewChatMessage;
+
+            GM.FinishLoadGame();
+
+            menuGrid.Visibility = Visibility.Hidden;
+            creationGrid.Visibility = Visibility.Hidden;
+            gameGrid.Visibility = Visibility.Visible;
+        }
+
+        // tmp
+        private void ButtonJoinServer_Click(object sender, RoutedEventArgs e)
+        {
+            // tmp
+            List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
+            listFaction.Add(new Tuple<string, FactionName>("MeTheTinyClient", FactionName.Gauls));
+
+            NewGame(BuilderGameStrategy.Client, BuilderMapStrategy.Demo, listFaction);
+
+            menuGrid.Visibility = Visibility.Hidden;
+            creationGrid.Visibility = Visibility.Hidden;
+            gameGrid.Visibility = Visibility.Visible;
+        }
+
+
+
+        // Game creation -----------------------------------------------------------
 
         /// <summary>
         /// Starts Multi Player game creation
         /// </summary>
-        private void ButtonMultiPlayer_Click(object sender, RoutedEventArgs e)
+        private void ButtonValidate_Click(object sender, RoutedEventArgs e)
         {
             // tmp
             List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
@@ -173,32 +224,71 @@ namespace SWOP
             NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Demo, listFaction); // tmp
             this.GM.CurrentGame.Start(); // Ask explicitely to launch game
 
-            menuGrid.Visibility = Visibility.Collapsed;
+            menuGrid.Visibility = Visibility.Hidden;
+            creationGrid.Visibility = Visibility.Hidden;
             gameGrid.Visibility = Visibility.Visible;
         }
+
+        // tmp
+        private void ButtonLaunchServer_Click(object sender, RoutedEventArgs e)
+        {
+            // tmp
+            List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
+            listFaction.Add(new Tuple<string, FactionName>("MeTheServer", FactionName.Vikings));
+
+            NewGame(BuilderGameStrategy.Server, BuilderMapStrategy.Small, listFaction);
+
+            menuGrid.Visibility = Visibility.Hidden;
+            creationGrid.Visibility = Visibility.Hidden;
+            gameGrid.Visibility = Visibility.Visible;
+        }
+
+
+        // Pause menu -----------------------------------------------------------
 
 		/// <summary>
 		/// Pause the game and display main menu
 		/// </summary>
         private void ButtonMenu_Click(object sender, RoutedEventArgs e)
         {
-            mainMenu.Visibility = System.Windows.Visibility.Visible;
+            btnOpenMenu.Visibility = Visibility.Hidden;
+            mainMenu.Visibility = Visibility.Visible;
             BlurEffect blur = new BlurEffect();
             blur.Radius = 15;
             mapGrid.Effect = blur;
             this.MediaPlayer.Volume = MIN_VOLUME;
         }
 
-
 		/// <summary>
 		/// Resume the game and hide main menu
 		/// </summary>
         private void ButtonResume_Click(object sender, RoutedEventArgs e)
         {
-            mainMenu.Visibility = System.Windows.Visibility.Hidden;
+            btnOpenMenu.Visibility = Visibility.Visible;
+            mainMenu.Visibility = Visibility.Hidden;
             mapGrid.Effect = null;
             this.MediaPlayer.Volume = MAX_VOLUME;
         }
+
+        /// <summary>
+        /// Save current game
+        /// </summary>
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+            GM.SaveGame();
+            ButtonResume_Click(sender, e);
+        }
+
+        /// <summary>
+        /// Quit game
+        /// </summary>
+        private void ButtonGoMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            menuGrid.Visibility = Visibility.Visible;
+            gameGrid.Visibility = Visibility.Hidden;
+        }
+
+
 
         /// <summary>
         /// Mutes BGM
@@ -231,27 +321,6 @@ namespace SWOP
 			NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Demo, listFaction);
         }
 
-
-		// tmp
-		private void ButtonLaunchServer_Click(object sender, RoutedEventArgs e)
-		{
-			// tmp
-			List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
-			listFaction.Add(new Tuple<string, FactionName>("MeTheServer", FactionName.Vikings));
-
-			NewGame(BuilderGameStrategy.Server, BuilderMapStrategy.Small, listFaction);
-		}
-
-
-		// tmp
-		private void ButtonJoinServer_Click(object sender, RoutedEventArgs e)
-		{
-			// tmp
-			List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
-			listFaction.Add(new Tuple<string, FactionName>("MeTheTinyClient", FactionName.Gauls));
-
-			NewGame(BuilderGameStrategy.Client, BuilderMapStrategy.Demo, listFaction);
-		}
 
 
 		/// <summary>
@@ -356,8 +425,8 @@ namespace SWOP
 				IGame g = GM.CurrentGame;
 				lblNbTurn.Content = "Game Over !";
 
-				borderPlayer1.Visibility = System.Windows.Visibility.Hidden;
-				borderPlayer2.Visibility = System.Windows.Visibility.Hidden;
+				borderPlayer1.Visibility = Visibility.Hidden;
+				borderPlayer2.Visibility = Visibility.Hidden;
 			});
 		}
 

@@ -109,7 +109,6 @@ namespace SmallWorld
         {
             this.ChangeState(UnitState.Attacking);
             enemy.ChangeState(UnitState.Defending);
-            this.Mvt--;
             GameMaster.GM.CurrentGame.Fight(this, enemy);
 
             // Check wounds after fighting
@@ -119,9 +118,15 @@ namespace SmallWorld
                 this.ChangeState(UnitState.Idle);
 
             if (enemy.Hp == 0)
+            {
                 enemy.Die();
+                if (!enemy.Position.IsOccupied())
+                    this.Move(enemy.Position);
+            }
             else
                 enemy.ChangeState(UnitState.Idle);
+
+            this.Mvt--;
         }
 
         #endregion

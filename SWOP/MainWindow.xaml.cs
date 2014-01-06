@@ -155,6 +155,10 @@ namespace SWOP
                 factionView.BuryOurDeads();
             }
 
+            // Update player score : TMP ONLY TWO PLAYERS FOR NOW
+            this.lblPlayer1Score.Content = this.GM.CurrentGame.Players[0].Score;
+            this.lblPlayer2Score.Content = this.GM.CurrentGame.Players[1].Score;
+
 			btnNextPlayer.Visibility = (g.CurrentPlayerIsMe) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
 		}
 
@@ -266,8 +270,6 @@ namespace SWOP
 		}
 
 		#endregion
-
-
 
 		#region EventsHandlers
 

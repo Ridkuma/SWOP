@@ -19,6 +19,7 @@ namespace SmallWorld
 
         void AddAdjacentTile(ITile adjacentTile);
         bool IsAdjacent(ITile comparedTile);
+        bool IsAdjacentToWater();
 		bool IsOccupied();
 		bool IsOccupiedByFriend(IUnit comparedUnit);
 		bool IsOccupiedByEnnemy(IUnit comparedUnit);
@@ -67,6 +68,16 @@ namespace SmallWorld
         public bool IsAdjacent(ITile comparedTile)
         {
             return AdjacentsTiles.Contains(comparedTile);
+        }
+
+        public bool IsAdjacentToWater()
+        {
+            foreach (ITile tile in this.AdjacentsTiles)
+            {
+                if (tile.Type == TileType.Water)
+                    return true;
+            }
+            return false;
         }
 
 

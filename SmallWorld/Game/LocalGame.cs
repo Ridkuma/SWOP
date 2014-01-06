@@ -91,11 +91,21 @@ namespace SmallWorld
 		/// </summary>
 		public virtual void NextPlayer()
 		{
+            // Update player score
+            int turnScore = Players[CurrentPlayerId].CurrentFaction.GetTurnScore();
+            Players[CurrentPlayerId].Score += turnScore;
+
 			CurrentPlayerId++;
+
+            if (this.IsAnyPlayerOverkilled())
+            {
+                End();
+                return;
+            }
 
 			if (CurrentPlayerId >= Players.Count)
 			{
-				if (CurrentTurn >= MapBoard.TotalNbTurn || this.IsAnyPlayerOverkilled()) // Is end of total turns or player wiped out ? => game over
+				if (CurrentTurn >= MapBoard.TotalNbTurn) // Is end of total turns => game over
 				{
 					End();
 				}

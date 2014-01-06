@@ -19,6 +19,7 @@ namespace SmallWorld
 		void AddUnit(string name, ITile startPos);
         void GenerateUnits(int nbUnits, ITile startPos);
         bool IsDecimated();
+        int GetTurnScore();
     }
 
     public abstract class Faction : IFaction
@@ -27,7 +28,15 @@ namespace SmallWorld
         public List<IUnit> Units { get; protected set; }
         public List<string> AvailableNames { get; protected set; }
 
+        /// <summary>
+        /// Create new unit
+        /// </summary>
         public abstract void AddUnit(string name, ITile startPos);
+
+        /// <summary>
+        /// Get score of all units for this turn
+        /// </summary>
+        public abstract int GetTurnScore();
 
         static Random random = new Random();
 
@@ -91,13 +100,29 @@ namespace SmallWorld
             };
 		}
 
-		/// <summary>
-		/// Create new unit
-		/// </summary>
+		
 		public override void AddUnit(string name, ITile startPos)
 		{
 			Units.Add(new VikingsUnit(name, startPos));
 		}
+
+        public override int GetTurnScore()
+        {
+            int score = 0;
+            foreach (Unit unit in this.Units)
+            {
+                if (unit.State == UnitState.Dead || unit.Position.Type == TileType.Water)
+                    continue;
+
+                if (unit.Position.IsAdjacentToWater())
+                    score += 2;
+                else
+                    score += 1;
+            }
+
+            return score;
+        }
+
     }
 
     public class GaulsFaction : Faction
@@ -121,14 +146,27 @@ namespace SmallWorld
             };
 		}
 
-		/// <summary>
-		/// Create new unit
-		/// </summary>
 		public override void AddUnit(string name, ITile startPos)
 		{
 			Units.Add(new GaulsUnit(name, startPos));
 		}
 
+        public override int GetTurnScore()
+        {
+            int score = 0;
+            foreach (Unit unit in this.Units)
+            {
+                if (unit.State == UnitState.Dead || unit.Position.Type == TileType.Mountain)
+                    continue;
+
+                if (unit.Position.Type == TileType.Field)
+                    score += 2;
+                else
+                    score += 1;
+            }
+
+            return score;
+        }
     }
 
     public class DwarvesFaction : Faction
@@ -155,13 +193,27 @@ namespace SmallWorld
             };
 		}
 
-		/// <summary>
-		/// Create new unit
-		/// </summary>
-		public override void AddUnit(string name, ITile startPos)
+        public override void AddUnit(string name, ITile startPos)
 		{
 			Units.Add(new DwarvesUnit(name, startPos));
 		}
+
+        public override int GetTurnScore()
+        {
+            int score = 0;
+            foreach (Unit unit in this.Units)
+            {
+                if (unit.State == UnitState.Dead || unit.Position.Type == TileType.Field)
+                    continue;
+
+                if (unit.Position.Type == TileType.Forest)
+                    score += 2;
+                else
+                    score += 1;
+            }
+
+            return score;
+        }
     }
 
 

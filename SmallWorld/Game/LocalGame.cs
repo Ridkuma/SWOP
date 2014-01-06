@@ -5,6 +5,7 @@ using System.Text;
 
 namespace SmallWorld
 {
+    [Serializable]
 	public class LocalGame : IGame
     {
 		/// <summary>
@@ -230,13 +231,15 @@ namespace SmallWorld
 		/// </summary>
 		#region Events
 
-		public event EventHandler<EventArgs> OnStartGame;
-		protected virtual void OnRaiseStartGame()
+        [field:NonSerializedAttribute()] 
+        public event EventHandler<EventArgs> OnStartGame;
+		public virtual void OnRaiseStartGame()
 		{
 			if (OnStartGame != null)
 				OnStartGame(this, new EventArgs());
 		}
 
+        [field:NonSerializedAttribute()] 
 		public event EventHandler<EventArgs> OnNextPlayer;
 		protected virtual void OnRaiseNextPlayer()
 		{
@@ -244,6 +247,7 @@ namespace SmallWorld
 				OnNextPlayer(this, new EventArgs());
 		}
 
+        [field:NonSerializedAttribute()] 
 		public event EventHandler<EventArgs> OnEndGame;
 		protected virtual void OnRaiseEndGame()
 		{
@@ -251,6 +255,7 @@ namespace SmallWorld
 				OnEndGame(this, new EventArgs());
 		}
 
+        [field:NonSerializedAttribute()] 
         public event EventHandler<EventArgs> OnMoveUnit;
         protected virtual void OnRaiseMoveUnit()
         {
@@ -258,6 +263,7 @@ namespace SmallWorld
                 OnMoveUnit(this, new EventArgs());
         }
 
+        [field:NonSerializedAttribute()] 
         public event EventHandler<EventArgs> OnAttackUnit;
         protected virtual void OnRaiseAttackUnit()
         {
@@ -265,6 +271,7 @@ namespace SmallWorld
                 OnAttackUnit(this, new EventArgs());
         }
 
+        [field:NonSerializedAttribute()] 
 		public event EventHandler<StringEventArgs> OnNewChatMessage;
 		public virtual void OnRaiseNewChatMessage(string text)
 		{

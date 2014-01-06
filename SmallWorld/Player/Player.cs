@@ -5,6 +5,7 @@ using System.Text;
 
 namespace SmallWorld
 {
+    [Serializable]
     public class Player
     {
 		public string Name { get; protected set; }

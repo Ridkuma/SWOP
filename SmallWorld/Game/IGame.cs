@@ -30,6 +30,7 @@ namespace SmallWorld
         event EventHandler<EventArgs> OnAttackUnit;
 		event EventHandler<StringEventArgs> OnNewChatMessage;
 
+        void OnRaiseStartGame();
 		void OnRaiseNewChatMessage(string text);
 
     }

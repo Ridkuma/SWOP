@@ -11,8 +11,9 @@ namespace SmallWorld
 		int TotalNbTurn { get; }
 		int TotalNbUnits { get; }
 		ITile[,] Tiles { get; }
+		int RandomSeed { get; }
 
-		int GetRandomSeed();
+        void RefreshAlgoMap();
 		ITile GetStartTile(int playerId);
 		int GetTileId(ITile tile);
 		ITile GetTileFromId(int id);
@@ -22,14 +23,15 @@ namespace SmallWorld
 		bool IsFavorite(int remainingFav, ITile source, ITile destination, bool canAttack, bool isOccupied);
 	}
 
-
+    [Serializable]
 	public class Map : IMap
 	{
-		private AlgoMap algo;
+        [NonSerialized] private AlgoMap algo = null;
 
 		public int MapSize { get; protected set; }
 		public int TotalNbTurn { get; protected set; }
 		public int TotalNbUnits { get; protected set; }
+        public int RandomSeed { get; protected set; }
 
 		public ITile[,] Tiles { get; protected set; }
 
@@ -46,6 +48,8 @@ namespace SmallWorld
 			TileFactory tileFactory = new TileFactory();
 			algo = new AlgoMap();
 			algo.BuildMap(MapSize, randomSeed);
+
+            RandomSeed = (randomSeed == 0) ? algo.GetRandomSeed() : randomSeed;
 
 			for (int y = 0; y < MapSize; y++)
 			{
@@ -85,14 +89,14 @@ namespace SmallWorld
 			}
 		}
 
-
-		/// <summary>
-		/// Return the seed used to generate the map
-		/// </summary>
-		public int GetRandomSeed()
-		{
-			return algo.GetRandomSeed();
-		}
+        /// <summary>
+        /// Call initialization of the algo after load game
+        /// </summary>
+        public void RefreshAlgoMap()
+        {
+            algo = new AlgoMap();
+            algo.BuildMap(MapSize, RandomSeed);
+        }
 
 		/// <summary>
 		/// Return start coords of a specific player
@@ -127,7 +131,7 @@ namespace SmallWorld
 		/// </summary>
 		public bool CanMoveTo(ITile source, ITile destination)
 		{
-			int idToSelect = 0;
+            int idToSelect = 0;
 			for (int i = 0; i < source.OccupyingUnits.Count; i++)
 				if (source.OccupyingUnits[i].State == UnitState.Selected)
 				{

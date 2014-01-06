@@ -22,6 +22,7 @@ namespace SmallWorld
         int GetTurnScore();
     }
 
+    [Serializable]
     public abstract class Faction : IFaction
     {
         public FactionName Name { get; protected set; }
@@ -79,6 +80,7 @@ namespace SmallWorld
         }
     }
 
+    [Serializable]
     public class VikingsFaction : Faction
     {
         public VikingsFaction()
@@ -125,6 +127,7 @@ namespace SmallWorld
 
     }
 
+    [Serializable]
     public class GaulsFaction : Faction
     {
         public GaulsFaction()
@@ -169,6 +172,7 @@ namespace SmallWorld
         }
     }
 
+    [Serializable]
     public class DwarvesFaction : Faction
     {
         public DwarvesFaction()

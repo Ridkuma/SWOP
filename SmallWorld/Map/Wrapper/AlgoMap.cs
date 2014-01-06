@@ -10,6 +10,7 @@
 using System;
 using System.Runtime.InteropServices;
 
+
 public class AlgoMap : IDisposable {
   private HandleRef swigCPtr;
   protected bool swigCMemOwn;

@@ -150,10 +150,14 @@ namespace SWOP
 			}
 
             // Remove dead units
-            foreach (FactionView factionView in this.FactionsViews)
-            {
-                factionView.BuryOurDeads();
-            }
+           	foreach (FactionView factionView in this.FactionsViews)
+           	{
+				factionView.BuryOurDeads();
+      		}
+
+           	// Update player score : TMP ONLY TWO PLAYERS FOR NOW
+			this.lblPlayer1Score.Content = this.GM.CurrentGame.Players[0].Score;
+			this.lblPlayer2Score.Content = this.GM.CurrentGame.Players[1].Score;
 
 			btnNextPlayer.Visibility = (g.CurrentPlayerIsMe) ? Visibility.Visible : Visibility.Hidden;
 		}
@@ -335,8 +339,6 @@ namespace SWOP
 		}
 
 		#endregion
-
-
 
 		#region EventsHandlers
 

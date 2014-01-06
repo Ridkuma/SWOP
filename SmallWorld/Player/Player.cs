@@ -10,24 +10,25 @@ namespace SmallWorld
     {
 		public string Name { get; protected set; }
 		public IFaction CurrentFaction { get; protected set; }
-		public int Score { get; protected set; }
+		public int Score { get; set; }
 
 
         public Player(string name, FactionName faction)
         {
-			Name = name;
+			this.Name = name;
+            this.Score = 0;
 			switch (faction)
 			{
 				case FactionName.Dwarves:
-					CurrentFaction = new DwarvesFaction();
+                    this.CurrentFaction = new DwarvesFaction();
 					break;
 
 				case FactionName.Gauls:
-					CurrentFaction = new GaulsFaction();
+                    this.CurrentFaction = new GaulsFaction();
 					break;
 
 				case FactionName.Vikings:
-					CurrentFaction = new VikingsFaction();
+                    this.CurrentFaction = new VikingsFaction();
 					break;
 
 				default:

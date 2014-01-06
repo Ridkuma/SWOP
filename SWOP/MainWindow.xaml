@@ -6,6 +6,7 @@
         MinWidth="800" MinHeight="600"
         Loaded="MainWindow_Loaded" Closed="MainWindow_Closed"
 		Background="#FF141019"
+        Icon="Resources/swop.ico"
     >
 
     <!-- Resources -->
@@ -67,30 +68,36 @@
             </Grid.Resources>
 
             <Image Source="Resources/BGP_StartScreen.jpg" Stretch="UniformToFill"/>
+            
+            <!-- Title screen grid -->
+            <Grid Name="titleGrid" Visibility="Visible">
+                <TextBlock Name="firstTitleText" Text="SmallWorld" FontFamily="Resources/fonts/#Dark Crystal Outline" FontSize="100" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0" Opacity="0"/>
+                <TextBlock Name="secondTitleText" Text="of POO" FontFamily="Resources/fonts/#Dark Crystal Script" FontSize="50" Foreground="Black" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="530,175,49,0" Opacity="0" RenderTransformOrigin="0.5,0.5" Width="213">
+                    <TextBlock.RenderTransform>
+                        <RotateTransform Angle="-25.492"/>
+                    </TextBlock.RenderTransform>
+                    <TextBlock.Triggers>
+                        <!-- Fades Title blocks in -->
+                        <EventTrigger RoutedEvent="TextBlock.Loaded">
+                            <BeginStoryboard Storyboard="{DynamicResource titleFadeIn}" />
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>
 
-            <TextBlock Name="firstTitleText" Text="SmallWorld" FontFamily="Resources/fonts/#Dark Crystal Outline" FontSize="100" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0" Opacity="0"/>
-            <TextBlock Name="secondTitleText" Text="of POO" FontFamily="Resources/fonts/#Dark Crystal Script" FontSize="50" Foreground="Black" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="530,175,49,0" Opacity="0" RenderTransformOrigin="0.5,0.5" Width="213">
-                <TextBlock.RenderTransform>
-                    <RotateTransform Angle="-25.492"/>
-                </TextBlock.RenderTransform>
-                <TextBlock.Triggers>
-                    <!-- Fades Title blocks in -->
-                    <EventTrigger RoutedEvent="TextBlock.Loaded">
-                        <BeginStoryboard Storyboard="{DynamicResource titleFadeIn}" />
-                    </EventTrigger>
-                </TextBlock.Triggers>
-            </TextBlock>
-
-            <Button Name="buttonSinglePlayer" Style="{StaticResource startupPageButton}" Margin="0,319,0,0">
-                <Button.Content>
-                    <TextBlock Text="Single Player" Style="{StaticResource textDropShadow}" />
-                </Button.Content>
-            </Button>
-            <Button Name="buttonMultiPlayer" Click="ButtonMultiPlayer_Click" Style="{StaticResource startupPageButton}" Margin="0,408,0,0">
-                <Button.Content>
-                    <TextBlock Text="Multi Player" Style="{StaticResource textDropShadow}" />
-                </Button.Content>
-            </Button>
+                <Button Name="buttonSinglePlayer" Style="{StaticResource startupPageButton}" Margin="0,319,0,0">
+                    <Button.Content>
+                        <TextBlock Text="Single Player" Style="{StaticResource textDropShadow}" />
+                    </Button.Content>
+                </Button>
+                <Button Name="buttonMultiPlayer" Click="ButtonMultiPlayer_Click" Style="{StaticResource startupPageButton}" Margin="0,408,0,0">
+                    <Button.Content>
+                        <TextBlock Text="Multi Player" Style="{StaticResource textDropShadow}" />
+                    </Button.Content>
+                </Button>
+            </Grid>
+            
+            <!-- Game creation grid -->
+            
         </Grid>
 
         <!-- Game Grid -->

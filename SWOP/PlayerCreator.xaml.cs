@@ -65,15 +65,40 @@ namespace SWOP
         }
 
 
-        private void RefreshUI()
+        private void RefreshUI() // TODO
         {
-            btnViking.Background = new SolidColorBrush((factionChosen == FactionName.Vikings) ? factionSelectedColor : factionIdleColor);
-            btnGaul.Background = new SolidColorBrush((factionChosen == FactionName.Gauls) ? factionSelectedColor : factionIdleColor);
-            btnDwarf.Background = new SolidColorBrush((factionChosen == FactionName.Dwarves) ? factionSelectedColor : factionIdleColor);
+            SolidColorBrush idleColor = new SolidColorBrush(factionIdleColor);
+            SolidColorBrush selectedColor = new SolidColorBrush(factionSelectedColor);
+
+            btnViking.Background = idleColor;
+            btnGaul.Background = idleColor;
+            btnDwarf.Background = idleColor;
+
+            //btnViking.IsHitTestVisible = true;
+            //btnGaul.IsHitTestVisible = true;
+            //btnDwarf.IsHitTestVisible = true;
 
             //imgViking.Visibility = (factionChosen == FactionName.Vikings) ? Visibility.Visible : Visibility.Hidden;
             //imgGaul.Visibility = (factionChosen == FactionName.Gauls) ? Visibility.Visible : Visibility.Hidden;
             //imgDwarf.Visibility = (factionChosen == FactionName.Dwarves) ? Visibility.Visible : Visibility.Hidden;
+
+            switch (factionChosen)
+            {
+                case FactionName.Vikings:
+                    btnViking.Background = selectedColor;
+                    //btnViking.IsHitTestVisible = false;
+                    break;
+
+                case FactionName.Gauls:
+                    btnGaul.Background = selectedColor;
+                    //btnGaul.IsHitTestVisible = false;
+                    break;
+
+                case FactionName.Dwarves:
+                    btnDwarf.Background = selectedColor;
+                    //btnDwarf.IsHitTestVisible = false;
+                    break;
+            }
         }
     }
 }

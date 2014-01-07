@@ -162,6 +162,9 @@
     <Resource Include="Resources\musics\BGM3_DS2.mp3" />
     <Resource Include="Resources\musics\BGM1_AoE2.mp3" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\textures\BGT_PlayerCreator.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

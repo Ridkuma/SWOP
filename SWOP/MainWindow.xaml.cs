@@ -5,6 +5,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using SmallWorld;
+using System.Windows.Threading;
 
 namespace SWOP
 {
@@ -24,6 +25,9 @@ namespace SWOP
         private static Random RAND = new Random();
         private static String PATH;
 
+        private DispatcherTimer moveTimer;
+        private float moveDirX, moveDirY;
+
         private const int MIN_VOLUME = 20;
         private const int MAX_VOLUME = 80;
 
@@ -37,6 +41,10 @@ namespace SWOP
             PATH = System.Environment.CurrentDirectory;
             PATH = PATH.Replace(@"\Debug", @"\SWOP\Resources");
             PATH = PATH.Replace(@"\Release", @"\SWOP\Resources");
+
+            moveTimer = new System.Windows.Threading.DispatcherTimer();
+            moveTimer.Tick += new EventHandler(moveMap_Tick);
+            moveTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
         }
 
 		/// <summary>
@@ -293,6 +301,7 @@ namespace SWOP
             titleScreenGrid.Visibility = Visibility.Visible;
             creationGrid.Visibility = Visibility.Collapsed;
             gameGrid.Visibility = Visibility.Collapsed;
+            ButtonResume_Click(sender, e);
         }
 
 
@@ -357,6 +366,7 @@ namespace SWOP
 			this.Dispatcher.Invoke((OnModifyWPFCallback) delegate()
 			{
 				MapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
+                mapGrid.Margin = new Thickness(20, 20, 0, 0);
 
 				FactionsViews = new List<FactionView>();
 				foreach (Player p in GM.CurrentGame.Players)
@@ -461,6 +471,53 @@ namespace SWOP
 
 		#endregion
 
+        #region MoveMapHandlers
 
-	}
+        private void rectMoveLeft_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            moveDirX = 2.5f;
+            moveDirY = 0;
+            moveTimer.Start();
+        }
+
+        private void rectMoveTop_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            moveDirX = 0;
+            moveDirY = 2.5f;
+            moveTimer.Start();
+        }
+
+        private void rectMoveRight_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            moveDirX = -2.5f;
+            moveDirY = 0;
+            moveTimer.Start();
+        }
+
+        private void rectMoveBottom_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            moveDirX = 0;
+            moveDirY = -2.5f;
+            moveTimer.Start();
+        }
+
+        private void rectMove_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            moveDirX = 0;
+            moveDirY = 0f;
+            moveTimer.Stop();
+        }
+
+        private void moveMap_Tick(object sender, EventArgs e)
+        {
+            if (MapView == null)
+                return;
+
+            if ((moveDirY == 0 && (mapGrid.Margin.Left > - MapView.Map.MapSize * 10 || moveDirX > 0) && (mapGrid.Margin.Left < 30 || moveDirX < 0))
+                || (moveDirX == 0 && (mapGrid.Margin.Top > - MapView.Map.MapSize * 10 || moveDirY > 0) && (mapGrid.Margin.Top < 30 || moveDirY < 0)))
+                mapGrid.Margin = new Thickness(mapGrid.Margin.Left + moveDirX, mapGrid.Margin.Top + moveDirY, 0, 0);
+        }
+
+        #endregion
+    }
 }

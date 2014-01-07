@@ -128,6 +128,10 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="80px"/>
             </Grid.RowDefinitions>
+
+            <!-- Main grid -->
+            <Grid x:Name="mapGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1"/>
+            
             <!-- Top header -->
             <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
@@ -151,13 +155,12 @@
                 <Label Name="lblPlayer2Score" Content="0" Grid.Column="4" Foreground="#FFD83626" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
 
                 <Label Name="lblPlayer1Name" Content="Player1Name" Grid.Column="1" Foreground="#FF3E62FF" Margin="10,0,0,0"/>
-                <Border Name="borderPlayer1" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Background="#FF2C48C3" Visibility="Hidden"/>
+                <Border Name="borderPlayer1" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="#FF2C48C3" Visibility="Hidden"/>
 
                 <Label Name="lblPlayer2Name" Content="Player2Name" Grid.Column="3" Foreground="#FFD83626" HorizontalAlignment="Right" Margin="0,0,10,0"/>
-                <Border Name="borderPlayer2" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="1" Background="#FFA62D1A" Visibility="Hidden"/>
+                <Border Name="borderPlayer2" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Background="#FFA62D1A" Visibility="Hidden"/>
             </Grid>
-            <!-- Main grid -->
-            <Grid x:Name="mapGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1"/>
+            
             <!-- Pause menu -->
             <Canvas Name="mainMenu" Width="150" Height="200" Grid.Row="1" Margin="321,79,321,191" Visibility="Hidden">
                 <Rectangle Stroke="#FFBF8850" Fill="#FF1C2427" Width="150" Height="240"/>
@@ -198,6 +201,11 @@
                     <Button Name="btnNextPlayer" Grid.Column="2" Content="Start Game !" Margin="5,20,5,0" VerticalAlignment="Top" Height="38" Click="ButtonNextPlayer_Click" Background="#FFBF8850"/>
                 </Grid>
             </Border>
+
+            <Rectangle Name="rectMoveLeft" Fill="#00000000" HorizontalAlignment="Left" VerticalAlignment="Top" Width="13" MouseEnter="rectMoveLeft_MouseEnter" MouseLeave="rectMove_MouseLeave" Grid.Row="0" Grid.RowSpan="3" Height="1000" Margin="0,15"/>
+            <Rectangle Name="rectMoveTop" Fill="#00000000" HorizontalAlignment="Left" VerticalAlignment="Top" Height="13" MouseEnter="rectMoveTop_MouseEnter" MouseLeave="rectMove_MouseLeave" Grid.Row="0" Width="2000"/>
+            <Rectangle Name="rectMoveRight" Fill="#00000000" HorizontalAlignment="Right" VerticalAlignment="Top" Width="13" MouseEnter="rectMoveRight_MouseEnter" MouseLeave="rectMove_MouseLeave" Grid.Row="0" Grid.RowSpan="3" Height="1000" Margin="0,15"/>
+            <Rectangle Name="rectMoveBottom" Fill="#00000000" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="13" MouseEnter="rectMoveBottom_MouseEnter" MouseLeave="rectMove_MouseLeave" Grid.Row="2" Width="2000"/>
         </Grid>
     </Grid>
 </Window>

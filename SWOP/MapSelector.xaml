@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="SWOP.MapSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="150" Width="500">
+
+    <!-- Resources -->
+    <UserControl.Resources>
+        <Style x:Key="labelContent" TargetType="Label">
+            <Setter Property="FontFamily" Value="Resources/fonts/#Dark Crystal Outline" />
+            <Setter Property="FontSize" Value="40" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+    </UserControl.Resources>
+
+    <UserControl.Background>
+        <ImageBrush ImageSource="Resources/textures/BGT_PlayerCreator.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,300,300" Opacity="0.9"/>
+    </UserControl.Background>
+
+    <Border BorderBrush="Black" BorderThickness="2">
+        <Grid>
+            <Label Content="Map" Style="{StaticResource labelContent}" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+
+            <Button Name="btnDemo" HorizontalAlignment="Center" Margin="-200,55,0,0" VerticalAlignment="Top" Click="btnDemo_Click">
+                <Image Source="Resources/ui/demo.png" Stretch="Fill" Height="65" Width="65"/>
+            </Button>
+            <Button Name="btnSmall" HorizontalAlignment="Center" Margin="0,55,0,0" VerticalAlignment="Top" Click="btnSmall_Click">
+                <Image Source="Resources/ui/small.png" Stretch="Fill" Height="65" Width="65"/>
+            </Button>
+            <Button Name="btnNormal" HorizontalAlignment="Center" Margin="200,55,0,0" VerticalAlignment="Top" Click="btnNormal_Click">
+                <Image Source="Resources/ui/normal.png" Stretch="Fill" Height="65" Width="65"/>
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

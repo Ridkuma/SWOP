@@ -251,12 +251,7 @@ namespace SWOP
         /// </summary>
         private void ButtonValidate_Click(object sender, RoutedEventArgs e)
         {
-            // tmp
-            //List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
-            //listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
-            //listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
-
-            NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Demo, this.GetPlayersInfo()); // tmp
+            NewGame(BuilderGameStrategy.Local, this.mapSelector.mapChosen, this.GetPlayersInfo());
             this.GM.CurrentGame.Start(); // Ask explicitely to launch game
 
             menuGrid.Visibility = Visibility.Collapsed;

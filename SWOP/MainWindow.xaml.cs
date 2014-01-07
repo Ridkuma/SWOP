@@ -154,7 +154,6 @@ namespace SWOP
 		public void RefreshUI()
 		{
 			IGame g = GM.CurrentGame;
-
 			// Header UI elements
 			lblPlayer1Name.Content = g.Players[0].Name;
 			lblPlayer2Name.Content = g.Players[1].Name;

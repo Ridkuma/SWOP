@@ -166,9 +166,15 @@
     <Resource Include="Resources\textures\BGT_PlayerCreator.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ui\sword.jpg" />
-    <Resource Include="Resources\ui\footstep.jpg" />
-    <Resource Include="Resources\ui\heart.jpg" />
+    <Resource Include="Resources\ui\foot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ui\heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ui\sword.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\ui\shield.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

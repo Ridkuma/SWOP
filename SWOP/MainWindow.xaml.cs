@@ -117,6 +117,28 @@ namespace SWOP
             this.MediaPlayer.Play();
         }
 
+        /// <summary>
+        /// Browse all logical children to find Player Creators and get their infos
+        /// </summary>
+        /// <returns>A list of tuples (PlayerName, FactionName)</returns>
+        public List<Tuple<string, FactionName>> GetPlayersInfo()
+        {
+            List<Tuple<string, FactionName>> playersInfos = new List<Tuple<string, FactionName>>();
+
+            foreach (UIElement element in this.creationGrid.Children)
+            {
+                if (! (element is PlayerCreator))
+                    continue;
+
+                PlayerCreator playerCreator = (PlayerCreator) element;
+                if (!playerCreator.isReady)
+                    continue;
+
+                playersInfos.Add(new Tuple<string, FactionName>(playerCreator.nameChosen, playerCreator.factionChosen));
+            }
+
+            return playersInfos;
+        }
 
 		/// <summary>
 		/// Ask explicitely to refresh each UI elements (may be tmp and replaced by bindings)
@@ -219,11 +241,11 @@ namespace SWOP
         private void ButtonValidate_Click(object sender, RoutedEventArgs e)
         {
             // tmp
-            List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
-            listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
-            listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
+            //List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
+            //listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
+            //listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
 
-            NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Demo, listFaction); // tmp
+            NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Demo, this.GetPlayersInfo()); // tmp
             this.GM.CurrentGame.Start(); // Ask explicitely to launch game
 
             menuGrid.Visibility = Visibility.Collapsed;

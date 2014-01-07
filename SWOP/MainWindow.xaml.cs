@@ -145,12 +145,13 @@ namespace SWOP
 			if (ActiveUnitView != null)
 			{
 				unitName.Text = ActiveUnitView.Unit.Name;
-                unitHp.Text = "HP : " + ActiveUnitView.Unit.Hp.ToString() + "/" + ActiveUnitView.Unit.HpMax.ToString();
-				unitMvt.Text = "MVT : " + ActiveUnitView.Unit.Mvt.ToString();
-				unitAtk.Text = "ATK : " + ActiveUnitView.Unit.Atk.ToString();
-				unitDef.Text = "DEF : " + ActiveUnitView.Unit.Def.ToString();
+                unitHp.Text = ActiveUnitView.Unit.Hp.ToString() + " / " + ActiveUnitView.Unit.HpMax.ToString();
+				unitMvt.Text = ActiveUnitView.Unit.Mvt.ToString();
+				unitAtk.Text = ActiveUnitView.Unit.Atk.ToString();
+				unitDef.Text = ActiveUnitView.Unit.Def.ToString();
 				unitImg.Source = ActiveUnitView.sprite.Source;
-				selectedUnit.Visibility = Visibility.Visible;
+                unitColor.Fill = new SolidColorBrush((g.CurrentPlayerId == 0) ? Color.FromRgb(44, 72, 195) : Color.FromRgb(166, 45, 26));
+                selectedUnit.Visibility = Visibility.Visible;
 			}
 			else
 			{
@@ -190,6 +191,9 @@ namespace SWOP
         private void ButtonLoad_Click(object sender, RoutedEventArgs e)
         {
             GM.LoadGame();
+
+            if (GM.CurrentGame == null)
+                return;
 
             // Subscribe to Game events
             GM.CurrentGame.OnStartGame += OnStartGame;
@@ -344,6 +348,9 @@ namespace SWOP
 		/// </summary>
 		private void ButtonNextPlayer_Click(object sender, RoutedEventArgs e)
 		{
+            if (GM.CurrentGame == null)
+                return;
+
 			if (GM.CurrentGame.CurrentTurn == 0)
 				GM.CurrentGame.Start(); // Start game
 			else

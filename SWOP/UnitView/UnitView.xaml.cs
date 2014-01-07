@@ -46,17 +46,14 @@ namespace SWOP
             switch(this.Unit.Faction)
             {
                 case FactionName.Vikings:
-                    this.selectedSquare.Stroke = (SolidColorBrush) Resources["VikingsColor"];
                     this.sprite.Source = (BitmapImage) Resources["VikingsImg"];
                     break;
 
                 case FactionName.Gauls:
-                    this.selectedSquare.Stroke = (SolidColorBrush) Resources["GaulsColor"];
                     this.sprite.Source = (BitmapImage) Resources["GaulsImg"];
                     break;
 
                 case FactionName.Dwarves:
-                    this.selectedSquare.Stroke = (SolidColorBrush) Resources["DwarvesColor"];
                     this.sprite.Source = (BitmapImage) Resources["DwarvesImg"];
                     break;
             }
@@ -68,6 +65,7 @@ namespace SWOP
         /// </summary>
         public void UpdateAppearance()
         {
+            this.selectedSquare.Stroke = new SolidColorBrush((MainWindow.INSTANCE.GM.CurrentGame.CurrentPlayerId == 0) ? Color.FromRgb(44, 72, 195) : Color.FromRgb(166, 45, 26));
             Storyboard rectangleOpacityAnim = (Storyboard) this.grid.FindResource("rectangleOpacity");
 
             if (this.Unit.State == UnitState.Selected)

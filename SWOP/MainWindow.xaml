@@ -7,6 +7,8 @@
         Loaded="MainWindow_Loaded" Closed="MainWindow_Closed"
 		Background="#FF141019"
         Icon="Resources/swop.ico"
+        WindowState="Maximized"
+        WindowStyle="None"
     >
 
     <!-- Resources -->
@@ -78,6 +80,20 @@
                     </Storyboard>
                 </Grid.Resources>
 
+                <Button HorizontalAlignment="Left" Margin="20,0,0,20" VerticalAlignment="Bottom" Click="ButtonExit_Click">
+                    <Image Source="Resources/ui/exit.png" Stretch="Fill" Height="50" Width="50"/>
+                </Button>
+                <Button Name="btnMini" HorizontalAlignment="Left" Margin="100,0,0,20" VerticalAlignment="Bottom" Click="ButtonMini_Click">
+                    <Image Source="Resources/ui/minimize.png" Stretch="Fill" Height="50" Width="50"/>
+                </Button>
+                <Button Name="btnMaxi" HorizontalAlignment="Left" Margin="100,0,0,20" VerticalAlignment="Bottom" Click="ButtonMaxi_Click" Visibility="Hidden">
+                    <Image Source="Resources/ui/minimize.png" Stretch="Fill" Height="50" Width="50" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <ScaleTransform ScaleY="-1"/>
+                        </Image.RenderTransform>
+                    </Image>
+                </Button>
+
                 <TextBlock Name="firstTitleText" Text="SmallWorld" FontFamily="Resources/fonts/#Dark Crystal Outline" FontSize="100" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0" Opacity="0"/>
                 <TextBlock Name="secondTitleText" Text="of POO" FontFamily="Resources/fonts/#Dark Crystal Script" FontSize="50" Foreground="Black" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="530,175,49,0" Opacity="0" RenderTransformOrigin="0.5,0.5" Width="213">
                     <TextBlock.RenderTransform>
@@ -115,6 +131,10 @@
 
             <!-- Game creation grid -->
             <Grid Name="creationGrid" Visibility="Collapsed">
+                <Button Name="btnReturn" HorizontalAlignment="Left" Margin="20,0,0,20" VerticalAlignment="Bottom" Click="ButtonReturn_Click">
+                    <Image Source="Resources/ui/return.png" Stretch="Fill" Height="50" Width="50"/>
+                </Button>
+                
                 <SWOP:PlayerCreator x:Name="playerCreator1" Width="300" Height="250" Margin="-350,-250,0,0"></SWOP:PlayerCreator>
                 <SWOP:PlayerCreator x:Name="playerCreator2" Width="300" Height="250" Margin="350,-250,0,0"></SWOP:PlayerCreator>
 
@@ -130,14 +150,16 @@
                 <TextBlock Text="Game Over" FontFamily="Resources/fonts/#Dark Crystal Outline" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-280,0,0"/>
                 <TextBlock Text="- New King of SmallWorld -" FontFamily="Resources/fonts/#Dark Crystal Script" FontSize="42" Foreground="DarkGoldenrod" Style="{StaticResource textDropShadow}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0"/>
                 <TextBlock Name="victorName" Text="Player Name" FontFamily="Resources/fonts/#Dark Crystal Script" FontSize="80" Foreground="DarkGoldenrod" Style="{StaticResource textDropShadow}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,250,0,0"/>
-                <Button Content="Return to Menu" Width="100" Height="50"  Click="ButtonGoMainMenu_Click" Margin="0,0,10,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                <Button HorizontalAlignment="Left" Margin="20,0,0,20" VerticalAlignment="Bottom" Click="ButtonGoMainMenu_Click">
+                    <Image Source="Resources/ui/return.png" Stretch="Fill" Height="50" Width="50"/>
+                </Button>
             </Grid>
         </Grid>
 
 
 
         <!-- Game Grid -->
-        <Grid Name="gameGrid" Visibility="Collapsed" Margin="0,4,0,-4">
+        <Grid Name="gameGrid" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="36px"/>
                 <RowDefinition Height="*"/>
@@ -154,11 +176,11 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30px"/>
+                    <ColumnDefinition Width="50px"/>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="200px"/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="30px"/>
+                    <ColumnDefinition Width="50px"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.ColumnSpan="5" Background="#FF2B3240"/>
 

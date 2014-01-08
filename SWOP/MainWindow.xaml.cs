@@ -203,6 +203,45 @@ namespace SWOP
         // Main menu -----------------------------------------------------------
 
         /// <summary>
+        /// Exits application
+        /// </summary>
+        private void ButtonExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        /// <summary>
+        /// Exits fullscreen
+        /// </summary>
+        private void ButtonMini_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = System.Windows.WindowState.Normal;
+            this.WindowStyle = System.Windows.WindowStyle.SingleBorderWindow;
+            this.btnMini.Visibility = Visibility.Hidden;
+            this.btnMaxi.Visibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// Goes fullscreen
+        /// </summary>
+        private void ButtonMaxi_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = System.Windows.WindowState.Maximized;
+            this.WindowStyle = System.Windows.WindowStyle.None;
+            this.btnMini.Visibility = Visibility.Visible;
+            this.btnMaxi.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// Goes back to main menu
+        /// </summary>
+        private void ButtonReturn_Click(object sender, RoutedEventArgs e)
+        {
+            this.titleScreenGrid.Visibility = Visibility.Visible;
+            this.creationGrid.Visibility = Visibility.Collapsed;
+        }
+
+        /// <summary>
         /// Open creation game window
         /// </summary>
         private void ButtonGameCreation_Click(object sender, RoutedEventArgs e)

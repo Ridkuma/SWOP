@@ -99,8 +99,6 @@ namespace SmallWorld
 
 			CurrentPlayerId++;
 			
-			Players[CurrentPlayerId].MyTurn();
-
             if (this.IsAnyPlayerOverkilled())
             {
                 End();
@@ -117,11 +115,13 @@ namespace SmallWorld
 				{
 					CurrentPlayerId = 0;
 					CurrentTurn++;
+                    Players[CurrentPlayerId].MyTurn();
 					OnRaiseNextPlayer();
 				}
 			}
 			else
 			{
+                Players[CurrentPlayerId].MyTurn();
 				OnRaiseNextPlayer();
 			}
 			

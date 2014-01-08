@@ -99,11 +99,6 @@ namespace SmallWorld
             Players[CurrentPlayerId].Score += turnScore;
 
 			CurrentPlayerId++;
-<<<<<<< HEAD
-			
-=======
-
->>>>>>> 05282e43e67bfeded28dda38108acb433d515db3
             if (this.IsAnyPlayerOverkilled())
             {
                 End();
@@ -119,22 +114,16 @@ namespace SmallWorld
 				else
 				{
 					CurrentPlayerId = 0;
-<<<<<<< HEAD
-					CurrentTurn++;
-=======
                     CurrentTurn++;
->>>>>>> 05282e43e67bfeded28dda38108acb433d515db3
-                    Players[CurrentPlayerId].MyTurn();
+                    if (CurrentPlayerIsMe)
+                        Players[CurrentPlayerId].MyTurn();
 					OnRaiseNextPlayer();
 				}
 			}
 			else
-<<<<<<< HEAD
-			{
-=======
             {
->>>>>>> 05282e43e67bfeded28dda38108acb433d515db3
-                Players[CurrentPlayerId].MyTurn();
+                if (CurrentPlayerIsMe)
+                    Players[CurrentPlayerId].MyTurn();
 				OnRaiseNextPlayer();
 			}
 			
@@ -164,9 +153,9 @@ namespace SmallWorld
         /// <summary>
         /// Process attacking from a Unit to another
         /// </summary>
-        public virtual void AttackUnit(IUnit unit, IUnit enemy)
+        public virtual void AttackUnit(IUnit unit, ITile destinaton)
         {
-            unit.RealAttack(enemy);
+            unit.RealAttack(destinaton.GetBestDefUnit());
             OnRaiseAttackUnit();
         }
 
@@ -216,7 +205,7 @@ namespace SmallWorld
             {
                 double toHit = this.ToHitChance(attacker, defender);
                 int hit = RAND.Next(101);
-                if (hit <= toHit)
+                if (hit <= toHit || LocalPlayerId != -1)
                     defender.Hp--;
                 else
                     attacker.Hp--;
@@ -224,14 +213,6 @@ namespace SmallWorld
                 turns--;
             }
         }
-
-		/// <summary>
-		/// Save the game in an external file
-		/// </summary>
-		public virtual void Save()
-		{
-			throw new NotImplementedException();
-		}
 
 		/// <summary>
 		/// End of the game

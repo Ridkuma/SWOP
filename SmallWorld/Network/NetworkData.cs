@@ -20,14 +20,15 @@ namespace SmallWorld
 		NextPlayer,			// ()
 		Message,			// (0, 0, message)
 		UnitMove,			// (ownerPlayerId, targetTile, name)
-		Attack,
+		UnitAttack,         // (ownerPlayerId, targetTile, name)
 		
 		ClientLogin,		// (0, factionId, name)
 		ClientLogout,
 		ClientGiveIpEP,		// (0, port, ipToParse)
 		ClientNextPlayer,	// ()
 		ClientMessage,		// (0, 0, message)
-		ClientUnitMove,		// (0, targetTile, name)
+        ClientUnitMove,		// (0, targetTile, name)
+        ClientUnitAttack,	// (0, targetTile, name)
 	}
 
 

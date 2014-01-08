@@ -61,10 +61,19 @@ namespace SmallWorld
 		}
 
 
-		public override void Save()
-		{
-			throw new NotImplementedException();
-		}
+        /// <summary>
+        /// Warn each players of the new attack
+        /// </summary>
+        public override void AttackUnit(IUnit unit, ITile destination)
+        {
+            base.AttackUnit(unit, destination);
+            SendMulticast(NetworkCommand.UnitAttack, 0, MapBoard.GetTileId(destination), unit.Name);
+        }
+        public void AttackUnit(IUnit unit, ITile destination, int ownerPlayer)
+        {
+            base.AttackUnit(unit, destination);
+            SendMulticast(NetworkCommand.UnitAttack, ownerPlayer, MapBoard.GetTileId(destination), unit.Name);
+        }
 
 
 		public override void End()
@@ -100,7 +109,6 @@ namespace SmallWorld
 					NextPlayer();
 					break;
 
-
 				// Player ask to move one of his unit
 				case NetworkCommand.ClientUnitMove:
 					foreach (IUnit u in Players[data.PlayerId].CurrentFaction.Units)
@@ -111,6 +119,17 @@ namespace SmallWorld
 						}
 					}
 					break;
+
+                // Player ask to attack an enemy unit
+                case NetworkCommand.ClientUnitAttack:
+                    foreach (IUnit u in Players[data.PlayerId].CurrentFaction.Units)
+                    {
+                        if (u.Name == data.ArgsString)
+                        {
+                            AttackUnit(u, MapBoard.GetTileFromId(data.ArgsInt2), data.PlayerId);
+                        }
+                    }
+                    break;
 
 				default:
 					throw new NotSupportedException();

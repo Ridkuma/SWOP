@@ -48,6 +48,9 @@ namespace SmallWorld
         /// </summary>
         public void SaveGame()
         {
+            if (CurrentGame.GetType() != typeof(LocalGame)) // Only save local game
+                return;
+
             try
             {
                 // Create a FileStream that will write data to file.
@@ -58,6 +61,8 @@ namespace SmallWorld
             catch (Exception e)
             {
                 Console.WriteLine("[ERROR] Unable to save game data : [" + e.Source + "]" + e.Message);
+                if (File.Exists(SAVEFILE_PATH))
+                    File.Delete(SAVEFILE_PATH);
             }
         }
 
@@ -78,13 +83,12 @@ namespace SmallWorld
                     FileStream fileStream = new FileStream(SAVEFILE_PATH, FileMode.Open, FileAccess.Read);
                     CurrentGame = (LocalGame) formatter.Deserialize(fileStream);
                     fileStream.Close();
+                    CurrentGame.MapBoard.RefreshAlgoMap();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("[ERROR] Unable to read game data : [" + e.Source + "]" + e.Message);
                 }
-
-                CurrentGame.MapBoard.RefreshAlgoMap();
             }
 		}
 

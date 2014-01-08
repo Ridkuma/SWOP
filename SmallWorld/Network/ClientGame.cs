@@ -39,12 +39,10 @@ namespace SmallWorld
 			SendPacket(NetworkCommand.ClientUnitMove, 0, MapBoard.GetTileId(destination), unit.Name);
 		}
 
-
-		public override void Save()
-		{
-			throw new NotImplementedException();
-		}
-
+        public override void AttackUnit(IUnit unit, ITile destination)
+        {
+            SendPacket(NetworkCommand.ClientUnitAttack, 0, MapBoard.GetTileId(destination), unit.Name);
+        }
 
 		public override void End()
 		{
@@ -112,6 +110,18 @@ namespace SmallWorld
 						Players[data.ArgsInt1].CurrentFaction.AddUnit(data.ArgsString, MapBoard.GetTileFromId(data.ArgsInt2));
 					}
 					break;
+
+                // Move unit (or create if inexisting)
+                case NetworkCommand.UnitAttack:
+                    foreach (IUnit u in Players[data.ArgsInt1].CurrentFaction.Units)
+                    {
+                        if (u.Name == data.ArgsString)
+                        {
+                            base.AttackUnit(u, MapBoard.GetTileFromId(data.ArgsInt2));
+                            break;
+                        }
+                    }
+                    break;
 
 				default:
 					throw new NotSupportedException();

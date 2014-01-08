@@ -35,15 +35,31 @@ void AlgoMap::BuildMap(int size, int rndSeed)
 	vector<vector<int> > t (mapSize, vector<int>(mapSize));
 	tiles = t;
 
+	// Init all tiles to null
+	for (int x = 0; x < mapSize; x++)
+		for (int y = 0; y < mapSize; y++)
+			tiles[x][y] = TILE_NULL;
+
 	// Start by seas
 	BuildSeaCoasts();
 
 	// Then put some random zones
 	for (int i = 0; i < mapRange * 2; i++)
 	{
+		BuildSpecialTiles(TILE_FIELD);
 		BuildSpecialTiles(TILE_MOUNTAIN);
 		BuildSpecialTiles(TILE_DESERT);
 		BuildSpecialTiles(TILE_FOREST);
+	}
+
+	// Last parsing
+	for (int x = 0; x < mapSize; x++)
+	{
+		for (int y = 0; y < mapSize; y++)
+		{
+			if (tiles[x][y] == TILE_NULL)
+				tiles[x][y] = rand() % 5;
+		}
 	}
 
 	ProcessStartPositions();
@@ -229,7 +245,7 @@ void AlgoMap::BuildSpecialTiles(int tileType)
 	{
 		centerX = rand() % mapSize;
 		centerY = rand() % mapSize;
-	} while(tiles[centerX][centerY] != TILE_FIELD);
+	} while(tiles[centerX][centerY] != TILE_NULL);
 	
 	tiles[centerX][centerY] = tileType;
 
@@ -239,7 +255,7 @@ void AlgoMap::BuildSpecialTiles(int tileType)
 		for (int y = 0; y < mapSize; y++)
 		{
 			int dist = GetDistance(centerX, centerY, x, y);
-			if (dist < min(mapRange, 3) && tiles[x][y] == TILE_FIELD && (rand() % 10) < (10 - mapRange * 2 - dist))
+			if (dist < min(mapRange, 3) && tiles[x][y] == TILE_NULL && (rand() % 10) < (10 - mapRange * 2 - dist))
 				tiles[x][y] = tileType;
 		}
 	}

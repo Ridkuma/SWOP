@@ -35,6 +35,9 @@ namespace SWOP {
             }
         }
 
+        /// <summary>
+        /// Parse maps in order to check reachable tiles
+        /// </summary>
 		public void ParseNewSelectedTile()
 		{
 			int remainingFav = 3; // Adviced tiles for next action (max 3)

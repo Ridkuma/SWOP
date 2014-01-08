@@ -97,7 +97,7 @@ namespace SmallWorld
             if (!this.CheckAttack(enemy))
                 return;
 
-            GameMaster.GM.CurrentGame.AttackUnit(this, enemy);
+            GameMaster.GM.CurrentGame.AttackUnit(this, enemy.Position);
         }
 
         /// <summary>

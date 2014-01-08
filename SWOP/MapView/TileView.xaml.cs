@@ -121,7 +121,9 @@ namespace SWOP {
             currentState = newState;
         }
 
-
+        /// <summary>
+        /// Set texture for each ground type
+        /// </summary>
         public void SetGround() {
             string brushPath = "BrushImg"; // set to "Brush" or "BrushImg"
 

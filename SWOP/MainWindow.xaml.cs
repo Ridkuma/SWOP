@@ -31,6 +31,9 @@ namespace SWOP
         private const double MIN_VOLUME = 0.2;
         private const double MAX_VOLUME = 0.8;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -81,6 +84,7 @@ namespace SWOP
 			GM.CurrentGame.OnNextPlayer += OnNextPlayer;
 			GM.CurrentGame.OnEndGame += OnEndGame;
             GM.CurrentGame.OnMoveUnit += OnMoveUnit;
+            GM.CurrentGame.OnAttackUnit += OnAttackUnit;
 			GM.CurrentGame.OnNewChatMessage += OnNewChatMessage;
 
             // Subscribe to Media event
@@ -126,6 +130,7 @@ namespace SWOP
             this.MediaPlayer.Play();
         }
 
+
         /// <summary>
         /// Browse all logical children to find Player Creators and get their infos
         /// </summary>
@@ -152,6 +157,7 @@ namespace SWOP
 
             return playersInfos;
         }
+
 
 		/// <summary>
 		/// Ask explicitely to refresh each UI elements (may be tmp and replaced by bindings)
@@ -198,8 +204,8 @@ namespace SWOP
 		}
 
 
-		#region ButtonsEvents
-
+		
+        #region MainMenu_ButtonsEvents
         // Main menu -----------------------------------------------------------
 
         /// <summary>
@@ -247,6 +253,7 @@ namespace SWOP
         private void ButtonGameCreation_Click(object sender, RoutedEventArgs e)
         {
 			playerCreator2.Visibility = Visibility.Visible;
+            mapSelector.Visibility = Visibility.Visible;
 			btnStartLocal.Visibility = Visibility.Visible;
 			btnStartServer.Visibility = Visibility.Hidden;
 			btnStartClient.Visibility = Visibility.Hidden;
@@ -284,7 +291,8 @@ namespace SWOP
         private void ButtonServerCreation_Click(object sender, RoutedEventArgs e)
         {
 			playerCreator2.Visibility = Visibility.Hidden;
-			btnStartLocal.Visibility = Visibility.Hidden;
+            mapSelector.Visibility = Visibility.Visible;
+            btnStartLocal.Visibility = Visibility.Hidden;
 			btnStartServer.Visibility = Visibility.Visible;
 			btnStartClient.Visibility = Visibility.Hidden;
 			
@@ -298,7 +306,8 @@ namespace SWOP
         private void ButtonClientCreation_Click(object sender, RoutedEventArgs e)
         {
 			playerCreator2.Visibility = Visibility.Hidden;
-			btnStartLocal.Visibility = Visibility.Hidden;
+            mapSelector.Visibility = Visibility.Hidden;
+            btnStartLocal.Visibility = Visibility.Hidden;
 			btnStartServer.Visibility = Visibility.Hidden;
 			btnStartClient.Visibility = Visibility.Visible;
 			
@@ -306,7 +315,10 @@ namespace SWOP
             creationGrid.Visibility = Visibility.Visible;
         }
 
+        #endregion
 
+
+        #region GameCreation_ButtonEvents
         // Game creation -----------------------------------------------------------
 
         /// <summary>
@@ -347,11 +359,13 @@ namespace SWOP
             gameGrid.Visibility = Visibility.Visible;
         }
 
+        #endregion
 
 
+        #region PauseMenu_ButtonEvents
         // Pause menu -----------------------------------------------------------
 
-		/// <summary>
+        /// <summary>
 		/// Pause the game and display main menu
 		/// </summary>
         private void ButtonMenu_Click(object sender, RoutedEventArgs e)
@@ -400,8 +414,6 @@ namespace SWOP
             ButtonResume_Click(sender, e);
         }
 
-
-
         /// <summary>
         /// Mutes BGM
         /// </summary>
@@ -422,10 +434,9 @@ namespace SWOP
             this.playBgmBtn.Visibility = Visibility.Hidden;
         }
 
-		// tmp
+        // tmp
         private void ButtonReload_Click(object sender, RoutedEventArgs e)
 		{
-			// tmp
 			List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
 			listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
 			listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
@@ -433,9 +444,13 @@ namespace SWOP
 			NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Demo, listFaction);
         }
 
+        #endregion
 
 
-		/// <summary>
+        #region InGame_ButtonEvents
+        // In-game -----------------------------------------------------------
+
+        /// <summary>
 		/// End current player turn
 		/// </summary>
 		private void ButtonNextPlayer_Click(object sender, RoutedEventArgs e)
@@ -472,6 +487,7 @@ namespace SWOP
         }
 
 		#endregion
+
 
 		#region EventsHandlers
 
@@ -537,13 +553,35 @@ namespace SWOP
             {
                 //this.ActiveUnitView.Move();
 
-                // TODO : tmp, could be better implemented than this 'a-la-bourrin' method
 				foreach(FactionView fv in FactionsViews)
 					foreach (UnitView uv in fv.UnitViews.Values)
 					{
 						uv.Move();
 					}
 
+            });
+        }
+
+        /// <summary>
+        /// Event received when a unit attack
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnAttackUnit(object sender, EventArgs e)
+        {
+            this.Dispatcher.Invoke((OnModifyWPFCallback)delegate()
+            {
+                //this.ActiveUnitView.Move();
+
+                foreach (FactionView fv in FactionsViews)
+                    foreach (UnitView uv in fv.UnitViews.Values)
+                    {
+                        if (uv.Unit.Hp <= 0)
+                            uv.Unit.Die();
+                        uv.Move();
+                    }
+
+                RefreshUI();
             });
         }
 
@@ -590,8 +628,12 @@ namespace SWOP
 
 		#endregion
 
-        #region MoveMapHandlers
 
+        #region MoveMapHandlers
+        /// <summary>
+        /// All handlers to move the map while mouse is over screen borders
+        /// </summary>
+        
         private void rectMoveLeft_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             moveDirX = 2.5f;

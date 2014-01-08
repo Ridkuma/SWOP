@@ -12,6 +12,10 @@ namespace SWOP
         public IFaction Faction { get; set; }
         public Dictionary<IUnit, UnitView> UnitViews { get; set; }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="faction">Model faction</param>
         public FactionView(IFaction faction)
         {
 			Faction = faction;
@@ -24,6 +28,9 @@ namespace SWOP
             }
         }
 
+        /// <summary>
+        /// Hide units when dead
+        /// </summary>
         public void BuryOurDeads()
         {
             foreach (IUnit unit in this.Faction.Units)

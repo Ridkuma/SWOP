@@ -11,6 +11,7 @@
 #define MAX_NB_PLAYERS	4
 
 // Type tile constants
+#define TILE_NULL		-1
 #define TILE_FIELD		0
 #define TILE_MOUNTAIN	1
 #define TILE_DESERT		2

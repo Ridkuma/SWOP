@@ -14,7 +14,7 @@ namespace SmallWorld
 		public int Score { get; set; }
 		
 		private bool isAI = false;
-		private DispatcherTimer aiTimer;
+        [NonSerialized] private DispatcherTimer aiTimer;
 		private int aiCurrentUnit;
         private static Random random = new Random();
 
@@ -93,10 +93,12 @@ namespace SmallWorld
                 }
             }
 
+            // Choose a random tile from the 3 favorites ones
             int nbSelectableTiles = Math.Min(remainingFavList.Count, 3);
             int selected = random.Next(nbSelectableTiles);
             u.Move(remainingFavList[selected]);
 
+            // End turn if every unit has moved
 			aiCurrentUnit++;
 			if (aiCurrentUnit >= CurrentFaction.Units.Count)
 			{

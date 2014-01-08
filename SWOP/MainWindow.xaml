@@ -26,7 +26,7 @@
         <Style x:Key="textDropShadow" TargetType="TextBlock">
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect ShadowDepth="4" Direction="330" Color="Black" Opacity="0.8" BlurRadius="4" />
+                    <DropShadowEffect ShadowDepth="3" Direction="330" Color="Black" Opacity="0.8" BlurRadius="2" />
                 </Setter.Value>
             </Setter>
         </Style>
@@ -39,7 +39,7 @@
         <Grid Name="menuGrid" Visibility="Visible">
 
             <Image Source="Resources/BGP_StartScreen.jpg" Stretch="UniformToFill"/>
-            
+
             <!-- Title Screen grid -->
             <Grid Name="titleScreenGrid" Visibility="Visible">
 
@@ -112,17 +112,25 @@
             <Grid Name="creationGrid" Visibility="Collapsed">
                 <SWOP:PlayerCreator Width="300" Height="250" Margin="-350,-250,0,0"></SWOP:PlayerCreator>
                 <SWOP:PlayerCreator Width="300" Height="250" Margin="350,-250,0,0"></SWOP:PlayerCreator>
-                
+
                 <SWOP:MapSelector x:Name="mapSelector" Width="500" Height="150" Margin="0,225,0,0" />
 
                 <Button Content="Start !" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonValidate_Click"/>
                 <Button Content="or Launch server" HorizontalAlignment="Center" Width="120" Height="30" Margin="300,0,0,35" VerticalAlignment="Bottom" Click="ButtonLaunchServer_Click"/>
 
             </Grid>
+
+            <!-- Game Over Grid -->
+            <Grid Name="gameOverGrid" Visibility="Collapsed">
+                <TextBlock Text="Game Over" FontFamily="Resources/fonts/#Dark Crystal Outline" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-280,0,0"/>
+                <TextBlock Text="- New King of SmallWorld -" FontFamily="Resources/fonts/#Dark Crystal Script" FontSize="42" Foreground="DarkGoldenrod" Style="{StaticResource textDropShadow}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0"/>
+                <TextBlock Name="victorName" Text="Player Name" FontFamily="Resources/fonts/#Dark Crystal Script" FontSize="80" Foreground="DarkGoldenrod" Style="{StaticResource textDropShadow}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,250,0,0"/>
+                <Button Content="Return to Menu" Width="100" Height="50"  Click="ButtonGoMainMenu_Click" Margin="0,0,10,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+            </Grid>
         </Grid>
-        
-        
-        
+
+
+
         <!-- Game Grid -->
         <Grid Name="gameGrid" Visibility="Collapsed">
             <Grid.RowDefinitions>
@@ -133,7 +141,7 @@
 
             <!-- Main grid -->
             <Grid x:Name="mapGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1"/>
-            
+
             <!-- Top header -->
             <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
@@ -162,7 +170,7 @@
                 <Label Name="lblPlayer2Name" Content="Player2Name" Grid.Column="3" Foreground="#FFD83626" HorizontalAlignment="Right" Margin="0,2,10,0"/>
                 <Border Name="borderPlayer2" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Background="#FFA62D1A" Visibility="Hidden"/>
             </Grid>
-            
+
             <!-- Pause menu -->
             <Canvas Name="mainMenu" Width="150" Height="200" Grid.Row="1" Margin="321,79,321,191" Visibility="Hidden">
                 <Rectangle Stroke="#FFBF8850" Fill="#FF1C2427" Width="150" Height="240"/>
@@ -173,7 +181,7 @@
                 <Button Content="Go to main menu" Width="100" Click="ButtonGoMainMenu_Click" Canvas.Left="25" Canvas.Top="125" Background="#FFBF8850"/>
                 <Button Content="Reload(tmp)" Width="100" Click="ButtonReload_Click" Canvas.Left="25" Canvas.Top="200" Background="#FFBF8850"/>
             </Canvas>
-            
+
             <!-- Chat Column -->
             <Border Grid.Row="1" Grid.Column="0" Height="80" VerticalAlignment="Bottom" IsHitTestVisible="False">
                 <TextBlock Name="textChat" Height="80" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFD6D6D6"/>
@@ -206,6 +214,7 @@
 
                     <!-- Button Column -->
                     <Button Name="btnNextPlayer" Grid.Column="2" Content="Start Game !" Margin="5,20,15,0" VerticalAlignment="Top" Height="38" Click="ButtonNextPlayer_Click" Background="#FFBF8850"/>
+                    <Button Name="btnEndGame" Grid.Column="2" Content="End Game" FontWeight="Bold" Margin="5,20,15,0" VerticalAlignment="Top" Height="38" Click="ButtonEndGame_Click" Background="SeaGreen" Visibility="Collapsed"/>
                 </Grid>
             </Border>
 

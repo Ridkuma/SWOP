@@ -17,6 +17,7 @@ namespace SmallWorld
 		public int LocalPlayerId { get; protected set; } // -1 if local game
 		public int CurrentPlayerId { get; protected set; }
 		public bool CurrentPlayerIsMe { get { return (LocalPlayerId == -1 || LocalPlayerId == CurrentPlayerId); } }
+        public Player Victor { get; protected set; }
 
         /// <summary>
         /// Random numbers generator
@@ -222,6 +223,17 @@ namespace SmallWorld
 		/// </summary>
 		public virtual void End()
 		{
+            int maxScore = -1;
+
+            foreach (Player player in this.Players)
+            {
+                if (!player.CurrentFaction.IsDecimated() && player.Score > maxScore)
+                {
+                    this.Victor = player;
+                    maxScore = player.Score;
+                }
+            }
+
 			OnRaiseEndGame();
         }
 

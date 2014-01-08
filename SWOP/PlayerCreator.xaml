@@ -14,28 +14,30 @@
             <Setter Property="Foreground" Value="White" />
         </Style>
     </UserControl.Resources>
-    
+
     <UserControl.Background>
         <ImageBrush ImageSource="Resources/textures/BGT_PlayerCreator.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,300,300" Opacity="0.9"/>
     </UserControl.Background>
 
     <!-- One player creation -->
-        <Border BorderBrush="Black" BorderThickness="2">
-            <Grid Name="playerCreation" Width="300" Height="250" Background="Transparent">
-                <Label Name="lblName" Content="Name" Style="{StaticResource labelContent}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <TextBox Name="txtName" HorizontalAlignment="Left" Margin="16,50,0,0" TextWrapping="Wrap" Text="MyName" VerticalAlignment="Top" Height="31" Width="215"/>
+    <Border BorderBrush="Black" BorderThickness="2">
+        <Grid Name="playerCreation" Width="300" Height="250" Background="Transparent">
+            <Label Name="lblName" Content="Name" Style="{StaticResource labelContent}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <TextBox Name="txtName" HorizontalAlignment="Left" Margin="16,50,0,0" TextWrapping="Wrap" Text="MyName" VerticalAlignment="Top" Height="31" Width="180"/>
 
-                <Label Content="Faction" Style="{StaticResource labelContent}" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
+            <CheckBox Checked="HandleAI" Margin="0,58,26,0" Foreground="White" HorizontalAlignment="Right" Width="37" Height="17" VerticalAlignment="Top">AI</CheckBox>
 
-                <Button Name="btnViking" HorizontalAlignment="Center" Margin="-150,150,0,0" VerticalAlignment="Top" Click="btnViking_Click">
-                    <Image Source="Resources/units/viking.png" Stretch="Fill" Height="50" Width="50"/>
-                </Button>
-                <Button Name="btnGaul" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" Click="btnGaul_Click">
-                    <Image Source="Resources/units/gaul.png" Stretch="Fill" Height="50" Width="50"/>
-                </Button>
-                <Button Name="btnDwarf" HorizontalAlignment="Center" Margin="150,150,0,0" VerticalAlignment="Top" Click="btnDwarf_Click">
-                    <Image Source="Resources/units/dwarf.png" Stretch="Fill" Height="50" Width="50"/>
-                </Button>
+            <Label Content="Faction" Style="{StaticResource labelContent}" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
+
+            <Button Name="btnViking" HorizontalAlignment="Center" Margin="-150,150,0,0" VerticalAlignment="Top" Click="btnViking_Click">
+                <Image Source="Resources/units/viking.png" Stretch="Fill" Height="50" Width="50"/>
+            </Button>
+            <Button Name="btnGaul" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" Click="btnGaul_Click">
+                <Image Source="Resources/units/gaul.png" Stretch="Fill" Height="50" Width="50"/>
+            </Button>
+            <Button Name="btnDwarf" HorizontalAlignment="Center" Margin="150,150,0,0" VerticalAlignment="Top" Click="btnDwarf_Click">
+                <Image Source="Resources/units/dwarf.png" Stretch="Fill" Height="50" Width="50"/>
+            </Button>
         </Grid>
-        </Border>
+    </Border>
 </UserControl>

@@ -143,7 +143,7 @@
 
 
         <!-- Game Grid -->
-        <Grid Name="gameGrid" Visibility="Collapsed">
+        <Grid Name="gameGrid" Visibility="Collapsed" Margin="0,4,0,-4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="36px"/>
                 <RowDefinition Height="*"/>

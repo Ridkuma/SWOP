@@ -143,7 +143,8 @@ namespace SWOP
                 if (!playerCreator.isReady)
                     continue;
 
-                playersInfos.Add(new Tuple<string, FactionName>(playerCreator.nameChosen, playerCreator.factionChosen));
+                string playerName = ((playerCreator.aiPlayer) ? "AI-" : "") + playerCreator.txtName.Text;
+                playersInfos.Add(new Tuple<string, FactionName>(playerName, playerCreator.factionChosen));
 
                 if (onlyFirst)
 					break;

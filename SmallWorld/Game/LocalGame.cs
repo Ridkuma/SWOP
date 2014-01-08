@@ -99,11 +99,7 @@ namespace SmallWorld
             Players[CurrentPlayerId].Score += turnScore;
 
 			CurrentPlayerId++;
-<<<<<<< HEAD
-			
-=======
 
->>>>>>> 05282e43e67bfeded28dda38108acb433d515db3
             if (this.IsAnyPlayerOverkilled())
             {
                 End();
@@ -119,21 +115,13 @@ namespace SmallWorld
 				else
 				{
 					CurrentPlayerId = 0;
-<<<<<<< HEAD
-					CurrentTurn++;
-=======
                     CurrentTurn++;
->>>>>>> 05282e43e67bfeded28dda38108acb433d515db3
                     Players[CurrentPlayerId].MyTurn();
 					OnRaiseNextPlayer();
 				}
 			}
 			else
-<<<<<<< HEAD
-			{
-=======
             {
->>>>>>> 05282e43e67bfeded28dda38108acb433d515db3
                 Players[CurrentPlayerId].MyTurn();
 				OnRaiseNextPlayer();
 			}

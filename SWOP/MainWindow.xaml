@@ -140,7 +140,7 @@
                 <Button Name="btnReturn" HorizontalAlignment="Left" Margin="20,0,0,20" VerticalAlignment="Bottom" Click="ButtonReturn_Click">
                     <Image Source="Resources/ui/return.png" Stretch="Fill" Height="50" Width="50"/>
                 </Button>
-                
+
                 <SWOP:PlayerCreator x:Name="playerCreator1" Width="300" Height="250" Margin="-350,-250,0,0"></SWOP:PlayerCreator>
                 <SWOP:PlayerCreator x:Name="playerCreator2" Width="300" Height="250" Margin="350,-250,0,0"></SWOP:PlayerCreator>
 
@@ -148,7 +148,7 @@
 
                 <Button Name="btnStartLocal" Content="Start !" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonValidate_Click"/>
                 <Button Name="btnStartServer" Content="Launch server" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonLaunchServer_Click"/>
-				<Button Name="btnStartClient" Content="Join server" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonJoinServer_Click"/>
+                <Button Name="btnStartClient" Content="Join server" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonJoinServer_Click"/>
             </Grid>
 
             <!-- Game Over Grid -->
@@ -165,7 +165,7 @@
 
 
         <!-- Game Grid -->
-        <Grid Name="gameGrid" Visibility="Collapsed">
+        <Grid Name="gameGrid" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="36px"/>
                 <RowDefinition Height="*"/>
@@ -212,6 +212,21 @@
                 <Button Name="muteBgmBtn" Content="Mute Music" Width="100" Click="ButtonMuteBGM_Click" Canvas.Left="25" Canvas.Top="90" Background="#FFBF8850"/>
                 <Button Name="playBgmBtn" Content="Play Music" Width="100" Click="ButtonPlayBGM_Click" Canvas.Left="25" Canvas.Top="90" Background="#FFBF8850" Visibility="Hidden"/>
                 <Button Content="Go to main menu" Width="100" Click="ButtonGoMainMenu_Click" Canvas.Left="25" Canvas.Top="125" Background="#FFBF8850"/>
+
+                <Button Canvas.Left="37" Canvas.Top="164" Click="ButtonExit_Click">
+                    <Image Source="Resources/ui/exit.png" Stretch="Fill" Height="20" Width="20"/>
+                </Button>
+                <Button Name="btnMiniMenu" Canvas.Right="37" Canvas.Top="164" Click="ButtonMini_Click">
+                    <Image Source="Resources/ui/minimize.png" Stretch="Fill" Height="20" Width="20"/>
+                </Button>
+                <Button Name="btnMaxiMenu" Canvas.Right="37" Canvas.Top="164" Click="ButtonMaxi_Click" Visibility="Hidden">
+                    <Image Source="Resources/ui/minimize.png" Stretch="Fill" Height="20" Width="20" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <ScaleTransform ScaleY="-1"/>
+                        </Image.RenderTransform>
+                    </Image>
+                </Button>
+
                 <Button Content="Reload(tmp)" Width="100" Click="ButtonReload_Click" Canvas.Left="25" Canvas.Top="200" Background="#FFBF8850"/>
             </Canvas>
 

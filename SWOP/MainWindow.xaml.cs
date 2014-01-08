@@ -4,8 +4,8 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
-using SmallWorld;
 using System.Windows.Threading;
+using SmallWorld;
 
 namespace SWOP
 {
@@ -125,6 +125,31 @@ namespace SWOP
             this.MediaPlayer.Play();
         }
 
+        /// <summary>
+        /// Browse all logical children to find Player Creators and get their infos
+        /// </summary>
+        /// <returns>A list of tuples (PlayerName, FactionName)</returns>
+        public List<Tuple<string, FactionName>> GetPlayersInfo(bool onlyFirst = false)
+        {
+            List<Tuple<string, FactionName>> playersInfos = new List<Tuple<string, FactionName>>();
+
+            foreach (UIElement element in this.creationGrid.Children)
+            {
+                if (! (element is PlayerCreator))
+                    continue;
+
+                PlayerCreator playerCreator = (PlayerCreator) element;
+                if (!playerCreator.isReady)
+                    continue;
+
+                playersInfos.Add(new Tuple<string, FactionName>(playerCreator.nameChosen, playerCreator.factionChosen));
+                
+                if (onlyFirst)
+					break;
+            }
+
+            return playersInfos;
+        }
 
 		/// <summary>
 		/// Ask explicitely to refresh each UI elements (may be tmp and replaced by bindings)
@@ -132,7 +157,6 @@ namespace SWOP
 		public void RefreshUI()
 		{
 			IGame g = GM.CurrentGame;
-
 			// Header UI elements
 			lblPlayer1Name.Content = g.Players[0].Name;
 			lblPlayer2Name.Content = g.Players[1].Name;
@@ -181,6 +205,11 @@ namespace SWOP
         /// </summary>
         private void ButtonGameCreation_Click(object sender, RoutedEventArgs e)
         {
+			playerCreator2.Visibility = Visibility.Visible;
+			btnStartLocal.Visibility = Visibility.Visible;
+			btnStartServer.Visibility = Visibility.Hidden;
+			btnStartClient.Visibility = Visibility.Hidden;
+			
             titleScreenGrid.Visibility = Visibility.Collapsed;
             creationGrid.Visibility = Visibility.Visible;
         }
@@ -208,34 +237,48 @@ namespace SWOP
             gameGrid.Visibility = Visibility.Visible;
         }
 
-        // tmp
-        private void ButtonJoinServer_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Open creation game window
+        /// </summary>
+        private void ButtonServerCreation_Click(object sender, RoutedEventArgs e)
         {
-            // tmp
-            List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
-            listFaction.Add(new Tuple<string, FactionName>("MeTheTinyClient", FactionName.Gauls));
-
-            NewGame(BuilderGameStrategy.Client, BuilderMapStrategy.Demo, listFaction);
-
-            menuGrid.Visibility = Visibility.Collapsed;
-            gameGrid.Visibility = Visibility.Visible;
+			playerCreator2.Visibility = Visibility.Hidden;
+			btnStartLocal.Visibility = Visibility.Hidden;
+			btnStartServer.Visibility = Visibility.Visible;
+			btnStartClient.Visibility = Visibility.Hidden;
+			
+            titleScreenGrid.Visibility = Visibility.Collapsed;
+            creationGrid.Visibility = Visibility.Visible;
         }
-
+        
+        /// <summary>
+        /// Open creation game window
+        /// </summary>
+        private void ButtonClientCreation_Click(object sender, RoutedEventArgs e)
+        {
+			playerCreator2.Visibility = Visibility.Hidden;
+			btnStartLocal.Visibility = Visibility.Hidden;
+			btnStartServer.Visibility = Visibility.Hidden;
+			btnStartClient.Visibility = Visibility.Visible;
+			
+            titleScreenGrid.Visibility = Visibility.Collapsed;
+            creationGrid.Visibility = Visibility.Visible;
+        }
 
 
         // Game creation -----------------------------------------------------------
 
         /// <summary>
-        /// Starts Multi Player game creation
+        /// Starts local game
         /// </summary>
         private void ButtonValidate_Click(object sender, RoutedEventArgs e)
         {
             // tmp
-            List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
-            listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
-            listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
+            //List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
+            //listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
+            //listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
 
-            NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Demo, listFaction); // tmp
+            NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Demo, this.GetPlayersInfo()); // tmp
             this.GM.CurrentGame.Start(); // Ask explicitely to launch game
 
             menuGrid.Visibility = Visibility.Collapsed;
@@ -243,7 +286,9 @@ namespace SWOP
             this.RandomBattleSong();
         }
 
-        // tmp
+        /// <summary>
+        /// Starts server to host game
+        /// </summary>
         private void ButtonLaunchServer_Click(object sender, RoutedEventArgs e)
         {
             // tmp
@@ -256,6 +301,22 @@ namespace SWOP
             gameGrid.Visibility = Visibility.Visible;
             this.RandomBattleSong();
         }
+        
+        /// <summary>
+        /// Join started server, as a client
+        /// </summary>
+        private void ButtonJoinServer_Click(object sender, RoutedEventArgs e)
+        {
+            // tmp
+            List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
+            listFaction.Add(new Tuple<string, FactionName>("MeTheTinyClient", FactionName.Gauls));
+
+            NewGame(BuilderGameStrategy.Client, BuilderMapStrategy.Demo, listFaction);
+
+            menuGrid.Visibility = Visibility.Collapsed;
+            gameGrid.Visibility = Visibility.Visible;
+        }
+
 
 
         // Pause menu -----------------------------------------------------------

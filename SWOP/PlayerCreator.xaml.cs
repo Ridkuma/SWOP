@@ -17,18 +17,18 @@ using SmallWorld;
 namespace SWOP
 {
     /// <summary>
-    /// Logique d'interaction pour GameCreator.xaml
+    /// Logique d'interaction pour PlayerCreator.xaml
     /// </summary>
     public partial class PlayerCreator : UserControl
     {
-        private static int nbCreatedPlayers = 0;
+        public int PlayerId { get; set; }
+
         private static Color factionIdleColor = Color.FromRgb(150, 150, 150);
         private static Color factionSelectedColor = Color.FromRgb(150, 150, 64);
 
-        public int mapSize = 1; // tmp
-        public int playerId;
         public bool isReady = false;
         public Color playerColor;
+        public string nameChosen;
         public FactionName factionChosen;
 
 
@@ -37,68 +37,59 @@ namespace SWOP
             InitializeComponent();
         }
 
-        /// <summary>
-        /// End current player turn
-        /// </summary>
-        private void btnNextPlayer_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow.INSTANCE.GM.CurrentGame.NextPlayer(); // Next turn
-        }
-
-
-        private void btnViking_Click(object sender, RoutedEventArgs e)
-        {
-            factionChosen = FactionName.Vikings;
-            RefreshUI();
-        }
-
-        private void btnGaul_Click(object sender, RoutedEventArgs e)
-        {
-            factionChosen = FactionName.Gauls;
-            RefreshUI();
-        }
-
-        private void btnDwarf_Click(object sender, RoutedEventArgs e)
-        {
-            factionChosen = FactionName.Dwarves;
-            RefreshUI();
-        }
-
-
-        private void RefreshUI() // TODO
+        private void RefreshUI()
         {
             SolidColorBrush idleColor = new SolidColorBrush(factionIdleColor);
             SolidColorBrush selectedColor = new SolidColorBrush(factionSelectedColor);
 
-            btnViking.Background = idleColor;
-            btnGaul.Background = idleColor;
-            btnDwarf.Background = idleColor;
-
-            //btnViking.IsHitTestVisible = true;
-            //btnGaul.IsHitTestVisible = true;
-            //btnDwarf.IsHitTestVisible = true;
-
-            //imgViking.Visibility = (factionChosen == FactionName.Vikings) ? Visibility.Visible : Visibility.Hidden;
-            //imgGaul.Visibility = (factionChosen == FactionName.Gauls) ? Visibility.Visible : Visibility.Hidden;
-            //imgDwarf.Visibility = (factionChosen == FactionName.Dwarves) ? Visibility.Visible : Visibility.Hidden;
+            this.btnViking.Background = idleColor;
+            this.btnGaul.Background = idleColor;
+            this.btnDwarf.Background = idleColor;
 
             switch (factionChosen)
             {
                 case FactionName.Vikings:
-                    btnViking.Background = selectedColor;
-                    //btnViking.IsHitTestVisible = false;
+                    this.btnViking.Background = selectedColor;
                     break;
 
                 case FactionName.Gauls:
-                    btnGaul.Background = selectedColor;
-                    //btnGaul.IsHitTestVisible = false;
+                    this.btnGaul.Background = selectedColor;
                     break;
 
                 case FactionName.Dwarves:
-                    btnDwarf.Background = selectedColor;
-                    //btnDwarf.IsHitTestVisible = false;
+                    this.btnDwarf.Background = selectedColor;
                     break;
             }
         }
+
+        private void AnyButtonClick()
+        {
+            this.nameChosen = this.txtName.Text;
+            this.isReady = true;
+            this.RefreshUI();
+        }
+
+        #region ButtonEvents
+
+        private void btnViking_Click(object sender, RoutedEventArgs e)
+        {
+            this.factionChosen = FactionName.Vikings;
+            this.AnyButtonClick();
+        }
+
+        private void btnGaul_Click(object sender, RoutedEventArgs e)
+        {
+            this.factionChosen = FactionName.Gauls;
+            this.AnyButtonClick();
+        }
+
+        private void btnDwarf_Click(object sender, RoutedEventArgs e)
+        {
+            this.factionChosen = FactionName.Dwarves;
+            this.AnyButtonClick();
+        }
+
+        #endregion
+ 
     }
 }

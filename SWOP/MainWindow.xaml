@@ -101,7 +101,12 @@
                         <TextBlock Text="Load game" Style="{StaticResource textDropShadow}" />
                     </Button.Content>
                 </Button>
-                <Button Name="buttonJoin" Click="ButtonJoinServer_Click" Style="{StaticResource startupPageButton}" Margin="0,200,0,0" VerticalAlignment="Center">
+                <Button Name="buttonServer" Click="ButtonServerCreation_Click" Style="{StaticResource startupPageButton}" Margin="0,200,0,0" VerticalAlignment="Center">
+                    <Button.Content>
+                        <TextBlock Text="Create server" Style="{StaticResource textDropShadow}" />
+                    </Button.Content>
+                </Button>
+                <Button Name="buttonJoin" Click="ButtonClientCreation_Click" Style="{StaticResource startupPageButton}" Margin="0,320,0,0" VerticalAlignment="Center">
                     <Button.Content>
                         <TextBlock Text="Join game" Style="{StaticResource textDropShadow}" />
                     </Button.Content>
@@ -110,12 +115,12 @@
 
             <!-- Game creation grid -->
             <Grid Name="creationGrid" Visibility="Collapsed">
-                <SWOP:PlayerCreator Width="300" Height="400" Margin="-350,0,0,0"></SWOP:PlayerCreator>
-                <SWOP:PlayerCreator Width="300" Height="400" Margin="350,0,0,0"></SWOP:PlayerCreator>
+                <SWOP:PlayerCreator x:Name="playerCreator1" Width="300" Height="400" Margin="-350,0,0,0"></SWOP:PlayerCreator>
+                <SWOP:PlayerCreator x:Name="playerCreator2" Width="300" Height="400" Margin="350,0,0,0"></SWOP:PlayerCreator>
 
-                <Button Content="Start !" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonValidate_Click"/>
-                <Button Content="or Launch server" HorizontalAlignment="Center" Width="120" Height="30" Margin="300,0,0,35" VerticalAlignment="Bottom" Click="ButtonLaunchServer_Click"/>
-
+                <Button Name="btnStartLocal" Content="Start !" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonValidate_Click"/>
+                <Button Name="btnStartServer" Content="Launch server" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonLaunchServer_Click"/>
+				<Button Name="btnStartClient" Content="Join server" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonJoinServer_Click"/>
             </Grid>
         </Grid>
         
@@ -193,11 +198,11 @@
                         <Image Name="unitImg" Width="90" Height="90" Margin="-5,0,0,-5" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                         <TextBlock Name="unitName" TextAlignment="Left" Width="200" Height="30px" Margin="100,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="AntiqueWhite" FontSize="20" FontWeight="Bold" Text="Test"/>
                         <TextBlock Name="unitHp" Width="50" Height="25" Margin="135,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="AntiqueWhite" FontSize="18" Text="2 / 2"/>
-                        <Image Width="25" Height="25px" Margin="100,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Resources/ui/heart.jpg" />
+                        <Image Width="25" Height="25px" Margin="100,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Resources/ui/heart.png" />
                         <TextBlock Name="unitMvt" Width="50" Height="25" Margin="266,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="AntiqueWhite" FontSize="18" Text="1"/>
-                        <Image Width="25" Height="25px" Margin="236,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Resources/ui/footstep.jpg" />
+                        <Image Width="25" Height="25px" Margin="236,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Resources/ui/foot.png" />
                         <TextBlock Name="unitAtk" Width="50" Height="28" Margin="385,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="AntiqueWhite" FontSize="18" Text="1"/>
-                        <Image Width="25" Height="25px" Margin="351,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Resources/ui/sword.jpg" />
+                        <Image Width="25" Height="25px" Margin="351,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Resources/ui/sword.png" />
                         <TextBlock Name="unitDef" Width="50" Height="25" Margin="481,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="AntiqueWhite" FontSize="18" Text="1"/>
                         <Image Width="25" Height="25px" Margin="451,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Resources/ui/shield.png" />
                     </Grid>

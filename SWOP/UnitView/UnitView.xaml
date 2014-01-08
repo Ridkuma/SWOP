@@ -8,9 +8,6 @@
              d:DesignHeight="60" d:DesignWidth="60">
     
     <UserControl.Resources>
-        <SolidColorBrush x:Key="VikingsColor" Color="DarkRed"></SolidColorBrush>
-        <SolidColorBrush x:Key="GaulsColor" Color="DarkOrchid"></SolidColorBrush>
-        <SolidColorBrush x:Key="DwarvesColor" Color="Gold"></SolidColorBrush>
         <BitmapImage x:Key="VikingsImg" UriSource="../Resources/units/viking.png"></BitmapImage>
         <BitmapImage x:Key="GaulsImg" UriSource="../Resources/units/gaul.png"></BitmapImage>
         <BitmapImage x:Key="DwarvesImg" UriSource="../Resources/units/dwarf.png"></BitmapImage>

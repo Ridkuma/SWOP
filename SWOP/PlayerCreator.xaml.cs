@@ -21,16 +21,13 @@ namespace SWOP
     /// </summary>
     public partial class PlayerCreator : UserControl
     {
-        public int PlayerId { get; set; }
-
         private static Color factionIdleColor = Color.FromRgb(150, 150, 150);
         private static Color factionSelectedColor = Color.FromRgb(150, 150, 64);
 
         public bool isReady = false;
         public Color playerColor;
-        public string nameChosen;
         public FactionName factionChosen;
-
+        public bool aiPlayer = false;
 
         public PlayerCreator()
         {
@@ -64,7 +61,6 @@ namespace SWOP
 
         private void AnyButtonClick()
         {
-            this.nameChosen = this.txtName.Text;
             this.isReady = true;
             this.RefreshUI();
         }
@@ -89,7 +85,11 @@ namespace SWOP
             this.AnyButtonClick();
         }
 
+        private void HandleAI(object sender, RoutedEventArgs e)
+        {
+            this.aiPlayer = (!this.aiPlayer) ? true : false;
+        }
+
         #endregion
- 
     }
 }

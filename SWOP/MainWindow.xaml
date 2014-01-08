@@ -173,7 +173,7 @@
             </Grid.RowDefinitions>
 
             <!-- Main grid -->
-            <Grid x:Name="mapGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1"/>
+            <Grid x:Name="mapGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"/>
 
             <!-- Top header -->
             <Grid Grid.Row="0">
@@ -220,7 +220,7 @@
                 <Button Name="btnMiniMenu" Canvas.Right="37" Canvas.Top="197" Click="ButtonMini_Click">
                     <Image Source="Resources/ui/minimize.png" Stretch="Fill" Height="20" Width="20"/>
                 </Button>
-                <Button Name="btnMaxiMenu" Canvas.Right="37" Canvas.Top="164" Click="ButtonMaxi_Click" Visibility="Hidden">
+                <Button Name="btnMaxiMenu" Canvas.Right="37" Canvas.Top="197" Click="ButtonMaxi_Click" Visibility="Hidden">
                     <Image Source="Resources/ui/minimize.png" Stretch="Fill" Height="20" Width="20" RenderTransformOrigin="0.5,0.5">
                         <Image.RenderTransform>
                             <ScaleTransform ScaleY="-1"/>

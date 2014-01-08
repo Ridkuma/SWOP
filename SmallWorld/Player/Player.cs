@@ -73,7 +73,7 @@ namespace SmallWorld
                 if (t != u.Position)
                 {
                     // Attack tile
-                    if (map.CanAttackTo(u.Position, t) && map.IsFavorite(remainingFav, u.Position, t, true, false))
+                    if (map.CanAttackTo(u.Position, t))
                     {
                         remainingFav--;
                         remainingFavList.Insert(0, t);
@@ -83,9 +83,17 @@ namespace SmallWorld
                     {
                         if (map.IsFavorite(remainingFav, u.Position, t, false, t.IsOccupied()))
                         {
-                            remainingFavList.Insert(0, t);
+                            remainingFav--;
+                            if (remainingFavList.Count > 1)
+                                remainingFavList.Insert(1, t);
+                            else
+                                remainingFavList.Add(t);
                         }
-                        else if (remainingFav > 0)
+                        else if (!t.IsOccupied())
+                        {
+                            remainingFavList.Add(t);
+                        }
+                        else if (remainingFav > 2)
                         {
                             remainingFavList.Add(t);
                         }
@@ -94,9 +102,15 @@ namespace SmallWorld
             }
 
             // Choose a random tile from the 3 favorites ones
-            int nbSelectableTiles = Math.Min(remainingFavList.Count, 3);
-            int selected = random.Next(nbSelectableTiles);
-            u.Move(remainingFavList[selected]);
+            if (remainingFavList.Count > 0)
+            {
+                int nbSelectableTiles = Math.Min(remainingFavList.Count, 3);
+                int selected = random.Next(nbSelectableTiles);
+                if (map.CanAttackTo(u.Position, remainingFavList[selected]))
+                    u.Attack(remainingFavList[selected].GetBestDefUnit());
+                else
+                    u.Move(remainingFavList[selected]);
+            }
 
             // End turn if every unit has moved
 			aiCurrentUnit++;

@@ -187,7 +187,12 @@ namespace SWOP {
 			if (this.Tile.IsOccupied())
 			{
 				IEnumerable<UnitView> uViews = this.grid.Children.OfType<UnitView>();
-				if (uViews.Count() <= 1)
+                if (uViews.Count() == 0)
+                {
+                    mapView.ParseNewSelectedTile();
+                    return;
+                }
+				else if (uViews.Count() == 1)
 				{
 					uViews.ElementAt(0).Select();
 				}

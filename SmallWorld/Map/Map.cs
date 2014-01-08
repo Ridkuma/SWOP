@@ -155,10 +155,12 @@ namespace SmallWorld
 			return algo.CanAttackTo(source.X, source.Y, destination.X, destination.Y, ((source.IsOccupied() && destination.IsOccupied() && source.OccupyingUnits[idToSelect].CheckAttack(destination.OccupyingUnits[0])) ? (int) source.OccupyingUnits[idToSelect].Faction : -1), (destination.IsOccupied() ? (int) destination.OccupyingUnits[0].Faction : -1));
 		}
 
-
+        /// <summary>
+        /// Is it a tile to suggest to move next ?
+        /// </summary>
 		public bool IsFavorite(int remainingFav, ITile source, ITile destination, bool canAttack, bool isOccupied)
 		{
-			if (remainingFav <= 0)
+			if (remainingFav < 0)
 				return false;
 
 			return algo.IsFavorite(source.X, source.Y, destination.X, destination.Y, canAttack, isOccupied);

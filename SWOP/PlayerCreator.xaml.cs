@@ -24,7 +24,7 @@ namespace SWOP
         private static Color factionIdleColor = Color.FromRgb(150, 150, 150);
         private static Color factionSelectedColor = Color.FromRgb(150, 150, 64);
 
-        public bool isReady = false;
+        public bool isReady = true;
         public Color playerColor;
         public FactionName factionChosen;
         public bool aiPlayer = false;
@@ -32,6 +32,7 @@ namespace SWOP
         public PlayerCreator()
         {
             InitializeComponent();
+            factionChosen = FactionName.Vikings;
         }
 
         private void RefreshUI()

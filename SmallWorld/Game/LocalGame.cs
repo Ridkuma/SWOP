@@ -95,8 +95,11 @@ namespace SmallWorld
 		public virtual void NextPlayer()
 		{
             // Update player score
-            int turnScore = Players[CurrentPlayerId].CurrentFaction.GetTurnScore();
-            Players[CurrentPlayerId].Score += turnScore;
+            if (CurrentPlayerId < Players.Count)
+            {
+                int turnScore = Players[CurrentPlayerId].CurrentFaction.GetTurnScore();
+                Players[CurrentPlayerId].Score += turnScore;
+            }
 
 			CurrentPlayerId++;
 
@@ -110,7 +113,8 @@ namespace SmallWorld
 			{
 				if (CurrentTurn >= MapBoard.TotalNbTurn) // Is end of total turns => game over
 				{
-					End();
+                    CurrentPlayerId = 0;
+                    End();
 				}
 				else
 				{

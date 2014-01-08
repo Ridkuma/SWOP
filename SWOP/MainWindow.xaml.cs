@@ -26,6 +26,7 @@ namespace SWOP
         private static String PATH;
 
         private DispatcherTimer moveTimer;
+        private float moveOffsetX, moveOffsetY;
         private float moveDirX, moveDirY;
 
         private const double MIN_VOLUME = 0.2;
@@ -485,6 +486,7 @@ namespace SWOP
 
             this.gameGrid.Visibility = Visibility.Collapsed;
             this.menuGrid.Visibility = Visibility.Visible;
+            this.titleScreenGrid.Visibility = Visibility.Collapsed;
             this.gameOverGrid.Visibility = Visibility.Visible;
         }
 
@@ -505,7 +507,9 @@ namespace SWOP
 			this.Dispatcher.Invoke((OnModifyWPFCallback) delegate()
 			{
 				MapView = new MapView(GM.CurrentGame.MapBoard, mapGrid);
-                mapGrid.Margin = new Thickness(20, 20, 0, 0);
+                moveOffsetX = (MapView.Map.MapSize * 60);
+                moveOffsetY = (MapView.Map.MapSize * 60);
+                mapGrid.Margin = new Thickness(- moveOffsetX, - moveOffsetY, 0, 0);
 
 				FactionsViews = new List<FactionView>();
 				foreach (Player p in GM.CurrentGame.Players)
@@ -638,7 +642,7 @@ namespace SWOP
         
         private void rectMoveLeft_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            moveDirX = 2.5f;
+            moveDirX = 4.0f;
             moveDirY = 0;
             moveTimer.Start();
         }
@@ -646,13 +650,13 @@ namespace SWOP
         private void rectMoveTop_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             moveDirX = 0;
-            moveDirY = 2.5f;
+            moveDirY = 4.0f;
             moveTimer.Start();
         }
 
         private void rectMoveRight_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            moveDirX = -2.5f;
+            moveDirX = -4.0f;
             moveDirY = 0;
             moveTimer.Start();
         }
@@ -660,7 +664,7 @@ namespace SWOP
         private void rectMoveBottom_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             moveDirX = 0;
-            moveDirY = -2.5f;
+            moveDirY = -4.0f;
             moveTimer.Start();
         }
 
@@ -676,8 +680,8 @@ namespace SWOP
             if (MapView == null)
                 return;
 
-            if ((moveDirY == 0 && (mapGrid.Margin.Left > - MapView.Map.MapSize * 10 || moveDirX > 0) && (mapGrid.Margin.Left < 30 || moveDirX < 0))
-                || (moveDirX == 0 && (mapGrid.Margin.Top > - MapView.Map.MapSize * 10 || moveDirY > 0) && (mapGrid.Margin.Top < 30 || moveDirY < 0)))
+            if ((moveDirY == 0 && (mapGrid.Margin.Left > - moveOffsetX * 1.2f || moveDirX > 0) && (mapGrid.Margin.Left < - moveOffsetX * 0.3f || moveDirX < 0))
+                || (moveDirX == 0 && (mapGrid.Margin.Top > - moveOffsetY * 1.2f || moveDirY > 0) && (mapGrid.Margin.Top < - moveOffsetY * 0.3f || moveDirY < 0)))
                 mapGrid.Margin = new Thickness(mapGrid.Margin.Left + moveDirX, mapGrid.Margin.Top + moveDirY, 0, 0);
         }
 

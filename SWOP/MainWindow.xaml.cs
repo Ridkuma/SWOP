@@ -28,8 +28,8 @@ namespace SWOP
         private DispatcherTimer moveTimer;
         private float moveDirX, moveDirY;
 
-        private const int MIN_VOLUME = 20;
-        private const int MAX_VOLUME = 80;
+        private const double MIN_VOLUME = 0.2;
+        private const double MAX_VOLUME = 0.8;
 
         public MainWindow()
         {
@@ -87,8 +87,9 @@ namespace SWOP
             this.MediaPlayer.MediaEnded += OnMediaEnded;
 
 			// GUI
-			btnNextPlayer.Visibility = Visibility.Visible;
-			btnNextPlayer.Content = "Start Game !";
+            this.btnEndGame.Visibility = Visibility.Collapsed;
+            this.btnNextPlayer.Visibility = Visibility.Visible;
+            this.btnNextPlayer.Content = "Start Game !";
 			
 			if (MapView != null)
 				MapView.MapViewGrid.Children.RemoveRange(0, MapView.MapViewGrid.Children.Count);
@@ -143,7 +144,7 @@ namespace SWOP
                     continue;
 
                 playersInfos.Add(new Tuple<string, FactionName>(playerCreator.nameChosen, playerCreator.factionChosen));
-                
+
                 if (onlyFirst)
 					break;
             }
@@ -170,7 +171,7 @@ namespace SWOP
 			{
 				unitName.Text = ActiveUnitView.Unit.Name;
                 unitHp.Text = ActiveUnitView.Unit.Hp.ToString() + " / " + ActiveUnitView.Unit.HpMax.ToString();
-				unitMvt.Text = ActiveUnitView.Unit.Mvt.ToString();
+                unitMvt.Text = (ActiveUnitView.Unit.Mvt > 0) ? ActiveUnitView.Unit.Mvt.ToString() : "0";
 				unitAtk.Text = ActiveUnitView.Unit.Atk.ToString();
 				unitDef.Text = ActiveUnitView.Unit.Def.ToString();
 				unitImg.Source = ActiveUnitView.sprite.Source;
@@ -273,15 +274,12 @@ namespace SWOP
         /// </summary>
         private void ButtonValidate_Click(object sender, RoutedEventArgs e)
         {
-            // tmp
-            //List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
-            //listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
-            //listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
+            NewGame(BuilderGameStrategy.Local, this.mapSelector.mapChosen, this.GetPlayersInfo());
 
-            NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Demo, this.GetPlayersInfo()); // tmp
             this.GM.CurrentGame.Start(); // Ask explicitely to launch game
 
             menuGrid.Visibility = Visibility.Collapsed;
+            creationGrid.Visibility = Visibility.Collapsed;
             gameGrid.Visibility = Visibility.Visible;
             this.RandomBattleSong();
         }
@@ -366,6 +364,7 @@ namespace SWOP
             titleScreenGrid.Visibility = Visibility.Visible;
             creationGrid.Visibility = Visibility.Collapsed;
             gameGrid.Visibility = Visibility.Collapsed;
+            gameOverGrid.Visibility = Visibility.Collapsed;
             ButtonResume_Click(sender, e);
         }
 
@@ -417,6 +416,28 @@ namespace SWOP
 			else
 				GM.CurrentGame.NextPlayer(); // Next turn
 		}
+
+        /// <summary>
+        /// Update End Game screen and go
+        /// </summary>
+        private void ButtonEndGame_Click(object sender, RoutedEventArgs e)
+        {
+            this.victorName.Text = GM.CurrentGame.Victor.Name;
+            switch (GM.CurrentGame.Players.IndexOf(GM.CurrentGame.Victor))
+            {
+                case 0:
+                    this.victorName.Foreground = new SolidColorBrush(Color.FromRgb(44, 72, 195));
+                    break;
+
+                case 1:
+                    this.victorName.Foreground = new SolidColorBrush(Color.FromRgb(166, 45, 26));
+                    break;
+            }
+
+            this.gameGrid.Visibility = Visibility.Collapsed;
+            this.menuGrid.Visibility = Visibility.Visible;
+            this.gameOverGrid.Visibility = Visibility.Visible;
+        }
 
 		#endregion
 
@@ -503,13 +524,11 @@ namespace SWOP
 		{
 			this.Dispatcher.Invoke((OnModifyWPFCallback) delegate()
 			{
-                this.MediaPlayer.Stop();
-
-				IGame g = GM.CurrentGame;
 				lblNbTurn.Content = "Game Over !";
 
-				borderPlayer1.Visibility = Visibility.Hidden;
-				borderPlayer2.Visibility = Visibility.Hidden;
+				this.borderPlayer1.Visibility = Visibility.Hidden;
+				this.borderPlayer2.Visibility = Visibility.Hidden;
+                this.btnEndGame.Visibility = Visibility.Visible;
 			});
 		}
 

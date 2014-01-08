@@ -12,6 +12,7 @@ namespace SmallWorld
 		List<Player> Players { get; }
 		int CurrentPlayerId { get; }
 		bool CurrentPlayerIsMe { get; }
+        Player Victor { get; }
 
         Player GetCurrentPlayer();
 		void Start(bool generateUnits = true);

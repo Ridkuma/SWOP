@@ -27,7 +27,7 @@
         </Grid.Resources>
 
         <Rectangle Name="selectedSquare" 
-            Stroke="{DynamicResource VikingsColor}"
+            Stroke="Blue"
             Visibility="Hidden"
             Width="40" Height ="50"
             StrokeThickness="2">

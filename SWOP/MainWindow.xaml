@@ -101,7 +101,12 @@
                         <TextBlock Text="Load game" Style="{StaticResource textDropShadow}" />
                     </Button.Content>
                 </Button>
-                <Button Name="buttonJoin" Click="ButtonJoinServer_Click" Style="{StaticResource startupPageButton}" Margin="0,200,0,0" VerticalAlignment="Center">
+                <Button Name="buttonServer" Click="ButtonServerCreation_Click" Style="{StaticResource startupPageButton}" Margin="0,200,0,0" VerticalAlignment="Center">
+                    <Button.Content>
+                        <TextBlock Text="Create server" Style="{StaticResource textDropShadow}" />
+                    </Button.Content>
+                </Button>
+                <Button Name="buttonJoin" Click="ButtonClientCreation_Click" Style="{StaticResource startupPageButton}" Margin="0,320,0,0" VerticalAlignment="Center">
                     <Button.Content>
                         <TextBlock Text="Join game" Style="{StaticResource textDropShadow}" />
                     </Button.Content>
@@ -110,14 +115,14 @@
 
             <!-- Game creation grid -->
             <Grid Name="creationGrid" Visibility="Collapsed">
-                <SWOP:PlayerCreator Width="300" Height="250" Margin="-350,-250,0,0"></SWOP:PlayerCreator>
-                <SWOP:PlayerCreator Width="300" Height="250" Margin="350,-250,0,0"></SWOP:PlayerCreator>
+                <SWOP:PlayerCreator x:Name="playerCreator1" Width="300" Height="250" Margin="-350,-250,0,0"></SWOP:PlayerCreator>
+                <SWOP:PlayerCreator x:Name="playerCreator2" Width="300" Height="250" Margin="350,-250,0,0"></SWOP:PlayerCreator>
 
                 <SWOP:MapSelector x:Name="mapSelector" Width="500" Height="150" Margin="0,225,0,0" />
 
-                <Button Content="Start !" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonValidate_Click"/>
-                <Button Content="or Launch server" HorizontalAlignment="Center" Width="120" Height="30" Margin="300,0,0,35" VerticalAlignment="Bottom" Click="ButtonLaunchServer_Click"/>
-
+                <Button Name="btnStartLocal" Content="Start !" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonValidate_Click"/>
+                <Button Name="btnStartServer" Content="Launch server" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonLaunchServer_Click"/>
+				<Button Name="btnStartClient" Content="Join server" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonJoinServer_Click"/>
             </Grid>
 
             <!-- Game Over Grid -->

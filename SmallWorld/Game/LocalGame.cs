@@ -98,6 +98,8 @@ namespace SmallWorld
             Players[CurrentPlayerId].Score += turnScore;
 
 			CurrentPlayerId++;
+			
+			Players[CurrentPlayerId].MyTurn();
 
             if (this.IsAnyPlayerOverkilled())
             {

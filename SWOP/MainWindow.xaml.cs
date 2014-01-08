@@ -4,8 +4,8 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
-using SmallWorld;
 using System.Windows.Threading;
+using SmallWorld;
 
 namespace SWOP
 {
@@ -130,7 +130,7 @@ namespace SWOP
         /// Browse all logical children to find Player Creators and get their infos
         /// </summary>
         /// <returns>A list of tuples (PlayerName, FactionName)</returns>
-        public List<Tuple<string, FactionName>> GetPlayersInfo()
+        public List<Tuple<string, FactionName>> GetPlayersInfo(bool onlyFirst = false)
         {
             List<Tuple<string, FactionName>> playersInfos = new List<Tuple<string, FactionName>>();
 
@@ -145,6 +145,9 @@ namespace SWOP
 
                 string playerName = ((playerCreator.aiPlayer) ? "AI-" : "") + playerCreator.txtName.Text;
                 playersInfos.Add(new Tuple<string, FactionName>(playerName, playerCreator.factionChosen));
+
+                if (onlyFirst)
+					break;
             }
 
             return playersInfos;
@@ -204,6 +207,11 @@ namespace SWOP
         /// </summary>
         private void ButtonGameCreation_Click(object sender, RoutedEventArgs e)
         {
+			playerCreator2.Visibility = Visibility.Visible;
+			btnStartLocal.Visibility = Visibility.Visible;
+			btnStartServer.Visibility = Visibility.Hidden;
+			btnStartClient.Visibility = Visibility.Hidden;
+			
             titleScreenGrid.Visibility = Visibility.Collapsed;
             creationGrid.Visibility = Visibility.Visible;
         }
@@ -231,29 +239,44 @@ namespace SWOP
             gameGrid.Visibility = Visibility.Visible;
         }
 
-        // tmp
-        private void ButtonJoinServer_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Open creation game window
+        /// </summary>
+        private void ButtonServerCreation_Click(object sender, RoutedEventArgs e)
         {
-            // tmp
-            List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
-            listFaction.Add(new Tuple<string, FactionName>("MeTheTinyClient", FactionName.Gauls));
-
-            NewGame(BuilderGameStrategy.Client, BuilderMapStrategy.Demo, listFaction);
-
-            menuGrid.Visibility = Visibility.Collapsed;
-            gameGrid.Visibility = Visibility.Visible;
+			playerCreator2.Visibility = Visibility.Hidden;
+			btnStartLocal.Visibility = Visibility.Hidden;
+			btnStartServer.Visibility = Visibility.Visible;
+			btnStartClient.Visibility = Visibility.Hidden;
+			
+            titleScreenGrid.Visibility = Visibility.Collapsed;
+            creationGrid.Visibility = Visibility.Visible;
         }
-
+        
+        /// <summary>
+        /// Open creation game window
+        /// </summary>
+        private void ButtonClientCreation_Click(object sender, RoutedEventArgs e)
+        {
+			playerCreator2.Visibility = Visibility.Hidden;
+			btnStartLocal.Visibility = Visibility.Hidden;
+			btnStartServer.Visibility = Visibility.Hidden;
+			btnStartClient.Visibility = Visibility.Visible;
+			
+            titleScreenGrid.Visibility = Visibility.Collapsed;
+            creationGrid.Visibility = Visibility.Visible;
+        }
 
 
         // Game creation -----------------------------------------------------------
 
         /// <summary>
-        /// Starts Multi Player game creation
+        /// Starts local game
         /// </summary>
         private void ButtonValidate_Click(object sender, RoutedEventArgs e)
         {
             NewGame(BuilderGameStrategy.Local, this.mapSelector.mapChosen, this.GetPlayersInfo());
+
             this.GM.CurrentGame.Start(); // Ask explicitely to launch game
 
             menuGrid.Visibility = Visibility.Collapsed;
@@ -262,7 +285,9 @@ namespace SWOP
             this.RandomBattleSong();
         }
 
-        // tmp
+        /// <summary>
+        /// Starts server to host game
+        /// </summary>
         private void ButtonLaunchServer_Click(object sender, RoutedEventArgs e)
         {
             // tmp
@@ -275,6 +300,22 @@ namespace SWOP
             gameGrid.Visibility = Visibility.Visible;
             this.RandomBattleSong();
         }
+        
+        /// <summary>
+        /// Join started server, as a client
+        /// </summary>
+        private void ButtonJoinServer_Click(object sender, RoutedEventArgs e)
+        {
+            // tmp
+            List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
+            listFaction.Add(new Tuple<string, FactionName>("MeTheTinyClient", FactionName.Gauls));
+
+            NewGame(BuilderGameStrategy.Client, BuilderMapStrategy.Demo, listFaction);
+
+            menuGrid.Visibility = Visibility.Collapsed;
+            gameGrid.Visibility = Visibility.Visible;
+        }
+
 
 
         // Pause menu -----------------------------------------------------------

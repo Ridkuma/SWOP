@@ -140,7 +140,7 @@
                 <Button Name="btnReturn" HorizontalAlignment="Left" Margin="20,0,0,20" VerticalAlignment="Bottom" Click="ButtonReturn_Click">
                     <Image Source="Resources/ui/return.png" Stretch="Fill" Height="50" Width="50"/>
                 </Button>
-                
+
                 <SWOP:PlayerCreator x:Name="playerCreator1" Width="300" Height="250" Margin="-350,-250,0,0"></SWOP:PlayerCreator>
                 <SWOP:PlayerCreator x:Name="playerCreator2" Width="300" Height="250" Margin="350,-250,0,0"></SWOP:PlayerCreator>
 
@@ -148,7 +148,7 @@
 
                 <Button Name="btnStartLocal" Content="Start !" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonValidate_Click"/>
                 <Button Name="btnStartServer" Content="Launch server" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonLaunchServer_Click"/>
-				<Button Name="btnStartClient" Content="Join server" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonJoinServer_Click"/>
+                <Button Name="btnStartClient" Content="Join server" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonJoinServer_Click"/>
             </Grid>
 
             <!-- Game Over Grid -->
@@ -205,14 +205,29 @@
             </Grid>
 
             <!-- Pause menu -->
-            <Canvas Name="mainMenu" Width="150" Height="200" Grid.Row="1" Margin="321,79,321,191" Visibility="Hidden">
-                <Rectangle Stroke="#FFBF8850" Fill="#FF1C2427" Width="150" Height="240"/>
+            <Canvas Name="mainMenu" Width="150" Height="235" Grid.Row="1" Margin="321,79,321,191" Visibility="Hidden">
+                <Rectangle Stroke="#FFBF8850" Fill="#FF1C2427" Width="150" Height="235"/>
                 <Button Content="Resume" Width="100" Click="ButtonResume_Click" Canvas.Left="25" Canvas.Top="20" Background="#FFBF8850"/>
                 <Button Content="Save" Width="100" Click="ButtonSave_Click" Canvas.Left="25" Canvas.Top="55" Background="#FFBF8850"/>
-                <Button Name="muteBgmBtn" Content="Mute Music" Width="100" Click="ButtonMuteBGM_Click" Canvas.Left="25" Canvas.Top="90" Background="#FFBF8850"/>
-                <Button Name="playBgmBtn" Content="Play Music" Width="100" Click="ButtonPlayBGM_Click" Canvas.Left="25" Canvas.Top="90" Background="#FFBF8850" Visibility="Hidden"/>
-                <Button Content="Go to main menu" Width="100" Click="ButtonGoMainMenu_Click" Canvas.Left="25" Canvas.Top="125" Background="#FFBF8850"/>
-                <Button Content="Reload(tmp)" Width="100" Click="ButtonReload_Click" Canvas.Left="25" Canvas.Top="200" Background="#FFBF8850"/>
+                <Button Content="Restart" Width="100" Click="ButtonReload_Click" Canvas.Left="25" Canvas.Top="90" Background="#FFBF8850"/>
+                <Button Name="muteBgmBtn" Content="Mute Music" Width="100" Click="ButtonMuteBGM_Click" Canvas.Left="25" Canvas.Top="125" Background="#FFBF8850"/>
+                <Button Name="playBgmBtn" Content="Play Music" Width="100" Click="ButtonPlayBGM_Click" Canvas.Left="25" Canvas.Top="125" Background="#FFBF8850" Visibility="Hidden"/>
+                <Button Content="Go to main menu" Width="100" Click="ButtonGoMainMenu_Click" Canvas.Left="25" Canvas.Top="160" Background="#FFBF8850"/>
+
+                <Button Canvas.Left="37" Canvas.Top="197" Click="ButtonExit_Click">
+                    <Image Source="Resources/ui/exit.png" Stretch="Fill" Height="20" Width="20"/>
+                </Button>
+                <Button Name="btnMiniMenu" Canvas.Right="37" Canvas.Top="197" Click="ButtonMini_Click">
+                    <Image Source="Resources/ui/minimize.png" Stretch="Fill" Height="20" Width="20"/>
+                </Button>
+                <Button Name="btnMaxiMenu" Canvas.Right="37" Canvas.Top="164" Click="ButtonMaxi_Click" Visibility="Hidden">
+                    <Image Source="Resources/ui/minimize.png" Stretch="Fill" Height="20" Width="20" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <ScaleTransform ScaleY="-1"/>
+                        </Image.RenderTransform>
+                    </Image>
+                </Button>
+
             </Canvas>
 
             <!-- Chat Column -->
@@ -251,10 +266,10 @@
                 </Grid>
             </Border>
 
-            <Rectangle Name="rectMoveLeft" Fill="#00000000" HorizontalAlignment="Left" VerticalAlignment="Top" Width="13" MouseEnter="rectMoveLeft_MouseEnter" MouseLeave="rectMove_MouseLeave" Grid.Row="0" Grid.RowSpan="3" Height="1000" Margin="0,15"/>
-            <Rectangle Name="rectMoveTop" Fill="#00000000" HorizontalAlignment="Left" VerticalAlignment="Top" Height="13" MouseEnter="rectMoveTop_MouseEnter" MouseLeave="rectMove_MouseLeave" Grid.Row="0" Width="2000"/>
-            <Rectangle Name="rectMoveRight" Fill="#00000000" HorizontalAlignment="Right" VerticalAlignment="Top" Width="13" MouseEnter="rectMoveRight_MouseEnter" MouseLeave="rectMove_MouseLeave" Grid.Row="0" Grid.RowSpan="3" Height="1000" Margin="0,15"/>
-            <Rectangle Name="rectMoveBottom" Fill="#00000000" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="13" MouseEnter="rectMoveBottom_MouseEnter" MouseLeave="rectMove_MouseLeave" Grid.Row="2" Width="2000"/>
+            <Rectangle Name="rectMoveLeft" Fill="#00000000" HorizontalAlignment="Left" VerticalAlignment="Top" Width="10" MouseEnter="rectMoveLeft_MouseEnter" MouseLeave="rectMove_MouseLeave" Grid.Row="0" Grid.RowSpan="3" Height="1000" Margin="0,15"/>
+            <Rectangle Name="rectMoveTop" Fill="#00000000" HorizontalAlignment="Left" VerticalAlignment="Top" Height="10" MouseEnter="rectMoveTop_MouseEnter" MouseLeave="rectMove_MouseLeave" Grid.Row="0" Width="2000"/>
+            <Rectangle Name="rectMoveRight" Fill="#00000000" HorizontalAlignment="Right" VerticalAlignment="Top" Width="10" MouseEnter="rectMoveRight_MouseEnter" MouseLeave="rectMove_MouseLeave" Grid.Row="0" Grid.RowSpan="3" Height="1000" Margin="0,15"/>
+            <Rectangle Name="rectMoveBottom" Fill="#00000000" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="10" MouseEnter="rectMoveBottom_MouseEnter" MouseLeave="rectMove_MouseLeave" Grid.Row="2" Width="2000"/>
         </Grid>
     </Grid>
 </Window>

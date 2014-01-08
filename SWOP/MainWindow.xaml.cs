@@ -224,7 +224,9 @@ namespace SWOP
             this.WindowState = System.Windows.WindowState.Normal;
             this.WindowStyle = System.Windows.WindowStyle.SingleBorderWindow;
             this.btnMini.Visibility = Visibility.Hidden;
+            this.btnMiniMenu.Visibility = Visibility.Hidden;
             this.btnMaxi.Visibility = Visibility.Visible;
+            this.btnMaxiMenu.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -235,7 +237,9 @@ namespace SWOP
             this.WindowState = System.Windows.WindowState.Maximized;
             this.WindowStyle = System.Windows.WindowStyle.None;
             this.btnMini.Visibility = Visibility.Visible;
+            this.btnMiniMenu.Visibility = Visibility.Visible;
             this.btnMaxi.Visibility = Visibility.Hidden;
+            this.btnMaxiMenu.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -434,14 +438,12 @@ namespace SWOP
             this.playBgmBtn.Visibility = Visibility.Hidden;
         }
 
-        // tmp
+        /// <summary>
+        /// Reload identic game
+        /// </summary>
         private void ButtonReload_Click(object sender, RoutedEventArgs e)
 		{
-			List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
-			listFaction.Add(new Tuple<string, FactionName>("TheFox", FactionName.Vikings));
-			listFaction.Add(new Tuple<string, FactionName>("Ablouin", FactionName.Dwarves));
-
-			NewGame(BuilderGameStrategy.Local, BuilderMapStrategy.Demo, listFaction);
+            NewGame(BuilderGameStrategy.Local, this.mapSelector.mapChosen, this.GetPlayersInfo());
         }
 
         #endregion

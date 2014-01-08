@@ -255,7 +255,7 @@ void AlgoMap::BuildSpecialTiles(int tileType)
 		for (int y = 0; y < mapSize; y++)
 		{
 			int dist = GetDistance(centerX, centerY, x, y);
-			if (dist < min(mapRange, 3) && tiles[x][y] == TILE_NULL && (rand() % 10) < (10 - mapRange * 2 - dist))
+			if (dist < min(mapRange, 2) && tiles[x][y] == TILE_NULL && (rand() % 10) < (10 - mapRange * 2 - dist))
 				tiles[x][y] = tileType;
 		}
 	}

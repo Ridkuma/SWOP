@@ -111,15 +111,19 @@ namespace SmallWorld
         public override int GetTurnScore()
         {
             int score = 0;
+            List<ITile> visitedTiles = new List<ITile>();
             foreach (Unit unit in this.Units)
             {
-                if (unit.State == UnitState.Dead || unit.Position.Type == TileType.Water)
+                // Skip if Unit is dead, Tile is water or Tile points have already been visited
+                if (unit.State == UnitState.Dead || unit.Position.Type == TileType.Water || visitedTiles.Contains(unit.Position))
                     continue;
 
                 if (unit.Position.IsAdjacentToWater())
                     score += 2;
                 else
                     score += 1;
+
+                visitedTiles.Add(unit.Position);
             }
 
             return score;
@@ -157,15 +161,20 @@ namespace SmallWorld
         public override int GetTurnScore()
         {
             int score = 0;
+            List<ITile> visitedTiles = new List<ITile>();
+
+            // Skip if Unit is dead, Tile is water or Tile points have already been visited
             foreach (Unit unit in this.Units)
             {
-                if (unit.State == UnitState.Dead || unit.Position.Type == TileType.Mountain)
+                if (unit.State == UnitState.Dead || unit.Position.Type == TileType.Mountain || visitedTiles.Contains(unit.Position))
                     continue;
 
                 if (unit.Position.Type == TileType.Field)
                     score += 2;
                 else
                     score += 1;
+
+                visitedTiles.Add(unit.Position);
             }
 
             return score;
@@ -205,15 +214,20 @@ namespace SmallWorld
         public override int GetTurnScore()
         {
             int score = 0;
+            List<ITile> visitedTiles = new List<ITile>();
+
+            // Skip if Unit is dead, Tile is water or Tile points have already been visited
             foreach (Unit unit in this.Units)
             {
-                if (unit.State == UnitState.Dead || unit.Position.Type == TileType.Field)
+                if (unit.State == UnitState.Dead || unit.Position.Type == TileType.Field || visitedTiles.Contains(unit.Position))
                     continue;
 
                 if (unit.Position.Type == TileType.Forest)
                     score += 2;
                 else
                     score += 1;
+
+                visitedTiles.Add(unit.Position);
             }
 
             return score;

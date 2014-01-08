@@ -24,6 +24,8 @@ namespace SWOP
     {
         public IUnit Unit { get; private set; }
         public TileView ParentTile { get; private set; }
+
+        private static Random random = new Random();
         
         public UnitView(IUnit u)
         {
@@ -128,8 +130,15 @@ namespace SWOP
             this.ParentTile = newTileView;
 
 			// If only one unit on tile => replace it in the center
-			if (this.ParentTile.Tile.OccupyingUnits.Count <= 1)
-				this.Margin = new Thickness(0);
+            if (this.ParentTile.Tile.OccupyingUnits.Count <= 1)
+                this.Margin = new Thickness(0);
+            else
+            {
+                int randMarginX = random.Next(-10, 15);
+                int randMarginY = random.Next(-20, 15);
+
+                this.Margin = new Thickness(randMarginX, randMarginY, -randMarginX, -randMarginY);
+            }
         }
     }
 }

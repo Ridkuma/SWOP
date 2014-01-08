@@ -72,6 +72,12 @@
                         BeginTime="0:0:7" 
                         />
                         <DoubleAnimation
+                        Storyboard.TargetName="buttonServer"
+                        Storyboard.TargetProperty="Opacity"
+                        From="0" To="1" Duration="0:0:1" 
+                        BeginTime="0:0:7" 
+                        />
+                        <DoubleAnimation
                         Storyboard.TargetName="buttonJoin"
                         Storyboard.TargetProperty="Opacity"
                         From="0" To="1" Duration="0:0:1" 
@@ -191,10 +197,10 @@
                 <Label Name="lblPlayer1Score" Content="0" Grid.Column="0" Foreground="#FF3E62FF" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
                 <Label Name="lblPlayer2Score" Content="0" Grid.Column="4" Foreground="#FFD83626" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
 
-                <Label Name="lblPlayer1Name" Content="Player1Name" Grid.Column="1" Foreground="#FF3E62FF" Margin="10,2,0,0"/>
+                <Label Name="lblPlayer1Name" Content="" Grid.Column="1" Foreground="#FF3E62FF" Margin="10,2,0,0"/>
                 <Border Name="borderPlayer1" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="#FF2C48C3" Visibility="Hidden"/>
 
-                <Label Name="lblPlayer2Name" Content="Player2Name" Grid.Column="3" Foreground="#FFD83626" HorizontalAlignment="Right" Margin="0,2,10,0"/>
+                <Label Name="lblPlayer2Name" Content="" Grid.Column="3" Foreground="#FFD83626" HorizontalAlignment="Right" Margin="0,2,10,0"/>
                 <Border Name="borderPlayer2" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Background="#FFA62D1A" Visibility="Hidden"/>
             </Grid>
 
@@ -225,7 +231,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Selected Unit Column -->
-                    <Grid Name="selectedUnit" Grid.Column="1" Visibility="Visible">
+                    <Grid Name="selectedUnit" Grid.Column="1" Visibility="Hidden">
                         <Rectangle Name="unitColor" Width="85" Height="90" Margin="-1,0,0,-5" HorizontalAlignment="Left" VerticalAlignment="Bottom" Fill="#FF767676" Stroke="#FF14002C" />
                         <Image Name="unitImg" Width="90" Height="90" Margin="-5,0,0,-5" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                         <TextBlock Name="unitName" TextAlignment="Left" Width="200" Height="30px" Margin="100,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="AntiqueWhite" FontSize="20" FontWeight="Bold" Text="Test"/>

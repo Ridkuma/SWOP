@@ -34,7 +34,7 @@ namespace SWOP {
 
         private TileViewState currentState;
 
-        static Random random = new Random();
+        private static Random random = new Random();
         
 
         public TileView(ITile t) {

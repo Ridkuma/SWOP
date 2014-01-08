@@ -289,11 +289,7 @@ namespace SWOP
         /// </summary>
         private void ButtonLaunchServer_Click(object sender, RoutedEventArgs e)
         {
-            // tmp
-            List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
-            listFaction.Add(new Tuple<string, FactionName>("MeTheServer", FactionName.Vikings));
-
-            NewGame(BuilderGameStrategy.Server, BuilderMapStrategy.Small, listFaction);
+            NewGame(BuilderGameStrategy.Server, this.mapSelector.mapChosen, this.GetPlayersInfo(true));
 
             menuGrid.Visibility = Visibility.Collapsed;
             gameGrid.Visibility = Visibility.Visible;
@@ -305,11 +301,7 @@ namespace SWOP
         /// </summary>
         private void ButtonJoinServer_Click(object sender, RoutedEventArgs e)
         {
-            // tmp
-            List<Tuple<string, FactionName>> listFaction = new List<Tuple<string, FactionName>>();
-            listFaction.Add(new Tuple<string, FactionName>("MeTheTinyClient", FactionName.Gauls));
-
-            NewGame(BuilderGameStrategy.Client, BuilderMapStrategy.Demo, listFaction);
+            NewGame(BuilderGameStrategy.Client, this.mapSelector.mapChosen, this.GetPlayersInfo(true));
 
             menuGrid.Visibility = Visibility.Collapsed;
             gameGrid.Visibility = Visibility.Visible;
@@ -463,6 +455,12 @@ namespace SWOP
 					FactionsViews.Add(new FactionView(p.CurrentFaction));
 				}
 
+                foreach (TileView tView in this.MapView.TilesView.Values)
+                {
+                    if (tView.Tile.IsOccupied())
+                        tView.DispatchArmy();
+                }
+
                 //this.RandomBattleSong();
 
 				OnNextPlayer(this, e); // Init game info in the UI
@@ -482,12 +480,6 @@ namespace SWOP
 				if (ActiveUnitView != null)
 					ActiveUnitView.Unselect();
 
-				// TODO : Temp, need to place this somewhere else
-				foreach (TileView tView in this.MapView.TilesView.Values)
-				{
-					if (tView.Tile.IsOccupied())
-						tView.DispatchArmy();
-				}
 				MapView.ParseNewSelectedTile();
 				
 				RefreshUI();

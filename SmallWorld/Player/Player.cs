@@ -16,7 +16,7 @@ namespace SmallWorld
 		private bool isAI = false;
 		private DispatcherTimer aiTimer;
 		private int aiCurrentUnit;
-
+        private static Random random = new Random();
 
         public Player(string name, FactionName faction)
         {
@@ -40,12 +40,12 @@ namespace SmallWorld
 					throw new NotImplementedException();
 			}
 			
-			if (Name.StartsWith("ai")) // Artificial Intelligence
+			if (Name.StartsWith("AI-")) // Artificial Intelligence
 			{
 				isAI = true;
 				aiTimer = new System.Windows.Threading.DispatcherTimer();
 				aiTimer.Tick += new EventHandler(aiLogic_Tick);
-				aiTimer.Interval = new TimeSpan(0, 0, 0, 1);
+				aiTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
 			}
         }
         
@@ -54,7 +54,7 @@ namespace SmallWorld
         {
 			if (!isAI)
 				return;
-			
+
 			aiCurrentUnit = 0;
 			aiTimer.Start();
 		}
@@ -63,8 +63,40 @@ namespace SmallWorld
 		private void aiLogic_Tick(object sender, EventArgs e)
         {
 			IUnit u = CurrentFaction.Units[aiCurrentUnit];
-			
-			
+
+            IMap map = GameMaster.GM.CurrentGame.MapBoard;
+            int remainingFav = 3; // Adviced tiles for next action (max 3)
+            List<ITile> remainingFavList = new List<ITile>();
+
+            foreach (ITile t in map.Tiles)
+            {
+                if (t != u.Position)
+                {
+                    // Attack tile
+                    if (map.CanAttackTo(u.Position, t) && map.IsFavorite(remainingFav, u.Position, t, true, false))
+                    {
+                        remainingFav--;
+                        remainingFavList.Insert(0, t);
+                    }
+                    // Move tile
+                    else if (map.CanMoveTo(u.Position, t))
+                    {
+                        if (map.IsFavorite(remainingFav, u.Position, t, false, t.IsOccupied()))
+                        {
+                            remainingFavList.Insert(0, t);
+                        }
+                        else if (remainingFav > 0)
+                        {
+                            remainingFavList.Add(t);
+                        }
+                    }
+                }
+            }
+
+            int nbSelectableTiles = Math.Min(remainingFavList.Count, 3);
+            int selected = random.Next(nbSelectableTiles);
+            u.Move(remainingFavList[selected]);
+
 			aiCurrentUnit++;
 			if (aiCurrentUnit >= CurrentFaction.Units.Count)
 			{

@@ -70,7 +70,8 @@ namespace SmallWorld
 					Players[i].CurrentFaction.GenerateUnits(MapBoard.TotalNbUnits, MapBoard.GetStartTile(i));
 			}
 
-			OnRaiseStartGame();
+            Players[CurrentPlayerId].MyTurn();
+            OnRaiseStartGame();
 		}
 
         /// <summary>
@@ -98,8 +99,6 @@ namespace SmallWorld
             Players[CurrentPlayerId].Score += turnScore;
 
 			CurrentPlayerId++;
-			
-			Players[CurrentPlayerId].MyTurn();
 
             if (this.IsAnyPlayerOverkilled())
             {
@@ -116,12 +115,14 @@ namespace SmallWorld
 				else
 				{
 					CurrentPlayerId = 0;
-					CurrentTurn++;
+                    CurrentTurn++;
+                    Players[CurrentPlayerId].MyTurn();
 					OnRaiseNextPlayer();
 				}
 			}
 			else
-			{
+            {
+                Players[CurrentPlayerId].MyTurn();
 				OnRaiseNextPlayer();
 			}
 			

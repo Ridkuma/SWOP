@@ -203,7 +203,7 @@
     <Resource Include="Resources\ui\return.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\terrains\water.jpg" />
+    <Resource Include="Resources\terrains\water2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,7 +11,7 @@ namespace SmallWorld
         ITile Position { get; } // Tile
         int Atk { get; } // Attack Points
         int Def { get; } // Defense Points
-        int Hp { get; set; } // Health Points // TODO : Would be cleaner to remove the setter ("friend"-like relationship IUnit/IGame ?)
+        int Hp { get; set; } // Health Points
         int HpMax { get; } // Maximum Heath Points
         int Mvt { get; } // Movement Points
         string Name { get; } // Unit name

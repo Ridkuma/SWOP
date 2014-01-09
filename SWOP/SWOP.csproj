@@ -28,7 +28,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -201,9 +201,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ui\return.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\terrains\water2.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\artworks\Viking.png" />

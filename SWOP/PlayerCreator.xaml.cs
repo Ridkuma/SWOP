@@ -44,17 +44,42 @@ namespace SWOP
             this.btnGaul.Background = idleColor;
             this.btnDwarf.Background = idleColor;
 
+            if (Margin.Left < 0)
+            {
+                MainWindow.INSTANCE.imgPlayer1Viking.Visibility = Visibility.Hidden;
+                MainWindow.INSTANCE.imgPlayer1Gaul.Visibility = Visibility.Hidden;
+                MainWindow.INSTANCE.imgPlayer1Dwarf.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                MainWindow.INSTANCE.imgPlayer2Viking.Visibility = Visibility.Hidden;
+                MainWindow.INSTANCE.imgPlayer2Gaul.Visibility = Visibility.Hidden;
+                MainWindow.INSTANCE.imgPlayer2Dwarf.Visibility = Visibility.Hidden;
+            }
+
             switch (factionChosen)
             {
                 case FactionName.Vikings:
+                    if (Margin.Left < 0)
+                        MainWindow.INSTANCE.imgPlayer1Viking.Visibility = Visibility.Visible;
+                    else
+                        MainWindow.INSTANCE.imgPlayer2Viking.Visibility = Visibility.Visible;
                     this.btnViking.Background = selectedColor;
                     break;
 
                 case FactionName.Gauls:
+                    if (Margin.Left < 0)
+                        MainWindow.INSTANCE.imgPlayer1Gaul.Visibility = Visibility.Visible;
+                    else
+                        MainWindow.INSTANCE.imgPlayer2Gaul.Visibility = Visibility.Visible;
                     this.btnGaul.Background = selectedColor;
                     break;
 
                 case FactionName.Dwarves:
+                    if (Margin.Left < 0)
+                        MainWindow.INSTANCE.imgPlayer1Dwarf.Visibility = Visibility.Visible;
+                    else
+                        MainWindow.INSTANCE.imgPlayer2Dwarf.Visibility = Visibility.Visible;
                     this.btnDwarf.Background = selectedColor;
                     break;
             }

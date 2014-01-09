@@ -527,7 +527,8 @@ namespace SWOP
 
 				OnNextPlayer(this, e); // Init game info in the UI
 				btnNextPlayer.Content = "End my turn";
-			});
+                btnEndGame.Visibility = Visibility.Collapsed;
+            });
 		}
 
 		/// <summary>

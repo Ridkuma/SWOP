@@ -137,6 +137,62 @@
 
             <!-- Game creation grid -->
             <Grid Name="creationGrid" Visibility="Collapsed">
+                <Image Name="imgPlayer1Viking" Opacity="1" Source="Resources/artworks/Viking.png" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-650,100,0,0" Visibility="Hidden" IsHitTestVisible="False" Panel.ZIndex="-10">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                            <SkewTransform AngleY="0" AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                    <Image.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="2"/>
+                    </Image.Effect>
+                </Image>
+                <Image Name="imgPlayer1Dwarf" Opacity="1" Source="Resources/artworks/Dwarf.png" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-700,100,0,-0" Visibility="Hidden" IsHitTestVisible="False" Panel.ZIndex="-10">
+                    <Image.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="2"/>
+                    </Image.Effect>
+                </Image>
+                <Image Name="imgPlayer1Gaul" Opacity="1" Source="Resources/artworks/Gaul.png" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-650,100,0,-0" Visibility="Hidden" IsHitTestVisible="False" Panel.ZIndex="-10">
+                    <Image.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="2"/>
+                    </Image.Effect>
+                </Image>
+
+                <Image Name="imgPlayer2Viking" Opacity="1" Source="Resources/artworks/Viking.png" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,-650,0" Visibility="Hidden" IsHitTestVisible="False" Panel.ZIndex="-10">
+                    <Image.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="2"/>
+                    </Image.Effect>
+                </Image>
+                <Image Name="imgPlayer2Dwarf" Opacity="1" Source="Resources/artworks/Dwarf.png" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,-700,0" Visibility="Hidden" IsHitTestVisible="False" Panel.ZIndex="-10">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                            <SkewTransform AngleY="0" AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                    <Image.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="2"/>
+                    </Image.Effect>
+                </Image>
+                <Image Name="imgPlayer2Gaul" Opacity="1" Source="Resources/artworks/Gaul.png" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,-650,0" Visibility="Hidden" IsHitTestVisible="False">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                            <SkewTransform AngleY="0" AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                    <Image.Effect>
+                        <DropShadowEffect Color="White" ShadowDepth="2"/>
+                    </Image.Effect>
+                </Image>
+
                 <Button Name="btnReturn" HorizontalAlignment="Left" Margin="20,0,0,20" VerticalAlignment="Bottom" Click="ButtonReturn_Click">
                     <Image Source="Resources/ui/return.png" Stretch="Fill" Height="50" Width="50"/>
                 </Button>
@@ -149,6 +205,7 @@
                 <Button Name="btnStartLocal" Content="Start !" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonValidate_Click"/>
                 <Button Name="btnStartServer" Content="Launch server" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonLaunchServer_Click"/>
                 <Button Name="btnStartClient" Content="Join server" HorizontalAlignment="Center" Width="150" Height="40" Margin="0,0,0,30" VerticalAlignment="Bottom" Click="ButtonJoinServer_Click"/>
+                
             </Grid>
 
             <!-- Game Over Grid -->

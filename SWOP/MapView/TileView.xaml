@@ -35,7 +35,7 @@
 		<ImageBrush x:Key="BrushImgForest" ImageSource="../Resources/terrains/forest.png"/>
 		<ImageBrush x:Key="BrushImgDesert" ImageSource="../Resources/terrains/desert.png"/>
 		<ImageBrush x:Key="BrushImgMountain" ImageSource="../Resources/terrains/mountain.png"/>
-		<ImageBrush x:Key="BrushImgWater" ImageSource="../Resources/terrains/water.jpg"/>
+		<ImageBrush x:Key="BrushImgWater" ImageSource="../Resources/terrains/water.png"/>
 	</UserControl.Resources>
 
 	<Grid Name="grid">

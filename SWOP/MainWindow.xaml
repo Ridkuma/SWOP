@@ -22,7 +22,7 @@
             <Setter Property="Width" Value="254"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Opacity" Value="1"/>
+            <Setter Property="Opacity" Value="0"/>
         </Style>
 
         <Style x:Key="textDropShadow" TargetType="TextBlock">
@@ -51,19 +51,19 @@
                         Storyboard.TargetName="firstTitleText"
                         Storyboard.TargetProperty="Opacity"
                         From="0" To="1" Duration="0:0:2" 
-                        BeginTime="0:0:3" 
+                        BeginTime="0:0:1" 
                         />
                         <DoubleAnimation
                         Storyboard.TargetName="secondTitleText"
                         Storyboard.TargetProperty="Opacity"
                         From="0" To="1" Duration="0:0:1" 
-                        BeginTime="0:0:5" 
+                        BeginTime="0:0:4" 
                         />
                         <DoubleAnimation
                         Storyboard.TargetName="buttonGameCreation"
                         Storyboard.TargetProperty="Opacity"
                         From="0" To="1" Duration="0:0:1" 
-                        BeginTime="0:0:7" 
+                        BeginTime="0:0:6" 
                         />
                         <DoubleAnimation
                         Storyboard.TargetName="buttonLoad"
@@ -75,13 +75,13 @@
                         Storyboard.TargetName="buttonServer"
                         Storyboard.TargetProperty="Opacity"
                         From="0" To="1" Duration="0:0:1" 
-                        BeginTime="0:0:7" 
+                        BeginTime="0:0:8" 
                         />
                         <DoubleAnimation
                         Storyboard.TargetName="buttonJoin"
                         Storyboard.TargetProperty="Opacity"
                         From="0" To="1" Duration="0:0:1" 
-                        BeginTime="0:0:7" 
+                        BeginTime="0:0:9" 
                         />
                     </Storyboard>
                 </Grid.Resources>

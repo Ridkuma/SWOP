@@ -56,8 +56,8 @@ namespace SWOP
 		/// </summary>
         public void MainWindow_Loaded(object sender, RoutedEventArgs e) {
 			GM = new GameMaster();
-            this.MediaPlayer.Volume = MAX_VOLUME;
-            this.MediaPlayer.Open(new Uri(PATH + @"\musics\BGM0_Morro.mp3"));
+            this.MediaPlayer.Volume = 0.4;
+            this.MediaPlayer.Open(new Uri(PATH + @"\musics\BGM0.mp3"));
             this.MediaPlayer.Play();
 		}
 
@@ -110,19 +110,19 @@ namespace SWOP
             switch (RAND.Next(3))
             {
                 case 0 :
-                    uri = new Uri(PATH + @"\musics\BGM1_AoE2.mp3");
+                    uri = new Uri(PATH + @"\musics\BGM1.mp3");
                     break;
 
                 case 1 :
-                    uri = new Uri(PATH + @"\musics\BGM2_GW.mp3");
+                    uri = new Uri(PATH + @"\musics\BGM2.mp3");
                     break;
 
                 case 2:
-                    uri = new Uri(PATH + @"\musics\BGM3_DS2.mp3");
+                    uri = new Uri(PATH + @"\musics\BGM3.mp3");
                     break;
 
                 default :
-                    uri = new Uri(PATH + @"\musics\BGM0_Morro.mp3");
+                    uri = new Uri(PATH + @"\musics\BGM0.mp3");
                     break;
             }
             
